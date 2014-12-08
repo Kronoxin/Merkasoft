@@ -5,10 +5,39 @@
  */
 package integracion.transaction.Imp;
 
+import integracion.transaction.Transaction;
+import java.sql.Connection;
+
 /**
  *
- * @author Ruben
+ * 
  */
-public class TransactionMysql {
+public class TransactionMysql implements Transaction
+{
+
+    @Override
+    public void start() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void commit() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void rollback() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Connection getResource() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void lock() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

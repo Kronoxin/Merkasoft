@@ -5,10 +5,19 @@
  */
 package integracion.transaction.transactionFactory.Imp;
 
+import integracion.transaction.transactionFactory.TransactionFactory;
+
 /**
  *
  * @author Ruben
  */
-public class TransactionFactoryImp {
+public class TransactionFactoryImp extends TransactionFactory
+{
+
+    @Override
+    public void generaTransaccion() 
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
