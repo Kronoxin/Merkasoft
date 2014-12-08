@@ -9,6 +9,6 @@ package Negocio.Transfers;
  *
  * @author Marina
  */
-public class TClienteVip {
+public class TClienteVip extends TCliente {
     
 }

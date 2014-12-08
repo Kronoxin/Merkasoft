@@ -11,4 +11,7 @@ package Negocio.Transfers;
  */
 public class TProducto {
     
+    
+    
+    
 }

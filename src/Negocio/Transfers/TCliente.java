@@ -9,6 +9,15 @@ package Negocio.Transfers;
  *
  * @author Marina
  */
-public class TCliente {
+public abstract class TCliente {
+    
+    private int _id;
+    private String _nombre;
+    private String _apellidos;
+    private String _DNI;
+    private TVenta _venta;
+    private boolean _activo;
+    
+    
     
 }
