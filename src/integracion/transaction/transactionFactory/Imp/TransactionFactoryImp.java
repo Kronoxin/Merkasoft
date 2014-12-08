@@ -5,6 +5,8 @@
  */
 package integracion.transaction.transactionFactory.Imp;
 
+import integracion.transaction.Imp.TransactionMysql;
+import integracion.transaction.Transaction;
 import integracion.transaction.transactionFactory.TransactionFactory;
 
 /**
@@ -15,9 +17,9 @@ public class TransactionFactoryImp extends TransactionFactory
 {
 
     @Override
-    public void generaTransaccion() 
+    public Transaction generaTransaccion() 
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new TransactionMysql();
     }
     
 }

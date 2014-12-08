@@ -16,14 +16,14 @@ public abstract class FactoriaQuery
 	 * <!-- end-UML-doc -->
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	private FactoriaQuery _instance;
+	private static FactoriaQuery _instance = null;
 
 	/** 
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public FactoriaQuery getInstance() 
+	public static FactoriaQuery getInstance() 
         {
             if (_instance == null)
                 _instance = new FactoriaQueryImp();

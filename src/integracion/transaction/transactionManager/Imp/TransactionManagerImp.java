@@ -7,6 +7,8 @@ package integracion.transaction.transactionManager.Imp;
 
 import integracion.transaction.Transaction;
 import integracion.transaction.transactionManager.TransactionManager;
+import integracion.transaction.transactionFactory.TransactionFactory;
+import java.util.HashMap;
 
 /**
  *
@@ -14,20 +16,25 @@ import integracion.transaction.transactionManager.TransactionManager;
  */
 public class TransactionManagerImp extends TransactionManager 
 {
+    private HashMap<Thread, Transaction> _mapa_transacciones;
 
     @Override
-    public void nuevaTransaccion() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void nuevaTransaccion() 
+    {
+        if (!_mapa_transacciones.containsKey(Thread.currentThread()))
+            _mapa_transacciones.put(Thread.currentThread(), TransactionFactory.getInstance().generaTransaccion());
     }
 
     @Override
-    public Transaction getTransaccion() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Transaction getTransaccion() 
+    {
+        return _mapa_transacciones.get(Thread.currentThread());
     }
 
     @Override
-    public void eliminaTransaccion() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void eliminaTransaccion() 
+    {
+        _mapa_transacciones.remove(Thread.currentThread());
     }
     
 }

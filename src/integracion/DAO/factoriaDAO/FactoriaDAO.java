@@ -1,6 +1,7 @@
 package integracion.DAO.factoriaDAO;
 
 import integracion.DAO.cliente.DAOCliente;
+import integracion.DAO.factoriaDAO.Imp.FactoriaDAOImp;
 import integracion.DAO.producto.DAOProducto;
 import integracion.DAO.venta.DAOVenta;
 
@@ -32,12 +33,7 @@ public abstract class FactoriaDAO {
 	 * @return
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public DAOProducto getDAOProducto() {
-		// begin-user-code
-		// TODO Apéndice de método generado automáticamente
-		return null;
-		// end-user-code
-	}
+	public abstract DAOProducto getDAOProducto();
 
 	/** 
 	 * <!-- begin-UML-doc -->
@@ -45,12 +41,7 @@ public abstract class FactoriaDAO {
 	 * @return
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public DAOCliente getDAOCliente() {
-		// begin-user-code
-		// TODO Apéndice de método generado automáticamente
-		return null;
-		// end-user-code
-	}
+	public abstract DAOCliente getDAOCliente();
 
 	/** 
 	 * <!-- begin-UML-doc -->
@@ -58,10 +49,12 @@ public abstract class FactoriaDAO {
 	 * @return
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public static Object obtenerInstancia() {
+	public static FactoriaDAO obtenerInstancia() {
 		// begin-user-code
 		// TODO Apéndice de método generado automáticamente
-		return null;
+            if (_instance == null)
+                _instance = new FactoriaDAOImp();
+            return _instance;
 		// end-user-code
 	}
 

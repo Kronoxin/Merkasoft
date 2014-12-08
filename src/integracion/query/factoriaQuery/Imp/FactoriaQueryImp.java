@@ -6,6 +6,7 @@
 package integracion.query.factoriaQuery.Imp;
 
 import integracion.query.Query;
+import integracion.query.cliente.QueryMediaClientes;
 import integracion.query.factoriaQuery.FactoriaQuery;
 
 /**
@@ -18,7 +19,7 @@ public class FactoriaQueryImp extends FactoriaQuery
     @Override
     public Query obtenerQueryClientesMedia() 
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new QueryMediaClientes();
     }
     
 }

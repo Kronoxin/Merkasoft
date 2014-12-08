@@ -16,7 +16,7 @@ public class DAOClienteImp implements DAOCliente
 {
 
     @Override
-    public Integer altaCliente(Tcliente cliente) {
+    public Integer altaCliente(TCliente cliente) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

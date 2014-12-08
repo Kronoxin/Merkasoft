@@ -1,5 +1,6 @@
 package integracion.transaction.transactionFactory;
 
+import integracion.transaction.Transaction;
 import integracion.transaction.transactionFactory.Imp.TransactionFactoryImp;
 
 /** 
@@ -22,7 +23,7 @@ public abstract class TransactionFactory
 	 * <!-- end-UML-doc -->
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public abstract void generaTransaccion();
+	public abstract Transaction generaTransaccion();
 
 	/** 
 	 * <!-- begin-UML-doc -->
@@ -30,7 +31,7 @@ public abstract class TransactionFactory
 	 * @return
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public TransactionFactory getInstance() 
+	public static TransactionFactory getInstance() 
         {
             if (_instance == null)
                 _instance = new TransactionFactoryImp();

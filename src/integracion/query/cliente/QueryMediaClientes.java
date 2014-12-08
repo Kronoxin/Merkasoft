@@ -5,10 +5,19 @@
  */
 package integracion.query.cliente;
 
+import integracion.query.Query;
+
 /**
  *
  * @author Ruben
  */
-public class QueryMediaClientes {
+public class QueryMediaClientes implements Query
+{
+
+    @Override
+    public Object execute(Object datos) 
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
