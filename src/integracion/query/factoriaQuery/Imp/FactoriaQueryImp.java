@@ -5,10 +5,20 @@
  */
 package integracion.query.factoriaQuery.Imp;
 
+import integracion.query.Query;
+import integracion.query.factoriaQuery.FactoriaQuery;
+
 /**
  *
  * @author Ruben
  */
-public class FactoriaQueryImp {
+public class FactoriaQueryImp extends FactoriaQuery
+{
+
+    @Override
+    public Query obtenerQueryClientesMedia() 
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

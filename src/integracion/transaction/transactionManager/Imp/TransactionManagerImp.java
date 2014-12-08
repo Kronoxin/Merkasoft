@@ -5,10 +5,29 @@
  */
 package integracion.transaction.transactionManager.Imp;
 
+import integracion.transaction.Transaction;
+import integracion.transaction.transactionManager.TransactionManager;
+
 /**
  *
  * @author Ruben
  */
-public class TransactionManagerImp {
+public class TransactionManagerImp extends TransactionManager 
+{
+
+    @Override
+    public void nuevaTransaccion() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Transaction getTransaccion() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void eliminaTransaccion() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

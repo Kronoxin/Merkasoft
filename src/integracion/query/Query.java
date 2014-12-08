@@ -9,6 +9,7 @@ package integracion.query;
  *
  * @author Ruben
  */
-public class Query {
-    
+public interface Query 
+{
+    public Object execute(Object datos);
 }
