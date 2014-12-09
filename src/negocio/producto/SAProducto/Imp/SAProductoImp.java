@@ -14,7 +14,8 @@ public class SAProductoImp implements SAProducto{
 
     @Override
     //Esta metodo permite dar de alta un producto en BBDD comprobando que este no exista ya en ella
-    public String altaProducto(TProducto producto) {
+    public String altaProducto(TProducto producto) 
+    {
         
         TransactionManager.obtenerInstanacia().nuevaTransaccion();
         
@@ -75,6 +76,8 @@ public class SAProductoImp implements SAProducto{
     //Este metodo permite la eliminacion de un producto de la BBDD
     public boolean bajaProducto(int id) 
     {
+        boolean correcto=false;
+        
         
         TransactionManager.obtenerInstanacia().nuevaTransaccion();
         
@@ -82,32 +85,28 @@ public class SAProductoImp implements SAProducto{
         {
             TransactionManager.obtenerInstanacia().getTransaccion().start();
             TransactionManager.obtenerInstanacia().getTransaccion().lock("Productos");
+            TProducto tProducto = FactoriaDAO.obtenerInstancia().getDAOProducto().mostrarProducto(id);
+            
+            if(tProducto!=null && tProducto.getActivo()==true)
+            {           
+                tProducto.setActivo(false);
+ 
+                FactoriaDAO.obtenerInstancia().getDAOProducto().bajaProducto(id);
+                TransactionManager.obtenerInstanacia().getTransaccion().commit();
+                TransactionManager.obtenerInstanacia().getTransaccion().rollback();
+                TransactionManager.obtenerInstanacia().eliminaTransaccion();
+                correcto=true;
+            }
+            else
+            {
+                TransactionManager.obtenerInstanacia().eliminaTransaccion();
+            }
         }
         catch(Exception e)
         {
             TransactionManager.obtenerInstanacia().eliminaTransaccion();
         }
         
-        boolean correcto=false;
-        TProducto tProducto = FactoriaDAO.obtenerInstancia().getDAOProducto().mostrarProducto(id);
-        
-        if(tProducto!=null)
-        {
-            if(tProducto.getActivo()==true)
-            {
-                tProducto.setActivo(false);
-                //deberia pasarsele el transfer no el codigo de barras
-                FactoriaDAO.obtenerInstancia().getDAOProducto().bajaProducto(id);
-                correcto=true;
-                TransactionManager.obtenerInstanacia().getTransaccion().commit();
-                TransactionManager.obtenerInstanacia().eliminaTransaccion();
-            }	
-        }
-        else
-        {
-            TransactionManager.obtenerInstanacia().getTransaccion().rollback();
-            TransactionManager.obtenerInstanacia().eliminaTransaccion();
-        }
         return correcto;
     }
 
