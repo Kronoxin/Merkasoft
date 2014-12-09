@@ -1,5 +1,6 @@
 package integracion.DAO.producto;
 
+import Negocio.producto.TProducto;
 import java.util.ArrayList;
 
 /** 
@@ -42,7 +43,7 @@ public interface DAOProducto {
 	 * @return
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public TProducto mostrarProducto(int ID);
+	public TProducto mostrarProducto(String codigoBarras);
 
 	/** 
 	 * <!-- begin-UML-doc -->

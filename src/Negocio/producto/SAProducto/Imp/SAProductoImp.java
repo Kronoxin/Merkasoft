@@ -66,8 +66,31 @@ public class SAProductoImp implements SAProducto{
     }
 
     @Override
-    public TProducto mostrarProducto(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public TProducto mostrarProducto(String codigoBarras) {
+        TransactionManager.obtenerInstanacia().nuevaTransaccion();
+		TransactionManager.obtenerInstanacia().getTransaccion().start();
+
+		boolean ok = false;
+
+		TProducto tProducto = FactoriaDAO.obtenerInstancia().getDAOProducto().obtieneProducto(codigoBarras);
+
+		if(tProducto!=null){
+			if(tProducto.getActivo()==true){
+				TransactionManager.obtenerInstanacia().getTransaccion().commit();
+				TransactionManager.obtenerInstanacia().eliminaTransaccion();
+				ok = true;		
+			}	
+		}
+
+		if(!ok){
+
+			TransactionManager.obtenerInstanacia().getTransaccion().rollback();
+			TransactionManager.obtenerInstanacia().eliminaTransaccion();
+
+		}
+
+
+		return ok;
     }
 
     @Override
