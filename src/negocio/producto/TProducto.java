@@ -9,7 +9,7 @@ package Negocio.producto;
  *
  * @author borja
  */
-public abstract class TProducto {
+public class TProducto {
     
     private String _nombre;
     private double _precio;

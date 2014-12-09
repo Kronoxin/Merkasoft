@@ -11,7 +11,7 @@ import Negocio.cliente.TCliente;
  * Clase TClienteVip: hereda de TCliente se emplea para especificar a la clase padre.
  * Agrega el atributo financiacion para determinar que es una empresa.
  */
-public abstract class TClienteVip extends TCliente {
+public class TClienteVip extends TCliente {
     //atributo que especializa la clase
     private float financiacion;
 

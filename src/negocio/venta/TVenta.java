@@ -7,7 +7,7 @@ import Negocio.cliente.TCliente;
 import java.util.ArrayList;
 import java.util.Date;
 
-public abstract  class TVenta {
+public class TVenta {
     
     
     private int _id;

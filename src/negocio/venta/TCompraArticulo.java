@@ -2,7 +2,7 @@
  * transfer que proporciona los atributos de un articulo comprado
  */
 package Negocio.venta;
-public abstract class TCompraArticulo {
+public class TCompraArticulo {
     
     private int _idArticulo;
     private int _cantidad;

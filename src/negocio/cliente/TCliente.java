@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * Clase abstracta tCliente: esta clase sirve como contenedor de informacion, empleado
  * para transmitir la informacion entre capas. Tiene todos los atributos, get y set.
  */
-public abstract class TCliente {
+public class TCliente {
     
     //Atributos del TCliente
     private int _id;

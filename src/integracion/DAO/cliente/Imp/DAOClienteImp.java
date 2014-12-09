@@ -6,6 +6,7 @@
 package integracion.DAO.cliente.Imp;
 
 import Negocio.cliente.TCliente;
+import Negocio.cliente.TClienteNormal;
 import integracion.DAO.cliente.DAOCliente;
 import integracion.transaction.transactionManager.TransactionManager;
 import java.sql.Connection;
@@ -27,8 +28,12 @@ public class DAOClienteImp implements DAOCliente
         Statement query = null;
         Connection connection = null;
         String campos_para_query = cliente.getDNI() + ", " + cliente.getNombre() + ", " + cliente.getApellidos() + ", " + cliente.getFechaNacimiento() + ", " + cliente.getTipo();
-        String query_especializada = ""
+        String query_especializada = null;        
         if (cliente.getTipo().equalsIgnoreCase("normal"))
+        {
+            Negocio.cliente.
+            query_especializada = "INSERT INTO clientesnormales(id_cliente, QuiereVip) VALUES (" 
+        }
         
         try
         {
