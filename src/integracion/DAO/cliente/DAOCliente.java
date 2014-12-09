@@ -17,7 +17,7 @@ public interface DAOCliente {
 	 * @return
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public int altaCliente(TCliente cliente);
+	public int altaCliente(TCliente cliente) throws Exception;
 
 	/** 
 	 * <!-- begin-UML-doc -->
@@ -26,7 +26,7 @@ public interface DAOCliente {
 	 * @return
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public Boolean bajaCliente(int ID);
+	public Boolean bajaCliente(int ID) throws Exception;
 
 	/** 
 	 * <!-- begin-UML-doc -->
@@ -34,7 +34,7 @@ public interface DAOCliente {
 	 * @return
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public ArrayList listarClientes();
+	public ArrayList listarClientes() throws Exception;
 
 	/** 
 	 * <!-- begin-UML-doc -->
@@ -43,7 +43,7 @@ public interface DAOCliente {
 	 * @return
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public TCliente mostrarCliente(int ID);
+	public TCliente mostrarCliente(int ID) throws Exception;
 
 	/** 
 	 * <!-- begin-UML-doc -->
@@ -52,5 +52,5 @@ public interface DAOCliente {
 	 * @return
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public Boolean modificarCliente(TCliente cliente);
+	public Boolean modificarCliente(TCliente cliente) throws Exception;
 }

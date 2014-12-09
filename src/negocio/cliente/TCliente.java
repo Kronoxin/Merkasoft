@@ -20,7 +20,6 @@ public class TCliente {
     private String _apellidos;
     private String _DNI;
     private String _fecha_nacimiento; //Formato: "dd/mm/yyyy"
-    private String _tipo;
     private ArrayList<TVenta> _venta;
     private boolean _activo;
 
@@ -63,16 +62,6 @@ public class TCliente {
     public void setFechaNacimiento(String fecha)
     {
         this._fecha_nacimiento = fecha;
-    }
-    
-    public String getTipo()
-    {
-        return _tipo;
-    }
-    
-    public void setTipo(String tipo)
-    {
-        _tipo = tipo;
     }
 
     public ArrayList<TVenta> getVenta() {
