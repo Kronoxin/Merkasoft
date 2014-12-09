@@ -12,6 +12,7 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Properties;
 
 /**
@@ -20,15 +21,17 @@ import java.util.Properties;
  */
 public class TransactionMysql implements Transaction
 {
-    
+   
     private Connection _connection;
     
+    // Inicializa la conexion de la base de datos.
     @Override
-    public void start() 
+    public void start() throws Exception
     {
         Properties props = new Properties();
         try 
         {
+            // Cargamos la configuracion de la BBDD.
             InputStream fichero = FactoriaDAOImp.class.getClassLoader().getResourceAsStream("database.properties");
             props.load(fichero);
 	}
@@ -43,8 +46,7 @@ public class TransactionMysql implements Transaction
 	
         catch (SQLException e) 
         {
-
-            throw new RuntimeException("No se ha podido establecer la conexón con la base de datos.");
+            throw new SQLException("No se ha podido establecer la conexón con la base de datos.");
 	}
 		
 	try 
@@ -58,14 +60,19 @@ public class TransactionMysql implements Transaction
     }
 
     @Override
-    public void commit() 
+    public void commit() throws SQLException 
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        _connection.commit();
+        _connection.close();
+	
+        
     }
 
     @Override
-    public void rollback() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void rollback()  throws SQLException
+    {
+        _connection.rollback();
+        _connection.close();
     }
 
     @Override
@@ -75,8 +82,11 @@ public class TransactionMysql implements Transaction
     }
 
     @Override
-    public void lock() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void lock(String tabla)  throws SQLException
+    {
+        Statement query = null;
+        query = _connection.createStatement();
+	query.execute("LOCK TABLES '"+tabla+"' WRITE");
     }
     
 }
