@@ -18,8 +18,16 @@ public class SAProductoImp implements SAProducto{
     public String altaProducto(TProducto producto) {
         TransactionMysql transaccion=new TransactionMysql();
         TransactionManager.obtenerInstanacia().nuevaTransaccion();
+        try
+        {
         transaccion.start();
-        transaccion.lock();
+        transaccion.lock("Productos");
+        }
+        catch(Exception e)
+        {
+            TransactionManager.obtenerInstanacia().eliminaTransaccion();
+        }
+       
 
         String codigoBarras=null;
 
