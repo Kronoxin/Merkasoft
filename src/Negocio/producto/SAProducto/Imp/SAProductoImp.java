@@ -7,20 +7,19 @@ import Negocio.producto.SAProducto.SAProducto;
 import Negocio.producto.TProducto;
 import integracion.DAO.factoriaDAO.FactoriaDAO;
 import integracion.transaction.Imp.TransactionMysql;
-import integracion.transaction.Transaction;
 import integracion.transaction.transactionManager.TransactionManager;
-import java.sql.SQLException;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class SAProductoImp implements SAProducto{
 
     @Override
     //Esta metodo permite dar de alta un producto en BBDD comprobando que este no exista ya en ella
     public String altaProducto(TProducto producto) {
+        TransactionMysql transaccion=new TransactionMysql();
         TransactionManager.obtenerInstanacia().nuevaTransaccion();
-        new TransactionMysql().start();
+        transaccion.start();
+        transaccion.lock();
 
         String codigoBarras=null;
 
@@ -30,7 +29,7 @@ public class SAProductoImp implements SAProducto{
                 if(FactoriaDAO.obtenerInstancia().getDAOProducto().altaProducto(producto) == 1){
 
                         codigoBarras=producto.getCodigoDeBarras();
-                        new TransactionMysql().commit();
+                        transaccion.commit();
                         TransactionManager.obtenerInstanacia().eliminaTransaccion();
                 }
         }
@@ -41,7 +40,7 @@ public class SAProductoImp implements SAProducto{
 
         if(codigoBarras==null){
 
-                new TransactionMysql().rollback();
+                transaccion.rollback();
                 TransactionManager.obtenerInstanacia().eliminaTransaccion();
 
         }
@@ -49,10 +48,12 @@ public class SAProductoImp implements SAProducto{
     }
 
     @Override
-    //Este metodo permie la eliminacion de un producto de la BBDD
+    //Este metodo permite la eliminacion de un producto de la BBDD
     public boolean bajaProducto(String codigoBarras) {
+        TransactionMysql transaccion=new TransactionMysql();
         TransactionManager.obtenerInstanacia().nuevaTransaccion();
-        new TransactionMysql().start();
+        transaccion.start();
+        transaccion.lock();
         boolean correcto=false;
         TProducto tProducto = FactoriaDAO.obtenerInstancia().getDAOProducto().mostrarProducto(codigoBarras);
         if(tProducto!=null){
@@ -60,35 +61,61 @@ public class SAProductoImp implements SAProducto{
             {
                 tProducto.setActivo(false);
                 //deberia pasarsele el transfer no el codigo de barras
-                FactoriaDAO.obtenerInstancia().getDAOProducto().bajaProducto(tProducto);
+                FactoriaDAO.obtenerInstancia().getDAOProducto().bajaProducto(codigoBarras);
                 correcto=true;
-                new TransactionMysql().commit();
+                transaccion.commit();
                 TransactionManager.obtenerInstanacia().eliminaTransaccion();
             }	
+        }
+        else
+        {
+            transaccion.rollback();
+            TransactionManager.obtenerInstanacia().eliminaTransaccion();
         }
         return correcto;
     }
 
     @Override
+    //Metodo que permite la modificacion de un producto existente en la BBDD
     public boolean modificarProducto(TProducto producto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean correcto=false;
+        TransactionMysql transaccion=new TransactionMysql();
+        TransactionManager.obtenerInstanacia().nuevaTransaccion();
+        transaccion.start();
+        transaccion.lock();
+        TProducto tProducto = FactoriaDAO.obtenerInstancia().getDAOProducto().mostrarProducto(producto.getCodigoDeBarras());
+        if(tProducto!=null && !tProducto.equals(producto))
+        {
+            FactoriaDAO.obtenerInstancia().getDAOProducto().modificarProducto(producto);
+            transaccion.commit();
+            TransactionManager.obtenerInstanacia().eliminaTransaccion();
+            correcto=true;
+        }
+        else
+        {
+            transaccion.rollback();
+            TransactionManager.obtenerInstanacia().eliminaTransaccion();
+        }
+        return correcto;
     }
 
     @Override
+    //Metodo que muestra el producto solicitado mediante un codigo de barras en caso de que este exista en la BBDD
     public TProducto mostrarProducto(String codigoBarras) {
+        TransactionMysql transaccion=new TransactionMysql();
         TransactionManager.obtenerInstanacia().nuevaTransaccion();
-        new TransactionMysql().start();
+        transaccion.start();
 
         TProducto tProducto = FactoriaDAO.obtenerInstancia().getDAOProducto().mostrarProducto(codigoBarras);
 
         if(tProducto!=null){
                 if(tProducto.getActivo()==true){
-                        new TransactionMysql().commit();
-                        TransactionManager.obtenerInstanacia().eliminaTransaccion();		
+                    transaccion.commit();
+                    TransactionManager.obtenerInstanacia().eliminaTransaccion();		
                 }	
         }
         else{
-            new TransactionMysql().rollback();
+            transaccion.rollback();
             TransactionManager.obtenerInstanacia().eliminaTransaccion();
         }
 
@@ -97,9 +124,14 @@ public class SAProductoImp implements SAProducto{
     }
 
     @Override
-    public ArrayList<TProducto> mostrarListaProducto() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    //Metodo que genera un lista de todos los productos existentes en la BBDD que esten activos
+    public ArrayList<TProducto> mostrarListaProducto() 
+    {
+        ArrayList<TProducto> listaProductos;
+        TransactionMysql transaccion=new TransactionMysql();
+        TransactionManager.obtenerInstanacia().nuevaTransaccion();
+        transaccion.start();
+        listaProductos=FactoriaDAO.obtenerInstancia().getDAOProducto().listarProducto();
+        return listaProductos;
     }
-
-
 }
