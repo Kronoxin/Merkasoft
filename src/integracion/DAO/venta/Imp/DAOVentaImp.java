@@ -5,6 +5,8 @@
  */
 package integracion.DAO.venta.Imp;
 
+import Negocio.venta.TCompraArticulo;
+import Negocio.venta.TVenta;
 import integracion.DAO.venta.DAOVenta;
 import java.util.ArrayList;
 
@@ -36,7 +38,7 @@ public class DAOVentaImp implements DAOVenta
     }
 
     @Override
-    public Boolean devolucionProducto(TVenta venta) {
+    public Boolean devolucionProducto(TCompraArticulo venta) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

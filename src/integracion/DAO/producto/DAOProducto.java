@@ -26,7 +26,7 @@ public interface DAOProducto {
 	 * @return
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public Boolean bajaProducto(String CodigoBarras);
+	public Boolean bajaProducto(int Id);
 
 	/** 
 	 * <!-- begin-UML-doc -->
@@ -43,7 +43,7 @@ public interface DAOProducto {
 	 * @return
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public TProducto mostrarProducto(String codigoBarras);
+	public TProducto mostrarProducto(int id);
 
 	/** 
 	 * <!-- begin-UML-doc -->

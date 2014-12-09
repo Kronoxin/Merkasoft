@@ -8,20 +8,21 @@ import Negocio.producto.TProducto;
 import integracion.DAO.factoriaDAO.FactoriaDAO;
 import integracion.transaction.Imp.TransactionMysql;
 import integracion.transaction.transactionManager.TransactionManager;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 public class SAProductoImp implements SAProducto{
 
     @Override
     //Esta metodo permite dar de alta un producto en BBDD comprobando que este no exista ya en ella
-    public String altaProducto(TProducto producto) {
-        TransactionMysql transaccion=new TransactionMysql();
+    public String altaProducto(TProducto producto) 
+    {
+        
         TransactionManager.obtenerInstanacia().nuevaTransaccion();
+        
         try
         {
-        transaccion.start();
-        transaccion.lock("Productos");
+            TransactionManager.obtenerInstanacia().getTransaccion().start();
+            TransactionManager.obtenerInstanacia().getTransaccion().lock("Productos");
         }
         catch(Exception e)
         {
@@ -37,7 +38,7 @@ public class SAProductoImp implements SAProducto{
                 if(FactoriaDAO.obtenerInstancia().getDAOProducto().altaProducto(producto) == 1){
 
                         codigoBarras=producto.getCodigoDeBarras();
-                        transaccion.commit();
+                        TransactionManager.obtenerInstanacia().getTransaccion().commit();
                         TransactionManager.obtenerInstanacia().eliminaTransaccion();
                 }
         }
@@ -45,7 +46,7 @@ public class SAProductoImp implements SAProducto{
         else if(tProducto!=null && tProducto.getActivo()==true){
 
                codigoBarras=tProducto.getCodigoDeBarras();
-               transaccion.rollback();
+               TransactionManager.obtenerInstanacia().getTransaccion().rollback();
                TransactionManager.obtenerInstanacia().eliminaTransaccion();
         }
         //El producto existe y no esta activo
@@ -58,7 +59,14 @@ public class SAProductoImp implements SAProducto{
             {
                 codigoBarras=tProducto.getCodigoDeBarras();
             }
-            transaccion.rollback();
+            try
+            {
+                TransactionManager.obtenerInstanacia().getTransaccion().rollback();
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
             TransactionManager.obtenerInstanacia().eliminaTransaccion();
         }
         return codigoBarras;     
@@ -66,29 +74,39 @@ public class SAProductoImp implements SAProducto{
 
     @Override
     //Este metodo permite la eliminacion de un producto de la BBDD
-    public boolean bajaProducto(String codigoBarras) {
-        TransactionMysql transaccion=new TransactionMysql();
-        TransactionManager.obtenerInstanacia().nuevaTransaccion();
-        transaccion.start();
-        transaccion.lock();
+    public boolean bajaProducto(int id) 
+    {
         boolean correcto=false;
-        TProducto tProducto = FactoriaDAO.obtenerInstancia().getDAOProducto().mostrarProducto(codigoBarras);
-        if(tProducto!=null){
-            if(tProducto.getActivo()==true)
-            {
-                tProducto.setActivo(false);
-                //deberia pasarsele el transfer no el codigo de barras
-                FactoriaDAO.obtenerInstancia().getDAOProducto().bajaProducto(codigoBarras);
-                correcto=true;
-                transaccion.commit();
-                TransactionManager.obtenerInstanacia().eliminaTransaccion();
-            }	
-        }
-        else
+        
+        
+        TransactionManager.obtenerInstanacia().nuevaTransaccion();
+        
+        try
         {
-            transaccion.rollback();
+            TransactionManager.obtenerInstanacia().getTransaccion().start();
+            TransactionManager.obtenerInstanacia().getTransaccion().lock("Productos");
+            TProducto tProducto = FactoriaDAO.obtenerInstancia().getDAOProducto().mostrarProducto(id);
+            
+            if(tProducto!=null && tProducto.getActivo()==true)
+            {           
+                tProducto.setActivo(false);
+ 
+                FactoriaDAO.obtenerInstancia().getDAOProducto().bajaProducto(id);
+                TransactionManager.obtenerInstanacia().getTransaccion().commit();
+                TransactionManager.obtenerInstanacia().getTransaccion().rollback();
+                TransactionManager.obtenerInstanacia().eliminaTransaccion();
+                correcto=true;
+            }
+            else
+            {
+                TransactionManager.obtenerInstanacia().eliminaTransaccion();
+            }
+        }
+        catch(Exception e)
+        {
             TransactionManager.obtenerInstanacia().eliminaTransaccion();
         }
+        
         return correcto;
     }
 
@@ -118,7 +136,8 @@ public class SAProductoImp implements SAProducto{
 
     @Override
     //Metodo que muestra el producto solicitado mediante un codigo de barras en caso de que este exista en la BBDD
-    public TProducto mostrarProducto(String codigoBarras) {
+    public TProducto mostrarProducto(int id) 
+    {
         TransactionMysql transaccion=new TransactionMysql();
         TransactionManager.obtenerInstanacia().nuevaTransaccion();
         transaccion.start();

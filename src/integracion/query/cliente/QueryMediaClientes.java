@@ -6,6 +6,9 @@
 package integracion.query.cliente;
 
 import integracion.query.Query;
+import integracion.transaction.transactionManager.TransactionManager;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 /**
  *
@@ -17,7 +20,22 @@ public class QueryMediaClientes implements Query
     @Override
     public Object execute(Object datos) 
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Connection connection = null;
+        String query = null;        
+        
+      
+            query = "INSERT INTO clientesnormales(id_cliente, QuiereVip) VALUES ("; 
+     
+        
+        try
+        {
+            connection = (Connection) TransactionManager.obtenerInstanacia().getTransaccion().getResource();
+            query = connection.createStatement();
+        }
+        catch (SQLException e)
+        {
+            throw new SQLException("No se ha podido realizar la conexión con la base de datos. \nEs posible que haya olvidado crear o iniciar la transacción\nError: " + e.getMessage());
+        }
     }
     
 }
