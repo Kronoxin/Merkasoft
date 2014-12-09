@@ -5,6 +5,7 @@
  */
 package integracion.DAO.producto.Imp;
 
+import Negocio.producto.TProducto;
 import integracion.DAO.producto.DAOProducto;
 import java.util.ArrayList;
 

@@ -267,6 +267,7 @@ public class SAClienteImp implements SACliente{
         
 
                 ArrayList<TCliente> listaProductos;
+                
                 TransactionMysql transaccion=new TransactionMysql();
                 TransactionManager.obtenerInstanacia().nuevaTransaccion();
                

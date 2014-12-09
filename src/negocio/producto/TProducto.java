@@ -10,7 +10,7 @@ package Negocio.producto;
  * @author borja
  */
 public class TProducto {
-    
+    private int _id;
     private String _nombre;
     private double _precio;
     private String _descripcion;
@@ -64,6 +64,14 @@ public class TProducto {
 
     public void setActivo(boolean _activo) {
         this._activo = _activo;
+    }
+
+    public int getId() {
+        return _id;
+    }
+
+    public void setId(int _id) {
+        this._id = _id;
     }
     
     

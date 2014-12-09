@@ -13,12 +13,13 @@ import java.util.ArrayList;
  *
  * @author borja
  */
-public interface SAProducto {
+public interface SAProducto 
+{
     
     public String altaProducto(TProducto producto);
-    public  boolean bajaProducto(String codigoBarras);
+    public  boolean bajaProducto(int id);
     public boolean modificarProducto(TProducto producto);
-    public TProducto mostrarProducto(String codigoBarras);
+    public TProducto mostrarProducto(int id);
     public ArrayList<TProducto> mostrarListaProducto();
     
     
