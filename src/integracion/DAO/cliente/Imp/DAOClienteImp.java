@@ -7,6 +7,7 @@ package integracion.DAO.cliente.Imp;
 
 import Negocio.cliente.TCliente;
 import Negocio.cliente.TClienteNormal;
+import Negocio.cliente.TClienteVip;
 import integracion.DAO.cliente.DAOCliente;
 import integracion.transaction.transactionManager.TransactionManager;
 import java.sql.Connection;
@@ -27,14 +28,22 @@ public class DAOClienteImp implements DAOCliente
         Integer ret = -1;
         Statement query = null;
         Connection connection = null;
-        String campos_para_query = cliente.getDNI() + ", " + cliente.getNombre() + ", " + cliente.getApellidos() + ", " + cliente.getFechaNacimiento() + ", " + cliente.getTipo();
-        String query_especializada = null;        
-        if (cliente.getTipo().equalsIgnoreCase("normal"))
+        String contenido_query = "INSERT INTO Clientes(DNI, Nombre, Apellidos, Fecha_nacimiento, Tipo) VALUES ('" + cliente.getDNI() + ", " + cliente.getNombre() + ", " + cliente.getApellidos() + ", " + cliente.getFechaNacimiento() + ", ";
+        String contenido_query_especializada = null;
+        if (cliente.getClass().equals(TClienteNormal.class))
         {
-            Negocio.cliente.
-            query_especializada = "INSERT INTO clientesnormales(id_cliente, QuiereVip) VALUES (" 
+            Negocio.cliente.TClienteNormal temp = (TClienteNormal) cliente;
+            contenido_query += "normal);";
+            contenido_query_especializada = "INSERT INTO clientesnormales(id_cliente, QuiereVip) VALUES ('" + cliente.getId() + ", " + temp.isQuierevip() + "');";
+        }
+        else
+        {
+            Negocio.cliente.TClienteVip temp = (TClienteVip) cliente; 
+            contenido_query += "VIP);";
+            contenido_query_especializada = "INSERT INTO clientesnormales(id_cliente, Financiacion) VALUES ('" + cliente.getId() + ", " + temp.getFinanciacion() + "');";
         }
         
+        //insercion cliente generico
         try
         {
             connection = (Connection) TransactionManager.obtenerInstanacia().getTransaccion().getResource();
@@ -42,12 +51,25 @@ public class DAOClienteImp implements DAOCliente
         }
         catch (SQLException e)
         {
-            throw new SQLException("No se ha podido realizar la conexión con la base de datos. \nEs posible que haya olvidado crear o iniciar la transacción\nError: " + e.getMessage());
+            throw new SQLException("No se ha podido realizar la conexión con la base de datos. \nEs posible que haya olvidado crear o iniciar la transacción"
+                    + "\nError: " + e.getMessage());
         }
-        try
+         try
         {
-            query.executeUpdate("INSERT INTO Clientes(DNI, Nombre, Apellidos, Fecha_nacimiento, Tipo) VALUES ('" + ret + "')");
+            query.executeUpdate( + ret + "')");
         }
+        catch (SQLException e)
+        {
+            throw new SQLException("No se ha podido dar de alta el cliente. Posiblemente ya exista\nError: " + e.getMessage());
+        }
+        
+        //insercion cliente especializado
+        
+                
+        
+        
+        
+       
         
         
         return ret;
