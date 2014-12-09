@@ -1,7 +1,7 @@
 package integracion.DAO.cliente;
 
 import java.util.ArrayList;
-import negocio.cliente.TCliente;
+import Negocio.cliente.TCliente;
 
 /** 
  * <!-- begin-UML-doc -->
@@ -17,7 +17,7 @@ public interface DAOCliente {
 	 * @return
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public Integer altaCliente(Tcliente cliente);
+	public Integer altaCliente(TCliente cliente);
 
 	/** 
 	 * <!-- begin-UML-doc -->

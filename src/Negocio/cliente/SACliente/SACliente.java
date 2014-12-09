@@ -14,12 +14,12 @@ import java.util.ArrayList;
  */
 public interface SACliente {
     
-    public int altaCliente(TCliente cliente);
-    public boolean eliminarCliente(int id);
-    public boolean modificarCliente(TCliente cliente);
-    public boolean mostrarCliente(int id);    
-    public ArrayList<TCliente> mostrarListaCliente();
-    public ArrayList<TCliente> mostrarClientesMedia();
+    public int altaCliente(TCliente cliente)throws Exception;
+    public boolean eliminarCliente(int id)throws Exception;
+    public boolean modificarCliente(TCliente cliente)throws Exception;
+    public TCliente mostrarCliente(int id)throws Exception;    
+    public ArrayList<TCliente> mostrarListaCliente()throws Exception;
+    public ArrayList<TCliente> mostrarClientesMedia()throws Exception;
         
     
 }
