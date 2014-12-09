@@ -16,7 +16,7 @@ import java.util.HashMap;
  */
 public class TransactionManagerImp extends TransactionManager 
 {
-    private HashMap<Thread, Transaction> _mapa_transacciones;
+    private HashMap<Thread, Transaction> _mapa_transacciones = new HashMap<Thread, Transaction>();
 
     @Override
     public void nuevaTransaccion() 
