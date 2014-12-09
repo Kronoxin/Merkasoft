@@ -11,6 +11,7 @@ import Negocio.cliente.TClienteVip;
 import integracion.DAO.cliente.DAOCliente;
 import integracion.transaction.transactionManager.TransactionManager;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -25,10 +26,11 @@ public class DAOClienteImp implements DAOCliente
     @Override
     public int altaCliente(TCliente cliente) throws Exception
     {
-        Integer ret = -1;
         Statement query = null;
         Connection connection = null;
+        //insercion cliente generico
         String contenido_query = "INSERT INTO Clientes(DNI, Nombre, Apellidos, Fecha_nacimiento, Tipo) VALUES ('" + cliente.getDNI() + ", " + cliente.getNombre() + ", " + cliente.getApellidos() + ", " + cliente.getFechaNacimiento() + ", ";
+        //insercion cliente especializado
         String contenido_query_especializada = null;
         if (cliente.getClass().equals(TClienteNormal.class))
         {
@@ -42,8 +44,7 @@ public class DAOClienteImp implements DAOCliente
             contenido_query += "VIP);";
             contenido_query_especializada = "INSERT INTO clientesnormales(id_cliente, Financiacion) VALUES ('" + cliente.getId() + ", " + temp.getFinanciacion() + "');";
         }
-        
-        //insercion cliente generico
+                
         try
         {
             connection = (Connection) TransactionManager.obtenerInstanacia().getTransaccion().getResource();
@@ -56,23 +57,18 @@ public class DAOClienteImp implements DAOCliente
         }
          try
         {
-            query.executeUpdate( + ret + "')");
+            query.executeUpdate(contenido_query);
+            query.executeUpdate(contenido_query_especializada);
         }
         catch (SQLException e)
         {
             throw new SQLException("No se ha podido dar de alta el cliente. Posiblemente ya exista\nError: " + e.getMessage());
         }
-        
-        //insercion cliente especializado
-        
-                
-        
-        
-        
-       
-        
-        
-        return ret;
+         
+         //Si no ha saltado excepción en este punto es porque se ha dado el alta correctamente
+         query.executeUpdate("SELECT DNI FROM Clientes WHERE DNI = " + cliente.getDNI() + ";");
+         ResultSet rs = query.getResultSet();
+         return rs.getInt(1);
     }
 
     @Override
