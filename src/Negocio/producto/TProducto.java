@@ -58,7 +58,7 @@ public abstract class TProducto {
         this._stock = _stock;
     }
 
-    public boolean isActivo() {
+    public boolean getActivo() {
         return _activo;
     }
 
