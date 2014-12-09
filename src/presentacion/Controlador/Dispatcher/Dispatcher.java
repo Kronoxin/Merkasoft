@@ -5,10 +5,24 @@
  */
 package Presentacion.Controlador.Dispatcher;
 
+import Presentacion.Controlador.Comandos.*;
+
 /**
  *
  * @author Pepu
  */
-public class Dispatcher {
+public abstract class Dispatcher 
+{
+    private static Dispatcher _dispatcher;
+
+    public static Dispatcher getInstance() 
+    {
+	if(_dispatcher == null)
+        {
+            _dispatcher = new DispatcherImp();
+	}
+	return _dispatcher;
+    }
     
+    public abstract Command dispatch(RespuestaComando comando);
 }

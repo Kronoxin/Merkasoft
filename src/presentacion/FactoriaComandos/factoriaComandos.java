@@ -5,10 +5,25 @@
  */
 package Presentacion.FactoriaComandos;
 
+import presentacion.Controlador.Comandos.Command;
+
 /**
  *
  * @author Pepu
  */
-public class factoriaComandos {
-    
+public abstract class factoriaComandos 
+{
+    private static factoriaComandos _instance = null;
+
+    public abstract Command getCommand(int evento);
+
+    public static factoriaComandos getInstance() 
+    {
+	if (_instance == null) 
+        {
+            _instance = new factoriaComandosImp();
+	}
+
+	return _instance;
+    }
 }
