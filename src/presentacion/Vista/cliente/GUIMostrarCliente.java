@@ -5,14 +5,12 @@
  */
 package presentacion.Vista.cliente;
 
-import Negocio.cliente.TCliente;
+
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
-import javax.swing.text.DateFormatter;
-import sun.util.calendar.BaseCalendar;
+
 
 /**
  *
@@ -21,7 +19,7 @@ import sun.util.calendar.BaseCalendar;
 public class GUIMostrarCliente extends JPanel{
     
     public GUIMostrarCliente(){
-        Object[][] data = {
+        Object[][] datos_entrada = {
         {new Integer(1),"Paco", "Pino", new Date(1990, 12, 25)},
         {new Integer(3), "Array", "List",  new Date(1990, 12, 25)},
         { new Integer(2),"fdi", "ucm", new Date(1990, 12, 25)},
@@ -35,18 +33,18 @@ public class GUIMostrarCliente extends JPanel{
 
 		final JTextField textID = new JTextField("");
 
-		JPanel panelArriba = new JPanel(new GridLayout(2,2,5,5));
+		JPanel panelSuperior = new JPanel(new GridLayout(2,2,5,5));
                 JPanel panelTabla = new JPanel();
 
                 JLabel labID = new JLabel("ID del Cliente",JLabel.CENTER);
                 
 		JButton butID = new JButton("Buscar por ID");
-		panelArriba.add(labID);
-		panelArriba.add(textID);
-                panelArriba.add(butID);
+		panelSuperior.add(labID);
+		panelSuperior.add(textID);
+                panelSuperior.add(butID);
                 
                 //se crea la Tabla
-                JTable tabla = new JTable(data, NombreColumnas);
+                JTable tabla = new JTable(datos_entrada, NombreColumnas);
                 //cojo la primera columna de la tabla (el ID) y fijo el tamaño de esa columna
                 tabla.getColumnModel().getColumn(0).setPreferredWidth(2);
                 
@@ -57,13 +55,13 @@ public class GUIMostrarCliente extends JPanel{
                 panelTabla.add(scrollPane,BorderLayout.CENTER);
 
 
-		JButton butSalir = new JButton("Salir");
+		JButton boton_salir = new JButton("Salir");
 
-		butSalir.setPreferredSize(new Dimension(90,40));
+		boton_salir.setPreferredSize(new Dimension(90,40));
 		JPanel panelBoton = new JPanel(new FlowLayout(FlowLayout.RIGHT,15,15));
-		panelBoton.add(butSalir);
+		panelBoton.add(boton_salir);
                 
-                this.add(panelArriba,BorderLayout.NORTH);
+                this.add(panelSuperior,BorderLayout.NORTH);
 		this.setBorder(new TitledBorder(new TitledBorder(""), "Mostrar Cliente por ID", TitledBorder.CENTER, TitledBorder.TOP ));	
                
                 this.add(panelTabla, BorderLayout.CENTER);

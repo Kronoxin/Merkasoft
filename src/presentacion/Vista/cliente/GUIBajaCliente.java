@@ -6,8 +6,6 @@
 package presentacion.Vista.cliente;
 
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
@@ -24,48 +22,28 @@ public class GUIBajaCliente extends JPanel{
 
 		final JTextField textID = new JTextField("");
 
-		JPanel panelArriba = new JPanel(new GridLayout(1,2));
+		JPanel panelSuperior = new JPanel(new GridLayout(1,2));
 
 		JLabel labID = new JLabel("ID del Cliente",JLabel.CENTER);
 		
-		panelArriba.add(labID);
-		panelArriba.add(textID);
+		panelSuperior.add(labID);
+		panelSuperior.add(textID);
 		
-		JButton butOK = new JButton("Aceptar");
-		JButton butCancelar = new JButton("Cancelar");
+		JButton boton_ok = new JButton("Aceptar");
+		JButton boton_cancelar = new JButton("Cancelar");
 
 		JPanel panelBotones = new JPanel(new GridLayout(1,2,10,10));
-		panelBotones.add(butOK);
-		panelBotones.add(butCancelar);
+		panelBotones.add(boton_ok);
+		panelBotones.add(boton_cancelar);
 
-		this.add(panelArriba,BorderLayout.NORTH);
+		this.add(panelSuperior,BorderLayout.NORTH);
 		this.add(panelBotones,BorderLayout.SOUTH);
 		this.setBorder(new TitledBorder(new TitledBorder(""), "Baja Cliente", TitledBorder.CENTER, TitledBorder.TOP ));	
 	
 
-		
-		
-
 		this.setVisible(true);
 	}
-    
-    
- /*       public static void main(String[] args) {
-		JFrame frame = new JFrame("GUIAltaCliente");
-		frame.addWindowListener(new WindowAdapter() {
 
-			public void windowClosing(WindowEvent e) {
-				System.exit(0);
-			}
-		});
-		frame.getContentPane().add(new GUIBajaCliente(),
-				BorderLayout.CENTER);
-		frame.setSize(400, 400);
-		frame.setVisible(true);
-        }
-        */
-        
-        
 }
             
     

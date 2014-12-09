@@ -24,8 +24,8 @@ public class GUIAltaCliente extends JPanel{
         
             this.setLayout(new BorderLayout());
 
-		JPanel parteSuperior = new JPanel();
-		parteSuperior.setLayout(new GridLayout(4,2));
+		JPanel panelSuperior = new JPanel();
+		panelSuperior.setLayout(new GridLayout(4,2));
 
 		final JTextField textNombre = new JTextField("");
 		final JTextField textApellidos = new JTextField("");
@@ -33,25 +33,25 @@ public class GUIAltaCliente extends JPanel{
                 
              
                
-                JPanel panelFecha = new JPanel();
-                panelFecha.setLayout(new FlowLayout());
-                panelFecha.add(new JTextField(2));
-                panelFecha.add(new JLabel("/"));
-                panelFecha.add(new JTextField(2));
-                panelFecha.add(new JLabel("/"));
-                panelFecha.add(new JTextField(4)); 
+                JPanel panel_Fecha = new JPanel();
+                panel_Fecha.setLayout(new FlowLayout());
+                panel_Fecha.add(new JTextField(2));
+                panel_Fecha.add(new JLabel("/"));
+                panel_Fecha.add(new JTextField(2));
+                panel_Fecha.add(new JLabel("/"));
+                panel_Fecha.add(new JTextField(4)); 
 
 		JLabel labNombre = new JLabel("Nombre",JLabel.CENTER);
-		parteSuperior.add(labNombre);
-		parteSuperior.add(textNombre);
+		panelSuperior.add(labNombre);
+		panelSuperior.add(textNombre);
 
 		JLabel labApellidos = new JLabel("Apellidos",JLabel.CENTER);
-		parteSuperior.add(labApellidos);
-		parteSuperior.add(textApellidos);
+		panelSuperior.add(labApellidos);
+		panelSuperior.add(textApellidos);
                 
                 JLabel labFechaNacimiento = new JLabel("Fecha Nacimiento",JLabel.CENTER);
-                parteSuperior.add(labFechaNacimiento);
-                parteSuperior.add(panelFecha);
+                panelSuperior.add(labFechaNacimiento);
+                panelSuperior.add(panel_Fecha);
 
 		final JRadioButton radioNormal = new JRadioButton("Normal",true);
 		final JRadioButton radioVIP = new JRadioButton("VIP");
@@ -67,36 +67,29 @@ public class GUIAltaCliente extends JPanel{
 
 
 		JLabel labDNI = new JLabel("DNI",JLabel.CENTER);
-		parteSuperior.add(labDNI);
-		parteSuperior.add(textDNI);
+		panelSuperior.add(labDNI);
+		panelSuperior.add(textDNI);
 		this.add(panelRadios, BorderLayout.CENTER);
 
-		this.add(parteSuperior,BorderLayout.NORTH);	
+		this.add(panelSuperior,BorderLayout.NORTH);	
 
 
 
-		JButton butOK = new JButton("Aceptar");
+		JButton boton_ok = new JButton("Aceptar");
 
-		
-
-
-		JButton butCancelar = new JButton("Cancelar");
-
-	
+		JButton boton_cancelar = new JButton("Cancelar");
 
 
 		JPanel panelBotones = new JPanel(new GridLayout(1,2,5,5));
-		panelBotones.add(butOK);
-		panelBotones.add(butCancelar);
+		panelBotones.add(boton_ok);
+		panelBotones.add(boton_cancelar);
 
 		this.add(panelBotones,BorderLayout.SOUTH);
 
 		this.setBorder(new TitledBorder(new TitledBorder(""), "Alta Cliente", 
 				TitledBorder.CENTER, TitledBorder.TOP ));		
 
-		//this.add(entero);
-		//this.setResizable(false);
-		//this.setLocationRelativeTo(null);
+	
 		this.setVisible(true);
 	}
 /*    public static void main(String[] args) {
