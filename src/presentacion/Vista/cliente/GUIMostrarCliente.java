@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+import javax.swing.text.DateFormatter;
+import sun.util.calendar.BaseCalendar;
 
 /**
  *
@@ -20,12 +22,13 @@ public class GUIMostrarCliente extends JPanel{
     
     public GUIMostrarCliente(){
         Object[][] data = {
- {new Integer(5),"Mary", "Campione", new Date(1990, 2, 5)},
- {new Integer(3), "Lhucas", "Huml",  new Date(1990, 2, 5)},
- { new Integer(2),"Kathya", "Walrath", new Date(1990, 2, 5)},
- { new Integer(7), "Marcus", "Andrews", new Date(1990, 2, 5)},
- {new Integer(4), "Angela", "Lalth",  new Date(1990, 2, 5)}
- };
+        {new Integer(1),"Paco", "Pino", new Date(1990, 12, 25)},
+        {new Integer(3), "Array", "List",  new Date(1990, 12, 25)},
+        { new Integer(2),"fdi", "ucm", new Date(1990, 12, 25)},
+        { new Integer(7), "Marcus", "Andrews", new Date(1990, 2, 5)},
+        {new Integer(4), "Angela", "Lalth",  new Date(1990, 2, 5)}
+        };
+        
         String[] NombreColumnas = {"ID","Nombre", "Apellido", "Fecha Nacimiento"};
         
         this.setLayout(new BorderLayout());
@@ -43,10 +46,14 @@ public class GUIMostrarCliente extends JPanel{
                 panelArriba.add(butID);
                 
                 //se crea la Tabla
-                final JTable table = new JTable(data, NombreColumnas);
-                table.setPreferredScrollableViewportSize(new Dimension(300, 70));
+                JTable tabla = new JTable(data, NombreColumnas);
+                //cojo la primera columna de la tabla (el ID) y fijo el tamaño de esa columna
+                tabla.getColumnModel().getColumn(0).setPreferredWidth(2);
+                
+                //dimensiones del Jtable
+                tabla.setPreferredScrollableViewportSize(new Dimension(400, 70));
                 //Creamos un JscrollPane y le agregamos la JTable
-                JScrollPane scrollPane = new JScrollPane(table);
+                JScrollPane scrollPane = new JScrollPane(tabla);
                 panelTabla.add(scrollPane,BorderLayout.CENTER);
 
 

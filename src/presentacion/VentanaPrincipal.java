@@ -87,7 +87,7 @@ public class VentanaPrincipal extends JPanel {
 		});
 		frame.getContentPane().add(new VentanaPrincipal(),
 				BorderLayout.CENTER);
-		frame.setSize(800, 400);
+		frame.setSize(900, 500);
 		frame.setVisible(true);
 	}
 }

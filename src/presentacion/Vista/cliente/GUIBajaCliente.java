@@ -50,7 +50,7 @@ public class GUIBajaCliente extends JPanel{
 	}
     
     
-        public static void main(String[] args) {
+ /*       public static void main(String[] args) {
 		JFrame frame = new JFrame("GUIAltaCliente");
 		frame.addWindowListener(new WindowAdapter() {
 
@@ -63,7 +63,7 @@ public class GUIBajaCliente extends JPanel{
 		frame.setSize(400, 400);
 		frame.setVisible(true);
         }
-        
+        */
         
         
 }

@@ -22,6 +22,9 @@ public class GUIPrincipal_Cliente extends JPanel{
         GUIAltaCliente alta_cliente = new GUIAltaCliente();
         GUIBajaCliente baja = new GUIBajaCliente();
         GUIMostrarCliente mostrar_cliente = new GUIMostrarCliente();
+        GUIMostrarListaClientes lista_clientes = new GUIMostrarListaClientes();
+        GUIModificarCliente mod = new GUIModificarCliente();
+        GUIClientesMedia media = new GUIClientesMedia();
         
         this.setLayout(new GridLayout(1, 2));
         
@@ -30,6 +33,7 @@ public class GUIPrincipal_Cliente extends JPanel{
         panel_aux.add(lab_aux);*/
         
          JPanel panel_botones_clientes = new JPanel(new GridLayout(6,1,4,4));
+         
                 
                 TitledBorder borde_clientes = new TitledBorder("Clientes");
 		borde_clientes.setTitleFont(new Font(null, Font.BOLD, 16));
@@ -54,7 +58,7 @@ public class GUIPrincipal_Cliente extends JPanel{
                 panel_botones_clientes.add(boton_media_clientes);
                 
                 this.add(panel_botones_clientes);
-                this.add(mostrar_cliente);
+                this.add(media);
                 
     }
     
