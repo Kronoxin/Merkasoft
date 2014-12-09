@@ -26,12 +26,29 @@ public class SAVentaImp implements SAVenta{
         transaccion.start();
         transaccion.lock();
         
-        int idVenta;
+        int idVenta=0;
         
         TVenta tVenta=FactoriaDAO.obtenerInstancia().getDAOVenta().mostrarVenta(venta.getId());
-        if(tVenta!=null)
+        if(tVenta==null)
         {
-            
+             if(FactoriaDAO.obtenerInstancia().getDAOVenta().altaVenta(venta)==1)
+            {
+                idVenta=venta.getId();
+                transaccion.commit();
+                TransactionManager.obtenerInstanacia().eliminaTransaccion();
+            }
+        }
+        else if(tVenta!=null && tVenta.isActivo())
+        {
+            idVenta=tVenta.getId();
+            transaccion.rollback();
+            TransactionManager.obtenerInstanacia().eliminaTransaccion();
+        }
+        else
+        {
+            idVenta=0;
+            transaccion.rollback();
+            TransactionManager.obtenerInstanacia().eliminaTransaccion();
         }
         return idVenta;
     }
