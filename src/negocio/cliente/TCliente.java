@@ -19,6 +19,8 @@ public class TCliente {
     private String _nombre;
     private String _apellidos;
     private String _DNI;
+    private String _fecha_nacimiento; //Formato: "dd/mm/yyyy"
+    private String _tipo;
     private ArrayList<TVenta> _venta;
     private boolean _activo;
 
@@ -52,6 +54,25 @@ public class TCliente {
 
     public void setDNI(String _DNI) {
         this._DNI = _DNI;
+    }
+    
+    public String getFechaNacimiento()
+    {
+        return _fecha_nacimiento;
+    }
+    public void setFechaNacimiento(String fecha)
+    {
+        this._fecha_nacimiento = fecha;
+    }
+    
+    public String getTipo()
+    {
+        return _tipo;
+    }
+    
+    public void setTipo(String tipo)
+    {
+        _tipo = tipo;
     }
 
     public ArrayList<TVenta> getVenta() {
