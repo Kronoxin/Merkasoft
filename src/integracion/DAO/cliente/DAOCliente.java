@@ -17,7 +17,7 @@ public interface DAOCliente {
 	 * @return
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public Integer altaCliente(TCliente cliente);
+	public int altaCliente(TCliente cliente);
 
 	/** 
 	 * <!-- begin-UML-doc -->
