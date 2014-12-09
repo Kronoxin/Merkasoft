@@ -24,7 +24,7 @@ public class SAProductoImp implements SAProducto{
         String codigoBarras=null;
 
         TProducto tProducto = FactoriaDAO.obtenerInstancia().getDAOProducto().mostrarProducto(producto.getCodigoDeBarras());
-
+        //El producto no existe
         if(tProducto==null){	
                 if(FactoriaDAO.obtenerInstancia().getDAOProducto().altaProducto(producto) == 1){
 
@@ -33,16 +33,25 @@ public class SAProductoImp implements SAProducto{
                         TransactionManager.obtenerInstanacia().eliminaTransaccion();
                 }
         }
+        //El producto existe y esta activo
         else if(tProducto!=null && tProducto.getActivo()==true){
 
                codigoBarras=tProducto.getCodigoDeBarras();
+               transaccion.rollback();
+               TransactionManager.obtenerInstanacia().eliminaTransaccion();
         }
-
-        if(codigoBarras==null){
-
-                transaccion.rollback();
-                TransactionManager.obtenerInstanacia().eliminaTransaccion();
-
+        //El producto existe y no esta activo
+        else
+        {
+            //Cambiamos el atributo activo a true
+            tProducto.setActivo(true);
+            //Lo lanzamos contra la BBDD para activarlo
+            if(this.modificarProducto(tProducto))
+            {
+                codigoBarras=tProducto.getCodigoDeBarras();
+            }
+            transaccion.rollback();
+            TransactionManager.obtenerInstanacia().eliminaTransaccion();
         }
         return codigoBarras;     
     }

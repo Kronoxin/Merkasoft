@@ -8,6 +8,9 @@ package Negocio.venta.SAVenta.Imp;
 import Negocio.venta.SAVenta.SAVenta;
 import Negocio.venta.TCompraArticulo;
 import Negocio.venta.TVenta;
+import integracion.DAO.factoriaDAO.FactoriaDAO;
+import integracion.transaction.Imp.TransactionMysql;
+import integracion.transaction.transactionManager.TransactionManager;
 import java.util.ArrayList;
 
 /**
@@ -18,7 +21,19 @@ public class SAVentaImp implements SAVenta{
 
     @Override
     public int altaventa(TVenta venta) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        TransactionMysql transaccion=new TransactionMysql();
+        TransactionManager.obtenerInstanacia().nuevaTransaccion();
+        transaccion.start();
+        transaccion.lock();
+        
+        int idVenta;
+        
+        TVenta tVenta=FactoriaDAO.obtenerInstancia().getDAOVenta().mostrarVenta(venta.getId());
+        if(tVenta!=null)
+        {
+            
+        }
+        return idVenta;
     }
 
     @Override

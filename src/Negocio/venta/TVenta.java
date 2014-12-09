@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ *Transfer que proporciona los atributos de una venta
  */
 package Negocio.venta;
 
@@ -9,10 +7,6 @@ import Negocio.cliente.TCliente;
 import java.util.ArrayList;
 import java.util.Date;
 
-/**
- *
- * @author Marina
- */
 public abstract  class TVenta {
     
     
@@ -21,11 +15,11 @@ public abstract  class TVenta {
     private Date _fecha;
     private ArrayList<TCompraArticulo> _listaproductos;
     private boolean _activo;
-
+    //Metodos get y set de los atributos de venta
     public int getId() {
         return _id;
     }
-
+    
     public void setId(int _id) {
         this._id = _id;
     }

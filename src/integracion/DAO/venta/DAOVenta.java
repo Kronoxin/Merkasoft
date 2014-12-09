@@ -1,5 +1,7 @@
 package integracion.DAO.venta;
 
+import Negocio.venta.TCompraArticulo;
+import Negocio.venta.TVenta;
 import java.util.ArrayList;
 
 /** 

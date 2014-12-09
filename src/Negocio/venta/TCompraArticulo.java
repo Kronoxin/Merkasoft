@@ -1,19 +1,13 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * transfer que proporciona los atributos de un articulo comprado
  */
 package Negocio.venta;
-
-/**
- *
- * @author borja
- */
 public abstract class TCompraArticulo {
     
     private int _idArticulo;
     private int _cantidad;
     private double _precio;
+    //metodos get y set de los atrbutos de compraVenta
     public int getIdArticulo() {
         return _idArticulo;
     }
