@@ -6,6 +6,7 @@ package Negocio.producto.SAProducto.Imp;
 import Negocio.producto.SAProducto.SAProducto;
 import Negocio.producto.TProducto;
 import integracion.DAO.factoriaDAO.FactoriaDAO;
+import integracion.transaction.Imp.TransactionMysql;
 import integracion.transaction.Transaction;
 import integracion.transaction.transactionManager.TransactionManager;
 import java.sql.SQLException;
@@ -16,14 +17,10 @@ import java.util.logging.Logger;
 public class SAProductoImp implements SAProducto{
 
     @Override
-    //Esta clase implemena el metodo altaProducto que permite dar de alta un producto en BBDD comprobando que este no exista ya en ella
+    //Esta metodo permite dar de alta un producto en BBDD comprobando que este no exista ya en ella
     public String altaProducto(TProducto producto) {
         TransactionManager.obtenerInstanacia().nuevaTransaccion();
-        try {
-            TransactionManager.obtenerInstanacia().getTransaccion().start();
-        } catch (SQLException ex) {
-            Logger.getLogger(SAProductoImp.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        new TransactionMysql().start();
 
         String codigoBarras=null;
 
@@ -33,7 +30,7 @@ public class SAProductoImp implements SAProducto{
                 if(FactoriaDAO.obtenerInstancia().getDAOProducto().altaProducto(producto) == 1){
 
                         codigoBarras=producto.getCodigoDeBarras();
-                        //Falta el commit
+                        new TransactionMysql().commit();
                         TransactionManager.obtenerInstanacia().eliminaTransaccion();
                 }
         }
@@ -44,11 +41,7 @@ public class SAProductoImp implements SAProducto{
 
         if(codigoBarras==null){
 
-            try {
-                TransactionManager.obtenerInstanacia().getTransaccion().rollback();
-            } catch (SQLException ex) {
-                Logger.getLogger(SAProductoImp.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                new TransactionMysql().rollback();
                 TransactionManager.obtenerInstanacia().eliminaTransaccion();
 
         }
@@ -56,8 +49,24 @@ public class SAProductoImp implements SAProducto{
     }
 
     @Override
-    public boolean bajaProducto(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    //Este metodo permie la eliminacion de un producto de la BBDD
+    public boolean bajaProducto(String codigoBarras) {
+        TransactionManager.obtenerInstanacia().nuevaTransaccion();
+        new TransactionMysql().start();
+        boolean correcto=false;
+        TProducto tProducto = FactoriaDAO.obtenerInstancia().getDAOProducto().mostrarProducto(codigoBarras);
+        if(tProducto!=null){
+            if(tProducto.getActivo()==true)
+            {
+                tProducto.setActivo(false);
+                //deberia pasarsele el transfer no el codigo de barras
+                FactoriaDAO.obtenerInstancia().getDAOProducto().bajaProducto(tProducto);
+                correcto=true;
+                new TransactionMysql().commit();
+                TransactionManager.obtenerInstanacia().eliminaTransaccion();
+            }	
+        }
+        return correcto;
     }
 
     @Override
@@ -68,29 +77,23 @@ public class SAProductoImp implements SAProducto{
     @Override
     public TProducto mostrarProducto(String codigoBarras) {
         TransactionManager.obtenerInstanacia().nuevaTransaccion();
-		TransactionManager.obtenerInstanacia().getTransaccion().start();
+        new TransactionMysql().start();
 
-		boolean ok = false;
+        TProducto tProducto = FactoriaDAO.obtenerInstancia().getDAOProducto().mostrarProducto(codigoBarras);
 
-		TProducto tProducto = FactoriaDAO.obtenerInstancia().getDAOProducto().obtieneProducto(codigoBarras);
-
-		if(tProducto!=null){
-			if(tProducto.getActivo()==true){
-				TransactionManager.obtenerInstanacia().getTransaccion().commit();
-				TransactionManager.obtenerInstanacia().eliminaTransaccion();
-				ok = true;		
-			}	
-		}
-
-		if(!ok){
-
-			TransactionManager.obtenerInstanacia().getTransaccion().rollback();
-			TransactionManager.obtenerInstanacia().eliminaTransaccion();
-
-		}
+        if(tProducto!=null){
+                if(tProducto.getActivo()==true){
+                        new TransactionMysql().commit();
+                        TransactionManager.obtenerInstanacia().eliminaTransaccion();		
+                }	
+        }
+        else{
+            new TransactionMysql().rollback();
+            TransactionManager.obtenerInstanacia().eliminaTransaccion();
+        }
 
 
-		return ok;
+        return tProducto;
     }
 
     @Override
