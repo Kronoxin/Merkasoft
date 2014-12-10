@@ -8,11 +8,13 @@ package Negocio.cliente.SACliente.Imp;
 import Negocio.cliente.SACliente.SACliente;
 import Negocio.cliente.TCliente;
 import Negocio.cliente.TClienteNormal;
-import Negocio.cliente.TClienteVip;
+import Negocio.venta.TVenta;
 import integracion.DAO.factoriaDAO.FactoriaDAO;
-import integracion.transaction.Imp.TransactionMysql;
 import integracion.transaction.transactionManager.TransactionManager;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 /*
 * Clase SAClienteImp: implementa la interfaz SACliente, se encarga del modelo de negocio de cliente 
@@ -184,45 +186,62 @@ public class SAClienteImp implements SACliente{
     @Override
     public boolean modificarCliente(TCliente cliente) {
         
-      /*  boolean ok=false;
-        TransactionMysql transaccion=new TransactionMysql();
-        TransactionManager.obtenerInstanacia().nuevaTransaccion();
-        
-                try{
-             
-                 transaccion.start();
-                 transaccion.lock("Clientes");
-                 }catch(Exception e){
-                        TransactionManager.obtenerInstanacia().eliminaTransaccion();
-                 }
-        
-        if(cliente !=null){
-        
-            FactoriaDAO.obtenerInstancia().getDAOCliente().modificarCliente(cliente);
-            try {
-                transaccion.commit();
-            } catch (Exception ex) {
-                throw new Exception(ex.getMessage());
-            }
-            TransactionManager.obtenerInstanacia().eliminaTransaccion();
-            
-            ok = true;           
-        
-        }else{
-            
-            try {
-                transaccion.rollback();
-            } catch (Exception ex) {
-                throw new Exception(ex.getMessage());
-            }            
-            TransactionManager.obtenerInstanacia().eliminaTransaccion();
-        
-        
+      boolean correcto = false;
+      TransactionManager.obtenerInstanacia().nuevaTransaccion();
+      
+       try{
+                  TransactionManager.obtenerInstanacia().getTransaccion().start();
+
+        if(cliente.getClass().equals(TClienteNormal.class)){
+                  TransactionManager.obtenerInstanacia().getTransaccion().lock("ClienteNormal");
+
         }
-        
-        
-*/
-        return false;
+        else{
+                  TransactionManager.obtenerInstanacia().getTransaccion().lock("ClienteVip");
+        }
+      
+      TCliente tCliente = FactoriaDAO.obtenerInstancia().getDAOCliente().mostrarCliente(cliente.getId());
+     
+      if(tCliente !=null  && !tCliente.equals(cliente)){
+          
+          
+          if(FactoriaDAO.obtenerInstancia().getDAOCliente().modificarCliente(cliente)){
+          
+          try{
+              TransactionManager.obtenerInstanacia().getTransaccion().commit();
+              correcto = true;
+          
+          }//si falla el commit
+          catch(Exception e){
+          
+              TransactionManager.obtenerInstanacia().getTransaccion().rollback();
+              correcto = false;
+              
+          }
+                    
+          }
+            
+      }
+      else{
+      
+      //echamos para atras la transaccion
+          
+          TransactionManager.obtenerInstanacia().getTransaccion().rollback();
+      
+      
+      }
+      
+      //Eliminamos la transaccion
+      TransactionManager.obtenerInstanacia().eliminaTransaccion();
+      
+      
+      }
+      catch(Exception e ){
+      
+          TransactionManager.obtenerInstanacia().eliminaTransaccion();
+      
+      }
+       return correcto;
     }
 
     //mostrar por id
@@ -276,15 +295,67 @@ public class SAClienteImp implements SACliente{
     @Override
     public ArrayList<TCliente> mostrarClientesMedia() {
         
-        double media;
+        int tam =0;
+        double media=0;
+        int suma =0, sumatotal =0;
         
-                               
+        ArrayList<TCliente> listaClientes= new ArrayList<TCliente>();
+        ArrayList<TVenta> listaVentas = null;
+        Map<Integer, TCliente> listaMapCliente = new HashMap<Integer, TCliente>();                      
+                try{
+                    
+                    TransactionManager.obtenerInstanacia().getTransaccion().start();
+                
+                    listaVentas = FactoriaDAO.obtenerInstancia().getDAOVenta().listarVentas();
+                    
+                     for(int i =0; i< listaVentas.size();i++){
+                
+                    
+                      for(int j=0; j<listaVentas.get(i).getListaproductos().size();j++){
+                      
+                          //suma de los articulos de un cliente
+                          suma += listaVentas.get(i).getListaproductos().get(j).getPrecio();
+                          
+                          
+                      
+                      }
+                      listaMapCliente.put(suma, listaVentas.get(i).getCliente());
+                      sumatotal+= suma;
+                      
+                    
+                    }      
+                  media = sumatotal/listaMapCliente.size();
+                  
+                  Iterator it = listaMapCliente.keySet().iterator();
+                  
+                  while(it.hasNext()){
+                  
+                      Integer key = (Integer) it.next();
+                      
+                      if(key > media){
+                      
+                          listaClientes.add(listaMapCliente.get(key));
+                      
+                      }
+                  
+                  }
+                  
+                  
+                }
+                
+                catch(Exception e ){
+                
+                    TransactionManager.obtenerInstanacia().eliminaTransaccion();
+                
+                }
+                
+                
                 
                 
                 
                 
                         
-           return new ArrayList<TCliente>();
+           return listaClientes;
         
     }
 
