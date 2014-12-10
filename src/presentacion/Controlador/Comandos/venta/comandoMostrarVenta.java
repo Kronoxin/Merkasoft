@@ -5,10 +5,29 @@
  */
 package presentacion.Controlador.Comandos.venta;
 
+import Negocio.FactoriaSA.FactoriaSA;
+import Negocio.venta.TVenta;
+import presentacion.Controlador.Comandos.RespuestaComando;
+import presentacion.Controlador.Eventos.EventoNegocio;
+
 /**
  *
  * @author Pepu
  */
-public class comandoMostrarVenta {
-    
+public class comandoMostrarVenta 
+{
+    public RespuestaComando execute(Object datos) 
+    {
+       TVenta datosVenta;
+       RespuestaComando respuesta;
+       int idVenta = Integer.parseInt((String) datos);
+       datosVenta = FactoriaSA.obtenerInstancia().generaSAVenta().mostrarVenta(idVenta);
+       
+       if(datosVenta != null) //Si existe la venta
+           respuesta = new RespuestaComando(EventoNegocio.EXITO_MOSTRAR_VENTA, datosVenta);
+       else
+           respuesta = new RespuestaComando(EventoNegocio.FRACASO_MOSTRAR_VENTA, datosVenta);
+       
+       return respuesta;
+    }
 }
