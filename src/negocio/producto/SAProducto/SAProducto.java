@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public interface SAProducto 
 {
     
-    public String altaProducto(TProducto producto);
+    public int altaProducto(TProducto producto);
     public  boolean bajaProducto(int id);
     public boolean modificarProducto(TProducto producto);
     public TProducto mostrarProducto(int id);
