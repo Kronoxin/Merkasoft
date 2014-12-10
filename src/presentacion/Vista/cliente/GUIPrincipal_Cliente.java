@@ -58,7 +58,7 @@ public class GUIPrincipal_Cliente extends JPanel{
                 panel_botones_clientes.add(boton_media_clientes);
                 
                 this.add(panel_botones_clientes);
-                this.add(media);
+                this.add(mostrar_cliente);
                 
     }
     

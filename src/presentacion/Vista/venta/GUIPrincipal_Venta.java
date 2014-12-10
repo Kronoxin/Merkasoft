@@ -8,6 +8,7 @@ package presentacion.Vista.venta;
 
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.math.MathContext;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
@@ -19,6 +20,11 @@ public class GUIPrincipal_Venta extends JPanel{
     
     public GUIPrincipal_Venta(){
         
+        GUIAltaVenta alta = new GUIAltaVenta();
+        GUIMostrarVenta mostrar_una = new GUIMostrarVenta();
+        GUIMostrarListaVentas lista = new GUIMostrarListaVentas();
+        GUIDevolverProducto dev = new GUIDevolverProducto();
+        
          this.setLayout(new GridLayout(1, 2));
         
         JPanel panel_aux = new JPanel();
@@ -27,7 +33,7 @@ public class GUIPrincipal_Venta extends JPanel{
         
         JPanel panel_botones_ventas = new JPanel(new GridLayout(4,1,4,4));
                 
-                TitledBorder borde_productos = new TitledBorder("Productos");
+                TitledBorder borde_productos = new TitledBorder("Ventas");
 		borde_productos.setTitleFont(new Font(null, Font.BOLD, 16));
 		borde_productos.setTitleJustification(TitledBorder.CENTER);
 		panel_botones_ventas.setBorder(borde_productos);
@@ -46,7 +52,7 @@ public class GUIPrincipal_Venta extends JPanel{
                 panel_botones_ventas.add(boton_mostrar_lista_ventas);
                 
                 this.add(panel_botones_ventas);
-                this.add(panel_aux);
+                this.add(dev);
                 this.setVisible(true);
         
         

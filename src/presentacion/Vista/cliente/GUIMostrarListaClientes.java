@@ -45,7 +45,7 @@ public class GUIMostrarListaClientes extends JPanel{
         tabla.getColumnModel().getColumn(0).setPreferredWidth(2);
         
         //dimensiones del Jtable
-        tabla.setPreferredScrollableViewportSize(new Dimension(400, 300));
+        tabla.setPreferredScrollableViewportSize(new Dimension(450, 500));
         //Creamos un JscrollPane y le agregamos el JTable
         JScrollPane scrollPane = new JScrollPane(tabla);
         panelTabla.add(scrollPane,BorderLayout.CENTER);

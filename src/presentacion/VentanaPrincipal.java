@@ -6,25 +6,13 @@
 
 package presentacion;
 
-import com.sun.xml.internal.messaging.saaj.soap.JpegDataContentHandler;
-import javax.swing.JTabbedPane;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JFrame;
 import java.awt.*;
 import java.awt.event.*;
-import javax.swing.JButton;
-import javax.swing.JInternalFrame;
-import javax.swing.border.TitledBorder;
 import javax.swing.*;
-import presentacion.Vista.cliente.GUIAltaCliente;
-import presentacion.Vista.cliente.GUIMostrarCliente;
+
 import presentacion.Vista.cliente.GUIPrincipal_Cliente;
 import presentacion.Vista.producto.GUIPrincipal_Producto;
 import presentacion.Vista.venta.GUIPrincipal_Venta;
-
-
 
 
 /**
@@ -78,7 +66,7 @@ public class VentanaPrincipal extends JPanel {
 	}
           */      
     public static void main(String[] args) {
-		JFrame frame = new JFrame("Ventana Principal");
+		JFrame frame = new JFrame("MerkaSoft");
 		frame.addWindowListener(new WindowAdapter() {
 
 			public void windowClosing(WindowEvent e) {
@@ -87,7 +75,7 @@ public class VentanaPrincipal extends JPanel {
 		});
 		frame.getContentPane().add(new VentanaPrincipal(),
 				BorderLayout.CENTER);
-		frame.setSize(900, 500);
+		frame.setSize(1000, 700);
 		frame.setVisible(true);
 	}
 }

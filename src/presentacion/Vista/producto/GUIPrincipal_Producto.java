@@ -18,12 +18,18 @@ public class GUIPrincipal_Producto extends JPanel{
     
     public GUIPrincipal_Producto(){
         
+        GUIAltaProducto alta = new GUIAltaProducto();
+        GUIMostrarProducto mostrar_producto = new GUIMostrarProducto();
+        GUIMostrarListaProductos lista_productos = new GUIMostrarListaProductos();
+        GUIModificarProducto mod = new GUIModificarProducto();
+        GUIBajaProducto baja = new GUIBajaProducto();
+        
         this.setLayout(new GridLayout(1, 2));
         
-        JPanel panel_aux = new JPanel();
+     /*   JPanel panel_aux = new JPanel();
         JLabel lab_aux = new JLabel("aqui");
         panel_aux.add(lab_aux);
-        
+        */
         JPanel panel_botones_productos = new JPanel(new GridLayout(5,1,4,4));
                 
                 TitledBorder borde_productos = new TitledBorder("Productos");
@@ -47,7 +53,7 @@ public class GUIPrincipal_Producto extends JPanel{
                 panel_botones_productos.add(boton_mostrar_lista_productos);
                 
                 this.add(panel_botones_productos);
-                this.add(panel_aux);
+                this.add(lista_productos);
                 this.setVisible(true);
                 
     }
