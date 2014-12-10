@@ -21,33 +21,41 @@ public class SAVentaImp implements SAVenta{
 
     @Override
     public int altaventa(TVenta venta) {
-        TransactionMysql transaccion=new TransactionMysql();
+
+        int idVenta;
+        
         TransactionManager.obtenerInstanacia().nuevaTransaccion();
-        transaccion.start();
-        transaccion.lock();
-        
-        int idVenta=0;
-        
-        TVenta tVenta=FactoriaDAO.obtenerInstancia().getDAOVenta().mostrarVenta(venta.getId());
-        if(tVenta==null)
+        try
         {
-             if(FactoriaDAO.obtenerInstancia().getDAOVenta().altaVenta(venta)==1)
+            TransactionManager.obtenerInstanacia().getTransaccion().start();
+            TransactionManager.obtenerInstanacia().getTransaccion().lock("Ventas");   
+            //Si el producto no existe lo insertamos
+            TVenta tVenta=FactoriaDAO.obtenerInstancia().getDAOVenta().mostrarVenta(venta.getId());
+            if(tVenta==null)
             {
-                idVenta=venta.getId();
-                transaccion.commit();
+                 if(FactoriaDAO.obtenerInstancia().getDAOVenta().altaVenta(venta)==1)
+                {
+                    idVenta=venta.getId();
+                    transaccion.commit();
+                    TransactionManager.obtenerInstanacia().eliminaTransaccion();
+                }
+            }
+            else if(tVenta!=null && tVenta.isActivo())
+            {
+                idVenta=tVenta.getId();
+                transaccion.rollback();
+                TransactionManager.obtenerInstanacia().eliminaTransaccion();
+            }
+            else
+            {
+                idVenta=0;
+                transaccion.rollback();
                 TransactionManager.obtenerInstanacia().eliminaTransaccion();
             }
         }
-        else if(tVenta!=null && tVenta.isActivo())
+        catch(Exception e)
         {
-            idVenta=tVenta.getId();
-            transaccion.rollback();
-            TransactionManager.obtenerInstanacia().eliminaTransaccion();
-        }
-        else
-        {
-            idVenta=0;
-            transaccion.rollback();
+            idVenta = -1;
             TransactionManager.obtenerInstanacia().eliminaTransaccion();
         }
         return idVenta;
@@ -59,13 +67,45 @@ public class SAVentaImp implements SAVenta{
     }
 
     @Override
-    public TVenta mostrarVenta(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public TVenta mostrarVenta(int id) 
+    {
+        TVenta tVenta=null;
+        TransactionManager.obtenerInstanacia().nuevaTransaccion();
+        try
+        {
+            //Iniciamos la transsacion y bloqueamos la tabla a modificar
+            TransactionManager.obtenerInstanacia().getTransaccion().start();
+            //buscamos el producto en la BBDD
+            tVenta= FactoriaDAO.obtenerInstancia().getDAOVenta().mostrarVenta(id);
+            //Eliminamos la transaccion
+            TransactionManager.obtenerInstanacia().eliminaTransaccion();
+        }
+        catch(Exception e)
+        {
+            TransactionManager.obtenerInstanacia().eliminaTransaccion();
+        } 
+        return tVenta;
     }
 
     @Override
-    public ArrayList<TVenta> mostrarListaVenta() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ArrayList<TVenta> mostrarListaVenta() 
+    {
+        ArrayList<TVenta> listaVentas=null;
+        TransactionManager.obtenerInstanacia().nuevaTransaccion();
+        try
+        {
+            //Iniciamos la transsacion y bloqueamos la tabla a modificar
+            TransactionManager.obtenerInstanacia().getTransaccion().start();
+            //Extraemos la lista de productos de la BBDD
+            listaVentas= FactoriaDAO.obtenerInstancia().getDAOVenta().listarVentas();
+            //Eliminamos la transaccion
+            TransactionManager.obtenerInstanacia().eliminaTransaccion();
+        }
+        catch(Exception e)
+        {
+            TransactionManager.obtenerInstanacia().eliminaTransaccion();
+        } 
+        return listaVentas;
     }
     
 }
