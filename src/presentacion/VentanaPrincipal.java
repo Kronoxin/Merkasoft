@@ -42,7 +42,6 @@ public class VentanaPrincipal extends JPanel {
             //añadimos el Tab de Ventas al principal, con el icono y la clase principal de este panel
             tab_principal.addTab("Ventas", icono_ventas, principal_venta, "Ventas - Tab 3");
 
-
             setLayout(new GridLayout(1, 1));
             this.add(tab_principal);
             setSize(1000, 700);
