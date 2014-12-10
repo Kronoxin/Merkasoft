@@ -110,7 +110,7 @@ public class SAClienteImp implements SACliente{
     
         
     }
-// elimnar por id
+// eliminar por id
     public boolean eliminarCliente(int  id)
     {
         
@@ -124,16 +124,16 @@ public class SAClienteImp implements SACliente{
                         
             TCliente tCliente = FactoriaDAO.obtenerInstancia().getDAOCliente().mostrarCliente(id);
                        
-                        
+            // Si existe el cliente
             if(tCliente != null)
             {
-                        
+                // Si el cliente esta activo lo damos de baja.
                 if(tCliente.isActivo() == true)
                 {
-
+                    // Si se da de baja correctamente.
                     if(FactoriaDAO.obtenerInstancia().getDAOCliente().bajaCliente(id))
                     {                         
-                                        //confirmamos la transaccion
+                        // Hacemos el commit.
                         try
                         {                             
                             TransactionManager.obtenerInstanacia().getTransaccion().commit();
@@ -143,21 +143,36 @@ public class SAClienteImp implements SACliente{
                         catch(Exception e)
                         {                                   
                             TransactionManager.obtenerInstanacia().getTransaccion().rollback();
-                            correcto = false;                                  
+                                                            
                         }
-                    }                           
+                    }
+                    else
+                    {
+                        correcto = false;
+                        TransactionManager.obtenerInstanacia().getTransaccion().rollback();
+                    }
+                        
                 }              
             }
             else
             {           
                             // Echamos para atras la transaccion
                 TransactionManager.obtenerInstanacia().getTransaccion().rollback();                  
-            }                                                                            
+            }     
+             TransactionManager.obtenerInstanacia().eliminaTransaccion();
         }
-        catch(Exception e ){
+        catch(Exception e )
+        {
         
             TransactionManager.obtenerInstanacia().eliminaTransaccion();
-        
+            try 
+            {
+                TransactionManager.obtenerInstanacia().getTransaccion().rollback();
+            } 
+            catch (Exception ex) 
+            {
+                ex.printStackTrace();
+            }
         }
         
        return correcto;
@@ -165,7 +180,8 @@ public class SAClienteImp implements SACliente{
 
     //falta por hacer
     @Override
-    public boolean modificarCliente(TCliente cliente) {
+    public boolean modificarCliente(TCliente cliente) 
+    {
         
       boolean correcto = false;
       TransactionManager.obtenerInstanacia().nuevaTransaccion();
