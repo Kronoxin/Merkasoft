@@ -5,10 +5,18 @@
  */
 package presentacion.Controlador.Comandos.cliente.GUI;
 
+import presentacion.Controlador.Comandos.Command;
+import presentacion.Controlador.Comandos.RespuestaComando;
+
 /**
  *
  * @author Pepu
  */
-public class comandoGUIcrearCliente {
+public class comandoGUIcrearCliente implements Command{
+
+    @Override
+    public RespuestaComando execute(Object datos) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
