@@ -7,16 +7,10 @@ package Negocio.cliente.SACliente.Imp;
 
 import Negocio.cliente.SACliente.SACliente;
 import Negocio.cliente.TCliente;
-import Negocio.cliente.TClienteNormal;
-import Negocio.venta.TVenta;
 import integracion.DAO.factoriaDAO.FactoriaDAO;
+import integracion.query.factoriaQuery.FactoriaQuery;
 import integracion.transaction.transactionManager.TransactionManager;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /*
 * Clase SAClienteImp: implementa la interfaz SACliente, se encarga del modelo de negocio de cliente 
@@ -186,19 +180,21 @@ public class SAClienteImp implements SACliente{
       boolean correcto = false;
       TransactionManager.obtenerInstanacia().nuevaTransaccion();
       
-       try{
-                  TransactionManager.obtenerInstanacia().getTransaccion().start();
-
-       
+       try
+       {
+            TransactionManager.obtenerInstanacia().getTransaccion().start();
       
       TCliente tCliente = FactoriaDAO.obtenerInstancia().getDAOCliente().mostrarCliente(cliente.getId());
      
-      if(tCliente !=null  && !tCliente.equals(cliente)){
+      if(tCliente !=null  && !tCliente.equals(cliente))
+      {
           
           
-          if(FactoriaDAO.obtenerInstancia().getDAOCliente().modificarCliente(cliente)){
+          if(FactoriaDAO.obtenerInstancia().getDAOCliente().modificarCliente(cliente))
+          {
           
-          try{
+          try
+          {
               TransactionManager.obtenerInstanacia().getTransaccion().commit();
               correcto = true;
           
@@ -218,7 +214,7 @@ public class SAClienteImp implements SACliente{
       //echamos para atras la transaccion
           
           TransactionManager.obtenerInstanacia().getTransaccion().rollback();
-      
+          correcto = false;
       
       }
       
@@ -228,8 +224,13 @@ public class SAClienteImp implements SACliente{
       
       }
       catch(Exception e ){
-      
+          try {
+              TransactionManager.obtenerInstanacia().getTransaccion().rollback();
+          } catch (Exception ex) {
+              ex.printStackTrace();
+          }
           TransactionManager.obtenerInstanacia().eliminaTransaccion();
+          correcto = false;
       
       }
        return correcto;
@@ -237,7 +238,8 @@ public class SAClienteImp implements SACliente{
 
     //mostrar por id
     @Override
-    public TCliente mostrarCliente(int id) {
+    public TCliente mostrarCliente(int id) 
+    {
             
         TCliente tCliente = null;
         TransactionManager.obtenerInstanacia().nuevaTransaccion();
@@ -253,11 +255,9 @@ public class SAClienteImp implements SACliente{
             
             
         }
-        catch(Exception e ){
-        
-            TransactionManager.obtenerInstanacia().eliminaTransaccion();
-
-        
+        catch(Exception e )
+        {       
+            TransactionManager.obtenerInstanacia().eliminaTransaccion();        
         }
             
         
@@ -265,7 +265,8 @@ public class SAClienteImp implements SACliente{
     }
 //diferenciar entre lista de clientes normal o vip
     @Override
-    public ArrayList<TCliente> mostrarListaCliente() {
+    public ArrayList<TCliente> mostrarListaCliente() 
+    {
                 
 
                 ArrayList<TCliente> listaClientes=null;
@@ -284,69 +285,14 @@ public class SAClienteImp implements SACliente{
     }
     //falta por hacer 
     @Override
-    public ArrayList<TCliente> mostrarClientesMedia() {
+    public ArrayList<TCliente> mostrarClientesMedia() 
+    {
         
-        int tam =0;
-        double media=0;
-        int suma =0, sumatotal =0;
+        ArrayList<TCliente> listaClientes;
         
-        ArrayList<TCliente> listaClientes= new ArrayList<TCliente>();
-        ArrayList<TVenta> listaVentas = null;
-        Map<Integer, TCliente> listaMapCliente = new HashMap<Integer, TCliente>();                      
-                try{
-                    
-                    TransactionManager.obtenerInstanacia().getTransaccion().start();
-                
-                    listaVentas = FactoriaDAO.obtenerInstancia().getDAOVenta().listarVentas();
-                    
-                     for(int i =0; i< listaVentas.size();i++){
-                
-                    
-                      for(int j=0; j<listaVentas.get(i).getListaproductos().size();j++){
-                      
-                          //suma de los articulos de un cliente
-                          suma += listaVentas.get(i).getListaproductos().get(j).getPrecio();
-                          
-                          
-                      
-                      }
-                      listaMapCliente.put(suma, listaVentas.get(i).getCliente());
-                      sumatotal+= suma;
-                      
-                    
-                    }      
-                  media = sumatotal/listaMapCliente.size();
-                  
-                  Iterator it = listaMapCliente.keySet().iterator();
-                  
-                  while(it.hasNext()){
-                  
-                      Integer key = (Integer) it.next();
-                      
-                      if(key > media){
-                      
-                          listaClientes.add(listaMapCliente.get(key));
-                      
-                      }
-                  
-                  }
-                  
-                  
-                }
-                
-                catch(Exception e ){
-                
-                    TransactionManager.obtenerInstanacia().eliminaTransaccion();
-                
-                }
-                
-                
-                
-                
-                
-                
-                        
-           return listaClientes;
+        listaClientes = (ArrayList<TCliente>)FactoriaQuery.getInstance().obtenerQueryClientesMedia().execute(null);
+        
+        return listaClientes;
         
     }
 

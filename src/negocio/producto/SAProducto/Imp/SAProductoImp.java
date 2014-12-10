@@ -22,7 +22,6 @@ public class SAProductoImp implements SAProducto
         try
         {
             TransactionManager.obtenerInstanacia().getTransaccion().start();
-            TransactionManager.obtenerInstanacia().getTransaccion().lock("Productos");
         
             TProducto tProducto = FactoriaDAO.obtenerInstancia().getDAOProducto().mostrarProducto(producto.getId());
             
