@@ -29,6 +29,7 @@ public class Main {
         tm.nuevaTransaccion();
         Transaction t = tm.getTransaccion();
         t.start();
+        
         dc.altaCliente(prueba);
     }
 }

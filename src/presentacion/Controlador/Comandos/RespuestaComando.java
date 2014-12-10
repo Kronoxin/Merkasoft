@@ -11,6 +11,21 @@ package presentacion.Controlador.Comandos;
  */
 public class RespuestaComando 
 {
-    
+    private int evento;
+    private Object datos;
+	
+    public RespuestaComando(int evento, Object datos) 
+    {
+	this.evento = evento;
+	this.datos = datos;
+    }
+	
+	public int getEvento() {
+		return evento;
+	}
+	
+	public Object getDatos() {
+		return datos;
+	}
     
 }

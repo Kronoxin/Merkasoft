@@ -13,7 +13,7 @@ public abstract class Controlador
 {
     private static Controlador _controlador;
 
-    public static Controlador getInstancia() 
+    public static Controlador getInstance() 
     {
 
         if(_controlador == null)

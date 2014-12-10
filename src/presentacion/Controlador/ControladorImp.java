@@ -9,14 +9,20 @@ package presentacion.Controlador;
  *
  * @author Pepu
  */
-class ControladorImp extends Controlador {
-
-    public ControladorImp() {
-    }
-
-    @Override
+public class ControladorImp extends Controlador
+{
     public void accion(int evento, Object datos) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
+
+		Command comando;
+		RespuestaComando aux;
+
+		comando = FactoriaComandos.obtenerInstancia().getCommand(evento);
+		aux = comando.execute(datos);
+
+		if (aux != null) {
+			comando = Dispatcher.getInstance().dispatch(aux);
+			comando.execute(aux.getDatos());
+		}
+
+	}
 }

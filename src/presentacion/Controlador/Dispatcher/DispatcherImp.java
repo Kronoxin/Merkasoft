@@ -13,11 +13,8 @@ import presentacion.Controlador.Comandos.RespuestaComando;
  *
  * @author Pepu
  */
-class DispatcherImp extends Dispatcher {
-
-    public DispatcherImp() {
-    }
-    
+class DispatcherImp extends Dispatcher 
+{
     public Command dispatch(RespuestaComando comando)
     {
         return null;
