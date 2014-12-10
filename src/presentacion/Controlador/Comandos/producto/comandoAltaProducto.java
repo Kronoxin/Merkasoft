@@ -17,8 +17,6 @@ import presentacion.Controlador.Eventos.EventoNegocio;
  */
 public class comandoAltaProducto implements Command
 {
-    
-    @Override
     public RespuestaComando execute(Object datos) 
     {
        RespuestaComando respuesta;

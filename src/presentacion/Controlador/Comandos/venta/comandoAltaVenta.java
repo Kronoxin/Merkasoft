@@ -5,10 +5,28 @@
  */
 package presentacion.Controlador.Comandos.venta;
 
+import Negocio.FactoriaSA.FactoriaSA;
+import Negocio.venta.TVenta;
+import presentacion.Controlador.Comandos.RespuestaComando;
+import presentacion.Controlador.Eventos.EventoNegocio;
+
 /**
  *
  * @author Pepu
  */
-public class comandoAltaVenta {
-    
+public class comandoAltaVenta 
+{
+    public RespuestaComando execute(Object datos) 
+    {
+       TVenta datosVenta = (TVenta)datos;
+       RespuestaComando respuesta;
+       int idVenta;
+       idVenta = FactoriaSA.obtenerInstancia().generaSAVenta().altaventa(datosVenta, datosVenta.getCliente().getId());
+       if(idVenta > 0)
+           respuesta = new RespuestaComando(EventoNegocio.EXITO_ALTA_VENTA, datosVenta);
+       else
+           respuesta = new RespuestaComando(EventoNegocio.FRACASO_ALTA_VENTA, datosVenta);
+       
+       return respuesta;
+    }
 }
