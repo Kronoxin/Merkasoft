@@ -18,7 +18,7 @@ public class DAOVentaImp implements DAOVenta
 {
 
     @Override
-    public int altaVenta(TVenta venta) {
+    public int altaVenta(TVenta venta, int idCliente) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -38,8 +38,8 @@ public class DAOVentaImp implements DAOVenta
     }
 
     @Override
-    public Boolean devolucionProducto(TCompraArticulo venta) {
+    public Boolean devolucionProducto(TCompraArticulo articulo, int idVenta) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }
