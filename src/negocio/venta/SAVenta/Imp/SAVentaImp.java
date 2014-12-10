@@ -1,4 +1,4 @@
-/*
+*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -20,50 +20,106 @@ import java.util.ArrayList;
 public class SAVentaImp implements SAVenta{
 
     @Override
-    public int altaventa(TVenta venta) {
+    public int altaventa(TVenta venta,int idCliente) {
 
         int idVenta;
-        
         TransactionManager.obtenerInstanacia().nuevaTransaccion();
         try
         {
             TransactionManager.obtenerInstanacia().getTransaccion().start();
-            TransactionManager.obtenerInstanacia().getTransaccion().lock("Ventas");   
+            TransactionManager.obtenerInstanacia().getTransaccion().lock("Ventas");
+        
+            TVenta tVenta = FactoriaDAO.obtenerInstancia().getDAOVenta().mostrarVenta(venta.getId());
+            
             //Si el producto no existe lo insertamos
-            TVenta tVenta=FactoriaDAO.obtenerInstancia().getDAOVenta().mostrarVenta(venta.getId());
-            if(tVenta==null)
+            if(tVenta== null)
             {
-                 if(FactoriaDAO.obtenerInstancia().getDAOVenta().altaVenta(venta)==1)
+                idVenta = FactoriaDAO.obtenerInstancia().getDAOVenta().altaVenta(venta,idCliente);
+                
+                // Se hizo la insercion con exito.
+                if(idVenta > 0)
                 {
-                    idVenta=venta.getId();
-                    //transaccion.commit();
-                    TransactionManager.obtenerInstanacia().eliminaTransaccion();
-                }
+                    // Se hace el commit.
+                        try
+                        {
+                            TransactionManager.obtenerInstanacia().getTransaccion().commit();
+                        }
+                        // Si falla el commit.
+                        catch(Exception e)
+                        {
+                           idVenta = -1;
+                           TransactionManager.obtenerInstanacia().getTransaccion().rollback(); 
+                        }
+                    
+                }                                
             }
-            else if(tVenta!=null && tVenta.isActivo())
+            else if(tVenta.isActivo())
             {
-                idVenta=tVenta.getId();
-                //transaccion.rollback();
-                TransactionManager.obtenerInstanacia().eliminaTransaccion();
+                idVenta= tVenta.getId();
+                TransactionManager.obtenerInstanacia().getTransaccion().rollback(); 
             }
             else
             {
-                idVenta=0;
-                //transaccion.rollback();
-                TransactionManager.obtenerInstanacia().eliminaTransaccion();
+                idVenta=-1;
+                TransactionManager.obtenerInstanacia().getTransaccion().rollback(); 
             }
+            // Eliminamos la transaccion.
+            TransactionManager.obtenerInstanacia().eliminaTransaccion();
         }
         catch(Exception e)
         {
             idVenta = -1;
             TransactionManager.obtenerInstanacia().eliminaTransaccion();
         }
-        return 1;
+        return idVenta;
     }
 
     @Override
-    public boolean devolucionProducto(TCompraArticulo articulo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean devolucionProducto(TCompraArticulo articulo, int idVenta) {
+        boolean correcto=false;
+        TransactionManager.obtenerInstanacia().nuevaTransaccion();
+        try
+        {
+            //Iniciamos la transsacion y bloqueamos la tabla a modificar
+            TransactionManager.obtenerInstanacia().getTransaccion().start();
+            TransactionManager.obtenerInstanacia().getTransaccion().lock("Productos");
+            //buscamos el producto en la BBDD
+            TVenta tVenta = FactoriaDAO.obtenerInstancia().getDAOVenta().mostrarVenta(idVenta);
+            //Si el producto existe lo damos de baja logica
+            if(tVenta!=null){
+                if(tVenta.isActivo())
+                {
+                    //comprobamos si se introduce en la tabla o no
+                    if(FactoriaDAO.obtenerInstancia().getDAOVenta().devolucionProducto(articulo, idVenta))
+                    {
+                        //confirmamos la transaccion
+                        try
+                        {
+                            TransactionManager.obtenerInstanacia().getTransaccion().commit();
+                            correcto=true;
+                        }
+                        // Si falla el commit.
+                        catch(Exception e)
+                        {
+                           TransactionManager.obtenerInstanacia().getTransaccion().rollback();
+                        }
+                    }
+                }	
+            }
+            else
+            {
+                // Echamos para atras la transaccion
+                TransactionManager.obtenerInstanacia().getTransaccion().rollback();
+                
+            }
+            //Eliminamos la transaccion
+            TransactionManager.obtenerInstanacia().eliminaTransaccion();
+        }
+        catch(Exception e)
+        {
+            TransactionManager.obtenerInstanacia().eliminaTransaccion();
+        }     
+        return correcto;
     }
 
     @Override
@@ -106,6 +162,5 @@ public class SAVentaImp implements SAVenta{
             TransactionManager.obtenerInstanacia().eliminaTransaccion();
         } 
         return listaVentas;
-    }
-    
+    } 
 }
