@@ -8,6 +8,8 @@ import Negocio.producto.TProducto;
 import integracion.DAO.factoriaDAO.FactoriaDAO;
 import integracion.transaction.transactionManager.TransactionManager;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class SAProductoImp implements SAProducto
 {
@@ -93,16 +95,18 @@ public class SAProductoImp implements SAProducto
     {
         boolean correcto=false;
         TransactionManager.obtenerInstanacia().nuevaTransaccion();
+        
         try
         {
             //Iniciamos la transsacion y bloqueamos la tabla a modificar
             TransactionManager.obtenerInstanacia().getTransaccion().start();
-            TransactionManager.obtenerInstanacia().getTransaccion().lock("Productos");
             //buscamos el producto en la BBDD
             TProducto tProducto = FactoriaDAO.obtenerInstancia().getDAOProducto().mostrarProducto(id);
             //Si el producto existe lo damos de baja logica
-            if(tProducto!=null){
-                if(tProducto.getActivo()==true)
+            if(tProducto!=null)
+            {
+                // Si el producto esta activo lo intentamos dar de baja.
+                if(tProducto.getActivo())
                 {
                     //comprobamos si se introduce en la tabla o no
                     if(FactoriaDAO.obtenerInstancia().getDAOProducto().bajaProducto(id))
@@ -120,7 +124,14 @@ public class SAProductoImp implements SAProducto
                            correcto=false;
                         }
                     }
-                }	
+                }
+                // 
+                else
+                {
+                    correcto=false;
+                    TransactionManager.obtenerInstanacia().getTransaccion().rollback();
+                }
+            
             }
             else
             {
@@ -133,6 +144,12 @@ public class SAProductoImp implements SAProducto
         }
         catch(Exception e)
         {
+            try {
+                TransactionManager.obtenerInstanacia().getTransaccion().rollback();
+                
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
             TransactionManager.obtenerInstanacia().eliminaTransaccion();
         }     
         return correcto;
@@ -148,7 +165,6 @@ public class SAProductoImp implements SAProducto
         {
             //Iniciamos la transsacion y bloqueamos la tabla a modificar
             TransactionManager.obtenerInstanacia().getTransaccion().start();
-            TransactionManager.obtenerInstanacia().getTransaccion().lock("Productos");
             //buscamos el producto en la BBDD
             TProducto tProducto = FactoriaDAO.obtenerInstancia().getDAOProducto().mostrarProducto(producto.getId());
             //Si el producto existe y no es igual al pasado lo modificamos
