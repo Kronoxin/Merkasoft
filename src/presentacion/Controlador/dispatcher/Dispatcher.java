@@ -8,10 +8,7 @@ package presentacion.Controlador.dispatcher;
 import presentacion.Controlador.Comandos.RespuestaComando;
 import presentacion.Controlador.dispatcher.Imp.DispatcherImp;
 
-/**
- *
- * @author Marina
- */
+
 public abstract class Dispatcher 
 {
     public static Dispatcher _instance = null;
