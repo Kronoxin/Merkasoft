@@ -29,19 +29,19 @@ public class DAOClienteImp implements DAOCliente
         Statement query = null;
         Connection connection = null;
         //insercion cliente generico
-        String contenido_query = "INSERT INTO Clientes(DNI, Nombre, Apellidos, Fecha_nacimiento, Tipo) VALUES ('" + cliente.getDNI() + ", " + cliente.getNombre() + ", " + cliente.getApellidos() + ", " + cliente.getFechaNacimiento() + ", ";
+        String contenido_query = "INSERT INTO Clientes(DNI, Nombre, Apellidos, Fecha_nacimiento, Tipo) VALUES ('" + cliente.getDNI() + "', '" + cliente.getNombre() + "', '" + cliente.getApellidos() + "', STR_TO_DATE('" + cliente.getFechaNacimiento() + "', '%d/%m/%Y'), '";
         //insercion cliente especializado
         String contenido_query_especializada = null;
         if (cliente.getClass().equals(TClienteNormal.class))
         {
             Negocio.cliente.TClienteNormal temp = (TClienteNormal) cliente;
-            contenido_query += "normal);";
+            contenido_query += "normal');";
             contenido_query_especializada = "INSERT INTO clientesnormales(id_cliente, QuiereVip) VALUES ('" + cliente.getId() + ", " + temp.isQuierevip() + "');";
         }
         else
         {
             Negocio.cliente.TClienteVip temp = (TClienteVip) cliente; 
-            contenido_query += "VIP);";
+            contenido_query += "VIP');";
             contenido_query_especializada = "INSERT INTO clientesnormales(id_cliente, Financiacion) VALUES ('" + cliente.getId() + ", " + temp.getFinanciacion() + "');";
         }
                 
@@ -57,6 +57,7 @@ public class DAOClienteImp implements DAOCliente
         }
          try
         {
+            //System.out.println(contenido_query);
             query.executeUpdate(contenido_query);
             query.executeUpdate(contenido_query_especializada);
         }
@@ -72,13 +73,76 @@ public class DAOClienteImp implements DAOCliente
     }
 
     @Override
-    public Boolean bajaCliente(int ID) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void bajaCliente(int ID) throws Exception 
+    {
+        Statement query = null;
+        Connection connection = null;
+        //baja lógica de cliente (solo en la tabla de los genéricos)
+        String contenido_query = "DELETE FROM Clientes WHERE id_cliente = " + ID + ";";                
+                
+        try
+        {
+            connection = (Connection) TransactionManager.obtenerInstanacia().getTransaccion().getResource();
+            query = connection.createStatement();
+        }
+        catch (SQLException e)
+        {
+            throw new SQLException("No se ha podido realizar la conexión con la base de datos. \nEs posible que haya olvidado crear o iniciar la transacción"
+                    + "\nError: " + e.getMessage());
+        }
+         try
+        {
+            System.out.println(contenido_query);
+            query.executeUpdate(contenido_query);
+        }
+        catch (SQLException e)
+        {
+            throw new SQLException("No se ha podido dar de baja el cliente. \nError: " + e.getMessage());
+        }
     }
 
     @Override
-    public ArrayList listarClientes() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ArrayList<TCliente> listarClientes() throws Exception {
+        Statement query = null;
+        Connection connection = null;
+        ArrayList<TCliente> ret = new ArrayList<TCliente>();
+        TCliente temp = new TCliente();
+        //baja lógica de cliente (solo en la tabla de los genéricos)
+        String contenido_query = "SELECT * FROM Clientes";                
+                
+        try
+        {
+            connection = (Connection) TransactionManager.obtenerInstanacia().getTransaccion().getResource();
+            query = connection.createStatement();
+        }
+        catch (SQLException e)
+        {
+            throw new SQLException("No se ha podido realizar la conexión con la base de datos. \nEs posible que haya olvidado crear o iniciar la transacción"
+                    + "\nError: " + e.getMessage());
+        }
+         try
+        {
+            System.out.println(contenido_query);
+            query.executeUpdate(contenido_query);
+            ResultSet rs = query.getResultSet();
+            while (rs.next())
+            {
+                if (rs.getString("Disponible").equalsIgnoreCase("1"))
+                {
+                    Integer id = Integer.parseInt(rs.getString("id_cliente"));
+                    temp.setId(id);
+                    temp.setDNI(rs.getString("DNI"));
+                    temp.setNombre(rs.getString("Nombre"));
+                    temp.setApellidos(rs.getString("Apellidos"));
+                    temp.setFechaNacimiento(rs.getString("Fecha_nacimiento"));
+                    ret.add(temp);
+                }
+            }
+        }
+        catch (SQLException e)
+        {
+            throw new SQLException("No se ha podido dar de baja el cliente. \nError: " + e.getMessage());
+        }
     }
 
     @Override

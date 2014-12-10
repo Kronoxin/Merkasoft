@@ -22,7 +22,8 @@ public class Main {
     public static void main(String[] args) throws Exception
     {
         TClienteNormal prueba = new TClienteNormal();
-        prueba.setDNI("123456789");
+        prueba.setDNI("123456784");
+        prueba.setFechaNacimiento("20/03/1990");
         prueba.setQuierevip(true);
         DAOClienteImp dc = new DAOClienteImp();
         TransactionManager tm = TransactionManager.obtenerInstanacia();
@@ -30,6 +31,6 @@ public class Main {
         Transaction t = tm.getTransaccion();
         t.start();
         
-        dc.altaCliente(prueba);
+        dc.bajaCliente(3);
     }
 }
