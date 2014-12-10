@@ -83,28 +83,50 @@ public class SAProductoImp implements SAProducto
     //Este metodo permite la eliminacion de un producto de la BBDD
     public boolean bajaProducto(int id) 
     {
-        TransactionMysql transaccion=new TransactionMysql();
-        TransactionManager.obtenerInstanacia().nuevaTransaccion();
-        transaccion.start();
-        transaccion.lock();
         boolean correcto=false;
-        TProducto tProducto = FactoriaDAO.obtenerInstancia().getDAOProducto().mostrarProducto(codigoBarras);
-        if(tProducto!=null){
-            if(tProducto.getActivo()==true)
-            {
-                tProducto.setActivo(false);
-                //deberia pasarsele el transfer no el codigo de barras
-                FactoriaDAO.obtenerInstancia().getDAOProducto().bajaProducto(codigoBarras);
-                correcto=true;
-                transaccion.commit();
-                TransactionManager.obtenerInstanacia().eliminaTransaccion();
-            }	
-        }
-        else
+        TransactionManager.obtenerInstanacia().nuevaTransaccion();
+        try
         {
-            transaccion.rollback();
+            //Iniciamos la transsacion y bloqueamos la tabla a modificar
+            TransactionManager.obtenerInstanacia().getTransaccion().start();
+            TransactionManager.obtenerInstanacia().getTransaccion().lock("Productos");
+            //buscamos el producto en la BBDD
+            TProducto tProducto = FactoriaDAO.obtenerInstancia().getDAOProducto().mostrarProducto(id);
+            //Si el producto existe lo damos de baja logica
+            if(tProducto!=null){
+                if(tProducto.getActivo()==true)
+                {
+                    //comprobamos si se introduce en la tabla o no
+                    if(FactoriaDAO.obtenerInstancia().getDAOProducto().bajaProducto(id))
+                    {
+                        //confirmamos la transaccion
+                        try
+                        {
+                            TransactionManager.obtenerInstanacia().getTransaccion().commit();
+                            correcto=true;
+                        }
+                        // Si falla el commit.
+                        catch(Exception e)
+                        {
+                           TransactionManager.obtenerInstanacia().getTransaccion().rollback();
+                           correcto=false;
+                        }
+                    }
+                }	
+            }
+            else
+            {
+                // Echamos para atras la transaccion
+                TransactionManager.obtenerInstanacia().getTransaccion().rollback();
+                
+            }
+            //Eliminamos la transaccion
             TransactionManager.obtenerInstanacia().eliminaTransaccion();
         }
+        catch(Exception e)
+        {
+            TransactionManager.obtenerInstanacia().eliminaTransaccion();
+        }     
         return correcto;
     }
 
@@ -113,23 +135,42 @@ public class SAProductoImp implements SAProducto
     public boolean modificarProducto(TProducto producto) 
     {
         boolean correcto=false;
-        TransactionMysql transaccion=new TransactionMysql();
         TransactionManager.obtenerInstanacia().nuevaTransaccion();
-        transaccion.start();
-        transaccion.lock();
-        TProducto tProducto = FactoriaDAO.obtenerInstancia().getDAOProducto().mostrarProducto(producto.getI);
-        if(tProducto!=null && !tProducto.equals(producto))
+        try
         {
-            FactoriaDAO.obtenerInstancia().getDAOProducto().modificarProducto(producto);
-            transaccion.commit();
+            //Iniciamos la transsacion y bloqueamos la tabla a modificar
+            TransactionManager.obtenerInstanacia().getTransaccion().start();
+            TransactionManager.obtenerInstanacia().getTransaccion().lock("Productos");
+            //buscamos el producto en la BBDD
+            TProducto tProducto = FactoriaDAO.obtenerInstancia().getDAOProducto().mostrarProducto(id);
+            //Si el producto existe y no es igual al pasado modificamos
+            if(tProducto!=null && !tProducto.equals(producto))
+            {
+                FactoriaDAO.obtenerInstancia().getDAOProducto().modificarProducto(producto);
+                try
+                {
+                    TransactionManager.obtenerInstanacia().getTransaccion().commit();
+                    correcto=true;
+                }
+                // Si falla el commit.
+                catch(Exception e)
+                {
+                   TransactionManager.obtenerInstanacia().getTransaccion().rollback();
+                   correcto=false;
+                }       
+            }
+            else
+            {
+                // Echamos para atras la transaccion
+                TransactionManager.obtenerInstanacia().getTransaccion().rollback();
+            }
+            //Eliminamos la transaccion
             TransactionManager.obtenerInstanacia().eliminaTransaccion();
-            correcto=true;
         }
-        else
+        catch(Exception e)
         {
-            transaccion.rollback();
             TransactionManager.obtenerInstanacia().eliminaTransaccion();
-        }
+        } 
         return correcto;
     }
 
