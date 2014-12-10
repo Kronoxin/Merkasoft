@@ -142,7 +142,7 @@ public class DAOClienteImp implements DAOCliente
         }
         catch (SQLException e)
         {
-            throw new SQLException("No se ha podido dar de baja el cliente. \nError: " + e.getMessage());
+            throw new SQLException("No se ha podido mostrar la lista de clientes. \nError: " + e.getMessage());
         }
         return ret;
     }
@@ -209,7 +209,7 @@ public class DAOClienteImp implements DAOCliente
         }
         catch (SQLException e)
         {
-            throw new SQLException("No se ha podido dar de baja el cliente. \nError: " + e.getMessage());
+            throw new SQLException("No se ha podido consultar el cliente. \nError: " + e.getMessage());
         }
         return ret;
     }
