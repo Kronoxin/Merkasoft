@@ -16,46 +16,119 @@ import javax.swing.border.TitledBorder;
  * @author Ruben
  */
 public class GUIPrincipal_Venta extends JPanel{
-    
-    public GUIPrincipal_Venta(){
-        
         GUIAltaVenta alta = new GUIAltaVenta();
         GUIMostrarVenta mostrar_una = new GUIMostrarVenta();
         GUIMostrarListaVentas lista = new GUIMostrarListaVentas();
         GUIDevolverProducto dev = new GUIDevolverProducto();
         
-         this.setLayout(new GridLayout(1, 2));
-        
-        JPanel panel_aux = new JPanel();
-        JLabel lab_aux = new JLabel("aqui");
-        panel_aux.add(lab_aux);
-        
         JPanel panel_botones_ventas = new JPanel(new GridLayout(4,1,4,4));
-                
-                TitledBorder borde_productos = new TitledBorder("Ventas");
-		borde_productos.setTitleFont(new Font(null, Font.BOLD, 16));
-		borde_productos.setTitleJustification(TitledBorder.CENTER);
-		panel_botones_ventas.setBorder(borde_productos);
-                
-           
-                
-                JButton boton_alta_venta = new JButton("Alta Venta");
-                JButton boton_devolver_producto = new JButton("Devolver Producto");
-                JButton boton_mostrar_venta = new JButton("Mostrar Venta");
-                JButton boton_mostrar_lista_ventas = new JButton("Listado de Ventas");
-                
-                
-                panel_botones_ventas.add(boton_alta_venta);
-                panel_botones_ventas.add(boton_mostrar_venta);
-                panel_botones_ventas.add(boton_devolver_producto);
-                panel_botones_ventas.add(boton_mostrar_lista_ventas);
-                
-                this.add(panel_botones_ventas);
-                this.add(mostrar_una);
-                this.setVisible(true);
+
+        TitledBorder borde_productos = new TitledBorder("Ventas");
+
+        JButton boton_alta_venta = new JButton("Alta Venta");
+        JButton boton_devolver_producto = new JButton("Devolver Producto");
+        JButton boton_mostrar_venta = new JButton("Mostrar Venta");
+        JButton boton_mostrar_lista_ventas = new JButton("Listado de Ventas");
+    
+    public GUIPrincipal_Venta(){
         
+        this.setLayout(new GridLayout(1, 2));
         
-        
+        borde_productos.setTitleFont(new Font(null, Font.BOLD, 16));
+        borde_productos.setTitleJustification(TitledBorder.CENTER);
+        panel_botones_ventas.setBorder(borde_productos);
+
+        panel_botones_ventas.add(boton_alta_venta);
+        panel_botones_ventas.add(boton_mostrar_venta);
+        panel_botones_ventas.add(boton_devolver_producto);
+        panel_botones_ventas.add(boton_mostrar_lista_ventas);
+
+        this.add(panel_botones_ventas);
+        this.add(mostrar_una);
+        this.setVisible(true);
+          
     }
+
+    public GUIAltaVenta getAlta() {
+        return alta;
+    }
+
+    public void setAlta(GUIAltaVenta alta) {
+        this.alta = alta;
+    }
+
+    public GUIMostrarVenta getMostrar_una() {
+        return mostrar_una;
+    }
+
+    public void setMostrar_una(GUIMostrarVenta mostrar_una) {
+        this.mostrar_una = mostrar_una;
+    }
+
+    public GUIMostrarListaVentas getLista() {
+        return lista;
+    }
+
+    public void setLista(GUIMostrarListaVentas lista) {
+        this.lista = lista;
+    }
+
+    public GUIDevolverProducto getDev() {
+        return dev;
+    }
+
+    public void setDev(GUIDevolverProducto dev) {
+        this.dev = dev;
+    }
+
+    public JPanel getPanel_botones_ventas() {
+        return panel_botones_ventas;
+    }
+
+    public void setPanel_botones_ventas(JPanel panel_botones_ventas) {
+        this.panel_botones_ventas = panel_botones_ventas;
+    }
+
+    public TitledBorder getBorde_productos() {
+        return borde_productos;
+    }
+
+    public void setBorde_productos(TitledBorder borde_productos) {
+        this.borde_productos = borde_productos;
+    }
+
+    public JButton getBoton_alta_venta() {
+        return boton_alta_venta;
+    }
+
+    public void setBoton_alta_venta(JButton boton_alta_venta) {
+        this.boton_alta_venta = boton_alta_venta;
+    }
+
+    public JButton getBoton_devolver_producto() {
+        return boton_devolver_producto;
+    }
+
+    public void setBoton_devolver_producto(JButton boton_devolver_producto) {
+        this.boton_devolver_producto = boton_devolver_producto;
+    }
+
+    public JButton getBoton_mostrar_venta() {
+        return boton_mostrar_venta;
+    }
+
+    public void setBoton_mostrar_venta(JButton boton_mostrar_venta) {
+        this.boton_mostrar_venta = boton_mostrar_venta;
+    }
+
+    public JButton getBoton_mostrar_lista_ventas() {
+        return boton_mostrar_lista_ventas;
+    }
+
+    public void setBoton_mostrar_lista_ventas(JButton boton_mostrar_lista_ventas) {
+        this.boton_mostrar_lista_ventas = boton_mostrar_lista_ventas;
+    }
+    
+    
     
 }

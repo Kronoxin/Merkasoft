@@ -36,20 +36,20 @@ public class SAVentaImp implements SAVenta{
                  if(FactoriaDAO.obtenerInstancia().getDAOVenta().altaVenta(venta)==1)
                 {
                     idVenta=venta.getId();
-                    transaccion.commit();
+                    //transaccion.commit();
                     TransactionManager.obtenerInstanacia().eliminaTransaccion();
                 }
             }
             else if(tVenta!=null && tVenta.isActivo())
             {
                 idVenta=tVenta.getId();
-                transaccion.rollback();
+                //transaccion.rollback();
                 TransactionManager.obtenerInstanacia().eliminaTransaccion();
             }
             else
             {
                 idVenta=0;
-                transaccion.rollback();
+                //transaccion.rollback();
                 TransactionManager.obtenerInstanacia().eliminaTransaccion();
             }
         }
@@ -58,7 +58,7 @@ public class SAVentaImp implements SAVenta{
             idVenta = -1;
             TransactionManager.obtenerInstanacia().eliminaTransaccion();
         }
-        return idVenta;
+        return 1;
     }
 
     @Override
