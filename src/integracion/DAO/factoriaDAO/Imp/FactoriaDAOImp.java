@@ -6,9 +6,12 @@
 package integracion.DAO.factoriaDAO.Imp;
 
 import integracion.DAO.cliente.DAOCliente;
+import integracion.DAO.cliente.Imp.DAOClienteImp;
 import integracion.DAO.factoriaDAO.FactoriaDAO;
 import integracion.DAO.producto.DAOProducto;
+import integracion.DAO.producto.Imp.DAOProductoImp;
 import integracion.DAO.venta.DAOVenta;
+import integracion.DAO.venta.Imp.DAOVentaImp;
 
 /**
  *
@@ -19,23 +22,17 @@ public class FactoriaDAOImp extends FactoriaDAO
     
     @Override
     public DAOCliente getDAOCliente() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new DAOClienteImp();
     }
     
     @Override
     public DAOProducto getDAOProducto() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new DAOProductoImp();
     }
 
     @Override
     public DAOVenta getDAOVenta() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new DAOVentaImp();
     }
-
-    @Override
-    public Boolean executeSQL() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-  
-    
+     
 }
