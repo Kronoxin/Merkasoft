@@ -1,4 +1,4 @@
-*
+/**
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -9,7 +9,6 @@ import Negocio.venta.SAVenta.SAVenta;
 import Negocio.venta.TCompraArticulo;
 import Negocio.venta.TVenta;
 import integracion.DAO.factoriaDAO.FactoriaDAO;
-import integracion.transaction.Imp.TransactionMysql;
 import integracion.transaction.transactionManager.TransactionManager;
 import java.util.ArrayList;
 
