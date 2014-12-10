@@ -28,13 +28,13 @@ public class PopupsVenta {
       
     }
     
-    public static void BajaVentaExito(){
+    public static void DevolucionProductoExito(){
 
       JOptionPane.showMessageDialog(null, "Se ha devuelto los productos correctamente","Correcto",JOptionPane.INFORMATION_MESSAGE);
       
     }
     
-    public static void BajaVentaFracaso(){
+    public static void DevolucionProductoFracaso(){
 
       JOptionPane.showMessageDialog(null, "No se ha podido devolver los productos","Error",JOptionPane.ERROR_MESSAGE);
       
