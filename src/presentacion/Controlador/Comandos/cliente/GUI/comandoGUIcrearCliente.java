@@ -7,6 +7,7 @@ package presentacion.Controlador.Comandos.cliente.GUI;
 
 import presentacion.Controlador.Comandos.Command;
 import presentacion.Controlador.Comandos.RespuestaComando;
+import presentacion.Controlador.Eventos.EventoNegocio;
 
 /**
  *
@@ -16,7 +17,7 @@ public class comandoGUIcrearCliente implements Command{
 
     @Override
     public RespuestaComando execute(Object datos) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         return new RespuestaComando(EventoNegocio.GUI_ALTA_CLIENTE, null);
     }
     
 }

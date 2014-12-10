@@ -18,7 +18,7 @@ import presentacion.Controlador.Eventos.EventoNegocio;
  *
  * @author Pepu
  */
-class factoriaComandosImp extends factoriaComandos 
+public class factoriaComandosImp extends factoriaComandos 
 {
     @Override
     public Command getCommand(int evento) 

@@ -6,6 +6,7 @@
 package Presentacion.Controlador.Dispatcher;
 
 import Presentacion.Controlador.Comandos.*;
+import presentacion.Controlador.Dispatcher.Imp.DispatcherImp;
 
 /**
  *
@@ -13,7 +14,7 @@ import Presentacion.Controlador.Comandos.*;
  */
 public abstract class Dispatcher 
 {
-    private static Dispatcher _dispatcher;
+    private static Dispatcher _dispatcher=null;
 
     public static Dispatcher getInstance() 
     {
@@ -24,5 +25,5 @@ public abstract class Dispatcher
 	return _dispatcher;
     }
     
-    public abstract Command dispatch(RespuestaComando comando);
+    public abstract void dispatch(RespuestaComando comando);
 }

@@ -5,6 +5,11 @@
  */
 package presentacion.Controlador;
 
+import Presentacion.Controlador.Dispatcher.Dispatcher;
+import Presentacion.FactoriaComandos.factoriaComandos;
+import presentacion.Controlador.Comandos.Command;
+import presentacion.Controlador.Comandos.RespuestaComando;
+
 /**
  *
  * @author Pepu
@@ -16,7 +21,7 @@ public class ControladorImp extends Controlador
 		Command comando;
 		RespuestaComando aux;
 
-		comando = FactoriaComandos.obtenerInstancia().getCommand(evento);
+		comando = factoriaComandos.getInstance().getCommand(evento);
 		aux = comando.execute(datos);
 
 		if (aux != null) {

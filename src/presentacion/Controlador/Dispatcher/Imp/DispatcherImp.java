@@ -3,11 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package presentacion.Controlador.Dispatcher;
+package presentacion.Controlador.Dispatcher.Imp;
 
 import presentacion.Controlador.Comandos.Command;
 import presentacion.Controlador.Comandos.RespuestaComando;
+import Presentacion.Controlador.Dispatcher.Dispatcher;
 import presentacion.Controlador.Eventos.EventoNegocio;
+import presentacion.Vista.cliente.GUIAltaCliente;
 import presentacion.Vista.popups.PopupsCliente;
 import presentacion.Vista.popups.PopupsProducto;
 import presentacion.Vista.popups.PopupsVenta;
@@ -17,12 +19,20 @@ import presentacion.Vista.popups.PopupsVenta;
  *
  * @author Pepu
  */
-class DispatcherImp extends Dispatcher 
+public class DispatcherImp extends Dispatcher 
 {
-    public Command dispatch(RespuestaComando comando)
+   @Override
+   public void dispatch(RespuestaComando comando)
     {
         switch(comando.getEvento())
         {
+            //Eventos GUI cliente
+            case EventoNegocio.ALTA_CLIENTE:
+            {
+                
+                break;
+            }  
+            
             //Eventos de exito en operaciones
             case EventoNegocio.EXITO_ALTA_CLIENTE:
             {
@@ -108,7 +118,6 @@ class DispatcherImp extends Dispatcher
             }
                 
         }
-        return null;
     }
     
 }
