@@ -6,7 +6,6 @@ package Negocio.producto.SAProducto.Imp;
 import Negocio.producto.SAProducto.SAProducto;
 import Negocio.producto.TProducto;
 import integracion.DAO.factoriaDAO.FactoriaDAO;
-import integracion.transaction.Imp.TransactionMysql;
 import integracion.transaction.transactionManager.TransactionManager;
 import java.util.ArrayList;
 
@@ -17,7 +16,7 @@ public class SAProductoImp implements SAProducto
     //Esta metodo permite dar de alta un producto en BBDD comprobando que este no exista ya en ella
     public int altaProducto(TProducto producto) 
     {
-        int id_producto = -1;
+        int id_producto;
         
         TransactionManager.obtenerInstanacia().nuevaTransaccion();
         try
@@ -142,8 +141,8 @@ public class SAProductoImp implements SAProducto
             TransactionManager.obtenerInstanacia().getTransaccion().start();
             TransactionManager.obtenerInstanacia().getTransaccion().lock("Productos");
             //buscamos el producto en la BBDD
-            TProducto tProducto = FactoriaDAO.obtenerInstancia().getDAOProducto().mostrarProducto(id);
-            //Si el producto existe y no es igual al pasado modificamos
+            TProducto tProducto = FactoriaDAO.obtenerInstancia().getDAOProducto().mostrarProducto(producto.getId());
+            //Si el producto existe y no es igual al pasado lo modificamos
             if(tProducto!=null && !tProducto.equals(producto))
             {
                 if(FactoriaDAO.obtenerInstancia().getDAOProducto().modificarProducto(producto))
@@ -180,24 +179,21 @@ public class SAProductoImp implements SAProducto
     //Metodo que muestra el producto solicitado mediante un codigo de barras en caso de que este exista en la BBDD
     public TProducto mostrarProducto(int id) 
     {
-        TransactionMysql transaccion=new TransactionMysql();
+        TProducto tProducto=null;
         TransactionManager.obtenerInstanacia().nuevaTransaccion();
-        transaccion.start();
-
-        TProducto tProducto = FactoriaDAO.obtenerInstancia().getDAOProducto().mostrarProducto(id);
-
-        if(tProducto!=null){
-                if(tProducto.getActivo()==true){
-                    transaccion.commit();
-                    TransactionManager.obtenerInstanacia().eliminaTransaccion();		
-                }	
-        }
-        else{
-            transaccion.rollback();
+        try
+        {
+            //Iniciamos la transsacion y bloqueamos la tabla a modificar
+            TransactionManager.obtenerInstanacia().getTransaccion().start();
+            //buscamos el producto en la BBDD
+            tProducto= FactoriaDAO.obtenerInstancia().getDAOProducto().mostrarProducto(id);
+            //Eliminamos la transaccion
             TransactionManager.obtenerInstanacia().eliminaTransaccion();
         }
-
-
+        catch(Exception e)
+        {
+            TransactionManager.obtenerInstanacia().eliminaTransaccion();
+        } 
         return tProducto;
     }
 
@@ -205,11 +201,21 @@ public class SAProductoImp implements SAProducto
     //Metodo que genera un lista de todos los productos existentes en la BBDD que esten activos
     public ArrayList<TProducto> mostrarListaProducto() 
     {
-        ArrayList<TProducto> listaProductos;
-        TransactionMysql transaccion=new TransactionMysql();
+        ArrayList<TProducto> listaProductos=null;
         TransactionManager.obtenerInstanacia().nuevaTransaccion();
-        transaccion.start();
-        listaProductos=FactoriaDAO.obtenerInstancia().getDAOProducto().listarProducto();
+        try
+        {
+            //Iniciamos la transsacion y bloqueamos la tabla a modificar
+            TransactionManager.obtenerInstanacia().getTransaccion().start();
+            //Extraemos la lista de productos de la BBDD
+            listaProductos= FactoriaDAO.obtenerInstancia().getDAOProducto().listarProducto();
+            //Eliminamos la transaccion
+            TransactionManager.obtenerInstanacia().eliminaTransaccion();
+        }
+        catch(Exception e)
+        {
+            TransactionManager.obtenerInstanacia().eliminaTransaccion();
+        } 
         return listaProductos;
     }
 }
