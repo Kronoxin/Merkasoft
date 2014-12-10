@@ -5,10 +5,20 @@
  */
 package presentacion.Controlador.Comandos.cliente.GUI;
 
+import presentacion.Controlador.Comandos.Command;
+import presentacion.Controlador.Comandos.RespuestaComando;
+import presentacion.Controlador.Eventos.EventoNegocio;
+
 /**
  *
  * @author Pepu
  */
-public class comandoGUIeliminarCliente {
+public class comandoGUIeliminarCliente implements Command{
+
+    @Override
+    public RespuestaComando execute(Object datos) {
+        
+       return new RespuestaComando(EventoNegocio.GUI_BAJA_CLIENTE, null);
+    }
     
 }
