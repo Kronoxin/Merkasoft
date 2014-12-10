@@ -1,10 +1,10 @@
 /**
  * esta clase implementa la interfaz del servicio de aplicacion de producto
  */
-package Negocio.producto.SAProducto.Imp;
+package negocio.producto.SAProducto.Imp;
 
-import Negocio.producto.SAProducto.SAProducto;
-import Negocio.producto.TProducto;
+import negocio.producto.SAProducto.SAProducto;
+import negocio.producto.TProducto;
 import integracion.DAO.factoriaDAO.FactoriaDAO;
 import integracion.transaction.transactionManager.TransactionManager;
 import java.util.ArrayList;

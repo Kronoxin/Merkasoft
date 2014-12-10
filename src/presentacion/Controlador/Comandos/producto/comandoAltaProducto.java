@@ -5,8 +5,8 @@
  */
 package presentacion.Controlador.Comandos.producto;
 
-import Negocio.FactoriaSA.FactoriaSA;
-import Negocio.producto.TProducto;
+import negocio.FactoriaSA.FactoriaSA;
+import negocio.producto.TProducto;
 import presentacion.Controlador.Comandos.Command;
 import presentacion.Controlador.Comandos.RespuestaComando;
 import presentacion.Controlador.Eventos.EventoNegocio;

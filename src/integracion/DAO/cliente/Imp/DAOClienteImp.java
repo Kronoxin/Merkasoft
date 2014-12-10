@@ -5,16 +5,19 @@
  */
 package integracion.DAO.cliente.Imp;
 
-import Negocio.cliente.TCliente;
-import Negocio.cliente.TClienteNormal;
-import Negocio.cliente.TClienteVip;
+import negocio.cliente.TCliente;
+import negocio.cliente.TClienteNormal;
+import negocio.cliente.TClienteVip;
 import integracion.DAO.cliente.DAOCliente;
+import integracion.DAO.factoriaDAO.FactoriaDAO;
 import integracion.transaction.transactionManager.TransactionManager;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -34,13 +37,13 @@ public class DAOClienteImp implements DAOCliente
         String contenido_query_especializada = null;
         if (cliente.getClass().equals(TClienteNormal.class))
         {
-            Negocio.cliente.TClienteNormal temp = (TClienteNormal) cliente;
+            negocio.cliente.TClienteNormal temp = (TClienteNormal) cliente;
             contenido_query += "normal');";
             contenido_query_especializada = "INSERT INTO clientesnormales(id_cliente, QuiereVip) VALUES ('" + cliente.getId() + ", " + temp.isQuierevip() + "');";
         }
         else
         {
-            Negocio.cliente.TClienteVip temp = (TClienteVip) cliente; 
+            negocio.cliente.TClienteVip temp = (TClienteVip) cliente; 
             contenido_query += "VIP');";
             contenido_query_especializada = "INSERT INTO clientesnormales(id_cliente, Financiacion) VALUES ('" + cliente.getId() + ", " + temp.getFinanciacion() + "');";
         }
@@ -237,7 +240,7 @@ public class DAOClienteImp implements DAOCliente
         //Diferenciar tipo de cliente
         if (cliente.getClass().equals(TClienteNormal.class))
         {            
-            Negocio.cliente.TClienteNormal temp = (TClienteNormal) cliente;
+            negocio.cliente.TClienteNormal temp = (TClienteNormal) cliente;
             contenido_query += "normal' " + final_query;
             try
             {
@@ -269,7 +272,7 @@ public class DAOClienteImp implements DAOCliente
         }
         else
         {
-            Negocio.cliente.TClienteVip temp = (TClienteVip) cliente;
+            negocio.cliente.TClienteVip temp = (TClienteVip) cliente;
             contenido_query += "VIP' " + final_query;
             try
             {
@@ -301,5 +304,19 @@ public class DAOClienteImp implements DAOCliente
         return false;
     }
     
-    
+    public static void main(String args[])
+    {
+        TransactionManager.obtenerInstanacia().nuevaTransaccion();
+        TCliente cliente = new TCliente();
+        
+        cliente.setNombre("Nombre1");
+        cliente.setDNI("123456789");
+        cliente.setApellidos("Apellido1");
+        cliente.setActivo(true);
+        try {
+            FactoriaDAO.obtenerInstancia().getDAOCliente().altaCliente(cliente);
+        } catch (Exception ex) {
+            Logger.getLogger(DAOClienteImp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

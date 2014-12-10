@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Negocio.FactoriaSA.Imp;
+package negocio.FactoriaSA.Imp;
 
-import Negocio.FactoriaSA.FactoriaSA;
-import Negocio.cliente.SACliente.Imp.SAClienteImp;
-import Negocio.cliente.SACliente.SACliente;
-import Negocio.producto.SAProducto.Imp.SAProductoImp;
-import Negocio.producto.SAProducto.SAProducto;
-import Negocio.venta.SAVenta.Imp.SAVentaImp;
-import Negocio.venta.SAVenta.SAVenta;
+import negocio.FactoriaSA.FactoriaSA;
+import negocio.cliente.SACliente.Imp.SAClienteImp;
+import negocio.cliente.SACliente.SACliente;
+import negocio.producto.SAProducto.Imp.SAProductoImp;
+import negocio.producto.SAProducto.SAProducto;
+import negocio.venta.SAVenta.Imp.SAVentaImp;
+import negocio.venta.SAVenta.SAVenta;
 
 /**
  * Clase FactoriaSAImp: se encarga de realizar las instanciaciones de los SA (servicion de aplicacion)

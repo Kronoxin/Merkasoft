@@ -1,10 +1,10 @@
 /*
 Interfaz que proporciona los metodos del servicio de aplicacion de venta
  */
-package Negocio.venta.SAVenta;
+package negocio.venta.SAVenta;
 
-import Negocio.venta.TCompraArticulo;
-import Negocio.venta.TVenta;
+import negocio.venta.TCompraArticulo;
+import negocio.venta.TVenta;
 import java.util.ArrayList;
 
 public interface SAVenta {

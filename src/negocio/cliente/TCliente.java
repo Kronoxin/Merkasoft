@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Negocio.cliente;
+package negocio.cliente;
 
-import Negocio.venta.TVenta;
+import negocio.venta.TVenta;
 import java.util.ArrayList;
 
 /**

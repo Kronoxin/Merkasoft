@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Negocio.cliente;
+package negocio.cliente;
 
-import Negocio.cliente.TCliente;
+import negocio.cliente.TCliente;
 
 /**
  * Clase TClienteVip: hereda de TCliente se emplea para especificar a la clase padre.

@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Negocio.venta.SAVenta.Imp;
+package negocio.venta.SAVenta.Imp;
 
-import Negocio.venta.SAVenta.SAVenta;
-import Negocio.venta.TCompraArticulo;
-import Negocio.venta.TVenta;
+import negocio.venta.SAVenta.SAVenta;
+import negocio.venta.TCompraArticulo;
+import negocio.venta.TVenta;
 import integracion.DAO.factoriaDAO.FactoriaDAO;
 import integracion.transaction.transactionManager.TransactionManager;
 import java.util.ArrayList;

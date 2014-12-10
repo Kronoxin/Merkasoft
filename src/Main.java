@@ -1,5 +1,5 @@
 
-import Negocio.cliente.TClienteNormal;
+import negocio.cliente.TClienteNormal;
 import integracion.DAO.cliente.Imp.DAOClienteImp;
 import integracion.transaction.Transaction;
 import integracion.transaction.transactionManager.Imp.TransactionManagerImp;

@@ -1,7 +1,7 @@
 /*
  * transfer que proporciona los atributos de un articulo comprado
  */
-package Negocio.venta;
+package negocio.venta;
 public class TCompraArticulo {
     
     private int _idArticulo;

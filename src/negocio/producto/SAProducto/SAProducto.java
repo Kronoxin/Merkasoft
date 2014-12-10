@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Negocio.producto.SAProducto;
+package negocio.producto.SAProducto;
 
 
-import Negocio.producto.TProducto;
+import negocio.producto.TProducto;
 import java.util.ArrayList;
 
 /**

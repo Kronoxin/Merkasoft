@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Negocio.cliente.SACliente.Imp;
+package negocio.cliente.SACliente.Imp;
 
-import Negocio.cliente.SACliente.SACliente;
-import Negocio.cliente.TCliente;
+import negocio.cliente.SACliente.SACliente;
+import negocio.cliente.TCliente;
 import integracion.DAO.factoriaDAO.FactoriaDAO;
 import integracion.query.factoriaQuery.FactoriaQuery;
 import integracion.transaction.transactionManager.TransactionManager;

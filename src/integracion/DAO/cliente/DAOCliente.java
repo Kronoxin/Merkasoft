@@ -1,7 +1,7 @@
 package integracion.DAO.cliente;
 
 import java.util.ArrayList;
-import Negocio.cliente.TCliente;
+import negocio.cliente.TCliente;
 
 /** 
  * <!-- begin-UML-doc -->

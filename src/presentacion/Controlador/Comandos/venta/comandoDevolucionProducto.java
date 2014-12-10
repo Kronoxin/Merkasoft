@@ -6,9 +6,9 @@
 
 package presentacion.Controlador.Comandos.venta;
 
-import Negocio.FactoriaSA.FactoriaSA;
-import Negocio.venta.TCompraArticulo;
-import Negocio.venta.TVenta;
+import negocio.FactoriaSA.FactoriaSA;
+import negocio.venta.TCompraArticulo;
+import negocio.venta.TVenta;
 import java.util.ArrayList;
 import presentacion.Controlador.Comandos.RespuestaComando;
 import presentacion.Controlador.Eventos.EventoNegocio;

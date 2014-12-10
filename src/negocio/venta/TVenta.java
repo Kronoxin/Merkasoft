@@ -1,9 +1,9 @@
 /*
  *Transfer que proporciona los atributos de una venta
  */
-package Negocio.venta;
+package negocio.venta;
 
-import Negocio.cliente.TCliente;
+import negocio.cliente.TCliente;
 import java.util.ArrayList;
 import java.util.Date;
 
