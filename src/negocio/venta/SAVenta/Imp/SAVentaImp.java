@@ -81,7 +81,7 @@ public class SAVentaImp implements SAVenta{
         {
             //Iniciamos la transsacion y bloqueamos la tabla a modificar
             TransactionManager.obtenerInstanacia().getTransaccion().start();
-            TransactionManager.obtenerInstanacia().getTransaccion().lock("Productos");
+            TransactionManager.obtenerInstanacia().getTransaccion().lock("Ventas");
             //buscamos el producto en la BBDD
             TVenta tVenta = FactoriaDAO.obtenerInstancia().getDAOVenta().mostrarVenta(idVenta);
             //Si el producto existe lo damos de baja logica
