@@ -5,10 +5,12 @@
  */
 package presentacion.FactoriaComandos;
 
+import Presentacion.Controlador.Comandos.cliente.*;
+import Presentacion.Controlador.Comandos.producto.*;
+import Presentacion.Controlador.Comandos.venta.*;
 import Presentacion.FactoriaComandos.factoriaComandos;
 import presentacion.Controlador.Comandos.Command;
 import presentacion.Controlador.Eventos.EventoNegocio;
-
 /**
  *
  * @author Pepu
