@@ -56,7 +56,6 @@ public class SAProductoImp implements SAProducto
 
                 if(!tProducto.getActivo())
                 {
-                   TransactionManager.obtenerInstanacia().eliminaTransaccion();
                    tProducto.setActivo(true);
                     //Modificamos el producto.
                     if(!FactoriaDAO.obtenerInstancia().getDAOProducto().modificarProducto(tProducto))
@@ -73,6 +72,13 @@ public class SAProductoImp implements SAProducto
         catch(Exception e)
         {
             id_producto = -1;
+            try 
+             {
+                 TransactionManager.obtenerInstanacia().getTransaccion().rollback();
+             } catch (Exception ex) 
+             {
+                 ex.printStackTrace();
+             }
             TransactionManager.obtenerInstanacia().eliminaTransaccion();
         }
         return id_producto;     

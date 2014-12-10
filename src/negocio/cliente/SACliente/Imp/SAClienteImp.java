@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
 * Clase SAClienteImp: implementa la interfaz SACliente, se encarga del modelo de negocio de cliente 
@@ -30,7 +32,8 @@ public class SAClienteImp implements SACliente{
     
     //devuelve un id
     @Override
-    public int altaCliente(TCliente cliente) {
+    public int altaCliente(TCliente cliente) 
+    {
 
          int idCliente =-1;
         
@@ -40,28 +43,21 @@ public class SAClienteImp implements SACliente{
         try{
             
             TransactionManager.obtenerInstanacia().getTransaccion().start();
-           // TransactionManager.obtenerInstanacia().getTransaccion().lock("Clientes");
+       
             
             TCliente tCliente = FactoriaDAO.obtenerInstancia().getDAOCliente().mostrarCliente(cliente.getId());
             
             //Si el cliente no existe lo insertamos
             
-            if(tCliente == null){
-                
-                //comprobamos si es normal
-                if(cliente.getClass().equals(TClienteNormal.class)){
-                        TransactionManager.obtenerInstanacia().getTransaccion().lock("ClientesNormal");
-                         idCliente = FactoriaDAO.obtenerInstancia().getDAOCliente().altaCliente(cliente);
-                }
-                else{
-                    
-                        TransactionManager.obtenerInstanacia().getTransaccion().lock("ClientesVip");
-                        idCliente = FactoriaDAO.obtenerInstancia().getDAOCliente().altaCliente(cliente);
-                
-                
-                }
-                        TransactionManager.obtenerInstanacia().getTransaccion().commit();
-                                
+            if(tCliente == null)
+            {
+             
+              idCliente = FactoriaDAO.obtenerInstancia().getDAOCliente().altaCliente(cliente);  
+              
+              if(idCliente > 0)
+              {
+                       TransactionManager.obtenerInstanacia().getTransaccion().commit();
+              }                 
             
             
             }
@@ -73,10 +69,9 @@ public class SAClienteImp implements SACliente{
             
                 if(!tCliente.isActivo()){
                 
-                   TransactionManager.obtenerInstanacia().eliminaTransaccion();
+                   
                    tCliente.setActivo(true);
                    //MOdificamos el cliente
-                   // despues del modificar no haces commit?¿?¿?¿
                    if(!FactoriaDAO.obtenerInstancia().getDAOCliente().modificarCliente(tCliente)){
                    
                       // Si no se ha podido modificar cambiamos la id a -1.
@@ -99,79 +94,65 @@ public class SAClienteImp implements SACliente{
         catch(Exception e){
             
             idCliente = -1;
+             try 
+             {
+                 TransactionManager.obtenerInstanacia().getTransaccion().rollback();
+             } catch (Exception ex) 
+             {
+                 ex.printStackTrace();
+             }
             TransactionManager.obtenerInstanacia().eliminaTransaccion();
             
         
         }
-        
-        
         
         return idCliente;
     
         
     }
 // elimnar por id
-    public boolean eliminarCliente(int  id){
+    public boolean eliminarCliente(int  id)
+    {
         
         boolean correcto = false;
         
         TransactionManager.obtenerInstanacia().nuevaTransaccion();
         
-        try{
-                        TransactionManager.obtenerInstanacia().getTransaccion().start();
+        try
+        {
+            TransactionManager.obtenerInstanacia().getTransaccion().start();
                         
-                        TCliente tCliente = FactoriaDAO.obtenerInstancia().getDAOCliente().mostrarCliente(id);
-                        if(tCliente.getClass().equals(TClienteNormal.class)){
-                        
-                            TransactionManager.obtenerInstanacia().getTransaccion().lock("TClienteNormal");                        
-                        }
-                        else{
-                        
-                            TransactionManager.obtenerInstanacia().getTransaccion().lock("TClienteVip");                        
-                        
-                        }
-                        
-                        if(tCliente != null){
-                        
-                            if(tCliente.isActivo() == true){
-                                
-                                if(FactoriaDAO.obtenerInstancia().getDAOCliente().bajaCliente(id)){
-                                
-                                    //confirmamos la transaccion
-                                    try{
-                                    
-                                        TransactionManager.obtenerInstanacia().getTransaccion().commit();
-                                        correcto = true;
-                                    
-                                    }
-                                    catch(Exception e){
-                                    
-                                        TransactionManager.obtenerInstanacia().getTransaccion().rollback();
-                                        correcto = false;
-                                    
-                                    }
-                                
-                                
-                                }
-                                
-                                
-                            
-                            }
-                        
-                        
-                        }
-                        else{
-                        
-                            // Echamos para atras la transaccion
-                            TransactionManager.obtenerInstanacia().getTransaccion().rollback();
-                        
-                        
-                        
-                        }
+            TCliente tCliente = FactoriaDAO.obtenerInstancia().getDAOCliente().mostrarCliente(id);
                        
                         
+            if(tCliente != null)
+            {
                         
-        
+                if(tCliente.isActivo() == true)
+                {
+
+                    if(FactoriaDAO.obtenerInstancia().getDAOCliente().bajaCliente(id))
+                    {                         
+                                        //confirmamos la transaccion
+                        try
+                        {                             
+                            TransactionManager.obtenerInstanacia().getTransaccion().commit();
+                            correcto = true;
+
+                        }
+                        catch(Exception e)
+                        {                                   
+                            TransactionManager.obtenerInstanacia().getTransaccion().rollback();
+                            correcto = false;                                  
+                        }
+                    }                           
+                }              
+            }
+            else
+            {           
+                            // Echamos para atras la transaccion
+                TransactionManager.obtenerInstanacia().getTransaccion().rollback();                  
+            }                                                                            
         }
         catch(Exception e ){
         
@@ -192,13 +173,7 @@ public class SAClienteImp implements SACliente{
        try{
                   TransactionManager.obtenerInstanacia().getTransaccion().start();
 
-        if(cliente.getClass().equals(TClienteNormal.class)){
-                  TransactionManager.obtenerInstanacia().getTransaccion().lock("ClienteNormal");
-
-        }
-        else{
-                  TransactionManager.obtenerInstanacia().getTransaccion().lock("ClienteVip");
-        }
+       
       
       TCliente tCliente = FactoriaDAO.obtenerInstancia().getDAOCliente().mostrarCliente(cliente.getId());
      
