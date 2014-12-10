@@ -28,133 +28,163 @@ public class SAClienteImp implements SACliente{
     
     //devuelve un id
     @Override
-    public int altaCliente(TCliente cliente)throws Exception {
+    public int altaCliente(TCliente cliente) {
 
-        int id=-1;
-        TCliente clienteTemp = null;
+         int idCliente =-1;
+        
+        TransactionManager.obtenerInstanacia().nuevaTransaccion();
+        
+        
+        try{
             
-                 TransactionMysql transaccion=new TransactionMysql();
-                 TransactionManager.obtenerInstanacia().nuevaTransaccion();
-                 
-                 try
-                      {
-                         transaccion.start();
-                         transaccion.lock("Productos");
-                     }
-                 catch(Exception e)
-                 {
-                       TransactionManager.obtenerInstanacia().eliminaTransaccion();
-                  }
-
-		if(cliente.getClass().equals(TClienteVip.class)){
-
-                    clienteTemp = FactoriaDAO.obtenerInstancia().getDAOCliente().mostrarCliente(cliente.getId());
-
-                    if(clienteTemp == null){
-
-                            
-                            id = FactoriaDAO.obtenerInstancia().getDAOCliente().altaCliente(cliente);
-                        try {
-                            transaccion.commit();
-                        } catch (Exception ex) {
-                          throw new Exception(ex.getMessage());
-                        }
-                            TransactionManager.obtenerInstanacia().eliminaTransaccion();
-                            
-                            
-				
-                    }
-                    else if (clienteTemp != null && clienteTemp.isActivo()==true ){
-
+            TransactionManager.obtenerInstanacia().getTransaccion().start();
+           // TransactionManager.obtenerInstanacia().getTransaccion().lock("Clientes");
+            
+            TCliente tCliente = FactoriaDAO.obtenerInstancia().getDAOCliente().mostrarCliente(cliente.getId());
+            
+            //Si el cliente no existe lo insertamos
+            
+            if(tCliente == null){
+                
+                //comprobamos si es normal
+                if(cliente.getClass().equals(TClienteNormal.class)){
+                        TransactionManager.obtenerInstanacia().getTransaccion().lock("ClientesNormal");
+                         idCliente = FactoriaDAO.obtenerInstancia().getDAOCliente().altaCliente(cliente);
+                }
+                else{
+                    
+                        TransactionManager.obtenerInstanacia().getTransaccion().lock("ClientesVip");
+                        idCliente = FactoriaDAO.obtenerInstancia().getDAOCliente().altaCliente(cliente);
+                
+                
+                }
+                        TransactionManager.obtenerInstanacia().getTransaccion().commit();
                                 
-                                cliente.setDNI(cliente.getDNI());
-                                FactoriaDAO.obtenerInstancia().getDAOCliente().modificarCliente(cliente);
-                                transaccion.commit();
-                                TransactionManager.obtenerInstanacia().eliminaTransaccion();
-				
-
-                    }
-		}
-		else if(cliente.getClass().equals(TClienteNormal.class)){
-
-			clienteTemp = FactoriaDAO.obtenerInstancia().getDAOCliente().mostrarCliente(cliente.getId());
-
-			if(clienteTemp == null){
-                               
-                            id = cliente.getId();
-                            transaccion.commit();
-                            TransactionManager.obtenerInstanacia().eliminaTransaccion();
-			
-
-			}
-			 else if (clienteTemp != null && clienteTemp.isActivo()==true ){
-
+            
+            
+            }
+            else{
+            
+            idCliente = tCliente.getId();
+            
+            // Si el cliente  existe  y no esta activo lo activamos
+            
+                if(!tCliente.isActivo()){
+                
+                   TransactionManager.obtenerInstanacia().eliminaTransaccion();
+                   tCliente.setActivo(true);
+                   //MOdificamos el cliente
+                   // despues del modificar no haces commit?¿?¿?¿
+                   if(!FactoriaDAO.obtenerInstancia().getDAOCliente().modificarCliente(tCliente)){
+                   
+                      // Si no se ha podido modificar cambiamos la id a -1.
+                        idCliente = -1;
                                 
-                                cliente.setDNI(cliente.getDNI());
-                                FactoriaDAO.obtenerInstancia().getDAOCliente().modificarCliente(cliente);
-                                transaccion.commit();
-                                TransactionManager.obtenerInstanacia().eliminaTransaccion();
-				
-
-                        }
-		}
-
-		
-
-		return id;
+                   
+                   }
+                   //Eliminamos la transaccion
+                   
+                   TransactionManager.obtenerInstanacia().eliminaTransaccion();
+                }
+            
+            
+            
+            
+            }
+            
+        
+        }
+        catch(Exception e){
+            
+            idCliente = -1;
+            TransactionManager.obtenerInstanacia().eliminaTransaccion();
+            
+        
+        }
+        
+        
+        
+        return idCliente;
+    
+        
     }
 // elimnar por id
-    public boolean eliminarCliente(int  id) throws Exception{
+    public boolean eliminarCliente(int  id){
         
-        TransactionMysql transaccion=new TransactionMysql();
+        boolean correcto = false;
+        
         TransactionManager.obtenerInstanacia().nuevaTransaccion();
-                try{
-                 transaccion.start();
-                 transaccion.lock("Clientes");
-                 }catch(Exception e){
-                        TransactionManager.obtenerInstanacia().eliminaTransaccion();
-                 }
         
-        boolean ok = true;
-
+        try{
+                        TransactionManager.obtenerInstanacia().getTransaccion().start();
+                        
+                        TCliente tCliente = FactoriaDAO.obtenerInstancia().getDAOCliente().mostrarCliente(id);
+                        if(tCliente.getClass().equals(TClienteNormal.class)){
+                        
+                            TransactionManager.obtenerInstanacia().getTransaccion().lock("TClienteNormal");                        
+                        }
+                        else{
+                        
+                            TransactionManager.obtenerInstanacia().getTransaccion().lock("TClienteVip");                        
+                        
+                        }
+                        
+                        if(tCliente != null){
+                        
+                            if(tCliente.isActivo() == true){
+                                
+                                if(FactoriaDAO.obtenerInstancia().getDAOCliente().bajaCliente(id)){
+                                
+                                    //confirmamos la transaccion
+                                    try{
+                                    
+                                        TransactionManager.obtenerInstanacia().getTransaccion().commit();
+                                        correcto = true;
+                                    
+                                    }
+                                    catch(Exception e){
+                                    
+                                        TransactionManager.obtenerInstanacia().getTransaccion().rollback();
+                                        correcto = false;
+                                    
+                                    }
+                                
+                                
+                                }
+                                
+                                
+                            
+                            }
+                        
+                        
+                        }
+                        else{
+                        
+                            // Echamos para atras la transaccion
+                            TransactionManager.obtenerInstanacia().getTransaccion().rollback();
+                        
+                        
+                        
+                        }
+                       
+                        
+                        
         
-         TCliente cliente = FactoriaDAO.obtenerInstancia().getDAOCliente().mostrarCliente(id);
+        }
+        catch(Exception e ){
         
-         
-         if (cliente == null){
-             ok = false;
-            try {
-                transaccion.rollback();
-            } catch (Exception  ex) {
-                 throw new Exception(ex.getMessage());
-            }
             TransactionManager.obtenerInstanacia().eliminaTransaccion();
-         
-         
-         }else if(cliente.isActivo()== false){
-             ok = false;
-             transaccion.rollback();
-            TransactionManager.obtenerInstanacia().eliminaTransaccion();
-         
-         }else{
-             
-             FactoriaDAO.obtenerInstancia().getDAOCliente().bajaCliente(id);
-             transaccion.commit();
-             TransactionManager.obtenerInstanacia().eliminaTransaccion();
-
-                     
-         }
         
-
-
-
-        return ok;
+        }
+        
+       return correcto;
     }
 
+    //falta por hacer
     @Override
-    public boolean modificarCliente(TCliente cliente)throws Exception {
+    public boolean modificarCliente(TCliente cliente) {
         
-        boolean ok=false;
+      /*  boolean ok=false;
         TransactionMysql transaccion=new TransactionMysql();
         TransactionManager.obtenerInstanacia().nuevaTransaccion();
         
@@ -191,102 +221,64 @@ public class SAClienteImp implements SACliente{
         }
         
         
-
-        return ok;
+*/
+        return false;
     }
 
     //mostrar por id
     @Override
-    public TCliente mostrarCliente(int id)throws Exception {
+    public TCliente mostrarCliente(int id) {
             
-            TransactionMysql transaccion=new TransactionMysql();
-            TransactionManager.obtenerInstanacia().nuevaTransaccion();
-            try
-                  {
-                 transaccion.start();
-                 transaccion.lock("Productos");
-                 }
-            catch(Exception e)
-                   {
-                   TransactionManager.obtenerInstanacia().eliminaTransaccion();
-                }
-             
-             TCliente cliente = FactoriaDAO.obtenerInstancia().getDAOCliente().mostrarCliente(id);
-             
-             if(cliente !=null){
-             
-                    if(cliente.isActivo()== false){
-                        
-                        try {
-                            transaccion.commit();
-                        } catch (Exception ex) {
-                            throw new Exception(ex.getMessage());
-                        }
-                         TransactionManager.obtenerInstanacia().eliminaTransaccion();
-                    
-                    }
-                     
-             }else{
-                 try {
-                 transaccion.rollback();
-                 }catch(Exception ex){
-                        throw new Exception(ex.getMessage());
-                 }
-                TransactionManager.obtenerInstanacia().eliminaTransaccion();
-             
-             
-             }
+        TCliente tCliente = null;
+        TransactionManager.obtenerInstanacia().nuevaTransaccion();
         
-             return cliente;
-    }
+        
+        try{
+            
+            TransactionManager.obtenerInstanacia().getTransaccion().start();
+            
+             tCliente = FactoriaDAO.obtenerInstancia().getDAOCliente().mostrarCliente(id);
+             
+             TransactionManager.obtenerInstanacia().eliminaTransaccion();
+            
+            
+        }
+        catch(Exception e ){
+        
+            TransactionManager.obtenerInstanacia().eliminaTransaccion();
 
+        
+        }
+            
+        
+             return tCliente;
+    }
+//diferenciar entre lista de clientes normal o vip
     @Override
     public ArrayList<TCliente> mostrarListaCliente() {
                 
 
-                ArrayList<TCliente> listaProductos;
-                TransactionMysql transaccion=new TransactionMysql();
+                ArrayList<TCliente> listaClientes=null;
                 TransactionManager.obtenerInstanacia().nuevaTransaccion();
                 try
                     {
-                     transaccion.start();
-                     transaccion.lock("Productos");
+                        TransactionManager.obtenerInstanacia().getTransaccion().start();
+                        listaClientes = FactoriaDAO.obtenerInstancia().getDAOCliente().listarClientes();
+                        TransactionManager.obtenerInstanacia().eliminaTransaccion();
                      }
                  catch(Exception e)
                      {
                        TransactionManager.obtenerInstanacia().eliminaTransaccion();
                         }
-                listaProductos=FactoriaDAO.obtenerInstancia().getDAOCliente().listarClientes();
-        return listaProductos;
+        return listaClientes;
     }
-
+    //falta por hacer 
     @Override
     public ArrayList<TCliente> mostrarClientesMedia() {
         
         double media;
         
-
-                ArrayList<TCliente> listaProductos;
-                
-                TransactionMysql transaccion=new TransactionMysql();
-                TransactionManager.obtenerInstanacia().nuevaTransaccion();
-               
-                
-                try
-                    {
-                     transaccion.start();
-                      transaccion.lock("Productos");
-                     }
-                catch(Exception e)
-                     {
-                           TransactionManager.obtenerInstanacia().eliminaTransaccion();
-                     }
-                
-                
-                listaProductos=FactoriaDAO.obtenerInstancia().getDAOCliente().listarClientes();
-                
-                          
-                
+                               
                 
                 
                 
