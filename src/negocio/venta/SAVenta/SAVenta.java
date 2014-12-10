@@ -9,8 +9,8 @@ import java.util.ArrayList;
 
 public interface SAVenta {
     
-    public int altaventa(TVenta venta);
-    public boolean devolucionProducto(TCompraArticulo articulo);
+    public int altaventa(TVenta venta, int idCliente);
+    public boolean devolucionProducto(TCompraArticulo articulo,int idVenta);
     public TVenta mostrarVenta(int id);
     public ArrayList<TVenta> mostrarListaVenta();
     
