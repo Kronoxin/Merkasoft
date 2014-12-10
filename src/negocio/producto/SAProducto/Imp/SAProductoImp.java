@@ -146,18 +146,20 @@ public class SAProductoImp implements SAProducto
             //Si el producto existe y no es igual al pasado modificamos
             if(tProducto!=null && !tProducto.equals(producto))
             {
-                FactoriaDAO.obtenerInstancia().getDAOProducto().modificarProducto(producto);
-                try
+                if(FactoriaDAO.obtenerInstancia().getDAOProducto().modificarProducto(producto))
                 {
-                    TransactionManager.obtenerInstanacia().getTransaccion().commit();
-                    correcto=true;
+                    try
+                    {
+                        TransactionManager.obtenerInstanacia().getTransaccion().commit();
+                        correcto=true;
+                    }
+                    // Si falla el commit.
+                    catch(Exception e)
+                    {
+                       TransactionManager.obtenerInstanacia().getTransaccion().rollback();
+                       correcto=false;
+                    }
                 }
-                // Si falla el commit.
-                catch(Exception e)
-                {
-                   TransactionManager.obtenerInstanacia().getTransaccion().rollback();
-                   correcto=false;
-                }       
             }
             else
             {
