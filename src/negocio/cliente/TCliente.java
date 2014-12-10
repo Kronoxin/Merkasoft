@@ -23,6 +23,10 @@ public class TCliente {
     private ArrayList<TVenta> _venta;
     private boolean _activo;
 
+    public boolean equals(TCliente clienteB)
+    {
+        return this._id == clienteB.getId() && _nombre.equalsIgnoreCase(clienteB.getNombre()) && _apellidos.equalsIgnoreCase(clienteB.getApellidos()) && _DNI.equalsIgnoreCase(clienteB.getDNI()) && _fecha_nacimiento.equalsIgnoreCase(clienteB.getFechaNacimiento()) && _activo == clienteB.isActivo();
+    }
     public int getId() {
         return _id;
     }
