@@ -63,7 +63,11 @@ public class SAProductoImp implements SAProducto
                         id_producto = -1;
                     }
                 }
-
+                else
+                {
+                    id_producto = -1;
+                }
+                
             }
             // Eliminamos la transaccion.
             TransactionManager.obtenerInstanacia().eliminaTransaccion();
