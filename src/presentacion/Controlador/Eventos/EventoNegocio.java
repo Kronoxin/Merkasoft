@@ -44,5 +44,24 @@ public class EventoNegocio
     public static final int GUI_DEVOLUCION_PRODUCTO = 306;
     public static final int GUI_MOSTRAR_VENTA = 307;
     public static final int GUI_MOSTRAR_LISTA_VENTAS = 308;
-      
+    
+    //400 control de exito
+    public static final int EXITO_ALTA_CLIENTE=401;
+    public static final int EXITO_BAJA_CLIENTE=402;
+    public static final int EXITO_MODIFICAR_CLIENTE=403;
+    public static final int EXITO_ALTA_PRODUCTO=404;
+    public static final int EXITO_BAJA_PRODUCTO=405;
+    public static final int EXITO_MODIFICAR_PRODUCTO=406;
+    public static final int EXITO_ALTA_VENTA=407;
+    public static final int EXITO_DEVOLUCION_PRODUCTO=408;
+    
+    //500 Control de fracaso
+    public static final int FRACASO_ALTA_CLIENTE=501;
+    public static final int FRACASO_BAJA_CLIENTE=502;
+    public static final int FRACASO_MODIFICAR_CLIENTE=503;
+    public static final int FRACASO_ALTA_PRODUCTO=504;
+    public static final int FRACASO_BAJA_PRODUCTO=505;
+    public static final int FRACASO_MODIFICAR_PRODUCTO=506;
+    public static final int FRACASO_ALTA_VENTA=507;
+    public static final int FRACASO_DEVOLUCION_PRODUCTO=508;
 }
