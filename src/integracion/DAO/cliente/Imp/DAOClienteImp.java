@@ -145,6 +145,8 @@ public class DAOClienteImp implements DAOCliente
         {
             throw new SQLException("No se ha podido dar de baja el cliente. \nError: " + e.getMessage());
         }
+         
+         return ret;
     }
 
     @Override
