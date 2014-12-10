@@ -26,7 +26,7 @@ public interface DAOCliente {
 	 * @return
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public void bajaCliente(int ID) throws Exception;
+	public boolean bajaCliente(int ID) throws Exception;
 
 	/** 
 	 * <!-- begin-UML-doc -->

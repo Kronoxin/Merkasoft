@@ -73,7 +73,7 @@ public class DAOClienteImp implements DAOCliente
     }
 
     @Override
-    public void bajaCliente(int ID) throws Exception 
+    public boolean bajaCliente(int ID) throws Exception 
     {
         Statement query = null;
         Connection connection = null;
@@ -99,6 +99,8 @@ public class DAOClienteImp implements DAOCliente
         {
             throw new SQLException("No se ha podido dar de baja el cliente. \nError: " + e.getMessage());
         }
+         // MODIFICAR
+         return false;
     }
 
     @Override
