@@ -284,7 +284,7 @@ public class SAClienteImp implements SACliente{
                 
                 
                         
-           return listaProductos;
+           return new ArrayList<TCliente>();
         
     }
 

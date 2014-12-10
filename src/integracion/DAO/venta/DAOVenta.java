@@ -18,7 +18,7 @@ public interface DAOVenta {
 	 * @return
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public int altaVenta(TVenta venta);
+	public int altaVenta(TVenta venta, int idCliente);
 
 	/** 
 	 * <!-- begin-UML-doc -->
@@ -53,5 +53,5 @@ public interface DAOVenta {
 	 * @return
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public Boolean devolucionProducto(TCompraArticulo articulo);
+	public Boolean devolucionProducto(TCompraArticulo articulo, int idVenta);
 }
