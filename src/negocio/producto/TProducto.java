@@ -17,6 +17,11 @@ public class TProducto {
     private String _codigoDeBarras;
     private int _stock;
     private boolean _activo;
+    
+    public boolean equals(TProducto productoB)
+    {
+        return this._id == productoB.getId() && _nombre.equalsIgnoreCase(productoB.getNombre()) && _precio == productoB.getPrecio() && _descripcion.equalsIgnoreCase(productoB.getDescripcion()) && _codigoDeBarras.equalsIgnoreCase(productoB.getCodigoDeBarras()) && _activo == productoB.getActivo();
+    }
 
     public String getNombre() {
         return _nombre;

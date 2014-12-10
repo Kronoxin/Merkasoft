@@ -15,6 +15,11 @@ public class TVenta {
     private Date _fecha;
     private ArrayList<TCompraArticulo> _listaproductos;
     private boolean _activo;
+    
+    public boolean equals(TVenta ventaB)
+    {
+        return this._id == ventaB.getId() && _cliente.equals(ventaB.getCliente()) && _fecha.compareTo(ventaB.getFecha()) == 0 && _activo == ventaB.isActivo();
+    }
     //Metodos get y set de los atributos de venta
     public int getId() {
         return _id;
