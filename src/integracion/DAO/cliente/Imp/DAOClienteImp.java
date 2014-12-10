@@ -59,7 +59,7 @@ public class DAOClienteImp implements DAOCliente
         {
             System.out.println(contenido_query);
             query.executeUpdate(contenido_query);
-            query.executeUpdate(contenido_query_especializada);
+            //query.execute(contenido_query_especializada);
         }
         catch (SQLException e)
         {
@@ -69,6 +69,7 @@ public class DAOClienteImp implements DAOCliente
          //Si no ha saltado excepción en este punto es porque se ha dado el alta correctamente
          query.executeUpdate("SELECT DNI FROM Clientes WHERE DNI = " + cliente.getDNI() + ";");
          ResultSet rs = query.getResultSet();
+         rs.next();
          return rs.getInt(1);
     }
 

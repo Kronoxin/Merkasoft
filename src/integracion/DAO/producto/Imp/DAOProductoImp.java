@@ -52,6 +52,7 @@ public class DAOProductoImp implements DAOProducto
          //Si no ha saltado excepción en este punto es porque se ha dado el alta correctamente
          query.executeUpdate("SELECT DNI FROM Clientes WHERE Cod_barras = " + producto.getCodigoDeBarras()+ ";");
          ResultSet rs = query.getResultSet();
+         rs.next();
          return rs.getInt(1);
     }
 
