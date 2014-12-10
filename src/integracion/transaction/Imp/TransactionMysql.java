@@ -28,21 +28,23 @@ public class TransactionMysql implements Transaction
     @Override
     public void start() throws Exception
     {
-        Properties props = new Properties();
+        /*Properties props = new Properties();
         try 
         {
             // Cargamos la configuracion de la BBDD.
-            InputStream fichero = FactoriaDAOImp.class.getClassLoader().getResourceAsStream("database.properties");
+            InputStream fichero = Thread.currentThread().getContextClassLoader().getResourceAsStream("database.properties");
             props.load(fichero);
 	}
 	catch(IOException ioe) 
         {
             throw new RuntimeException("No se ha podido leer el fichero de configuración");
-        }
+        }*/
         try 
         {
-            _connection = DriverManager.getConnection(props.getProperty("jdbc.url"), props.getProperty("jdbc.username"), props.getProperty("jdbc.password"));
+            _connection = DriverManager.getConnection("jdbc:mysql://localhost/MerkaSoft", "root", "");
+           // _connection = DriverManager.getConnection(props.getProperty("jdbc.url"), props.getProperty("jdbc.username"), props.getProperty("jdbc.password"));
 	}
+        
 	
         catch (SQLException e) 
         {
