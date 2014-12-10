@@ -15,6 +15,8 @@ import presentacion.Vista.producto.GUIPrincipal_Producto;
 import presentacion.Vista.venta.GUIPrincipal_Venta;
 
 
+
+
 /**
  *
  * @author Ruben
@@ -66,15 +68,14 @@ public class VentanaPrincipal extends JPanel {
 	}
           */      
     public static void main(String[] args) {
-		JFrame frame = new JFrame("MerkaSoft");
+		JFrame frame = new JFrame("");
 		frame.addWindowListener(new WindowAdapter() {
 
 			public void windowClosing(WindowEvent e) {
 				System.exit(0);
 			}
 		});
-		frame.getContentPane().add(new VentanaPrincipal(),
-				BorderLayout.CENTER);
+		frame.getContentPane().add(new VentanaPrincipal(),BorderLayout.CENTER);
 		frame.setSize(1000, 700);
 		frame.setVisible(true);
 	}

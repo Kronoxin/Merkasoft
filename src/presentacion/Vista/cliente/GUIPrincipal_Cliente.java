@@ -19,6 +19,7 @@ import javax.swing.border.TitledBorder;
 public class GUIPrincipal_Cliente extends JPanel{
     
     public GUIPrincipal_Cliente(){
+  
         GUIAltaCliente alta_cliente = new GUIAltaCliente();
         GUIBajaCliente baja = new GUIBajaCliente();
         GUIMostrarCliente mostrar_cliente = new GUIMostrarCliente();
@@ -28,9 +29,9 @@ public class GUIPrincipal_Cliente extends JPanel{
         
         this.setLayout(new GridLayout(1, 2));
         
-        /*JPanel panel_aux = new JPanel();
+        JPanel panel_aux = new JPanel();
         JLabel lab_aux = new JLabel("aqui");
-        panel_aux.add(lab_aux);*/
+        panel_aux.add(lab_aux);
         
          JPanel panel_botones_clientes = new JPanel(new GridLayout(6,1,4,4));
          
@@ -58,8 +59,10 @@ public class GUIPrincipal_Cliente extends JPanel{
                 panel_botones_clientes.add(boton_media_clientes);
                 
                 this.add(panel_botones_clientes);
-                this.add(mostrar_cliente);
+                this.add(alta_cliente);
                 
+                  
     }
     
+     
 }

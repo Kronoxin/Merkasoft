@@ -8,7 +8,6 @@ package presentacion.Vista.venta;
 
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.math.MathContext;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
@@ -52,7 +51,7 @@ public class GUIPrincipal_Venta extends JPanel{
                 panel_botones_ventas.add(boton_mostrar_lista_ventas);
                 
                 this.add(panel_botones_ventas);
-                this.add(dev);
+                this.add(mostrar_una);
                 this.setVisible(true);
         
         
