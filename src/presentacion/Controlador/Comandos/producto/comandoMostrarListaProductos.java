@@ -5,10 +5,33 @@
  */
 package presentacion.Controlador.Comandos.producto;
 
+import Negocio.FactoriaSA.FactoriaSA;
+import Negocio.producto.TProducto;
+import java.util.ArrayList;
+import presentacion.Controlador.Comandos.RespuestaComando;
+import presentacion.Controlador.Eventos.EventoNegocio;
+
 /**
  *
  * @author Pepu
  */
-public class comandoMostrarListaProductos {
+public class comandoMostrarListaProductos 
+{
+    public RespuestaComando execute(Object datos) 
+    {
+        ArrayList<TProducto> listaProductos;
+	listaProductos = FactoriaSA.obtenerInstancia().generaSAProducto().mostrarListaProducto();
+	RespuestaComando respuesta;
+		
+	if (!listaProductos.isEmpty()) //Si ha cargado la lista
+        {
+            respuesta = new RespuestaComando(EventoNegocio.EXITO_MOSTRAR_LISTA_PRODUCTO, listaProductos);
+	}
+	else
+        {
+            respuesta = new RespuestaComando(EventoNegocio.FRACASO_MODIFICAR_PRODUCTO, listaProductos);
+	}
+	return respuesta;
+    }
     
 }

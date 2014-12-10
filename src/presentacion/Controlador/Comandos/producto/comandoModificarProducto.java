@@ -5,10 +5,31 @@
  */
 package presentacion.Controlador.Comandos.producto;
 
+import Negocio.FactoriaSA.FactoriaSA;
+import Negocio.producto.TProducto;
+import presentacion.Controlador.Comandos.RespuestaComando;
+import presentacion.Controlador.Eventos.EventoNegocio;
+
 /**
  *
  * @author Pepu
  */
-public class comandoModificarProducto {
-    
+public class comandoModificarProducto 
+{
+    public RespuestaComando execute(Object datos) 
+    {
+        //int idProducto = Integer.parseInt((String) datos);
+	boolean correcto = FactoriaSA.obtenerInstancia().generaSAProducto().modificarProducto((TProducto)datos);
+	RespuestaComando respuesta;
+		
+	if (correcto)
+        {
+            respuesta = new RespuestaComando(EventoNegocio.EXITO_MODIFICAR_PRODUCTO, (TProducto)datos);
+	}
+	else
+        {
+            respuesta = new RespuestaComando(EventoNegocio.FRACASO_MODIFICAR_PRODUCTO, (TProducto)datos);
+	}
+	return respuesta;
+    }
 }

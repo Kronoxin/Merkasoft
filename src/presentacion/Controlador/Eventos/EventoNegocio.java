@@ -54,6 +54,8 @@ public class EventoNegocio
     public static final int EXITO_MODIFICAR_PRODUCTO=406;
     public static final int EXITO_ALTA_VENTA=407;
     public static final int EXITO_DEVOLUCION_PRODUCTO=408;
+    public static final int EXITO_MOSTRAR_PRODUCTO=409;
+    public static final int EXITO_MOSTRAR_LISTA_PRODUCTO=410;
     
     //500 Control de fracaso
     public static final int FRACASO_ALTA_CLIENTE=501;
@@ -64,4 +66,6 @@ public class EventoNegocio
     public static final int FRACASO_MODIFICAR_PRODUCTO=506;
     public static final int FRACASO_ALTA_VENTA=507;
     public static final int FRACASO_DEVOLUCION_PRODUCTO=508;
+    public static final int FRACASO_MOSTRAR_PRODUCTO=509;
+    public static final int FRACASO_MOSTRAR_LISTA_PRODUCTO=510;
 }
