@@ -15,35 +15,88 @@ import javax.swing.border.TitledBorder;
  */
 public class GUIBajaCliente extends JPanel{
     
+    JTextField textID = new JTextField("");
+    
+    JPanel panelSuperior = new JPanel(new GridLayout(1,2));
+    JPanel panelBotones = new JPanel(new GridLayout(1,2,10,10));
+    
+    JLabel labID = new JLabel("ID del Cliente",JLabel.CENTER);
+    
+    JButton boton_ok = new JButton("Aceptar");
+    JButton boton_cancelar = new JButton("Cancelar");
+    
     public GUIBajaCliente(){
         
         
         this.setLayout(new BorderLayout());
+        
+        //añadimos el Jlabel y el Jtextfield para el ID del cliente al panelSuperior
+        panelSuperior.add(labID);
+        panelSuperior.add(textID);
 
-		final JTextField textID = new JTextField("");
+        //añadimos los botones aceptar y cancelar al panelBotones
+        panelBotones.add(boton_ok);
+        panelBotones.add(boton_cancelar);
 
-		JPanel panelSuperior = new JPanel(new GridLayout(1,2));
+        //añadimos a este panel BajaCliente cada panel independiente de la clase
+        this.add(panelSuperior,BorderLayout.NORTH);
+        this.add(panelBotones,BorderLayout.SOUTH);
+        this.setBorder(new TitledBorder(new TitledBorder(""), "Baja Cliente", TitledBorder.CENTER, TitledBorder.TOP ));	
 
-		JLabel labID = new JLabel("ID del Cliente",JLabel.CENTER);
-		
-		panelSuperior.add(labID);
-		panelSuperior.add(textID);
-		
-		JButton boton_ok = new JButton("Aceptar");
-		JButton boton_cancelar = new JButton("Cancelar");
 
-		JPanel panelBotones = new JPanel(new GridLayout(1,2,10,10));
-		panelBotones.add(boton_ok);
-		panelBotones.add(boton_cancelar);
+        this.setVisible(true);
+    }
 
-		this.add(panelSuperior,BorderLayout.NORTH);
-		this.add(panelBotones,BorderLayout.SOUTH);
-		this.setBorder(new TitledBorder(new TitledBorder(""), "Baja Cliente", TitledBorder.CENTER, TitledBorder.TOP ));	
-	
+    //getters y setters
+    public JTextField getTextID() {
+        return textID;
+    }
 
-		this.setVisible(true);
-	}
+    public void setTextID(JTextField textID) {
+        this.textID = textID;
+    }
 
+    public JPanel getPanelSuperior() {
+        return panelSuperior;
+    }
+
+    public void setPanelSuperior(JPanel panelSuperior) {
+        this.panelSuperior = panelSuperior;
+    }
+
+    public JPanel getPanelBotones() {
+        return panelBotones;
+    }
+
+    public void setPanelBotones(JPanel panelBotones) {
+        this.panelBotones = panelBotones;
+    }
+
+    public JLabel getLabID() {
+        return labID;
+    }
+
+    public void setLabID(JLabel labID) {
+        this.labID = labID;
+    }
+
+    public JButton getBoton_ok() {
+        return boton_ok;
+    }
+
+    public void setBoton_ok(JButton boton_ok) {
+        this.boton_ok = boton_ok;
+    }
+
+    public JButton getBoton_cancelar() {
+        return boton_cancelar;
+    }
+
+    public void setBoton_cancelar(JButton boton_cancelar) {
+        this.boton_cancelar = boton_cancelar;
+    }
+
+    
 }
             
     

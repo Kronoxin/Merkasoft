@@ -17,10 +17,7 @@ import javax.swing.border.TitledBorder;
  * @author Ruben
  */
 public class GUIMostrarListaClientes extends JPanel{
-    
-    public GUIMostrarListaClientes(){
-        
-        Object[][] datos_entrada = {
+       Object[][] datos_entrada = {
         {new Integer(1),"Paco", "Pino", new Date(1990, 12, 25)},
         {new Integer(3), "Array", "List",  new Date(1990, 12, 25)},
         { new Integer(2),"fdi", "ucm", new Date(1990, 12, 25)},
@@ -30,16 +27,20 @@ public class GUIMostrarListaClientes extends JPanel{
         
         String[] NombreColumnas = {"ID","Nombre", "Apellido", "Fecha Nacimiento"};
         
-        this.setLayout(new BorderLayout());
-
         JPanel panelSuperior = new JPanel();
         JPanel panelTabla = new JPanel();
 
         JLabel labID = new JLabel("Lista de Clientes",JLabel.CENTER);
+        
+        JTable tabla;
+    
+    public GUIMostrarListaClientes(){
+        
+        this.setLayout(new BorderLayout());
 
 
         //se crea la Tabla
-        JTable tabla = new JTable(datos_entrada, NombreColumnas);
+        tabla = new JTable(datos_entrada, NombreColumnas);
         
         //cojo la primera columna de la tabla (el ID) y fijo el tamaño de esa columna
         tabla.getColumnModel().getColumn(0).setPreferredWidth(2);
@@ -59,5 +60,55 @@ public class GUIMostrarListaClientes extends JPanel{
         this.setVisible(true);
     }
 
+    //getters y setters
+
+    public Object[][] getDatos_entrada() {
+        return datos_entrada;
+    }
+
+    public void setDatos_entrada(Object[][] datos_entrada) {
+        this.datos_entrada = datos_entrada;
+    }
+
+    public String[] getNombreColumnas() {
+        return NombreColumnas;
+    }
+
+    public void setNombreColumnas(String[] NombreColumnas) {
+        this.NombreColumnas = NombreColumnas;
+    }
+
+    public JPanel getPanelSuperior() {
+        return panelSuperior;
+    }
+
+    public void setPanelSuperior(JPanel panelSuperior) {
+        this.panelSuperior = panelSuperior;
+    }
+
+    public JPanel getPanelTabla() {
+        return panelTabla;
+    }
+
+    public void setPanelTabla(JPanel panelTabla) {
+        this.panelTabla = panelTabla;
+    }
+
+    public JLabel getLabID() {
+        return labID;
+    }
+
+    public void setLabID(JLabel labID) {
+        this.labID = labID;
+    }
+
+    public JTable getTabla() {
+        return tabla;
+    }
+
+    public void setTabla(JTable tabla) {
+        this.tabla = tabla;
+    }
+    
 }
     
