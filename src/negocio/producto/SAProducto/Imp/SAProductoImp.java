@@ -189,13 +189,20 @@ public class SAProductoImp implements SAProducto
             {
                 // Echamos para atras la transaccion
                 TransactionManager.obtenerInstanacia().getTransaccion().rollback();
+                correcto=false;
             }
             //Eliminamos la transaccion
             TransactionManager.obtenerInstanacia().eliminaTransaccion();
         }
         catch(Exception e)
         {
+            try {
+                TransactionManager.obtenerInstanacia().getTransaccion().rollback();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
             TransactionManager.obtenerInstanacia().eliminaTransaccion();
+            correcto=false;
         } 
         return correcto;
     }

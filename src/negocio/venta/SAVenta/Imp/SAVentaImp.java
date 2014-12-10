@@ -11,6 +11,8 @@ import Negocio.venta.TVenta;
 import integracion.DAO.factoriaDAO.FactoriaDAO;
 import integracion.transaction.transactionManager.TransactionManager;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -21,16 +23,15 @@ public class SAVentaImp implements SAVenta{
     @Override
     public int altaventa(TVenta venta,int idCliente) {
 
-        int idVenta;
+        int idVenta = -1;
         TransactionManager.obtenerInstanacia().nuevaTransaccion();
         try
         {
             TransactionManager.obtenerInstanacia().getTransaccion().start();
-            TransactionManager.obtenerInstanacia().getTransaccion().lock("Ventas");
         
             TVenta tVenta = FactoriaDAO.obtenerInstancia().getDAOVenta().mostrarVenta(venta.getId());
             
-            //Si el producto no existe lo insertamos
+            //Si la venta no existe la insertamos
             if(tVenta== null)
             {
                 idVenta = FactoriaDAO.obtenerInstancia().getDAOVenta().altaVenta(venta,idCliente);
@@ -59,7 +60,6 @@ public class SAVentaImp implements SAVenta{
             }
             else
             {
-                idVenta=-1;
                 TransactionManager.obtenerInstanacia().getTransaccion().rollback(); 
             }
             // Eliminamos la transaccion.
@@ -67,21 +67,27 @@ public class SAVentaImp implements SAVenta{
         }
         catch(Exception e)
         {
+            try { 
+                TransactionManager.obtenerInstanacia().getTransaccion().rollback();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
             idVenta = -1;
             TransactionManager.obtenerInstanacia().eliminaTransaccion();
+            
         }
         return idVenta;
     }
 
     @Override
-    public boolean devolucionProducto(TCompraArticulo articulo, int idVenta) {
+    public boolean devolucionProducto(TCompraArticulo articulo, int idVenta) 
+    {
         boolean correcto=false;
         TransactionManager.obtenerInstanacia().nuevaTransaccion();
         try
         {
             //Iniciamos la transsacion y bloqueamos la tabla a modificar
             TransactionManager.obtenerInstanacia().getTransaccion().start();
-            TransactionManager.obtenerInstanacia().getTransaccion().lock("Ventas");
             //buscamos el producto en la BBDD
             TVenta tVenta = FactoriaDAO.obtenerInstancia().getDAOVenta().mostrarVenta(idVenta);
             //Si el producto existe lo damos de baja logica
@@ -116,6 +122,11 @@ public class SAVentaImp implements SAVenta{
         }
         catch(Exception e)
         {
+            try {
+                TransactionManager.obtenerInstanacia().getTransaccion().rollback();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
             TransactionManager.obtenerInstanacia().eliminaTransaccion();
         }     
         return correcto;
