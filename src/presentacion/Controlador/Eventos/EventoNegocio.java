@@ -11,7 +11,7 @@ package presentacion.Controlador.Eventos;
  */
 public class EventoNegocio 
 {
-    //100
+    //100 Control de cliente y su GUI
     public static final int ALTA_CLIENTE = 101;
     public static final int BAJA_CLIENTE = 102;
     public static final int MOSTRAR_CLIENTE = 103;
@@ -23,7 +23,7 @@ public class EventoNegocio
     public static final int GUI_MOSTRAR_LISTA_CLIENTES = 109;
     public static final int GUI_MODIFICAR_CLIENTE = 110;
     
-    //200
+    //200 Control de productos y su GUI
     public static final int ALTA_PRODUCTO = 201;
     public static final int BAJA_PRODUCTO = 202;
     public static final int MOSTRAR_PRODUCTO = 203;
@@ -35,16 +35,14 @@ public class EventoNegocio
     public static final int GUI_MOSTRAR_LISTA_PRODUCTOS = 209;
     public static final int GUI_MODIFICAR_PRODUCTO = 210;
     
-    //300
+    //300 control de ventas y su GUI
     public static final int ALTA_VENTA = 301;
-    public static final int BAJA_VENTA = 302;
+    public static final int DEVOLUCION_PRODUCTO = 302;
     public static final int MOSTRAR_VENTA = 303;
     public static final int MOSTRAR_LISTA_VENTAS = 304;
-    public static final int MODIFICAR_VENTA = 305;
-    public static final int GUI_ALTA_VENTA = 306;
-    public static final int GUI_BAJA_VENTA = 307;
-    public static final int GUI_MOSTRAR_VENTA = 308;
-    public static final int GUI_MOSTRAR_LISTA_VENTAS = 309;
-    public static final int GUI_MODIFICAR_VENTA = 310;
+    public static final int GUI_ALTA_VENTA = 305;
+    public static final int GUI_DEVOLUCION_PRODUCTO = 306;
+    public static final int GUI_MOSTRAR_VENTA = 307;
+    public static final int GUI_MOSTRAR_LISTA_VENTAS = 308;
       
 }

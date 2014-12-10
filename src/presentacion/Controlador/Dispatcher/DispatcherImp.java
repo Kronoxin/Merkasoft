@@ -7,6 +7,7 @@ package presentacion.Controlador.Dispatcher;
 
 import presentacion.Controlador.Comandos.Command;
 import presentacion.Controlador.Comandos.RespuestaComando;
+import presentacion.Controlador.Eventos.EventoNegocio;
 
 
 /**
@@ -17,6 +18,13 @@ class DispatcherImp extends Dispatcher
 {
     public Command dispatch(RespuestaComando comando)
     {
+        switch(comando.getEvento())
+        {
+            case EventoNegocio.GUI_ALTA_CLIENTE:
+                (FJrame)comando.getDatos()
+                break;
+                
+        }
         return null;
     }
     

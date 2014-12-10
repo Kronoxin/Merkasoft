@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package presentacion.Controlador.Comandos.venta;
 
 /**
  *
- * @author Pepu
+ * @author usuario_local
  */
-public class comandoModficarVenta {
+public class comandoDevolucionProducto {
     
 }
