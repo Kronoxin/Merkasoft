@@ -61,7 +61,7 @@ public class GUIBajaProducto extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 textID.getText();
                 
-                Controlador.getInstance().accion(EventoNegocio.ALTA_PRODUCTO, textID.getText());
+                Controlador.getInstance().accion(EventoNegocio.BAJA_PRODUCTO, textID.getText());
             }
         });
         

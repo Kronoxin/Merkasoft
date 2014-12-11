@@ -9,8 +9,12 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+import presentacion.Controlador.Controlador;
+import presentacion.Controlador.Eventos.EventoNegocio;
 
 /**
  *
@@ -73,6 +77,27 @@ public class GUIMostrarProducto extends JFrame{
             this.add(panelTabla, BorderLayout.CENTER);
             this.add(panelBoton,BorderLayout.SOUTH);
             this.setVisible(true);
+            
+             butID.addActionListener(new ActionListener() {
+
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    textID.getText();
+
+                    Controlador.getInstance().accion(EventoNegocio.MOSTRAR_PRODUCTO, textID.getText());
+                }
+            });
+        
+        
+        boton_salir.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+               
+            }
+        });
+        
  
     }
     

@@ -66,7 +66,7 @@ public class GUIAltaProducto extends JFrame{
         //añadimos el Jlabel y el Jtextfield para el Precio
         panelSuperior.add(label_precio);
         panelSuperior.add(text_precio);
-        text_precio.setText("0.00€");
+        text_precio.setText("0.00");
         //añadimos el Jlabel y el Jtextfield para la descripción
         panelSuperior.add(label_descripcion);
         panelSuperior.add(text_descripcion);

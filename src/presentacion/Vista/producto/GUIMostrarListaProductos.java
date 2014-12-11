@@ -7,12 +7,16 @@ package presentacion.Vista.producto;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.TitledBorder;
+import presentacion.Controlador.Controlador;
+import presentacion.Controlador.Eventos.EventoNegocio;
 
 /**
  *
@@ -64,7 +68,7 @@ public class GUIMostrarListaProductos extends JFrame{
      //   this.setBorder(new TitledBorder(new TitledBorder(""), "Listado de todos los Productos", TitledBorder.CENTER, TitledBorder.TOP ));	
         this.add(panelTabla, BorderLayout.CENTER);
 
-        this.setVisible(true);
+        
                 
             
     }
