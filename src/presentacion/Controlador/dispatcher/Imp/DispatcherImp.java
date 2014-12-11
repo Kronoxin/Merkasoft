@@ -8,6 +8,8 @@ package presentacion.Controlador.dispatcher.Imp;
 import presentacion.Controlador.Comandos.RespuestaComando;
 import presentacion.Controlador.Eventos.EventoNegocio;
 import presentacion.Controlador.dispatcher.Dispatcher;
+import presentacion.VentanaPrincipal;
+import presentacion.Vista.cliente.GUIPrincipal_Cliente;
 import presentacion.Vista.popups.PopupsCliente;
 import presentacion.Vista.popups.PopupsProducto;
 import presentacion.Vista.popups.PopupsVenta;
@@ -24,10 +26,14 @@ public class DispatcherImp extends Dispatcher
             //Eventos GUI cliente
             case EventoNegocio.ALTA_CLIENTE:
             {
-                
+                VentanaPrincipal.ventanaPrincipal.getPrincipal_cliente().cambioVentana("alta");
                 break;
             }  
-            
+            case EventoNegocio.BAJA_CLIENTE:
+            {
+                VentanaPrincipal.ventanaPrincipal.getPrincipal_cliente().cambioVentana("baja");
+                break;
+            }
             //Eventos de exito en operaciones
             case EventoNegocio.EXITO_ALTA_CLIENTE:
             {
