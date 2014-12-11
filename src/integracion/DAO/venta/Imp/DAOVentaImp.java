@@ -30,7 +30,7 @@ public class DAOVentaImp implements DAOVenta
         Statement query = null;
         Connection connection = null;
         //insercion venta generico        
-        String contenido_query = "INSERT INTO Ventas(Fecha, Cliente)VALUES (STR_TO_DATE('" + venta.getFecha()+ "', '%d/%m/%Y'), '" + venta.getCliente()+ "');";
+        String contenido_query = "INSERT INTO Ventas(Fecha, Cliente)VALUES (STR_TO_DATE('02/03/1989', '%d/%m/%Y'), " + venta.getCliente().getId()+ ");";
         String contenido_query_2 = "INSERT INTO Venta_producto(id_venta, id_producto, Fecha, precio_actual, Cantidad VALUES (";
         
                 
@@ -63,7 +63,7 @@ public class DAOVentaImp implements DAOVenta
         }
          
          //Si no ha saltado excepción en este punto es porque se ha dado el alta correctamente
-         query.executeUpdate("SELECT MAX(id_ventas) FROM Ventas;");
+         query.execute("SELECT MAX(id_ventas) FROM Ventas;");
          ResultSet rs = query.getResultSet();
          rs.next();
          return rs.getInt(1);
@@ -77,7 +77,8 @@ public class DAOVentaImp implements DAOVenta
         Statement query = null;
         Connection connection = null;
         TVenta temp = new TVenta();
-        ArrayList<TVenta> ret = new ArrayList<TVenta>();        
+        ArrayList<TVenta> ret = new ArrayList<TVenta>(); 
+        ArrayList<TVenta> ret2 = new ArrayList<TVenta>();
         String contenido_query = "SELECT * FROM Ventas";           
                 
         try
@@ -93,38 +94,46 @@ public class DAOVentaImp implements DAOVenta
          try
         {
             System.out.println(contenido_query);
-            query.executeUpdate(contenido_query);
+            query.execute(contenido_query);
             ResultSet rs = query.getResultSet();
             while (rs.next())
             {
                                 
                     TCliente cliente = new TCliente();
-                    Integer dummy = Integer.parseInt(rs.getString("id_venta"));
+                    Integer dummy = Integer.parseInt(rs.getString("id_ventas"));
                     temp.setId(dummy);
                     dummy = Integer.parseInt(rs.getString("Cliente"));
                     cliente.setId(dummy);
                     temp.setCliente(cliente);                    
-                    temp.setFecha(rs.getDate("Fecha"));
-                    query.executeUpdate("SELECT * FROM Venta_producto WHERE id_venta = " + rs.getInt("id_venta") + ";");
-                    ResultSet rs2 = query.getResultSet();
-                    ArrayList<TCompraArticulo> lista = new ArrayList<TCompraArticulo>();
-                    TCompraArticulo art_actual = new TCompraArticulo();
-                    while (rs2.next())
-                    {
-                        art_actual.setIdArticulo(rs2.getInt("id_producto"));
-                        art_actual.setCantidad(rs2.getInt("Cantidad"));
-                        art_actual.setPrecio(rs2.getDouble("precio_actual"));
-                        lista.add(art_actual);
-                    }
-                    temp.setListaproductos(lista);
+                    temp.setFecha(rs.getDate("Fecha"));                    
+                    temp.setListaproductos(new ArrayList<TCompraArticulo>());
                     ret.add(temp);                
+            }
+            for (int i = 0; i < ret.size(); i++)
+            {
+                
+            
+                query.execute("SELECT * FROM Venta_producto WHERE id_venta = " + ret.get(i).getId() + ";");
+                ResultSet rs2 = query.getResultSet();
+                ArrayList<TCompraArticulo> lista = new ArrayList<TCompraArticulo>();
+                TCompraArticulo art_actual = new TCompraArticulo();
+                while (rs2.next())
+                {
+                    art_actual.setIdArticulo(rs2.getInt("id_producto"));
+                    art_actual.setCantidad(rs2.getInt("Cantidad"));
+                    art_actual.setPrecio(rs2.getDouble("precio_actual"));
+                    lista.add(art_actual);
+                }
+                TVenta dummy = ret.get(i);
+                dummy.setListaproductos(lista);
+                ret2.add(dummy);
             }
         }
         catch (SQLException e)
         {
-            throw new SQLException("No se ha podido dar de baja el venta. \nError: " + e.getMessage());
+            throw new SQLException("No se ha podido mostrar las ventas. \nError: " + e.getMessage());
         }
-        return ret;
+        return ret2;
     }
 
     @Override
@@ -148,19 +157,19 @@ public class DAOVentaImp implements DAOVenta
          try
         {
             System.out.println(contenido_query);
-            query.executeUpdate(contenido_query);
+            query.execute(contenido_query);
             ResultSet rs = query.getResultSet();
             if (rs.next())
             {
                                 
                     TCliente cliente = new TCliente();
-                    Integer dummy = Integer.parseInt(rs.getString("id_venta"));
+                    Integer dummy = Integer.parseInt(rs.getString("id_ventas"));
                     ret.setId(dummy);
                     dummy = Integer.parseInt(rs.getString("Cliente"));
                     cliente.setId(dummy);
                     ret.setCliente(cliente);                    
                     ret.setFecha(rs.getDate("Fecha"));
-                    query.executeUpdate("SELECT * FROM Venta_producto WHERE id_venta = " + rs.getInt("id_venta") + ";");
+                    query.execute("SELECT * FROM Venta_producto WHERE id_venta = " + rs.getInt("id_ventas") + ";");
                     ResultSet rs2 = query.getResultSet();
                     ArrayList<TCompraArticulo> lista = new ArrayList<TCompraArticulo>();
                     TCompraArticulo art_actual = new TCompraArticulo();
@@ -203,7 +212,7 @@ public class DAOVentaImp implements DAOVenta
 
         try
         {            
-            query.executeQuery(contenido_query);
+            query.executeUpdate(contenido_query);
         }
         catch (SQLException ex)
         {            
