@@ -17,6 +17,6 @@ public class comandoGUIeliminarProducto implements Command
 {
     public RespuestaComando execute(Object datos) {
         
-       return new RespuestaComando(EventoNegocio.GUI_BAJA_PRODUCTO, null);
+       return new RespuestaComando(EventoNegocio.GUI_BAJA_PRODUCTO, datos);
     }
 }

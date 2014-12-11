@@ -17,6 +17,6 @@ public class comandoGUImodificarProducto implements Command
 {
     public RespuestaComando execute(Object datos) {
         
-       return new RespuestaComando(EventoNegocio.GUI_MODIFICAR_PRODUCTO, null);
+       return new RespuestaComando(EventoNegocio.GUI_MODIFICAR_PRODUCTO, datos);
     }
 }

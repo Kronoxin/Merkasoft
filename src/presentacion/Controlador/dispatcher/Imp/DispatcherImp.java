@@ -19,6 +19,11 @@ import presentacion.Vista.cliente.GUIPrincipal_Cliente;
 import presentacion.Vista.popups.PopupsCliente;
 import presentacion.Vista.popups.PopupsProducto;
 import presentacion.Vista.popups.PopupsVenta;
+import presentacion.Vista.producto.GUIAltaProducto;
+import presentacion.Vista.producto.GUIBajaProducto;
+import presentacion.Vista.producto.GUIModificarProducto;
+import presentacion.Vista.producto.GUIMostrarListaProductos;
+import presentacion.Vista.producto.GUIMostrarProducto;
 
 
 public class DispatcherImp extends Dispatcher
@@ -61,6 +66,34 @@ public class DispatcherImp extends Dispatcher
             case EventoNegocio.GUI_MOSTRAR_LISTA_CLIENTES:
             {
                 new GUIMostrarListaClientes();
+                break;
+            }
+            
+            //GUIS DE PRODUCTO
+            
+            case EventoNegocio.GUI_ALTA_PRODUCTO:
+            {
+                new GUIAltaProducto();
+                break;
+            }
+            case EventoNegocio.GUI_BAJA_PRODUCTO:
+            {
+                new GUIBajaProducto();
+                break;
+            }
+            case EventoNegocio.GUI_MODIFICAR_PRODUCTO:
+            {
+                new GUIModificarProducto();
+                break;
+            }
+            case EventoNegocio.GUI_MOSTRAR_PRODUCTO:
+            {
+                new GUIMostrarProducto();
+                break;
+            }
+            case EventoNegocio.GUI_MOSTRAR_LISTA_PRODUCTOS:
+            {
+                new GUIMostrarListaProductos();
                 break;
             }
             

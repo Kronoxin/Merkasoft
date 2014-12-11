@@ -18,6 +18,6 @@ public class comandoGUImostrarListaProductos implements Command
 {
     public RespuestaComando execute(Object datos) {
         
-       return new RespuestaComando(EventoNegocio.GUI_MOSTRAR_LISTA_PRODUCTOS, null);
+       return new RespuestaComando(EventoNegocio.GUI_MOSTRAR_LISTA_PRODUCTOS, datos);
     }
 }
