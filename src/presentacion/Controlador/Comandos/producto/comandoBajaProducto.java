@@ -7,6 +7,7 @@ package presentacion.Controlador.Comandos.producto;
 
 import negocio.FactoriaSA.FactoriaSA;
 import negocio.producto.TProducto;
+import presentacion.Controlador.Comandos.Command;
 import presentacion.Controlador.Comandos.RespuestaComando;
 import presentacion.Controlador.Eventos.EventoNegocio;
 
@@ -14,7 +15,7 @@ import presentacion.Controlador.Eventos.EventoNegocio;
  *
  * @author Pepu
  */
-public class comandoBajaProducto 
+public class comandoBajaProducto implements Command
 {
     public RespuestaComando execute(Object datos) 
     {

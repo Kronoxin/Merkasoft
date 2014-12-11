@@ -10,6 +10,7 @@ import negocio.FactoriaSA.FactoriaSA;
 import negocio.venta.TCompraArticulo;
 import negocio.venta.TVenta;
 import java.util.ArrayList;
+import presentacion.Controlador.Comandos.Command;
 import presentacion.Controlador.Comandos.RespuestaComando;
 import presentacion.Controlador.Eventos.EventoNegocio;
 
@@ -17,7 +18,7 @@ import presentacion.Controlador.Eventos.EventoNegocio;
  *
  * @author usuario_local
  */
-public class comandoDevolucionProducto 
+public class comandoDevolucionProducto implements Command
 {
     public RespuestaComando execute(Object datos) 
     {

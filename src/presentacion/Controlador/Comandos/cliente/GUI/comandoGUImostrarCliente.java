@@ -5,6 +5,7 @@
  */
 package presentacion.Controlador.Comandos.cliente.GUI;
 
+import presentacion.Controlador.Comandos.Command;
 import presentacion.Controlador.Comandos.RespuestaComando;
 import presentacion.Controlador.Eventos.EventoNegocio;
 
@@ -12,7 +13,7 @@ import presentacion.Controlador.Eventos.EventoNegocio;
  *
  * @author Pepu
  */
-public class comandoGUImostrarCliente 
+public class comandoGUImostrarCliente implements Command
 {
     public RespuestaComando execute(Object datos) {
         

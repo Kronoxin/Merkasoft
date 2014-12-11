@@ -6,6 +6,7 @@
 
 package presentacion.Controlador.Comandos.producto.GUI;
 
+import presentacion.Controlador.Comandos.Command;
 import presentacion.Controlador.Comandos.RespuestaComando;
 import presentacion.Controlador.Eventos.EventoNegocio;
 
@@ -13,7 +14,7 @@ import presentacion.Controlador.Eventos.EventoNegocio;
  *
  * @author usuario_local
  */
-public class comandoGUImostrarListaProductos 
+public class comandoGUImostrarListaProductos implements Command
 {
     public RespuestaComando execute(Object datos) {
         

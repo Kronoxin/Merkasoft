@@ -5,6 +5,7 @@
  */
 package presentacion.Controlador.Comandos.cliente.GUI;
 
+import presentacion.Controlador.Comandos.Command;
 import presentacion.Controlador.Comandos.RespuestaComando;
 import presentacion.Controlador.Eventos.EventoNegocio;
 
@@ -12,8 +13,9 @@ import presentacion.Controlador.Eventos.EventoNegocio;
  *
  * @author Pepu
  */
-public class comandoGUImodificarCliente 
+public class comandoGUImodificarCliente implements Command
 {
+    @Override
     public RespuestaComando execute(Object datos) 
     {
        return new RespuestaComando(EventoNegocio.GUI_MODIFICAR_CLIENTE, null);

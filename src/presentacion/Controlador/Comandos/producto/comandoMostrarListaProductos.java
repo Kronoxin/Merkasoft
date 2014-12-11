@@ -8,6 +8,7 @@ package presentacion.Controlador.Comandos.producto;
 import negocio.FactoriaSA.FactoriaSA;
 import negocio.producto.TProducto;
 import java.util.ArrayList;
+import presentacion.Controlador.Comandos.Command;
 import presentacion.Controlador.Comandos.RespuestaComando;
 import presentacion.Controlador.Eventos.EventoNegocio;
 
@@ -15,7 +16,7 @@ import presentacion.Controlador.Eventos.EventoNegocio;
  *
  * @author Pepu
  */
-public class comandoMostrarListaProductos 
+public class comandoMostrarListaProductos implements Command
 {
     public RespuestaComando execute(Object datos) 
     {
