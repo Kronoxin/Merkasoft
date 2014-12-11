@@ -22,6 +22,9 @@ public class EventoNegocio
     public static final int GUI_MOSTRAR_CLIENTE = 108;
     public static final int GUI_MOSTRAR_LISTA_CLIENTES = 109;
     public static final int GUI_MODIFICAR_CLIENTE = 110;
+    public static final int GUI_MEDIA_CLIENTES = 111;
+    
+    
     
     //200 Control de productos y su GUI
     public static final int ALTA_PRODUCTO = 201;

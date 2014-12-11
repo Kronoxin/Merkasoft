@@ -8,8 +8,12 @@ package presentacion.Vista.venta;
 
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+import presentacion.Controlador.Controlador;
+import presentacion.Controlador.Eventos.EventoNegocio;
 
 /**
  *
@@ -42,13 +46,39 @@ public class GUIPrincipal_Venta extends JPanel{
         panel_botones_ventas.add(boton_mostrar_venta);
         panel_botones_ventas.add(boton_devolver_producto);
         panel_botones_ventas.add(boton_mostrar_lista_ventas);
+        
+        //incorporamos el actionListener
+        boton_alta_venta.addActionListener(new oyenteVenta());
+        boton_mostrar_venta.addActionListener(new oyenteVenta());
+        boton_devolver_producto.addActionListener(new oyenteVenta());
+        boton_mostrar_lista_ventas.addActionListener(new oyenteVenta());
 
         this.add(panel_botones_ventas);
         this.add(mostrar_una);
         this.setVisible(true);
           
     }
+    class oyenteVenta implements ActionListener{
 
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if( e.getSource() ==  boton_alta_venta){
+                    Controlador.getInstance().accion(EventoNegocio.GUI_ALTA_VENTA, GUIPrincipal_Venta.this);
+            }
+            else if( e.getSource() == boton_devolver_producto){
+                    Controlador.getInstance().accion(EventoNegocio.GUI_DEVOLUCION_PRODUCTO, GUIPrincipal_Venta.this);
+            }
+            else if( e.getSource() == boton_mostrar_lista_ventas){
+                    Controlador.getInstance().accion(EventoNegocio.GUI_MOSTRAR_LISTA_VENTAS, GUIPrincipal_Venta.this);
+            }
+            else if( e.getSource() == boton_mostrar_venta){
+                    Controlador.getInstance().accion(EventoNegocio.GUI_MOSTRAR_VENTA, GUIPrincipal_Venta.this);
+            
+            }
+        }
+        
+    }
+    //getters y setters
     public GUIAltaVenta getAlta() {
         return alta;
     }

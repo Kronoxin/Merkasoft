@@ -7,8 +7,12 @@ package presentacion.Vista.producto;
 
 import java.awt.*;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+import presentacion.Controlador.Controlador;
+import presentacion.Controlador.Eventos.EventoNegocio;
 
 /**
  *
@@ -48,11 +52,41 @@ public class GUIPrincipal_Producto extends JPanel{
                 panel_botones_productos.add(boton_baja_producto);
                 panel_botones_productos.add(boton_mostrar_lista_productos);
                 
+                //le asignamos la clase del ActionListener
+                boton_alta_producto.addActionListener(new oyenteProducto());
+                boton_baja_producto.addActionListener(new oyenteProducto());
+                boton_mostrar_producto.addActionListener(new oyenteProducto());
+                boton_modificar_producto.addActionListener(new oyenteProducto());
+                boton_mostrar_lista_productos.addActionListener(new oyenteProducto());
+                
                 this.add(panel_botones_productos);
                 this.add(mostrar_producto);
                 this.setVisible(true);
                 
     }
+    class oyenteProducto implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if( e.getSource() ==  boton_alta_producto ){
+                    Controlador.getInstance().accion(EventoNegocio.GUI_ALTA_PRODUCTO, GUIPrincipal_Producto.this);
+            }
+            else if( e.getSource() == boton_baja_producto){
+                    Controlador.getInstance().accion(EventoNegocio.GUI_BAJA_PRODUCTO, GUIPrincipal_Producto.this);
+            }
+            else if( e.getSource() == boton_mostrar_producto){
+                    Controlador.getInstance().accion(EventoNegocio.GUI_MOSTRAR_PRODUCTO, GUIPrincipal_Producto.this);
+            }
+            else if( e.getSource() == boton_modificar_producto){
+                    Controlador.getInstance().accion(EventoNegocio.GUI_MODIFICAR_PRODUCTO, GUIPrincipal_Producto.this);
+            }else if (e.getSource() == boton_mostrar_lista_productos) {
+                    Controlador.getInstance().accion(EventoNegocio.GUI_MOSTRAR_LISTA_PRODUCTOS, GUIPrincipal_Producto.this);
+
+            }
+        }
+        
+    }
+    
     //getters y setters
     public GUIAltaProducto getAlta() {
         return alta;

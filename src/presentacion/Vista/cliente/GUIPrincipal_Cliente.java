@@ -7,10 +7,14 @@ package presentacion.Vista.cliente;
 
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
+import presentacion.Controlador.Controlador;
+import presentacion.Controlador.Eventos.EventoNegocio;
 
 /**
  *
@@ -49,11 +53,42 @@ public class GUIPrincipal_Cliente extends JPanel{
         panel_botones_clientes.add(boton_baja_cliente);
         panel_botones_clientes.add(boton_mostrar_lista_clientes);
         panel_botones_clientes.add(boton_media_clientes);
+        
+                boton_alta_cliente.addActionListener(new oyenteCliente());
+        boton_baja_cliente.addActionListener(new oyenteCliente());
+        boton_mostrar_cliente.addActionListener(new oyenteCliente());
+        boton_media_clientes.addActionListener(new oyenteCliente());
+        boton_modificar_cliente.addActionListener(new oyenteCliente());
+        boton_mostrar_lista_clientes.addActionListener(new oyenteCliente());
 
         this.add(panel_botones_clientes);
         this.add(alta_cliente);
                 
                   
+    }
+    class oyenteCliente implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if( e.getSource() ==  boton_alta_cliente ){
+                    Controlador.getInstance().accion(EventoNegocio.GUI_ALTA_CLIENTE, GUIPrincipal_Cliente.this);
+            }
+            else if( e.getSource() == boton_baja_cliente){
+                    Controlador.getInstance().accion(EventoNegocio.GUI_BAJA_CLIENTE, GUIPrincipal_Cliente.this);
+            }
+            else if( e.getSource() == boton_media_clientes){
+                    Controlador.getInstance().accion(EventoNegocio.GUI_MEDIA_CLIENTES, GUIPrincipal_Cliente.this);
+            }
+            else if( e.getSource() == boton_modificar_cliente){
+                    Controlador.getInstance().accion(EventoNegocio.GUI_MODIFICAR_CLIENTE, GUIPrincipal_Cliente.this);
+            }else if (e.getSource() == boton_mostrar_cliente) {
+                    Controlador.getInstance().accion(EventoNegocio.GUI_MOSTRAR_CLIENTE, GUIPrincipal_Cliente.this);
+
+            }else if (e.getSource() == boton_mostrar_lista_clientes) {
+                    Controlador.getInstance().accion(EventoNegocio.GUI_MOSTRAR_LISTA_CLIENTES, GUIPrincipal_Cliente.this);
+
+            }
+        }
     }
     
     //getters y setters
