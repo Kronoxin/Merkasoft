@@ -5,9 +5,9 @@
  */
 package integracion.DAO.venta.Imp;
 
-import Negocio.cliente.TCliente;
-import Negocio.venta.TCompraArticulo;
-import Negocio.venta.TVenta;
+import negocio.cliente.TCliente;
+import negocio.venta.TCompraArticulo;
+import negocio.venta.TVenta;
 import integracion.DAO.venta.DAOVenta;
 import integracion.transaction.transactionManager.TransactionManager;
 import java.sql.Connection;

@@ -19,15 +19,7 @@ public interface DAOVenta {
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
 	public int altaVenta(TVenta venta, int idCliente) throws Exception;
-
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @param ID
-	 * @return
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public Boolean bajaVenta(int ID) throws Exception;
+	
 
 	/** 
 	 * <!-- begin-UML-doc -->
