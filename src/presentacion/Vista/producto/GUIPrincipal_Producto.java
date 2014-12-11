@@ -58,6 +58,7 @@ public class GUIPrincipal_Producto extends JPanel{
                 boton_mostrar_producto.addActionListener(new oyenteProducto());
                 boton_modificar_producto.addActionListener(new oyenteProducto());
                 boton_mostrar_lista_productos.addActionListener(new oyenteProducto());
+                //subete!
                 
                 this.add(panel_botones_productos);
                 this.add(mostrar_producto);

@@ -54,7 +54,7 @@ public class GUIPrincipal_Cliente extends JPanel{
         panel_botones_clientes.add(boton_mostrar_lista_clientes);
         panel_botones_clientes.add(boton_media_clientes);
         
-                boton_alta_cliente.addActionListener(new oyenteCliente());
+        boton_alta_cliente.addActionListener(new oyenteCliente());
         boton_baja_cliente.addActionListener(new oyenteCliente());
         boton_mostrar_cliente.addActionListener(new oyenteCliente());
         boton_media_clientes.addActionListener(new oyenteCliente());

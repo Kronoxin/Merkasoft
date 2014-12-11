@@ -47,11 +47,12 @@ public class GUIPrincipal_Venta extends JPanel{
         panel_botones_ventas.add(boton_devolver_producto);
         panel_botones_ventas.add(boton_mostrar_lista_ventas);
         
-        //incorporamos el actionListener
+        //incorporamos el actionListener!
         boton_alta_venta.addActionListener(new oyenteVenta());
         boton_mostrar_venta.addActionListener(new oyenteVenta());
         boton_devolver_producto.addActionListener(new oyenteVenta());
         boton_mostrar_lista_ventas.addActionListener(new oyenteVenta());
+        //subete!
 
         this.add(panel_botones_ventas);
         this.add(mostrar_una);
