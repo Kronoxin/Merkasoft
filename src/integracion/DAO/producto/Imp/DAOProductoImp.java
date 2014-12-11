@@ -5,7 +5,7 @@
  */
 package integracion.DAO.producto.Imp;
 
-import negocio.producto.TProducto;
+import Negocio.producto.TProducto;
 import integracion.DAO.producto.DAOProducto;
 import integracion.transaction.transactionManager.TransactionManager;
 import java.sql.Connection;
@@ -26,7 +26,7 @@ public class DAOProductoImp implements DAOProducto
         Statement query = null;
         Connection connection = null;
         //insercion producto generico
-        String contenido_query = "INSERT INTO Productos(Nombre, Precio, Descripcion, Cod_barras, Stock ) VALUES ('" + producto.getNombre()+ "', '" + producto.getPrecio()+ "', '" + producto.getDescripcion()+ "', '" + producto.getCodigoDeBarras()+ "', '" + producto.getStock() + "';";
+        String contenido_query = "INSERT INTO Productos(Nombre, Precio, Descripcion, Cod_barras, Stock ) VALUES ('" + producto.getNombre()+ "', " + producto.getPrecio()+ ", '" + producto.getDescripcion()+ "', '" + producto.getCodigoDeBarras()+ "', " + producto.getStock() + ");";
         
                 
         try
@@ -50,7 +50,7 @@ public class DAOProductoImp implements DAOProducto
         }
          
          //Si no ha saltado excepción en este punto es porque se ha dado el alta correctamente
-         query.executeUpdate("SELECT DNI FROM Clientes WHERE Cod_barras = " + producto.getCodigoDeBarras()+ ";");
+         query.execute("SELECT id_producto FROM Productos WHERE Cod_barras = " + producto.getCodigoDeBarras()+ ";");
          ResultSet rs = query.getResultSet();
          rs.next();
          return rs.getInt(1);
@@ -183,8 +183,8 @@ public class DAOProductoImp implements DAOProducto
     public Boolean modificarProducto(TProducto producto) throws Exception {
         Statement query = null;
         Connection connection = null;        
-        String contenido_query = "UPDATE Productos SET Nombre='" + producto.getNombre()+ "', Precio='" + producto.getPrecio()
-                + "', Descripcion='" + producto.getDescripcion()+ "', Cod_barras='" + producto.getCodigoDeBarras()+ "', Stock='" + producto.getStock() + "';"; 
+        String contenido_query = "UPDATE Productos SET Nombre='" + producto.getNombre()+ "', Precio='" + producto.getPrecio();
+               contenido_query += "', Descripcion='" + producto.getDescripcion() + "', Cod_barras='" + producto.getCodigoDeBarras() + "', Stock=" + producto.getStock() + " WHERE id_producto = " + producto.getId() + ";";
         
         try
         {
@@ -199,7 +199,7 @@ public class DAOProductoImp implements DAOProducto
 
         try
         {            
-            query.executeQuery(contenido_query);
+            query.executeUpdate(contenido_query);
         }
         catch (SQLException ex)
         {            
