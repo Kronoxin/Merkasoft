@@ -6,8 +6,15 @@
 package presentacion.Vista.cliente;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+import negocio.cliente.TCliente;
+import negocio.cliente.TClienteNormal;
+import negocio.cliente.TClienteVip;
+import presentacion.Controlador.Controlador;
+import presentacion.Controlador.Eventos.EventoNegocio;
 
 
 /**
@@ -85,6 +92,30 @@ public class GUIAltaCliente extends JFrame{
             //añadimos los botones aceptar y cancelar al panelBotones
             panelBotones.add(boton_ok);
             panelBotones.add(boton_cancelar);
+            
+            //Añadimos el actionlistener
+            boton_ok.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TCliente cliente = null;
+                if (radioNormal.isSelected())
+                {
+                    TClienteNormal temp = new TClienteNormal();
+                    temp.setQuierevip(false);
+                    cliente = temp;
+                }
+                else
+                {
+                    TClienteVip temp = new TClienteVip();
+                    temp.setFinanciacion((float) 0.0);
+                    cliente = temp;
+                }
+                    cliente.setDNI(textDNI.toString());
+                    Controlador con = Controlador.getInstance();
+                    con.accion(EventoNegocio.ALTA_CLIENTE, cliente);
+            }
+        });
 
             //añadimos a este panel AltaCliente cada panel independiente
             this.add(panelRadios, BorderLayout.CENTER);
