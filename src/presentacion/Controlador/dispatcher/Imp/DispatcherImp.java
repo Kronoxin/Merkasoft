@@ -41,9 +41,7 @@ public class DispatcherImp extends Dispatcher
              //Eventos GUI cliente
             case EventoNegocio.GUI_ALTA_CLIENTE:
             {
-
                 new GUIAltaCliente();
-
                 break;
             }
             

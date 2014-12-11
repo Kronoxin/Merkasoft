@@ -80,4 +80,7 @@ public class EventoNegocio
     public static final int FRACASO_MOSTRAR_LISTA_VENTA=512;
     public static final int FRACASO_MOSTRAR_CLIENTE=513;
     public static final int FRACASO_MOSTRAR_LISTA_CLIENTE=514;
+    
+    //600 control de ventanas
+    public static final int CANCELAR=601;
 }
