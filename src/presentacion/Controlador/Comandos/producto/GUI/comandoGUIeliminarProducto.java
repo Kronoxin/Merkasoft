@@ -5,10 +5,17 @@
  */
 package presentacion.Controlador.Comandos.producto.GUI;
 
+import presentacion.Controlador.Comandos.RespuestaComando;
+import presentacion.Controlador.Eventos.EventoNegocio;
+
 /**
  *
  * @author Pepu
  */
-public class comandoGUIeliminarProducto {
-    
+public class comandoGUIeliminarProducto 
+{
+    public RespuestaComando execute(Object datos) {
+        
+       return new RespuestaComando(EventoNegocio.GUI_BAJA_PRODUCTO, null);
+    }
 }

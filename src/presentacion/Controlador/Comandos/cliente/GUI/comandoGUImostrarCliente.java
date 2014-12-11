@@ -5,10 +5,17 @@
  */
 package presentacion.Controlador.Comandos.cliente.GUI;
 
+import presentacion.Controlador.Comandos.RespuestaComando;
+import presentacion.Controlador.Eventos.EventoNegocio;
+
 /**
  *
  * @author Pepu
  */
-public class comandoGUImostrarCliente {
-    
+public class comandoGUImostrarCliente 
+{
+    public RespuestaComando execute(Object datos) {
+        
+       return new RespuestaComando(EventoNegocio.GUI_MOSTRAR_CLIENTE, null);
+    }
 }

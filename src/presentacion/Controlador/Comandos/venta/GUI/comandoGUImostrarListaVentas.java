@@ -6,10 +6,17 @@
 
 package presentacion.Controlador.Comandos.venta.GUI;
 
+import presentacion.Controlador.Comandos.RespuestaComando;
+import presentacion.Controlador.Eventos.EventoNegocio;
+
 /**
  *
  * @author usuario_local
  */
-public class comandoGUImostrarListaVentas {
-    
+public class comandoGUImostrarListaVentas 
+{
+    public RespuestaComando execute(Object datos) {
+        
+       return new RespuestaComando(EventoNegocio.GUI_MOSTRAR_LISTA_VENTAS, null);
+    }
 }
