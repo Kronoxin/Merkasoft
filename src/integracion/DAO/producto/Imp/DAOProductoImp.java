@@ -26,7 +26,7 @@ public class DAOProductoImp implements DAOProducto
         Statement query = null;
         Connection connection = null;
         //insercion producto generico
-        String contenido_query = "INSERT INTO Productos(Nombre, Precio, Descripcion, Cod_barras, Stock ) VALUES ('" + producto.getNombre()+ "', " + producto.getPrecio()+ ", '" + producto.getDescripcion()+ "', '" + producto.getCodigoDeBarras()+ "', " + producto.getStock() + ");";
+        String contenido_query = "INSERT INTO Productos(Nombre, Precio, Descripcion, Cod_barras, Stock, Disponible ) VALUES ('" + producto.getNombre()+ "', " + producto.getPrecio()+ ", '" + producto.getDescripcion()+ "', '" + producto.getCodigoDeBarras()+ "', " + producto.getStock() +",1);";
         
                 
         try
