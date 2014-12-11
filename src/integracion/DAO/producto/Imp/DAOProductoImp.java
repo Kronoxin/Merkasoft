@@ -50,7 +50,7 @@ public class DAOProductoImp implements DAOProducto
         }
          
          //Si no ha saltado excepción en este punto es porque se ha dado el alta correctamente
-         query.execute("SELECT id_producto FROM Productos WHERE Cod_barras = " + producto.getCodigoDeBarras()+ ";");
+         query.executeQuery("SELECT id_producto FROM Productos WHERE Cod_barras = " + producto.getCodigoDeBarras()+ ";");
          ResultSet rs = query.getResultSet();
          rs.next();
          return rs.getInt(1);
@@ -115,12 +115,13 @@ public class DAOProductoImp implements DAOProducto
                     Integer id = Integer.parseInt(rs.getString("id_producto"));
                     temp.setId(id);                    
                     temp.setNombre(rs.getString("Nombre"));
-                    Double dummy = Double.parseDouble(rs.getString("DNI"));
+                    Double dummy = Double.parseDouble(rs.getString("Precio"));
                     temp.setPrecio(dummy);
                     temp.setDescripcion(rs.getString("Descripcion"));
                     temp.setCodigoDeBarras(rs.getString("Cod_barras"));
                     Integer dummy2 = Integer.parseInt(rs.getString("Stock"));
                     temp.setStock(dummy2);
+                    temp.setActivo(rs.getBoolean("Disponible"));
                     ret.add(temp);
                 }
             }
@@ -137,7 +138,7 @@ public class DAOProductoImp implements DAOProducto
         Statement query = null;
         Connection connection = null;
         TProducto ret = new TProducto();        
-        String contenido_query = "SELECT * FROM Clientes";                
+        String contenido_query = "SELECT * FROM Productos WHERE id_producto ="+ID;                
                 
         try
         {
@@ -152,7 +153,7 @@ public class DAOProductoImp implements DAOProducto
          try
         {
             System.out.println(contenido_query);
-            query.executeUpdate(contenido_query);
+            query.executeQuery(contenido_query);
             ResultSet rs = query.getResultSet();
             if (rs.next())
             {
@@ -161,12 +162,13 @@ public class DAOProductoImp implements DAOProducto
                     Integer id = Integer.parseInt(rs.getString("id_producto"));
                     ret.setId(id);                    
                     ret.setNombre(rs.getString("Nombre"));
-                    Double dummy = Double.parseDouble(rs.getString("DNI"));
+                    Double dummy = Double.parseDouble(rs.getString("Precio"));
                     ret.setPrecio(dummy);
                     ret.setDescripcion(rs.getString("Descripcion"));
                     ret.setCodigoDeBarras(rs.getString("Cod_barras"));
                     Integer dummy2 = Integer.parseInt(rs.getString("Stock"));
                     ret.setStock(dummy2);
+                    ret.setActivo(rs.getBoolean("Disponible"));
                 }
                 else
                     throw new Exception("Ese producto está dado de baja");
@@ -174,7 +176,8 @@ public class DAOProductoImp implements DAOProducto
         }
         catch (SQLException e)
         {
-            throw new SQLException("No se ha podido mostrar el producto. \nError: " + e.getMessage());
+            //throw new SQLException("No se ha podido mostrar el producto. \nError: " + e.getMessage());
+        	e.printStackTrace();
         }
         return ret;
     }

@@ -25,11 +25,9 @@ public class SAProductoImp implements SAProducto
         {
             TransactionManager.obtenerInstanacia().getTransaccion().start();
         
-            TProducto tProducto = FactoriaDAO.obtenerInstancia().getDAOProducto().mostrarProducto(producto.getId());
             
             //Si el producto no existe lo insertamos
-            if(tProducto == null)
-            {
+            
                 id_producto = FactoriaDAO.obtenerInstancia().getDAOProducto().altaProducto(producto);
                 
                 // Se hizo la insercion con exito.
@@ -48,29 +46,8 @@ public class SAProductoImp implements SAProducto
                         }
                     
                 }                                
-            }
-            else 
-            {
-                id_producto= tProducto.getId();
-
-                //Si el producto existe y no esta activo lo activamos.
-
-                if(!tProducto.getActivo())
-                {
-                   tProducto.setActivo(true);
-                    //Modificamos el producto.
-                    if(!FactoriaDAO.obtenerInstancia().getDAOProducto().modificarProducto(tProducto))
-                    {
-                        // Si no se ha podido modificar cambiamos la id a -1.
-                        id_producto = -1;
-                    }
-                }
-                else
-                {
-                    id_producto = -1;
-                }
-                
-            }
+            
+            
             // Eliminamos la transaccion.
             TransactionManager.obtenerInstanacia().eliminaTransaccion();
         }
