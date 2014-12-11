@@ -30,7 +30,7 @@ public class comandoMostrarListaProductos implements Command
 	}
 	else
         {
-            respuesta = new RespuestaComando(EventoNegocio.FRACASO_MODIFICAR_PRODUCTO, listaProductos);
+            respuesta = new RespuestaComando(EventoNegocio.FRACASO_MOSTRAR_LISTA_PRODUCTO, listaProductos);
 	}
 	return respuesta;
     }

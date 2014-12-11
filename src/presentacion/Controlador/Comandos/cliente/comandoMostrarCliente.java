@@ -5,18 +5,40 @@
  */
 package presentacion.Controlador.Comandos.cliente;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import negocio.FactoriaSA.FactoriaSA;
+import negocio.cliente.TCliente;
+import negocio.producto.TProducto;
 import presentacion.Controlador.Comandos.Command;
 import presentacion.Controlador.Comandos.RespuestaComando;
+import presentacion.Controlador.Eventos.EventoNegocio;
 
 /**
  *
  * @author Pepu
  */
-public class comandoMostrarCliente implements Command{
-
-    @Override
-    public RespuestaComando execute(Object datos) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+public class comandoMostrarCliente implements Command
+{
+    public RespuestaComando execute(Object datos) 
+    {
+        RespuestaComando respuesta = null;
+        try {
+            int idCliente = Integer.parseInt((String) datos);
+            TCliente cliente;
+            cliente = FactoriaSA.obtenerInstancia().generaSACliente().mostrarCliente(idCliente);
+            
+            if (cliente != null) //Si existe
+            {
+                respuesta = new RespuestaComando(EventoNegocio.EXITO_MOSTRAR_CLIENTE, cliente);
+            }
+            else
+            {
+                respuesta = new RespuestaComando(EventoNegocio.FRACASO_MOSTRAR_CLIENTE, cliente);
+            }
+        } catch (Exception ex) {
+        }
+        return respuesta;
     }
     
 }

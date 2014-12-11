@@ -5,8 +5,14 @@
  */
 package presentacion.Controlador.Comandos.cliente;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import negocio.FactoriaSA.FactoriaSA;
+import negocio.cliente.TCliente;
+import negocio.producto.TProducto;
 import presentacion.Controlador.Comandos.Command;
 import presentacion.Controlador.Comandos.RespuestaComando;
+import presentacion.Controlador.Eventos.EventoNegocio;
 
 /**
  *
@@ -14,9 +20,25 @@ import presentacion.Controlador.Comandos.RespuestaComando;
  */
 public class comandoModificarCliente implements Command{
 
-    @Override
-    public RespuestaComando execute(Object datos) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public RespuestaComando execute(Object datos) 
+    {
+        RespuestaComando respuesta = null;
+        try {
+            //int idProducto = Integer.parseInt((String) datos);
+            TCliente cliente = (TCliente)datos;
+            boolean correcto = FactoriaSA.obtenerInstancia().generaSACliente().modificarCliente(cliente);
+            
+            if (correcto)
+            {
+                respuesta = new RespuestaComando(EventoNegocio.EXITO_MODIFICAR_CLIENTE, cliente);
+            }
+            else
+            {
+                respuesta = new RespuestaComando(EventoNegocio.FRACASO_MODIFICAR_CLIENTE, cliente);
+            }
+        } catch (Exception ex) {
+        }
+        return respuesta;
     }
     
 }

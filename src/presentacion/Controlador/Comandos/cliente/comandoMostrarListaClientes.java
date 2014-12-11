@@ -5,8 +5,15 @@
  */
 package presentacion.Controlador.Comandos.cliente;
 
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import negocio.FactoriaSA.FactoriaSA;
+import negocio.cliente.TCliente;
+import negocio.producto.TProducto;
 import presentacion.Controlador.Comandos.Command;
 import presentacion.Controlador.Comandos.RespuestaComando;
+import presentacion.Controlador.Eventos.EventoNegocio;
 
 /**
  *
@@ -15,8 +22,24 @@ import presentacion.Controlador.Comandos.RespuestaComando;
 public class comandoMostrarListaClientes implements Command{
 
     @Override
-    public RespuestaComando execute(Object datos) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public RespuestaComando execute(Object datos) 
+    {
+        RespuestaComando respuesta = null;
+        try {
+            ArrayList<TCliente> listaClientes;
+            listaClientes = FactoriaSA.obtenerInstancia().generaSACliente().mostrarListaCliente();
+            
+            if (!listaClientes.isEmpty()) //Si ha cargado la lista
+            {
+                respuesta = new RespuestaComando(EventoNegocio.EXITO_MOSTRAR_LISTA_CLIENTE, listaClientes);
+            }
+            else
+            {
+                respuesta = new RespuestaComando(EventoNegocio.FRACASO_MOSTRAR_LISTA_CLIENTE, listaClientes);
+            }
+        } catch (Exception ex) {
+        }
+        return respuesta;
     }
     
 }
