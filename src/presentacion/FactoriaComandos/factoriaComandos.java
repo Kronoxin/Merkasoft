@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Presentacion.FactoriaComandos;
+package presentacion.FactoriaComandos;
 
 import presentacion.Controlador.Comandos.Command;
 import presentacion.FactoriaComandos.Imp.*;

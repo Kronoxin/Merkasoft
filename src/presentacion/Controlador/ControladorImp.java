@@ -6,7 +6,7 @@
 package presentacion.Controlador;
 
 import presentacion.Controlador.dispatcher.Dispatcher;
-import Presentacion.FactoriaComandos.factoriaComandos;
+import presentacion.FactoriaComandos.factoriaComandos;
 import presentacion.Controlador.Comandos.Command;
 import presentacion.Controlador.Comandos.RespuestaComando;
 

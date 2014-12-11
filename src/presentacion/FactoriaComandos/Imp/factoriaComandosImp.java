@@ -5,13 +5,13 @@
  */
 package presentacion.FactoriaComandos.Imp;
 
-import Presentacion.Controlador.Comandos.cliente.*;
-import Presentacion.Controlador.Comandos.producto.*;
-import Presentacion.Controlador.Comandos.venta.*;
-import Presentacion.Controlador.Comandos.cliente.GUI.*;
-import Presentacion.Controlador.Comandos.producto.GUI.*;
-import Presentacion.Controlador.Comandos.venta.GUI.*;
-import Presentacion.FactoriaComandos.factoriaComandos;
+import presentacion.Controlador.Comandos.cliente.*;
+import presentacion.Controlador.Comandos.producto.*;
+import presentacion.Controlador.Comandos.venta.*;
+import presentacion.Controlador.Comandos.cliente.GUI.*;
+import presentacion.Controlador.Comandos.producto.GUI.*;
+import presentacion.Controlador.Comandos.venta.GUI.*;
+import presentacion.FactoriaComandos.factoriaComandos;
 import presentacion.Controlador.Comandos.Command;
 import presentacion.Controlador.Eventos.EventoNegocio;
 /**
