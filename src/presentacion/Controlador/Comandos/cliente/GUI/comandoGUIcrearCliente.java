@@ -17,7 +17,7 @@ public class comandoGUIcrearCliente implements Command{
 
     @Override
     public RespuestaComando execute(Object datos) {
-         return new RespuestaComando(EventoNegocio.GUI_ALTA_CLIENTE, null);
+         return new RespuestaComando(EventoNegocio.GUI_ALTA_CLIENTE, datos);
     }
     
 }

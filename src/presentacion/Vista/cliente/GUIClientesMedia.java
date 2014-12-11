@@ -8,6 +8,7 @@ package presentacion.Vista.cliente;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.util.Date;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -18,7 +19,7 @@ import javax.swing.border.TitledBorder;
  *
  * @author Ruben
  */
-public class GUIClientesMedia extends JPanel{
+public class GUIClientesMedia extends JFrame{
         Object[][] datos_entrada = {
         {new Integer(1),"Paco", "Pino", new Date(1990, 12, 25)},
         {new Integer(3), "Array", "List",  new Date(1990, 12, 25)},
@@ -37,6 +38,9 @@ public class GUIClientesMedia extends JPanel{
         JTable tabla;
     
     public GUIClientesMedia(){
+         this.setTitle("Clientes Media");
+	setBounds(100, 100, 400, 300);
+        this.setLocationRelativeTo(null);
     
         
         this.setLayout(new BorderLayout());
@@ -55,7 +59,7 @@ public class GUIClientesMedia extends JPanel{
         panelSuperior.add(labID);
 
         this.add(panelSuperior,BorderLayout.NORTH);
-        this.setBorder(new TitledBorder(new TitledBorder(""), "Clientes con gasto superior a la media", TitledBorder.CENTER, TitledBorder.TOP ));	
+    //    this.setBorder(new TitledBorder(new TitledBorder(""), "Clientes con gasto superior a la media", TitledBorder.CENTER, TitledBorder.TOP ));	
 
         this.add(panelTabla, BorderLayout.CENTER);
 

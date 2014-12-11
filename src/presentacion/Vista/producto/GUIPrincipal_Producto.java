@@ -20,11 +20,6 @@ import presentacion.Controlador.Eventos.EventoNegocio;
  */
 public class GUIPrincipal_Producto extends JPanel{
     
-        GUIAltaProducto alta = new GUIAltaProducto();
-        GUIMostrarProducto mostrar_producto = new GUIMostrarProducto();
-        GUIMostrarListaProductos lista_productos = new GUIMostrarListaProductos();
-        GUIModificarProducto mod = new GUIModificarProducto();
-        GUIBajaProducto baja = new GUIBajaProducto();
         JPanel panel_botones_productos = new JPanel(new GridLayout(5,1,4,4));
 
         TitledBorder borde_productos = new TitledBorder("Productos");
@@ -58,13 +53,13 @@ public class GUIPrincipal_Producto extends JPanel{
                 boton_mostrar_producto.addActionListener(new oyenteProducto());
                 boton_modificar_producto.addActionListener(new oyenteProducto());
                 boton_mostrar_lista_productos.addActionListener(new oyenteProducto());
-                //subete!
                 
                 this.add(panel_botones_productos);
-                this.add(mostrar_producto);
+         //       this.add(mostrar_producto);
                 this.setVisible(true);
                 
     }
+    
     class oyenteProducto implements ActionListener{
 
         @Override
@@ -85,49 +80,11 @@ public class GUIPrincipal_Producto extends JPanel{
 
             }
         }
-        
     }
+            
     
     //getters y setters
-    public GUIAltaProducto getAlta() {
-        return alta;
-    }
 
-    public void setAlta(GUIAltaProducto alta) {
-        this.alta = alta;
-    }
-
-    public GUIMostrarProducto getMostrar_producto() {
-        return mostrar_producto;
-    }
-
-    public void setMostrar_producto(GUIMostrarProducto mostrar_producto) {
-        this.mostrar_producto = mostrar_producto;
-    }
-
-    public GUIMostrarListaProductos getLista_productos() {
-        return lista_productos;
-    }
-
-    public void setLista_productos(GUIMostrarListaProductos lista_productos) {
-        this.lista_productos = lista_productos;
-    }
-
-    public GUIModificarProducto getMod() {
-        return mod;
-    }
-
-    public void setMod(GUIModificarProducto mod) {
-        this.mod = mod;
-    }
-
-    public GUIBajaProducto getBaja() {
-        return baja;
-    }
-
-    public void setBaja(GUIBajaProducto baja) {
-        this.baja = baja;
-    }
 
     public JPanel getPanel_botones_productos() {
         return panel_botones_productos;

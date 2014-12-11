@@ -9,6 +9,12 @@ import presentacion.Controlador.Comandos.RespuestaComando;
 import presentacion.Controlador.Eventos.EventoNegocio;
 import presentacion.Controlador.dispatcher.Dispatcher;
 import presentacion.VentanaPrincipal;
+import presentacion.Vista.cliente.GUIAltaCliente;
+import presentacion.Vista.cliente.GUIBajaCliente;
+import presentacion.Vista.cliente.GUIClientesMedia;
+import presentacion.Vista.cliente.GUIModificarCliente;
+import presentacion.Vista.cliente.GUIMostrarCliente;
+import presentacion.Vista.cliente.GUIMostrarListaClientes;
 import presentacion.Vista.cliente.GUIPrincipal_Cliente;
 import presentacion.Vista.popups.PopupsCliente;
 import presentacion.Vista.popups.PopupsProducto;
@@ -23,6 +29,41 @@ public class DispatcherImp extends Dispatcher
     {
         switch(comando.getEvento())
         {
+             //Eventos GUI cliente
+            case EventoNegocio.GUI_ALTA_CLIENTE:
+            {
+
+                new GUIAltaCliente();
+
+                break;
+            }
+            
+            case EventoNegocio.GUI_BAJA_CLIENTE:
+            {
+                new GUIBajaCliente();
+                break;
+            }
+            case EventoNegocio.GUI_MEDIA_CLIENTES:
+            {
+                new GUIClientesMedia();
+                break;
+            }
+            case EventoNegocio.GUI_MODIFICAR_CLIENTE:
+            {
+                new GUIModificarCliente();
+                break;
+            }
+            case EventoNegocio.GUI_MOSTRAR_CLIENTE:
+            {
+                new GUIMostrarCliente();
+                break;
+            }
+            case EventoNegocio.GUI_MOSTRAR_LISTA_CLIENTES:
+            {
+                new GUIMostrarListaClientes();
+                break;
+            }
+            
             //Eventos GUI cliente
             case EventoNegocio.ALTA_CLIENTE:
             {

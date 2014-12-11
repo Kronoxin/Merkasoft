@@ -52,7 +52,6 @@ public class GUIPrincipal_Venta extends JPanel{
         boton_mostrar_venta.addActionListener(new oyenteVenta());
         boton_devolver_producto.addActionListener(new oyenteVenta());
         boton_mostrar_lista_ventas.addActionListener(new oyenteVenta());
-        //subete!
 
         this.add(panel_botones_ventas);
         this.add(mostrar_una);
@@ -77,9 +76,8 @@ public class GUIPrincipal_Venta extends JPanel{
             
             }
         }
-        
     }
-    //getters y setters
+
     public GUIAltaVenta getAlta() {
         return alta;
     }

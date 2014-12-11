@@ -5,6 +5,7 @@
  */
 package presentacion.FactoriaComandos.Imp;
 
+import presentacion.Controlador.Comandos.cliente.GUI.comandoGUImediaClientes;
 import presentacion.Controlador.Comandos.cliente.*;
 import presentacion.Controlador.Comandos.producto.*;
 import presentacion.Controlador.Comandos.venta.*;
@@ -73,6 +74,12 @@ public class factoriaComandosImp extends factoriaComandos
             case EventoNegocio.GUI_MODIFICAR_CLIENTE:
             {
 		comando = new comandoGUImodificarCliente();
+                break;
+            }
+            
+            case EventoNegocio.GUI_MEDIA_CLIENTES:
+            {
+                comando = new comandoGUImediaClientes();
                 break;
             }
             

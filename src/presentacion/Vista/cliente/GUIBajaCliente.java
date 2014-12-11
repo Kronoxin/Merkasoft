@@ -13,7 +13,8 @@ import javax.swing.border.TitledBorder;
  *
  * @author Ruben
  */
-public class GUIBajaCliente extends JPanel{
+public class GUIBajaCliente extends JFrame{
+   
     
     JTextField textID = new JTextField("");
     
@@ -26,6 +27,9 @@ public class GUIBajaCliente extends JPanel{
     JButton boton_cancelar = new JButton("Cancelar");
     
     public GUIBajaCliente(){
+         this.setTitle("Baja Cliente");
+    	setBounds(100, 100, 400, 300);
+        this.setLocationRelativeTo(null);
         
         
         this.setLayout(new BorderLayout());
@@ -41,10 +45,11 @@ public class GUIBajaCliente extends JPanel{
         //añadimos a este panel BajaCliente cada panel independiente de la clase
         this.add(panelSuperior,BorderLayout.NORTH);
         this.add(panelBotones,BorderLayout.SOUTH);
-        this.setBorder(new TitledBorder(new TitledBorder(""), "Baja Cliente", TitledBorder.CENTER, TitledBorder.TOP ));	
+     //   this.setBorder(new TitledBorder(new TitledBorder(""), "Baja Cliente", TitledBorder.CENTER, TitledBorder.TOP ));	
 
 
         this.setVisible(true);
+      //  this.setSize(300, 200);
     }
 
     //getters y setters

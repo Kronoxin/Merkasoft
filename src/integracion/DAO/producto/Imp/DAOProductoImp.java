@@ -5,7 +5,7 @@
  */
 package integracion.DAO.producto.Imp;
 
-import Negocio.producto.TProducto;
+import negocio.producto.TProducto;
 import integracion.DAO.producto.DAOProducto;
 import integracion.transaction.transactionManager.TransactionManager;
 import java.sql.Connection;

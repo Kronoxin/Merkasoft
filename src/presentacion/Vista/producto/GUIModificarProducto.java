@@ -14,7 +14,7 @@ import javax.swing.border.TitledBorder;
  *
  * @author Ruben
  */
-public class GUIModificarProducto extends JPanel{
+public class GUIModificarProducto extends JFrame{
         
         JPanel panelSuperior = new JPanel(new GridLayout(1,2));
         JPanel panelBotones = new JPanel(new GridLayout(1,2,10,10));
@@ -27,6 +27,9 @@ public class GUIModificarProducto extends JPanel{
         JButton boton_cancelar = new JButton("Cancelar");
     
     public GUIModificarProducto(){
+        this.setTitle("Modificar Producto");
+	setBounds(100, 100, 400, 300);
+        this.setLocationRelativeTo(null);
         
         this.setLayout(new BorderLayout());
 
@@ -40,7 +43,7 @@ public class GUIModificarProducto extends JPanel{
 
         this.add(panelSuperior,BorderLayout.NORTH);
         this.add(panelBotones,BorderLayout.SOUTH);
-        this.setBorder(new TitledBorder(new TitledBorder(""), "Modificar Producto", TitledBorder.CENTER, TitledBorder.TOP ));	
+  //      this.setBorder(new TitledBorder(new TitledBorder(""), "Modificar Producto", TitledBorder.CENTER, TitledBorder.TOP ));	
 
 
         this.setVisible(true);

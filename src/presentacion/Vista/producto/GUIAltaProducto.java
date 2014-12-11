@@ -10,6 +10,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -20,7 +21,7 @@ import javax.swing.border.TitledBorder;
  *
  * @author Ruben
  */
-public class GUIAltaProducto extends JPanel{
+public class GUIAltaProducto extends JFrame{
     
     JPanel panelSuperior = new JPanel();     
     JPanel panelBotones = new JPanel(new GridLayout(1,2,5,5));
@@ -41,6 +42,9 @@ public class GUIAltaProducto extends JPanel{
     JButton boton_cancelar = new JButton("Cancelar");
     
     public GUIAltaProducto(){
+        this.setTitle("Alta Producto");
+	setBounds(100, 100, 400, 300);
+        this.setLocationRelativeTo(null);
         
         this.setLayout(new BorderLayout());
 
@@ -71,8 +75,8 @@ public class GUIAltaProducto extends JPanel{
         this.add(panelSuperior,BorderLayout.NORTH);	
         this.add(panelBotones,BorderLayout.SOUTH);
 
-        this.setBorder(new TitledBorder(new TitledBorder(""), "Alta Producto", 
-                        TitledBorder.CENTER, TitledBorder.TOP ));		
+ //       this.setBorder(new TitledBorder(new TitledBorder(""), "Alta Producto", 
+  //                      TitledBorder.CENTER, TitledBorder.TOP ));		
 
 
         this.setVisible(true);

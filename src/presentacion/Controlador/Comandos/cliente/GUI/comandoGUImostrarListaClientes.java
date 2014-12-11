@@ -17,6 +17,6 @@ public class comandoGUImostrarListaClientes implements Command
 {
     public RespuestaComando execute(Object datos) {
         
-       return new RespuestaComando(EventoNegocio.GUI_MOSTRAR_LISTA_CLIENTES, null);
+       return new RespuestaComando(EventoNegocio.GUI_MOSTRAR_LISTA_CLIENTES, datos);
     }
 }

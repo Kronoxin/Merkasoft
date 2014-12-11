@@ -14,7 +14,7 @@ import javax.swing.border.TitledBorder;
  *
  * @author Ruben
  */
-public class GUIBajaProducto extends JPanel{
+public class GUIBajaProducto extends JFrame{
     
         JTextField textID = new JTextField("");
 
@@ -29,6 +29,9 @@ public class GUIBajaProducto extends JPanel{
             
             
     public GUIBajaProducto(){
+        this.setTitle("Baja Producto");
+	setBounds(100, 100, 400, 300);
+        this.setLocationRelativeTo(null);
         this.setLayout(new BorderLayout());
 
         //añadimos el Jlabel y el TextField del ID del producto al panelSuperior
@@ -42,7 +45,7 @@ public class GUIBajaProducto extends JPanel{
         //añadimos los paneles individuales al de la clase
         this.add(panelSuperior,BorderLayout.NORTH);
         this.add(panelBotones,BorderLayout.SOUTH);
-        this.setBorder(new TitledBorder(new TitledBorder(""), "Baja Producto", TitledBorder.CENTER, TitledBorder.TOP ));	
+      //  this.setBorder(new TitledBorder(new TitledBorder(""), "Baja Producto", TitledBorder.CENTER, TitledBorder.TOP ));	
 
         this.setVisible(true);
         

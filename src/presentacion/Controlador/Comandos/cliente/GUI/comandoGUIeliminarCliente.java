@@ -18,7 +18,7 @@ public class comandoGUIeliminarCliente implements Command{
     @Override
     public RespuestaComando execute(Object datos) {
         
-       return new RespuestaComando(EventoNegocio.GUI_BAJA_CLIENTE, null);
+       return new RespuestaComando(EventoNegocio.GUI_BAJA_CLIENTE, datos);
     }
     
 }

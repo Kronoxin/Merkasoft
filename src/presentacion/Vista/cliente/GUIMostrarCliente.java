@@ -16,7 +16,7 @@ import javax.swing.border.TitledBorder;
  *
  * @author Ruben
  */
-public class GUIMostrarCliente extends JPanel{
+public class GUIMostrarCliente extends JFrame{
         Object[][] datos_entrada = {
         {new Integer(1),"Paco", "Pino", new Date(1990, 12, 25)},
         {new Integer(3), "Array", "List",  new Date(1990, 12, 25)},
@@ -42,6 +42,9 @@ public class GUIMostrarCliente extends JPanel{
                 
     
     public GUIMostrarCliente(){
+        this.setTitle("Mostrar Cliente");
+	setBounds(100, 100, 400, 300);
+        this.setLocationRelativeTo(null);
 
         this.setLayout(new BorderLayout());
 	
@@ -67,7 +70,7 @@ public class GUIMostrarCliente extends JPanel{
 
         //añadimos al panel de esta clase (MostrarCliente) cada panel individual
         this.add(panelSuperior,BorderLayout.NORTH);
-        this.setBorder(new TitledBorder(new TitledBorder(""), "Mostrar Cliente por ID", TitledBorder.CENTER, TitledBorder.TOP ));	
+    //    this.setBorder(new TitledBorder(new TitledBorder(""), "Mostrar Cliente por ID", TitledBorder.CENTER, TitledBorder.TOP ));	
         this.add(panelTabla, BorderLayout.CENTER);
         this.add(panelBoton,BorderLayout.SOUTH);
         

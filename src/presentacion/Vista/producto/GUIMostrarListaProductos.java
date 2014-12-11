@@ -7,6 +7,7 @@ package presentacion.Vista.producto;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -17,7 +18,7 @@ import javax.swing.border.TitledBorder;
  *
  * @author Ruben
  */
-public class GUIMostrarListaProductos extends JPanel{
+public class GUIMostrarListaProductos extends JFrame{
     
         Object[][] datos_entrada = {
         {new Integer(1),"Paco", new Double(20.0), "Pino", "codBarr", new Integer(10)},
@@ -38,6 +39,9 @@ public class GUIMostrarListaProductos extends JPanel{
         JTable tabla;
     
     public GUIMostrarListaProductos(){
+        this.setTitle("Listar Productos");
+	setBounds(100, 100, 500, 600);
+        this.setLocationRelativeTo(null);
         
         this.setLayout(new BorderLayout());
 
@@ -57,7 +61,7 @@ public class GUIMostrarListaProductos extends JPanel{
         panelSuperior.add(labID);
 
         this.add(panelSuperior,BorderLayout.NORTH);
-        this.setBorder(new TitledBorder(new TitledBorder(""), "Listado de todos los Productos", TitledBorder.CENTER, TitledBorder.TOP ));	
+     //   this.setBorder(new TitledBorder(new TitledBorder(""), "Listado de todos los Productos", TitledBorder.CENTER, TitledBorder.TOP ));	
         this.add(panelTabla, BorderLayout.CENTER);
 
         this.setVisible(true);

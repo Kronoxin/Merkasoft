@@ -8,6 +8,7 @@ package presentacion.Vista.cliente;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -17,7 +18,7 @@ import javax.swing.border.TitledBorder;
  *
  * @author Ruben
  */
-public class GUIModificarCliente extends JPanel{
+public class GUIModificarCliente extends JFrame{
     
     JTextField textID = new JTextField("");
     JLabel labID = new JLabel("ID del Cliente",JLabel.CENTER);
@@ -29,6 +30,9 @@ public class GUIModificarCliente extends JPanel{
     JPanel panelBotones = new JPanel(new GridLayout(1,2,10,10));
     
     public GUIModificarCliente(){
+        this.setName("Modificar Cliente");
+	setBounds(100, 100, 400, 300);
+        this.setLocationRelativeTo(null);
         
         this.setLayout(new BorderLayout());
 
@@ -42,7 +46,7 @@ public class GUIModificarCliente extends JPanel{
 
         this.add(panelSuperior,BorderLayout.NORTH);
         this.add(panelBotones,BorderLayout.SOUTH);
-        this.setBorder(new TitledBorder(new TitledBorder(""), "Modificar Cliente", TitledBorder.CENTER, TitledBorder.TOP ));	
+    //    this.setBorder(new TitledBorder(new TitledBorder(""), "Modificar Cliente", TitledBorder.CENTER, TitledBorder.TOP ));	
 
 
         this.setVisible(true);

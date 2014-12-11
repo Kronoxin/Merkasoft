@@ -18,6 +18,6 @@ public class comandoGUImodificarCliente implements Command
     @Override
     public RespuestaComando execute(Object datos) 
     {
-       return new RespuestaComando(EventoNegocio.GUI_MODIFICAR_CLIENTE, null);
+       return new RespuestaComando(EventoNegocio.GUI_MODIFICAR_CLIENTE, datos);
     }
 }
