@@ -5,8 +5,9 @@
  */
 package integracion.DAO.venta.Imp;
 
-import negocio.venta.TCompraArticulo;
-import negocio.venta.TVenta;
+import Negocio.cliente.TCliente;
+import Negocio.venta.TCompraArticulo;
+import Negocio.venta.TVenta;
 import integracion.DAO.venta.DAOVenta;
 import integracion.transaction.transactionManager.TransactionManager;
 import java.sql.Connection;
@@ -68,43 +69,16 @@ public class DAOVentaImp implements DAOVenta
          return rs.getInt(1);
     }
 
-    @Override
-    public Boolean bajaVenta(int ID) throws Exception 
-    {
-        Statement query = null;
-        Connection connection = null;        
-        String contenido_query = "UPDATE Productos SET Disponible = FALSE WHERE id_venta = " + ID + ";";                
-                
-        try
-        {
-            connection = (Connection) TransactionManager.obtenerInstanacia().getTransaccion().getResource();
-            query = connection.createStatement();
-        }
-        catch (SQLException e)
-        {
-            throw new SQLException("No se ha podido realizar la conexión con la base de datos. \nEs posible que haya olvidado crear o iniciar la transacción"
-                    + "\nError: " + e.getMessage());
-        }
-         try
-        {
-            System.out.println(contenido_query);
-            query.executeUpdate(contenido_query);
-        }
-        catch (SQLException e)
-        {
-            throw new SQLException("No se ha podido dar de baja el venta. \nError: " + e.getMessage());
-        }
-         return false;
-    }
+    
 
     @Override
-    public ArrayList listarVentas() throws Exception 
+    public ArrayList<TVenta> listarVentas() throws Exception 
     {
-         Statement query = null;
+        Statement query = null;
         Connection connection = null;
-        TProducto temp = new TProducto();
-        ArrayList<TProducto> ret = new ArrayList<TProducto>();        
-        String contenido_query = "SELECT * FROM Clientes";                
+        TVenta temp = new TVenta();
+        ArrayList<TVenta> ret = new ArrayList<TVenta>();        
+        String contenido_query = "SELECT * FROM Ventas";           
                 
         try
         {
@@ -123,19 +97,27 @@ public class DAOVentaImp implements DAOVenta
             ResultSet rs = query.getResultSet();
             while (rs.next())
             {
-                if (rs.getString("Disponible").equalsIgnoreCase("1"))
-                {
-                    Integer id = Integer.parseInt(rs.getString("id_venta"));
-                    temp.setId(id);                    
-                    temp.setNombre(rs.getString("Nombre"));
-                    Double dummy = Double.parseDouble(rs.getString("DNI"));
-                    temp.setPrecio(dummy);
-                    temp.setDescripcion(rs.getString("Descripcion"));
-                    temp.setCodigoDeBarras(rs.getString("Cod_barras"));
-                    Integer dummy2 = Integer.parseInt(rs.getString("Stock"));
-                    temp.setStock(dummy2);
-                    ret.add(temp);
-                }
+                                
+                    TCliente cliente = new TCliente();
+                    Integer dummy = Integer.parseInt(rs.getString("id_venta"));
+                    temp.setId(dummy);
+                    dummy = Integer.parseInt(rs.getString("Cliente"));
+                    cliente.setId(dummy);
+                    temp.setCliente(cliente);                    
+                    temp.setFecha(rs.getDate("Fecha"));
+                    query.executeUpdate("SELECT * FROM Venta_producto WHERE id_venta = " + rs.getInt("id_venta") + ";");
+                    ResultSet rs2 = query.getResultSet();
+                    ArrayList<TCompraArticulo> lista = new ArrayList<TCompraArticulo>();
+                    TCompraArticulo art_actual = new TCompraArticulo();
+                    while (rs2.next())
+                    {
+                        art_actual.setIdArticulo(rs2.getInt("id_producto"));
+                        art_actual.setCantidad(rs2.getInt("Cantidad"));
+                        art_actual.setPrecio(rs2.getDouble("precio_actual"));
+                        lista.add(art_actual);
+                    }
+                    temp.setListaproductos(lista);
+                    ret.add(temp);                
             }
         }
         catch (SQLException e)
@@ -150,8 +132,8 @@ public class DAOVentaImp implements DAOVenta
     {
         Statement query = null;
         Connection connection = null;
-        TProducto ret = new TProducto();        
-        String contenido_query = "SELECT * FROM Clientes";                
+        TVenta ret = new TVenta();        
+        String contenido_query = "SELECT * FROM Ventas WHERE id_ventas=" + ID + ";";           
                 
         try
         {
@@ -170,25 +152,33 @@ public class DAOVentaImp implements DAOVenta
             ResultSet rs = query.getResultSet();
             if (rs.next())
             {
-                if (rs.getString("Disponible").equalsIgnoreCase("1"))
-                {
-                    Integer id = Integer.parseInt(rs.getString("id_venta"));
-                    ret.setId(id);                    
-                    ret.setNombre(rs.getString("Nombre"));
-                    Double dummy = Double.parseDouble(rs.getString("DNI"));
-                    ret.setPrecio(dummy);
-                    ret.setDescripcion(rs.getString("Descripcion"));
-                    ret.setCodigoDeBarras(rs.getString("Cod_barras"));
-                    Integer dummy2 = Integer.parseInt(rs.getString("Stock"));
-                    ret.setStock(dummy2);
-                }
-                else
-                    throw new Exception("Ese venta está dado de baja");
+                                
+                    TCliente cliente = new TCliente();
+                    Integer dummy = Integer.parseInt(rs.getString("id_venta"));
+                    ret.setId(dummy);
+                    dummy = Integer.parseInt(rs.getString("Cliente"));
+                    cliente.setId(dummy);
+                    ret.setCliente(cliente);                    
+                    ret.setFecha(rs.getDate("Fecha"));
+                    query.executeUpdate("SELECT * FROM Venta_producto WHERE id_venta = " + rs.getInt("id_venta") + ";");
+                    ResultSet rs2 = query.getResultSet();
+                    ArrayList<TCompraArticulo> lista = new ArrayList<TCompraArticulo>();
+                    TCompraArticulo art_actual = new TCompraArticulo();
+                    while (rs2.next())
+                    {
+                        art_actual.setIdArticulo(rs2.getInt("id_producto"));
+                        art_actual.setCantidad(rs2.getInt("Cantidad"));
+                        art_actual.setPrecio(rs2.getDouble("precio_actual"));
+                        lista.add(art_actual);
+                    }
+                    ret.setListaproductos(lista);               
             }
+            else
+                throw new Exception("No se ha podido encontrar la venta");
         }
         catch (SQLException e)
         {
-            throw new SQLException("No se ha podido mostrar el venta. \nError: " + e.getMessage());
+            throw new SQLException("No se ha podido mostrar la venta. \nError: " + e.getMessage());
         }
         return ret;
     }
@@ -198,8 +188,7 @@ public class DAOVentaImp implements DAOVenta
     {
         Statement query = null;
         Connection connection = null;        
-        String contenido_query = "UPDATE Productos SET Nombre='" + venta.getNombre()+ "', Precio='" + venta.getPrecio()
-                + "', Descripcion='" + venta.getDescripcion()+ "', Cod_barras='" + venta.getCodigoDeBarras()+ "', Stock='" + venta.getStock() + "';"; 
+        String contenido_query = "UPDATE Venta_producto SET Cantidad=Cantidad - 1 WHERE id_venta = "  + idVenta + " AND id_producto = " + articulo.getIdArticulo() + ";";
         
         try
         {
@@ -218,7 +207,7 @@ public class DAOVentaImp implements DAOVenta
         }
         catch (SQLException ex)
         {            
-            throw new Exception("Error al actualizar en la tabla de ventas \nError: " + ex.getMessage());            
+            throw new Exception("Error al devolver el producto. \nError: " + ex.getMessage());            
         }                                    
         return false;
     }
