@@ -26,12 +26,12 @@ public class DispatcherImp extends Dispatcher
             //Eventos GUI cliente
             case EventoNegocio.ALTA_CLIENTE:
             {
-                VentanaPrincipal.ventanaPrincipal.getPrincipal_cliente().cambioVentana("alta");
+                //VentanaPrincipal.ventanaPrincipal.getPrincipal_cliente().cambioVentana("alta");
                 break;
             }  
             case EventoNegocio.BAJA_CLIENTE:
             {
-                VentanaPrincipal.ventanaPrincipal.getPrincipal_cliente().cambioVentana("baja");
+                //VentanaPrincipal.ventanaPrincipal.getPrincipal_cliente().cambioVentana("baja");
                 break;
             }
             //Eventos de exito en operaciones

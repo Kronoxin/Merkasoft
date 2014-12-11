@@ -5,9 +5,9 @@
  */
 package integracion.DAO.cliente.Imp;
 
-import Negocio.cliente.TCliente;
-import Negocio.cliente.TClienteNormal;
-import Negocio.cliente.TClienteVip;
+import negocio.cliente.TCliente;
+import negocio.cliente.TClienteNormal;
+import negocio.cliente.TClienteVip;
 import integracion.DAO.cliente.DAOCliente;
 import integracion.transaction.transactionManager.TransactionManager;
 import java.sql.Connection;
@@ -62,12 +62,12 @@ public class DAOClienteImp implements DAOCliente
             int id = rs.getInt(1);
             if (cliente.getClass().equals(TClienteNormal.class))
             {
-                Negocio.cliente.TClienteNormal temp = (TClienteNormal) cliente;                
+                TClienteNormal temp = (TClienteNormal) cliente;                
                 contenido_query_especializada = "INSERT INTO clientesnormales(id_cliente, QuiereVip) VALUES (" + id + ", " + temp.isQuierevip() + ");";
             }
             else
             {
-                Negocio.cliente.TClienteVip temp = (TClienteVip) cliente;                 
+                TClienteVip temp = (TClienteVip) cliente;                 
                 contenido_query_especializada = "INSERT INTO ClientesVip(id_cliente, Financiacion) VALUES (" + id + ", " + temp.getFinanciacion() + ");";
             }
             System.out.println(contenido_query_especializada);
@@ -254,7 +254,7 @@ public class DAOClienteImp implements DAOCliente
         //Diferenciar tipo de cliente
         if (cliente.getClass().equals(TClienteNormal.class))
         {            
-            Negocio.cliente.TClienteNormal temp = (TClienteNormal) cliente;
+            TClienteNormal temp = (TClienteNormal) cliente;
             contenido_query += "normal' " + final_query;
             try
             {
@@ -286,7 +286,7 @@ public class DAOClienteImp implements DAOCliente
         }
         else
         {
-            Negocio.cliente.TClienteVip temp = (TClienteVip) cliente;            
+            TClienteVip temp = (TClienteVip) cliente;            
             contenido_query += "VIP' " + final_query;
             try
             {

@@ -21,6 +21,7 @@ public class comandoDevolucionProducto
 {
     public RespuestaComando execute(Object datos) 
     {
+        /*
        TVenta venta = (TVenta)datos;
        boolean correcto = false;
        ArrayList<TCompraArticulo> listaProd;
@@ -35,5 +36,7 @@ public class comandoDevolucionProducto
            respuesta = new RespuestaComando(EventoNegocio.FRACASO_DEVOLUCION_PRODUCTO, datosVenta);
        
        return respuesta;
+                */
+        return null;
     }
 }

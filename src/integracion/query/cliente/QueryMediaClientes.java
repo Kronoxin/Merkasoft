@@ -20,6 +20,7 @@ public class QueryMediaClientes implements Query
     @Override
     public Object execute(Object datos) 
     {
+        /*
         Connection connection = null;
         String query = null;        
         
@@ -36,6 +37,9 @@ public class QueryMediaClientes implements Query
         {
             throw new SQLException("No se ha podido realizar la conexión con la base de datos. \nEs posible que haya olvidado crear o iniciar la transacción\nError: " + e.getMessage());
         }
+                */
+        return null;
     }
+        
     
 }
