@@ -7,9 +7,13 @@ package presentacion.Vista.cliente;
 
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Date;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+import presentacion.Controlador.Controlador;
+import presentacion.Controlador.Eventos.EventoNegocio;
 
 
 /**
@@ -17,14 +21,7 @@ import javax.swing.border.TitledBorder;
  * @author Ruben
  */
 public class GUIMostrarCliente extends JFrame{
-        Object[][] datos_entrada = {
-        {new Integer(1),"Paco", "Pino", new Date(1990, 12, 25)},
-        {new Integer(3), "Array", "List",  new Date(1990, 12, 25)},
-        { new Integer(2),"fdi", "ucm", new Date(1990, 12, 25)},
-        { new Integer(7), "Marcus", "Andrews", new Date(1990, 2, 5)},
-        {new Integer(4), "Angela", "Lalth",  new Date(1990, 2, 5)}
-        };
-
+    Object[][] datos_entrada;
         String[] NombreColumnas = {"ID","Nombre", "Apellido", "Fecha Nacimiento"};
 
         JTextField textID = new JTextField("");
@@ -74,15 +71,31 @@ public class GUIMostrarCliente extends JFrame{
         this.add(panelTabla, BorderLayout.CENTER);
         this.add(panelBoton,BorderLayout.SOUTH);
         
+        //action listener
+        butID.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) 
+                {
+                Controlador con = Controlador.getInstance();
+                con.accion(EventoNegocio.MOSTRAR_CLIENTE, textID.getText());
+                }
+            });
+        boton_salir.addActionListener(new ActionListener() 
+        {
+                @Override
+                public void actionPerformed(ActionEvent e) 
+                {
+                dispose();
+                }
+            });
         this.setVisible(true);
-
-
-		
+	
 	}
 
     //getters y setter
 
     public Object[][] getDatos_entrada() {
+            
         return datos_entrada;
     }
 

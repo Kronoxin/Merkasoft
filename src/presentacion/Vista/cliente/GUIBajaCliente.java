@@ -6,8 +6,11 @@
 package presentacion.Vista.cliente;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
+import presentacion.Controlador.Controlador;
+import presentacion.Controlador.Eventos.EventoNegocio;
 
 /**
  *
@@ -46,8 +49,22 @@ public class GUIBajaCliente extends JFrame{
         this.add(panelSuperior,BorderLayout.NORTH);
         this.add(panelBotones,BorderLayout.SOUTH);
      //   this.setBorder(new TitledBorder(new TitledBorder(""), "Baja Cliente", TitledBorder.CENTER, TitledBorder.TOP ));	
-
-
+        //actionlistener
+        boton_ok.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) 
+                {
+                Controlador con = Controlador.getInstance();
+                con.accion(EventoNegocio.BAJA_CLIENTE, textID.getText());
+                }
+            });
+        boton_cancelar.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) 
+                {
+                dispose();
+                }
+            });
         this.setVisible(true);
       //  this.setSize(300, 200);
     }

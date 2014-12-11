@@ -7,12 +7,16 @@ package presentacion.Vista.cliente;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
+import presentacion.Controlador.Controlador;
+import presentacion.Controlador.Eventos.EventoNegocio;
 
 /**
  *
@@ -47,8 +51,23 @@ public class GUIModificarCliente extends JFrame{
         this.add(panelSuperior,BorderLayout.NORTH);
         this.add(panelBotones,BorderLayout.SOUTH);
     //    this.setBorder(new TitledBorder(new TitledBorder(""), "Modificar Cliente", TitledBorder.CENTER, TitledBorder.TOP ));	
-
-
+    //Actionlisteners
+        boton_ok.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) 
+                {
+                Controlador con = Controlador.getInstance();
+                con.accion(EventoNegocio.GUI_ALTA_CLIENTE, textID.getText());
+                }
+            });
+        boton_cancelar.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) 
+                {
+                dispose();
+                }
+            });
+        
         this.setVisible(true);
     }
     

@@ -116,7 +116,13 @@ public class GUIAltaCliente extends JFrame{
                     con.accion(EventoNegocio.ALTA_CLIENTE, cliente);
             }
         });
-
+            boton_cancelar.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) 
+                {
+                dispose();
+                }
+            });
             //añadimos a este panel AltaCliente cada panel independiente
             this.add(panelRadios, BorderLayout.CENTER);
             this.add(panelSuperior,BorderLayout.NORTH);	
