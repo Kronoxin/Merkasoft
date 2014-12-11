@@ -151,7 +151,7 @@ public class DispatcherImp extends Dispatcher
             }
             case EventoNegocio.EXITO_ALTA_PRODUCTO:
             {
-		PopupsProducto.AltaProductoExito();
+		PopupsProducto.AltaProductoExito((int)comando.getDatos());
                 break;
             }
             case EventoNegocio.EXITO_BAJA_PRODUCTO:

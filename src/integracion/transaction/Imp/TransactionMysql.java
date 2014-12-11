@@ -41,7 +41,7 @@ public class TransactionMysql implements Transaction
         }*/
         try 
         {
-            _connection = DriverManager.getConnection("jdbc:mysql://localhost/MerkaSoft", "root", "");
+            _connection = DriverManager.getConnection("jdbc:mysql://localhost/MerkaSoft", "root", "xampp");
            // _connection = DriverManager.getConnection(props.getProperty("jdbc.url"), props.getProperty("jdbc.username"), props.getProperty("jdbc.password"));
 	}
         

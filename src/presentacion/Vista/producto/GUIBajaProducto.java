@@ -7,14 +7,20 @@ package presentacion.Vista.producto;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+import negocio.producto.TProducto;
+import presentacion.Controlador.Controlador;
+import presentacion.Controlador.Eventos.EventoNegocio;
 
 /**
  *
  * @author Ruben
  */
 public class GUIBajaProducto extends JFrame{
+    
     
         JTextField textID = new JTextField("");
 
@@ -49,7 +55,26 @@ public class GUIBajaProducto extends JFrame{
 
         this.setVisible(true);
         
+             boton_ok.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                textID.getText();
+                
+                Controlador.getInstance().accion(EventoNegocio.ALTA_PRODUCTO, textID.getText());
+            }
+        });
         
+        
+        boton_cancelar.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+               
+            }
+        
+        });
     }
     
     //getters y setters

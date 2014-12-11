@@ -6,8 +6,12 @@
 package presentacion.Vista.producto;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.EventObject;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,12 +20,18 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
+import negocio.cliente.TCliente;
+import negocio.producto.TProducto;
+import presentacion.Controlador.Controlador;
+import presentacion.Controlador.Eventos.EventoNegocio;
+import presentacion.Vista.cliente.GUIPrincipal_Cliente;
 
 /**
  *
  * @author Ruben
  */
 public class GUIAltaProducto extends JFrame{
+    TProducto producto = new TProducto();
     
     JPanel panelSuperior = new JPanel();     
     JPanel panelBotones = new JPanel(new GridLayout(1,2,5,5));
@@ -75,13 +85,37 @@ public class GUIAltaProducto extends JFrame{
         this.add(panelSuperior,BorderLayout.NORTH);	
         this.add(panelBotones,BorderLayout.SOUTH);
 
- //       this.setBorder(new TitledBorder(new TitledBorder(""), "Alta Producto", 
-  //                      TitledBorder.CENTER, TitledBorder.TOP ));		
+        boton_ok.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                producto.setNombre(text_nombre.getText());
+                producto.setDescripcion(text_descripcion.getText());
+                producto.setPrecio(Double.parseDouble(text_precio.getText()));
+                producto.setCodigoDeBarras(text_codigo_barras.getText());
+                producto.setStock(Integer.parseInt(text_stock.getText()));
+               
+                
+                Controlador.getInstance().accion(EventoNegocio.ALTA_PRODUCTO, producto);
+            }
+        });
+        
+        
+        boton_cancelar.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
 
 
         this.setVisible(true);
 
     }
+    
+    
+    //getters y setters
 
     public JPanel getPanelSuperior() {
         return panelSuperior;
