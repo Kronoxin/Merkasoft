@@ -5,7 +5,7 @@
  */
 package presentacion.FactoriaComandos.Imp;
 
-import presentacion.Controlador.Comandos.vista.*;
+
 import presentacion.Controlador.Comandos.cliente.GUI.comandoGUImediaClientes;
 import presentacion.Controlador.Comandos.cliente.*;
 import presentacion.Controlador.Comandos.producto.*;
@@ -182,11 +182,7 @@ public class factoriaComandosImp extends factoriaComandos
                 break;
             }
             //Eventos de vista
-            case EventoNegocio.CANCELAR:
-            {
-		comando = new ComandoCancelar();
-                break;
-            }
+           
             default:
                 comando=null;
                 break;
