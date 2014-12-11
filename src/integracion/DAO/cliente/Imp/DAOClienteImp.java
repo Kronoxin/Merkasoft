@@ -5,19 +5,16 @@
  */
 package integracion.DAO.cliente.Imp;
 
-import negocio.cliente.TCliente;
-import negocio.cliente.TClienteNormal;
-import negocio.cliente.TClienteVip;
+import Negocio.cliente.TCliente;
+import Negocio.cliente.TClienteNormal;
+import Negocio.cliente.TClienteVip;
 import integracion.DAO.cliente.DAOCliente;
-import integracion.DAO.factoriaDAO.FactoriaDAO;
 import integracion.transaction.transactionManager.TransactionManager;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -31,22 +28,11 @@ public class DAOClienteImp implements DAOCliente
     {
         Statement query = null;
         Connection connection = null;
+        int ret = -1;
         //insercion cliente generico
         String contenido_query = "INSERT INTO Clientes(DNI, Nombre, Apellidos, Fecha_nacimiento, Tipo) VALUES ('" + cliente.getDNI() + "', '" + cliente.getNombre() + "', '" + cliente.getApellidos() + "', STR_TO_DATE('" + cliente.getFechaNacimiento() + "', '%d/%m/%Y'), '";
         //insercion cliente especializado
-        String contenido_query_especializada = null;
-        if (cliente.getClass().equals(TClienteNormal.class))
-        {
-            negocio.cliente.TClienteNormal temp = (TClienteNormal) cliente;
-            contenido_query += "normal');";
-            contenido_query_especializada = "INSERT INTO clientesnormales(id_cliente, QuiereVip) VALUES ('" + cliente.getId() + ", " + temp.isQuierevip() + "');";
-        }
-        else
-        {
-            negocio.cliente.TClienteVip temp = (TClienteVip) cliente; 
-            contenido_query += "VIP');";
-            contenido_query_especializada = "INSERT INTO clientesnormales(id_cliente, Financiacion) VALUES ('" + cliente.getId() + ", " + temp.getFinanciacion() + "');";
-        }
+        String contenido_query_especializada = null;        
                 
         try
         {
@@ -60,20 +46,40 @@ public class DAOClienteImp implements DAOCliente
         }
          try
         {
+            if (cliente.getClass().equals(TClienteNormal.class))
+            {
+                contenido_query += "normal');";                
+            }
+            else
+            {
+                contenido_query += "VIP');";                
+            }
             System.out.println(contenido_query);
             query.executeUpdate(contenido_query);
-            //query.execute(contenido_query_especializada);
+            query.execute("SELECT id_cliente FROM Clientes WHERE DNI = " + cliente.getDNI() + ";");
+            ResultSet rs = query.getResultSet();
+            rs.next();
+            int id = rs.getInt(1);
+            if (cliente.getClass().equals(TClienteNormal.class))
+            {
+                Negocio.cliente.TClienteNormal temp = (TClienteNormal) cliente;                
+                contenido_query_especializada = "INSERT INTO clientesnormales(id_cliente, QuiereVip) VALUES (" + id + ", " + temp.isQuierevip() + ");";
+            }
+            else
+            {
+                Negocio.cliente.TClienteVip temp = (TClienteVip) cliente;                 
+                contenido_query_especializada = "INSERT INTO ClientesVip(id_cliente, Financiacion) VALUES (" + id + ", " + temp.getFinanciacion() + ");";
+            }
+            System.out.println(contenido_query_especializada);
+            query.execute(contenido_query_especializada);
         }
         catch (SQLException e)
         {
-            throw new SQLException("No se ha podido dar de alta el cliente. Posiblemente ya exista\nError: " + e.getMessage());
+            throw new SQLException("No se ha podido dar de alta el cliente. Posiblemente ya exista\nError: " + e.getMessage() + "\n" + e.getSQLState() + "\n" + e.getErrorCode());
         }
          
-         //Si no ha saltado excepción en este punto es porque se ha dado el alta correctamente
-         query.executeUpdate("SELECT DNI FROM Clientes WHERE DNI = " + cliente.getDNI() + ";");
-         ResultSet rs = query.getResultSet();
-         rs.next();
-         return rs.getInt(1);
+         //Si no ha saltado excepción en este punto es porque se ha dado el alta correctamente         
+         return ret;
     }
 
     @Override
@@ -110,8 +116,7 @@ public class DAOClienteImp implements DAOCliente
     public ArrayList<TCliente> listarClientes() throws Exception {
         Statement query = null;
         Connection connection = null;
-        ArrayList<TCliente> ret = new ArrayList<TCliente>();
-        TCliente temp = new TCliente();
+        ArrayList<TCliente> ret = new ArrayList<TCliente>();        
         //baja lógica de cliente (solo en la tabla de los genéricos)
         String contenido_query = "SELECT * FROM Clientes";                
                 
@@ -128,12 +133,13 @@ public class DAOClienteImp implements DAOCliente
          try
         {
             System.out.println(contenido_query);
-            query.executeUpdate(contenido_query);
+            query.execute(contenido_query);
             ResultSet rs = query.getResultSet();
             while (rs.next())
             {
                 if (rs.getString("Disponible").equalsIgnoreCase("1"))
                 {
+                    TCliente temp = new TCliente();
                     Integer id = Integer.parseInt(rs.getString("id_cliente"));
                     temp.setId(id);
                     temp.setDNI(rs.getString("DNI"));
@@ -155,7 +161,9 @@ public class DAOClienteImp implements DAOCliente
     public TCliente mostrarCliente(int ID) throws Exception {
         Statement query = null;
         Connection connection = null;
-        TCliente ret = null;        
+        TCliente ret = null;
+        TClienteNormal normal = new TClienteNormal();
+        TClienteVip vip = new TClienteVip();
         //baja lógica de cliente (solo en la tabla de los genéricos)
         String contenido_query = "SELECT * FROM Clientes WHERE id_cliente = " + ID + ";";                
                 
@@ -172,43 +180,49 @@ public class DAOClienteImp implements DAOCliente
          try
         {
             System.out.println(contenido_query);
-            query.executeUpdate(contenido_query);
-            ResultSet rs = query.getResultSet();
+            query.execute(contenido_query);
+            ResultSet rs = query.getResultSet();            
             if (rs.next())
-            {
+            {       
+                int id = rs.getInt("id_cliente");
+                String dni = rs.getString("DNI");
+                String nombre = rs.getString("Nombre");
+                String apellidos = rs.getString("Apellidos");
+                String nacimiento = rs.getString("Fecha_nacimiento");
+                
                 if (rs.getString("tipo").equalsIgnoreCase("normal"))
                 {
-                    TClienteNormal temp = new TClienteNormal();
-                    query.executeUpdate("SELECT QuiereVip FROM ClientesNormales WHERE id_cliente = " + ID + ";");
+                    
+                    query.execute("SELECT QuiereVip FROM ClientesNormales WHERE id_cliente = " + ID + ";");
                     ResultSet rs2 = query.getResultSet();
                     if (rs2.next())
                     {
-                        temp.setQuierevip(rs2.getString("QuiereVip").equalsIgnoreCase("1")); 
-                        ret = temp;
+                        normal.setQuierevip(rs2.getString("QuiereVip").equalsIgnoreCase("1")); 
+                        ret = normal;
                     }
                     else
                         throw new Exception("Inconsistencia en la base de datos. El cliente consta como normal, pero no esta guardado sus atributos como cliente normal");
                 }
                 else
                 {
-                    TClienteVip temp = new TClienteVip();
-                    query.executeUpdate("SELECT QuiereVip FROM ClientesNormales WHERE id_cliente = " + ID + ";");
+                    
+                    query.execute("SELECT Financiacion FROM ClientesVip WHERE id_cliente = " + ID + ";");
                     ResultSet rs2 = query.getResultSet();
                     if (rs2.next())
                     {
                         Float dummy = Float.parseFloat(rs2.getString("Financiacion"));
-                        temp.setFinanciacion(dummy); 
-                        ret = temp;
+                        vip.setFinanciacion(dummy); 
+                        ret = vip;
                     }
                     else
                         throw new Exception("Inconsistencia en la base de datos. El cliente consta como VIP, pero no esta guardado sus atributos como cliente VIP"); 
                 }
-                Integer id = Integer.parseInt(rs.getString("id_cliente"));
                 ret.setId(id);
-                ret.setDNI(rs.getString("DNI"));
-                ret.setNombre(rs.getString("Nombre"));
-                ret.setApellidos(rs.getString("Apellidos"));
-                ret.setFechaNacimiento(rs.getString("Fecha_nacimiento"));
+                ret.setDNI(dni);
+                ret.setNombre(nombre);
+                ret.setApellidos(apellidos);
+                ret.setFechaNacimiento(nacimiento);
+                
             }
         }
         catch (SQLException e)
@@ -240,12 +254,12 @@ public class DAOClienteImp implements DAOCliente
         //Diferenciar tipo de cliente
         if (cliente.getClass().equals(TClienteNormal.class))
         {            
-            negocio.cliente.TClienteNormal temp = (TClienteNormal) cliente;
+            Negocio.cliente.TClienteNormal temp = (TClienteNormal) cliente;
             contenido_query += "normal' " + final_query;
             try
             {
                 //por si acaso estuviera en la otra tabla, lo borro
-                query.executeQuery("DELETE FROM ClientesVip where id_cliente = '" + cliente.getId() + "';");
+                query.executeUpdate("DELETE FROM ClientesVip where id_cliente = '" + cliente.getId() + "';");
             }
             catch (SQLException ex)
             {
@@ -255,13 +269,13 @@ public class DAOClienteImp implements DAOCliente
             try
             {
                 //Si ha cambiado de VIP a Normal, hay que darlo de alta, en otro caso, saltará al cath
-                query.executeQuery("INSERT INTO ClientesNormales(id_cliente,QuiereVip) VALUES('" + temp.getId() + "', '" + temp.isQuierevip() + "');"  );
+                query.executeUpdate("INSERT INTO ClientesNormales(id_cliente,QuiereVip) VALUES('" + temp.getId() + "', '" + temp.isQuierevip() + "');"  );
             }
             catch (SQLException ex)
             {
                 try
                 {
-                    query.executeQuery("UPDATE ClientesNormales SET QuiereVip='" + temp.isQuierevip() + "');");
+                    query.executeUpdate("UPDATE ClientesNormales SET QuiereVip='" + temp.isQuierevip() + "');");
                 }
                 catch (SQLException ex2)
                 {
@@ -272,12 +286,12 @@ public class DAOClienteImp implements DAOCliente
         }
         else
         {
-            negocio.cliente.TClienteVip temp = (TClienteVip) cliente;
+            Negocio.cliente.TClienteVip temp = (TClienteVip) cliente;            
             contenido_query += "VIP' " + final_query;
             try
             {
                 //por si acaso estuviera en la otra tabla, lo borro
-                query.executeQuery("DELETE FROM ClientesNormales where id_cliente = '" + cliente.getId() + "';");
+                query.executeUpdate("DELETE FROM ClientesNormales where id_cliente = '" + cliente.getId() + "';");
             }
             catch (SQLException ex)
             {
@@ -287,13 +301,13 @@ public class DAOClienteImp implements DAOCliente
             try
             {
                 //Si ha cambiado de VIP a Normal, hay que darlo de alta, en otro caso, saltará al cath
-                query.executeQuery("INSERT INTO ClientesVip(id_cliente,Financiacion) VALUES('" + temp.getId() + "', '" + temp.getFinanciacion()+ "');"  );
+                query.executeUpdate("INSERT INTO ClientesVip(id_cliente,Financiacion) VALUES('" + temp.getId() + "', '" + temp.getFinanciacion()+ "');"  );
             }
             catch (SQLException ex)
             {
                 try
                 {
-                    query.executeQuery("UPDATE ClientesVip SET Financiacion='" + temp.getFinanciacion() + "');");
+                    query.executeUpdate("UPDATE ClientesVip SET Financiacion=" + temp.getFinanciacion() + ";");
                 }
                 catch (SQLException ex2)
                 {
@@ -301,22 +315,10 @@ public class DAOClienteImp implements DAOCliente
                 }
             }
         }
+        System.out.println(contenido_query);
+        query.executeUpdate(contenido_query);
         return false;
     }
     
-    public static void main(String args[])
-    {
-        TransactionManager.obtenerInstanacia().nuevaTransaccion();
-        TCliente cliente = new TCliente();
-        
-        cliente.setNombre("Nombre1");
-        cliente.setDNI("123456789");
-        cliente.setApellidos("Apellido1");
-        cliente.setActivo(true);
-        try {
-            FactoriaDAO.obtenerInstancia().getDAOCliente().altaCliente(cliente);
-        } catch (Exception ex) {
-            Logger.getLogger(DAOClienteImp.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+    
 }

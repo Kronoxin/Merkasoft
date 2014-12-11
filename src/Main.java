@@ -4,6 +4,8 @@ import integracion.DAO.cliente.Imp.DAOClienteImp;
 import integracion.transaction.Transaction;
 import integracion.transaction.transactionManager.Imp.TransactionManagerImp;
 import integracion.transaction.transactionManager.TransactionManager;
+import java.sql.Connection;
+import java.sql.Statement;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -30,7 +32,10 @@ public class Main {
         tm.nuevaTransaccion();
         Transaction t = tm.getTransaccion();
         t.start();
-        
-        dc.altaCliente(prueba);
+        Connection con = (Connection) t.getResource();
+        Statement query = con.createStatement();
+        query.execute("INSERT INTO Clientes(DNI) VALUES('1225');");
+        con.commit();
+        con.close();
     }
 }
