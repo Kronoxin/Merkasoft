@@ -20,10 +20,6 @@ import presentacion.Controlador.Eventos.EventoNegocio;
  * @author Ruben
  */
 public class GUIPrincipal_Venta extends JPanel{
-        GUIAltaVenta alta = new GUIAltaVenta();
-        GUIMostrarVenta mostrar_una = new GUIMostrarVenta();
-        GUIMostrarListaVentas lista = new GUIMostrarListaVentas();
-        GUIDevolverProducto dev = new GUIDevolverProducto();
         
         JPanel panel_botones_ventas = new JPanel(new GridLayout(4,1,4,4));
 
@@ -54,7 +50,7 @@ public class GUIPrincipal_Venta extends JPanel{
         boton_mostrar_lista_ventas.addActionListener(new oyenteVenta());
 
         this.add(panel_botones_ventas);
-        this.add(mostrar_una);
+      //  this.add(mostrar_una);
         this.setVisible(true);
           
     }
@@ -78,37 +74,7 @@ public class GUIPrincipal_Venta extends JPanel{
         }
     }
 
-    public GUIAltaVenta getAlta() {
-        return alta;
-    }
-
-    public void setAlta(GUIAltaVenta alta) {
-        this.alta = alta;
-    }
-
-    public GUIMostrarVenta getMostrar_una() {
-        return mostrar_una;
-    }
-
-    public void setMostrar_una(GUIMostrarVenta mostrar_una) {
-        this.mostrar_una = mostrar_una;
-    }
-
-    public GUIMostrarListaVentas getLista() {
-        return lista;
-    }
-
-    public void setLista(GUIMostrarListaVentas lista) {
-        this.lista = lista;
-    }
-
-    public GUIDevolverProducto getDev() {
-        return dev;
-    }
-
-    public void setDev(GUIDevolverProducto dev) {
-        this.dev = dev;
-    }
+    //getters y setters
 
     public JPanel getPanel_botones_ventas() {
         return panel_botones_ventas;

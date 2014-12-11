@@ -24,6 +24,10 @@ import presentacion.Vista.producto.GUIBajaProducto;
 import presentacion.Vista.producto.GUIModificarProducto;
 import presentacion.Vista.producto.GUIMostrarListaProductos;
 import presentacion.Vista.producto.GUIMostrarProducto;
+import presentacion.Vista.venta.GUIAltaVenta;
+import presentacion.Vista.venta.GUIDevolverProducto;
+import presentacion.Vista.venta.GUIMostrarListaVentas;
+import presentacion.Vista.venta.GUIMostrarVenta;
 
 
 public class DispatcherImp extends Dispatcher
@@ -94,6 +98,29 @@ public class DispatcherImp extends Dispatcher
             case EventoNegocio.GUI_MOSTRAR_LISTA_PRODUCTOS:
             {
                 new GUIMostrarListaProductos();
+                break;
+            }
+            
+            //GUI VENTAS
+            
+            case EventoNegocio.GUI_ALTA_VENTA:
+            {
+                new GUIAltaVenta();
+                break;
+            }
+            case EventoNegocio.GUI_DEVOLUCION_PRODUCTO:
+            {
+                new GUIDevolverProducto();
+                break;
+            }
+            case EventoNegocio.GUI_MOSTRAR_VENTA:
+            {
+                new GUIMostrarVenta();
+                break;
+            }
+            case EventoNegocio.GUI_MOSTRAR_LISTA_VENTAS:
+            {
+                new GUIMostrarListaVentas();
                 break;
             }
             

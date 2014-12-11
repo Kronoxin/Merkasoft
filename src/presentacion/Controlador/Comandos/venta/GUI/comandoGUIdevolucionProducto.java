@@ -16,8 +16,9 @@ import presentacion.Controlador.Eventos.EventoNegocio;
  */
 public class comandoGUIdevolucionProducto implements Command
 {
+    @Override
     public RespuestaComando execute(Object datos) {
         
-       return new RespuestaComando(EventoNegocio.GUI_DEVOLUCION_PRODUCTO, null);
+       return new RespuestaComando(EventoNegocio.GUI_DEVOLUCION_PRODUCTO, datos);
     }
 }

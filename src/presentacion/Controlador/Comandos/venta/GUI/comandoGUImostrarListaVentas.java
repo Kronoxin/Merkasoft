@@ -16,8 +16,9 @@ import presentacion.Controlador.Eventos.EventoNegocio;
  */
 public class comandoGUImostrarListaVentas implements Command
 {
+    @Override
     public RespuestaComando execute(Object datos) {
         
-       return new RespuestaComando(EventoNegocio.GUI_MOSTRAR_LISTA_VENTAS, null);
+       return new RespuestaComando(EventoNegocio.GUI_MOSTRAR_LISTA_VENTAS, datos);
     }
 }

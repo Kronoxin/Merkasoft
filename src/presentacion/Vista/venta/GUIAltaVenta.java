@@ -13,7 +13,7 @@ import javax.swing.border.TitledBorder;
  *
  * @author Ruben
  */
-public class GUIAltaVenta extends JPanel{
+public class GUIAltaVenta extends JFrame{
     
         JPanel panelSuperior = new JPanel();
         JPanel panelBotones = new JPanel(new GridLayout(1,3,5,5));
@@ -34,6 +34,9 @@ public class GUIAltaVenta extends JPanel{
         JLabel label_cantidad = new JLabel("Cantidad",JLabel.CENTER);
 
     public GUIAltaVenta(){
+        this.setTitle("Alta Venta");
+	setBounds(100, 100, 400, 300);
+        this.setLocationRelativeTo(null);
         
         this.setLayout(new BorderLayout());
         panelSuperior.setLayout(new GridLayout(7,2));
@@ -59,7 +62,7 @@ public class GUIAltaVenta extends JPanel{
         
         this.add(panelSuperior,BorderLayout.NORTH);
         this.add(panelBotones,BorderLayout.SOUTH);
-        this.setBorder(new TitledBorder(new TitledBorder(""), "Nueva Venta", TitledBorder.CENTER, TitledBorder.TOP ));		
+//        this.setBorder(new TitledBorder(new TitledBorder(""), "Nueva Venta", TitledBorder.CENTER, TitledBorder.TOP ));		
 
         this.setVisible(true);
         

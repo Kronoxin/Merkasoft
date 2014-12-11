@@ -16,8 +16,9 @@ import presentacion.Controlador.Eventos.EventoNegocio;
  */
 public class comandoGUIcrearVenta implements Command
 {
+    @Override
     public RespuestaComando execute(Object datos) {
         
-       return new RespuestaComando(EventoNegocio.GUI_ALTA_VENTA, null);
+       return new RespuestaComando(EventoNegocio.GUI_ALTA_VENTA, datos);
     }
 }
