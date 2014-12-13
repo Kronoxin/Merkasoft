@@ -91,7 +91,7 @@ public class DAOProductoImp implements DAOProducto
         Connection connection = null;
         TProducto temp = new TProducto();
         ArrayList<TProducto> ret = new ArrayList<TProducto>();        
-        String contenido_query = "SELECT * FROM Clientes";                
+        String contenido_query = "SELECT * FROM Productos";                
                 
         try
         {
@@ -106,7 +106,7 @@ public class DAOProductoImp implements DAOProducto
          try
         {
             System.out.println(contenido_query);
-            query.executeUpdate(contenido_query);
+            query.executeQuery(contenido_query);
             ResultSet rs = query.getResultSet();
             while (rs.next())
             {
@@ -123,6 +123,7 @@ public class DAOProductoImp implements DAOProducto
                     temp.setStock(dummy2);
                     temp.setActivo(rs.getBoolean("Disponible"));
                     ret.add(temp);
+                    temp = new TProducto();
                 }
             }
         }

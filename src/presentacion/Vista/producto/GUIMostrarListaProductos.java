@@ -32,8 +32,6 @@ public class GUIMostrarListaProductos extends JFrame{
         
         String[] NombreColumnas = {"ID","Nombre", "Precio", "Descripción", "Cod.Barras", "Stock"};
 
-        JTextField textID = new JTextField("");
-
         JPanel panelSuperior = new JPanel(new GridLayout(2,2,5,5));
         JPanel panelTabla = new JPanel();
 
@@ -49,7 +47,6 @@ public class GUIMostrarListaProductos extends JFrame{
         this.setLayout(new BorderLayout());
                 
 		
-            panelSuperior.add(textID);
             panelSuperior.add(butID);
 
             //se crea la Tabla
@@ -130,14 +127,6 @@ public class GUIMostrarListaProductos extends JFrame{
 
     public void setNombreColumnas(String[] NombreColumnas) {
         this.NombreColumnas = NombreColumnas;
-    }
-
-    public JTextField getTextID() {
-        return textID;
-    }
-
-    public void setTextID(JTextField textID) {
-        this.textID = textID;
     }
 
     public JPanel getPanelSuperior() {
