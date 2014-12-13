@@ -11,8 +11,12 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import negocio.producto.TProducto;
 import presentacion.Controlador.Controlador;
 import presentacion.Controlador.Eventos.EventoNegocio;
 
@@ -23,12 +27,8 @@ import presentacion.Controlador.Eventos.EventoNegocio;
 public class GUIMostrarProducto extends JFrame{
         
         Object[][] datos_entrada = {
-        {new Integer(1),"Paco", new Double(20.0), "Pino", "codBarr", new Integer(10)},
-        {new Integer(3), "Array",new Double(100.23), "List","codBarr",  new Integer(9)},
-        {new Integer(2),"fdi",new Double(12.2), "ucm","codBarr", new Integer(10)},
-        {new Integer(7), "Marcus",new Double(10.0), "Andrews","codBarr", new Integer(7)},
-        {new Integer(4), "Angela",new Double(25.0), "Lalth","codBarr",  new Integer(4)}
-        };
+        {"","", "", "", "", ""}
+       };
         
         String[] NombreColumnas = {"ID","Nombre", "Precio", "Descripción", "Cod.Barras", "Stock"};
 
@@ -45,7 +45,7 @@ public class GUIMostrarProducto extends JFrame{
     
     public GUIMostrarProducto(){
         this.setTitle("Mostrar Producto");
-	setBounds(100, 100, 400, 300);
+	setBounds(100, 100, 500, 300);
         this.setLocationRelativeTo(null);
         this.setLayout(new BorderLayout());
                 
@@ -82,9 +82,14 @@ public class GUIMostrarProducto extends JFrame{
 
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    textID.getText();
-
-                    Controlador.getInstance().accion(EventoNegocio.MOSTRAR_PRODUCTO, textID.getText());
+                    ArrayList<Object> datos = new ArrayList<>();
+                    
+                    
+                    datos.add(Integer.parseInt(textID.getText()));
+                    datos.add(new GUIMostrarProducto());
+                    
+                    Controlador.getInstance().accion(EventoNegocio.MOSTRAR_PRODUCTO, datos);
+                    dispose();
                 }
             });
         
@@ -99,6 +104,17 @@ public class GUIMostrarProducto extends JFrame{
         });
         
  
+    }
+    //{"ID","Nombre", "Precio", "Descripción", "Cod.Barras", "Stock"};
+    public void cargarProductoEnLista(TProducto producto)
+    {
+        DefaultTableModel dtm = new DefaultTableModel(0, 0);
+        dtm.setColumnIdentifiers(NombreColumnas);
+        
+        tabla.setModel(dtm);
+        dtm.addRow(new Object[]
+        {producto.getId(),producto.getNombre(), producto.getPrecio(), producto.getDescripcion(), producto.getCodigoDeBarras(), producto.getStock()});
+        dtm.fireTableDataChanged();
     }
     
     //getters y setters

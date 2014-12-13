@@ -5,6 +5,8 @@
  */
 package presentacion.Controlador.dispatcher.Imp;
 
+import java.util.ArrayList;
+import negocio.producto.TProducto;
 import presentacion.Controlador.Comandos.RespuestaComando;
 import presentacion.Controlador.Eventos.EventoNegocio;
 import presentacion.Controlador.dispatcher.Dispatcher;
@@ -133,6 +135,7 @@ public class DispatcherImp extends Dispatcher
                 //VentanaPrincipal.ventanaPrincipal.getPrincipal_cliente().cambioVentana("baja");
                 break;
             }
+            
             //Eventos de exito en operaciones
             case EventoNegocio.EXITO_ALTA_CLIENTE:
             {
@@ -172,6 +175,26 @@ public class DispatcherImp extends Dispatcher
             case EventoNegocio.EXITO_DEVOLUCION_PRODUCTO:
             {
 		PopupsVenta.DevolucionProductoExito();
+                break;
+            }
+            
+            case EventoNegocio.EXITO_MOSTRAR_PRODUCTO:
+            {
+                ArrayList<Object> datos = (ArrayList<Object>)comando.getDatos();
+                
+                TProducto producto = (TProducto)datos.get(2);
+                ((GUIMostrarProducto)datos.get(1)).cargarProductoEnLista(producto);
+		
+                break;
+            }
+            
+            case EventoNegocio.EXITO_MOSTRAR_LISTA_PRODUCTO:
+            {
+                ArrayList<Object> datos = (ArrayList<Object>)comando.getDatos();
+                
+                ArrayList<TProducto> productos = (ArrayList<TProducto>)datos.get(1);
+                ((GUIMostrarListaProductos)datos.get(0)).cargarProductoEnLista(productos);
+		
                 break;
             }
             

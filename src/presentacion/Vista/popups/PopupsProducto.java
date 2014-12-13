@@ -20,7 +20,7 @@ public class PopupsProducto {
     public static void AltaProductoExito(int id){
 
         
-      JOptionPane.showMessageDialog(null, "Se ha dado de alta el producto"+id+" correctamente ","Correcto",JOptionPane.INFORMATION_MESSAGE);
+      JOptionPane.showMessageDialog(null, "Se ha dado de alta el producto "+id+" correctamente ","Correcto",JOptionPane.INFORMATION_MESSAGE);
       
     }
     

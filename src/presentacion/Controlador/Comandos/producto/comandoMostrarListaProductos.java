@@ -20,17 +20,19 @@ public class comandoMostrarListaProductos implements Command
 {
     public RespuestaComando execute(Object datos) 
     {
+        ArrayList<Object> datosLista = (ArrayList<Object>)datos;
         ArrayList<TProducto> listaProductos;
 	listaProductos = FactoriaSA.obtenerInstancia().generaSAProducto().mostrarListaProducto();
 	RespuestaComando respuesta;
+        datosLista.add(listaProductos);
 		
 	if (!listaProductos.isEmpty()) //Si ha cargado la lista
         {
-            respuesta = new RespuestaComando(EventoNegocio.EXITO_MOSTRAR_LISTA_PRODUCTO, listaProductos);
+            respuesta = new RespuestaComando(EventoNegocio.EXITO_MOSTRAR_LISTA_PRODUCTO, datosLista);
 	}
 	else
         {
-            respuesta = new RespuestaComando(EventoNegocio.FRACASO_MOSTRAR_LISTA_PRODUCTO, listaProductos);
+            respuesta = new RespuestaComando(EventoNegocio.FRACASO_MOSTRAR_LISTA_PRODUCTO, datosLista);
 	}
 	return respuesta;
     }

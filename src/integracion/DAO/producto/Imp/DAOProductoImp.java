@@ -86,7 +86,7 @@ public class DAOProductoImp implements DAOProducto
     }
 
     @Override
-    public ArrayList listarProducto()throws Exception {
+    public ArrayList<TProducto> listarProducto()throws Exception {
         Statement query = null;
         Connection connection = null;
         TProducto temp = new TProducto();

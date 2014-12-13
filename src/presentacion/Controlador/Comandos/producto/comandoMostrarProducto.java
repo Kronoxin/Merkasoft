@@ -5,6 +5,7 @@
  */
 package presentacion.Controlador.Comandos.producto;
 
+import java.util.ArrayList;
 import negocio.FactoriaSA.FactoriaSA;
 import negocio.producto.TProducto;
 import presentacion.Controlador.Comandos.Command;
@@ -19,18 +20,22 @@ public class comandoMostrarProducto implements Command
 {
     public RespuestaComando execute(Object datos) 
     {
-        int idProducto = Integer.parseInt((String) datos);
+        ArrayList<Object> datosAlmacenados = (ArrayList<Object>)datos;
+        
+        
+        Integer idProducto = (Integer)datosAlmacenados.get(0);
         TProducto producto;
 	producto = FactoriaSA.obtenerInstancia().generaSAProducto().mostrarProducto(idProducto);
 	RespuestaComando respuesta;
+        datosAlmacenados.add(producto);
 		
 	if (producto != null) //Si existe
         {
-            respuesta = new RespuestaComando(EventoNegocio.EXITO_MOSTRAR_PRODUCTO, producto);
+            respuesta = new RespuestaComando(EventoNegocio.EXITO_MOSTRAR_PRODUCTO, datosAlmacenados);
 	}
 	else
         {
-            respuesta = new RespuestaComando(EventoNegocio.FRACASO_MOSTRAR_PRODUCTO, producto);
+            respuesta = new RespuestaComando(EventoNegocio.FRACASO_MOSTRAR_PRODUCTO, datosAlmacenados);
 	}
 	return respuesta;
     }
