@@ -53,7 +53,6 @@ public class GUIMostrarCliente extends JFrame{
         tabla = new JTable(datos_entrada, NombreColumnas);
         //cojo la primera columna de la tabla (el ID) y fijo el tamaño de esa columna
         tabla.getColumnModel().getColumn(0).setPreferredWidth(3);
-
         //dimensiones del Jtable
         tabla.setPreferredScrollableViewportSize(new Dimension(450, 70));
         //Creamos un JscrollPane y le agregamos la JTable
@@ -87,7 +86,7 @@ public class GUIMostrarCliente extends JFrame{
                 {
                 dispose();
                 }
-            });
+        });
         this.setVisible(true);
 	
 	}

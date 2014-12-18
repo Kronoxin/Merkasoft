@@ -81,7 +81,8 @@ public class GUIPrincipal_Cliente extends JPanel{
             }
             else if( e.getSource() == boton_modificar_cliente){
                     Controlador.getInstance().accion(EventoNegocio.GUI_MODIFICAR_CLIENTE, GUIPrincipal_Cliente.this);
-            }else if (e.getSource() == boton_mostrar_cliente) {
+            }
+            else if (e.getSource() == boton_mostrar_cliente) {
                     Controlador.getInstance().accion(EventoNegocio.GUI_MOSTRAR_CLIENTE, GUIPrincipal_Cliente.this);
 
             }else if (e.getSource() == boton_mostrar_lista_clientes) {

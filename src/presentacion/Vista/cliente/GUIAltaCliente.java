@@ -112,6 +112,9 @@ public class GUIAltaCliente extends JFrame{
                     cliente = temp;
                 }
                     cliente.setDNI(textDNI.toString());
+                    cliente.setNombre(textNombre.toString());
+                    cliente.setApellidos(textApellidos.toString());
+                    cliente.setFechaNacimiento(fecha_dia.toString()+"/"+fecha_mes.toString()+"/"+fecha_anio.toString());
                     Controlador con = Controlador.getInstance();
                     con.accion(EventoNegocio.ALTA_CLIENTE, cliente);
             }
