@@ -87,8 +87,7 @@ public class GUIMostrarCliente extends JFrame{
                 dispose();
                 }
         });
-        this.setVisible(true);
-	
+        this.setVisible(true);	
 	}
 
     //getters y setter

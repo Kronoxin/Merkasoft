@@ -7,9 +7,13 @@ package presentacion.Vista.cliente;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+import negocio.cliente.TCliente;
+import presentacion.Controlador.Controlador;
+import presentacion.Controlador.Eventos.EventoNegocio;
 
 
 /**
@@ -17,16 +21,9 @@ import javax.swing.border.TitledBorder;
  * @author Ruben
  */
 public class GUIMostrarListaClientes extends JFrame{
-       Object[][] datos_entrada = {
-        {new Integer(1),"Paco", "Pino", new Date(1990, 12, 25)},
-        {new Integer(3), "Array", "List",  new Date(1990, 12, 25)},
-        { new Integer(2),"fdi", "ucm", new Date(1990, 12, 25)},
-        { new Integer(7), "Marcus", "Andrews", new Date(1990, 2, 5)},
-        {new Integer(4), "Angela", "Lalth",  new Date(1990, 2, 5)}
-        };
-        
+        ArrayList<TCliente> temp;
         String[] NombreColumnas = {"ID","Nombre", "Apellido", "Fecha Nacimiento"};
-        
+        Object [][] datosEntrada;
         JPanel panelSuperior = new JPanel();
         JPanel panelTabla = new JPanel();
 
@@ -38,12 +35,11 @@ public class GUIMostrarListaClientes extends JFrame{
         this.setTitle("Listar Clientes");
 	setBounds(100, 100, 450, 500);
         this.setLocationRelativeTo(null);
-        
+        Controlador.getInstance().accion(EventoNegocio.MOSTRAR_LISTA_CLIENTES,null);
         this.setLayout(new BorderLayout());
-
-
         //se crea la Tabla
-        tabla = new JTable(datos_entrada, NombreColumnas);
+        
+        tabla = new JTable(datosEntrada, NombreColumnas);
         
         //cojo la primera columna de la tabla (el ID) y fijo el tamaño de esa columna
         tabla.getColumnModel().getColumn(0).setPreferredWidth(2);
