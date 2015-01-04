@@ -26,16 +26,18 @@ public class comandoMostrarListaClientes implements Command{
     {
         RespuestaComando respuesta = null;
         try {
+            ArrayList<Object> datosLista = (ArrayList<Object>)datos;
             ArrayList<TCliente> listaClientes;
             listaClientes = FactoriaSA.obtenerInstancia().generaSACliente().mostrarListaCliente();
-            
+            datosLista.add(listaClientes);
+             
             if (!listaClientes.isEmpty()) //Si ha cargado la lista
             {
-                respuesta = new RespuestaComando(EventoNegocio.EXITO_MOSTRAR_LISTA_CLIENTE, listaClientes);
+                respuesta = new RespuestaComando(EventoNegocio.EXITO_MOSTRAR_LISTA_CLIENTE, datosLista);
             }
             else
             {
-                respuesta = new RespuestaComando(EventoNegocio.FRACASO_MOSTRAR_LISTA_CLIENTE, listaClientes);
+                respuesta = new RespuestaComando(EventoNegocio.FRACASO_MOSTRAR_LISTA_CLIENTE, datosLista);
             }
         } catch (Exception ex) {
         }

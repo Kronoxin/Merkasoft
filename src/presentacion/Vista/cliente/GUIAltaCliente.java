@@ -8,6 +8,7 @@ package presentacion.Vista.cliente;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import negocio.cliente.TCliente;
@@ -22,6 +23,8 @@ import presentacion.Controlador.Eventos.EventoNegocio;
  * @author Ruben
  */
 public class GUIAltaCliente extends JFrame{
+    TCliente cliente = new TCliente();
+    
     JPanel panelSuperior = new JPanel();
     JPanel panel_Fecha = new JPanel();
     JPanel panelRadios = new JPanel(new FlowLayout());
@@ -47,7 +50,7 @@ public class GUIAltaCliente extends JFrame{
     JButton boton_ok = new JButton("Aceptar");
     JButton boton_cancelar = new JButton("Cancelar");
     
-    
+    Date fecha = new Date(1,1,1);
     public GUIAltaCliente(){
         this.setTitle("Alta Cliente");
 	setBounds(100, 100, 400, 300);
@@ -98,7 +101,7 @@ public class GUIAltaCliente extends JFrame{
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                TCliente cliente = null;
+                cliente = null;
                 if (radioNormal.isSelected())
                 {
                     TClienteNormal temp = new TClienteNormal();
@@ -111,12 +114,12 @@ public class GUIAltaCliente extends JFrame{
                     temp.setFinanciacion((float) 0.0);
                     cliente = temp;
                 }
-                    cliente.setDNI(textDNI.toString());
-                    cliente.setNombre(textNombre.toString());
-                    cliente.setApellidos(textApellidos.toString());
-                    cliente.setFechaNacimiento(fecha_dia.toString()+"/"+fecha_mes.toString()+"/"+fecha_anio.toString());
-                    Controlador con = Controlador.getInstance();
-                    con.accion(EventoNegocio.ALTA_CLIENTE, cliente);
+                    cliente.setDNI(textDNI.getText());
+                    cliente.setNombre(textNombre.getText());
+                    cliente.setApellidos(textApellidos.getText());
+                    cliente.setFechaNacimiento(fecha_dia.getText()+"/"+fecha_mes.getText()+"/"+fecha_anio.getText());
+                    
+                    Controlador.getInstance().accion(EventoNegocio.ALTA_CLIENTE, cliente);
             }
         });
             boton_cancelar.addActionListener(new ActionListener() {

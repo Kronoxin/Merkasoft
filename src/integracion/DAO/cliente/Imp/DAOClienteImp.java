@@ -116,6 +116,7 @@ public class DAOClienteImp implements DAOCliente
     public ArrayList<TCliente> listarClientes() throws Exception {
         Statement query = null;
         Connection connection = null;
+        TCliente temp = new TCliente();
         ArrayList<TCliente> ret = new ArrayList<TCliente>();        
         //baja lógica de cliente (solo en la tabla de los genéricos)
         String contenido_query = "SELECT * FROM Clientes";                
@@ -139,7 +140,7 @@ public class DAOClienteImp implements DAOCliente
             {
                 if (rs.getString("Disponible").equalsIgnoreCase("1"))
                 {
-                    TCliente temp = new TCliente();
+                    temp =new TCliente();
                     Integer id = Integer.parseInt(rs.getString("id_cliente"));
                     temp.setId(id);
                     temp.setDNI(rs.getString("DNI"));
@@ -147,6 +148,7 @@ public class DAOClienteImp implements DAOCliente
                     temp.setApellidos(rs.getString("Apellidos"));
                     temp.setFechaNacimiento(rs.getString("Fecha_nacimiento"));
                     ret.add(temp);
+                    
                 }
             }
         }
