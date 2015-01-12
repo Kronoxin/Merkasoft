@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package departamentoJPAController;
+package negocio.departamentos.SA.Imp;
 
-import departamentoJPAController.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
@@ -18,14 +17,15 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import negocio.departamentos.Departamento;
+import negocio.turnos.SA.exceptions.NonexistentEntityException;
 
 /**
  *
  * @author Ruben
  */
-public class DepartamentoJpaController implements Serializable {
+public class DepartamentoSAImp implements Serializable {
 
-    public DepartamentoJpaController(EntityManagerFactory emf) {
+    public DepartamentoSAImp(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;

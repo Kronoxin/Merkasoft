@@ -1,4 +1,4 @@
-package departamentoJPAController.exceptions;
+package negocio.turnos.SA.exceptions;
 
 public class PreexistingEntityException extends Exception {
     public PreexistingEntityException(String message, Throwable cause) {

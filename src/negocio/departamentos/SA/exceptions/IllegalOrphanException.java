@@ -1,4 +1,4 @@
-package departamentoJPAController.exceptions;
+package negocio.departamentos.SA.exceptions;
 
 import java.util.ArrayList;
 import java.util.List;
