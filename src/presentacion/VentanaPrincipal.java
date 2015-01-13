@@ -8,10 +8,16 @@ package presentacion;
 
 import java.awt.*;
 import java.awt.event.*;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.swing.*;
 
 import presentacion.Vista.cliente.GUIPrincipal_Cliente;
+import presentacion.Vista.departamento.GUIPrincipal_Departamento;
+import presentacion.Vista.empleado.GUIPrincipal_Empleado;
 import presentacion.Vista.producto.GUIPrincipal_Producto;
+import presentacion.Vista.turno.GUIPrincipal_Turno;
 import presentacion.Vista.venta.GUIPrincipal_Venta;
 
 
@@ -23,6 +29,8 @@ public class VentanaPrincipal extends JPanel {
     
     private final JTabbedPane tab_principal = new JTabbedPane();
     
+    
+    //PRIMERA ENTREGA
     GUIPrincipal_Cliente principal_cliente = new GUIPrincipal_Cliente();
     GUIPrincipal_Producto principal_producto = new GUIPrincipal_Producto();
     GUIPrincipal_Venta principal_venta = new GUIPrincipal_Venta();
@@ -30,6 +38,16 @@ public class VentanaPrincipal extends JPanel {
     private final ImageIcon icono_clientes = new ImageIcon("icono-clientes.GIF");
     private final ImageIcon icono_productos = new ImageIcon("icono_productos.PNG");
     private final ImageIcon icono_ventas = new ImageIcon("icono_ventas.GIF");
+    
+    //SEGUNDA ENTREGA
+    GUIPrincipal_Empleado principal_empleado = new GUIPrincipal_Empleado();
+    GUIPrincipal_Departamento principal_departamento = new GUIPrincipal_Departamento();
+    GUIPrincipal_Turno principal_turno = new GUIPrincipal_Turno();
+    
+    private final ImageIcon icono_empleados = new ImageIcon("icono-empleados.PNG");
+    private final ImageIcon icono_departamentos = new ImageIcon("icono-departamento.PNG");
+    private final ImageIcon icono_turnos = new ImageIcon("icono-turno.GIF");
+    
 
 	public VentanaPrincipal() {
             
@@ -41,6 +59,17 @@ public class VentanaPrincipal extends JPanel {
 
             //añadimos el Tab de Ventas al principal, con el icono y la clase principal de este panel
             tab_principal.addTab("Ventas", icono_ventas, principal_venta, "Ventas - Tab 3");
+            
+            //añadimos el Tab de Empleados al principal, con el icono y la clase principal de este panel
+            tab_principal.addTab("Empleados", icono_empleados, principal_empleado, "Empleados - Tab 4");
+            
+            //añadimos el Tab de Departamentos al principal, con el icono y la clase principal de este panel
+            tab_principal.addTab("Departamentos", icono_departamentos, principal_departamento, "Departamentos - Tab 5");
+            
+            //añadimos el Tab de Turnos al principal, con el icono y la clase principal de este panel
+            tab_principal.addTab("Turnos", icono_turnos, principal_turno, "Turnos - Tab 6");
+            
+            
 
             setLayout(new GridLayout(1, 1));
             this.add(tab_principal);
@@ -87,6 +116,9 @@ public class VentanaPrincipal extends JPanel {
     public void setPrincipal_venta(GUIPrincipal_Venta principal_venta) {
         this.principal_venta = principal_venta;
     }
+
+    
     
   
+    
 }
