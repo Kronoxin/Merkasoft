@@ -43,6 +43,7 @@ public class VentanaPrincipal extends JPanel {
     GUIPrincipal_Empleado principal_empleado = new GUIPrincipal_Empleado();
     GUIPrincipal_Departamento principal_departamento = new GUIPrincipal_Departamento();
     GUIPrincipal_Turno principal_turno = new GUIPrincipal_Turno();
+    //git de los cojones
     
     private final ImageIcon icono_empleados = new ImageIcon("icono-empleados.PNG");
     private final ImageIcon icono_departamentos = new ImageIcon("icono-departamento.PNG");
