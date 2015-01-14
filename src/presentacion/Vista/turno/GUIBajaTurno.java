@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package presentacion.Vista.departamento;
+package presentacion.Vista.turno;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -14,54 +14,53 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import presentacion.Controlador.Controlador;
-import presentacion.Controlador.Eventos.EventoNegocio;
 
 /**
  *
  * @author Ruben
  */
-public class GUIModificarDepartamento extends JFrame{
+public class GUIBajaTurno extends JFrame{
     
+     JTextField textID = new JTextField("");
+
     JPanel panelSuperior = new JPanel(new GridLayout(1,2));
-    JPanel panelBotones = new JPanel(new GridLayout(1,2,8,8));
-        
-    //Texfield para insertar el ID del departamento
-    JTextField textID = new JTextField("");
-    JLabel labID = new JLabel("ID del Departamento",JLabel.CENTER);
+    JPanel panelBotones = new JPanel(new GridLayout(1,2,10,10));
+
+    JLabel labID = new JLabel("ID del Turno",JLabel.CENTER);
 
     JButton boton_ok = new JButton("Aceptar");
     JButton boton_cancelar = new JButton("Cancelar");
-    
-    public GUIModificarDepartamento(){
-        this.setTitle("Modificar Departamento");
+
+            
+            
+    public GUIBajaTurno(){
+        this.setTitle("Baja Turno");
 	setBounds(100, 100, 400, 300);
         this.setLocationRelativeTo(null);
-        
         this.setLayout(new BorderLayout());
 
-        //añadimos el JLabel y el JTextField al panel Superior
+        //añadimos el Jlabel y el TextField del ID del producto al panelSuperior
         panelSuperior.add(labID);
         panelSuperior.add(textID);
 
-        //añadimos el boton de aceptar y cancelar al panel de botones
+        //añadimos el boton Aceptar y cancelar al panelBotones
         panelBotones.add(boton_ok);
         panelBotones.add(boton_cancelar);
-
+        
+        //añadimos los paneles individuales al de la clase
         this.add(panelSuperior,BorderLayout.NORTH);
         this.add(panelBotones,BorderLayout.SOUTH);
-  //      this.setBorder(new TitledBorder(new TitledBorder(""), "Modificar Departamento", TitledBorder.CENTER, TitledBorder.TOP ));	
-
+      //  this.setBorder(new TitledBorder(new TitledBorder(""), "Baja Turno", TitledBorder.CENTER, TitledBorder.TOP ));	
 
         this.setVisible(true);
         
-        boton_ok.addActionListener(new ActionListener() {
+             boton_ok.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
              //   textID.getText();
                 
-             //   Controlador.getInstance().accion(EventoNegocio.MODIFICAR_DEPARTAMENTO, textID.getText());
+             //   Controlador.getInstance().accion(EventoNegocio.BAJA_TURNO, textID.getText());
             }
         });
         
@@ -73,11 +72,19 @@ public class GUIModificarDepartamento extends JFrame{
                 dispose();
                
             }
-        });
         
+        });
     }
-    
+
     //getters y setters
+
+    public JTextField getTextID() {
+        return textID;
+    }
+
+    public void setTextID(JTextField textID) {
+        this.textID = textID;
+    }
 
     public JPanel getPanelSuperior() {
         return panelSuperior;
@@ -93,14 +100,6 @@ public class GUIModificarDepartamento extends JFrame{
 
     public void setPanelBotones(JPanel panelBotones) {
         this.panelBotones = panelBotones;
-    }
-
-    public JTextField getTextID() {
-        return textID;
-    }
-
-    public void setTextID(JTextField textID) {
-        this.textID = textID;
     }
 
     public JLabel getLabID() {
@@ -126,10 +125,7 @@ public class GUIModificarDepartamento extends JFrame{
     public void setBoton_cancelar(JButton boton_cancelar) {
         this.boton_cancelar = boton_cancelar;
     }
-
-     
     
     
- 
     
 }

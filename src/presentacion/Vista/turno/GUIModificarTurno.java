@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package presentacion.Vista.departamento;
+package presentacion.Vista.turno;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -14,27 +14,25 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import presentacion.Controlador.Controlador;
-import presentacion.Controlador.Eventos.EventoNegocio;
 
 /**
  *
  * @author Ruben
  */
-public class GUIModificarDepartamento extends JFrame{
+public class GUIModificarTurno extends JFrame{
     
     JPanel panelSuperior = new JPanel(new GridLayout(1,2));
     JPanel panelBotones = new JPanel(new GridLayout(1,2,8,8));
         
-    //Texfield para insertar el ID del departamento
+    //Texfield para insertar el ID del turno
     JTextField textID = new JTextField("");
-    JLabel labID = new JLabel("ID del Departamento",JLabel.CENTER);
+    JLabel labID = new JLabel("ID del Turno",JLabel.CENTER);
 
     JButton boton_ok = new JButton("Aceptar");
     JButton boton_cancelar = new JButton("Cancelar");
     
-    public GUIModificarDepartamento(){
-        this.setTitle("Modificar Departamento");
+    public GUIModificarTurno(){
+        this.setTitle("Modificar Turno");
 	setBounds(100, 100, 400, 300);
         this.setLocationRelativeTo(null);
         
@@ -50,7 +48,7 @@ public class GUIModificarDepartamento extends JFrame{
 
         this.add(panelSuperior,BorderLayout.NORTH);
         this.add(panelBotones,BorderLayout.SOUTH);
-  //      this.setBorder(new TitledBorder(new TitledBorder(""), "Modificar Departamento", TitledBorder.CENTER, TitledBorder.TOP ));	
+  //      this.setBorder(new TitledBorder(new TitledBorder(""), "Modificar Turno", TitledBorder.CENTER, TitledBorder.TOP ));	
 
 
         this.setVisible(true);
@@ -61,7 +59,7 @@ public class GUIModificarDepartamento extends JFrame{
             public void actionPerformed(ActionEvent e) {
              //   textID.getText();
                 
-             //   Controlador.getInstance().accion(EventoNegocio.MODIFICAR_DEPARTAMENTO, textID.getText());
+             //   Controlador.getInstance().accion(EventoNegocio.MODIFICAR_TURNO, textID.getText());
             }
         });
         
@@ -77,6 +75,7 @@ public class GUIModificarDepartamento extends JFrame{
         
     }
     
+
     //getters y setters
 
     public JPanel getPanelSuperior() {
@@ -126,10 +125,7 @@ public class GUIModificarDepartamento extends JFrame{
     public void setBoton_cancelar(JButton boton_cancelar) {
         this.boton_cancelar = boton_cancelar;
     }
-
-     
     
     
- 
     
 }
