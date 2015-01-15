@@ -7,7 +7,6 @@ package presentacion.Controlador.Comandos.empleado;
 
 import negocio.FactoriaSA.FactoriaSA;
 import negocio.empleados.Empleado;
-import negocio.empleados.TEmpleado;
 import presentacion.Controlador.Comandos.Command;
 import presentacion.Controlador.Comandos.RespuestaComando;
 import presentacion.Controlador.Eventos.EventoNegocio;

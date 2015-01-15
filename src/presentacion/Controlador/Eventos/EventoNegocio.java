@@ -166,6 +166,7 @@ public class EventoNegocio
     public static final int GUI_MODIFICAR_DEPARTAMENTO = 809;
     public static final int GUI_MOSTRAR_DEPARTAMENTO = 810;
     public static final int GUI_MOSTRAR_LISTA_DEPARTAMENTOS = 811;
+    public static final int GUI_CALCULAR_NOMINA_DEPARTAMENTO = 812;
 
 
             

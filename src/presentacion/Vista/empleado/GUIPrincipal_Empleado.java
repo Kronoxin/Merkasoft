@@ -71,17 +71,17 @@ public class GUIPrincipal_Empleado extends JPanel{
                     Controlador.getInstance().accion(EventoNegocio.GUI_ALTA_EMPLEADO,GUIPrincipal_Empleado.this);
             }
             else if( e.getSource() == boton_baja_empleado){
-                  //  Controlador.getInstance().accion(EventoNegocio.GUI_BAJA_EMPLEADO, GUIPrincipal_Empleado.this);
+                    Controlador.getInstance().accion(EventoNegocio.GUI_BAJA_EMPLEADO, GUIPrincipal_Empleado.this);
             
             }
             else if( e.getSource() == boton_modificar_empleado){
-                  //  Controlador.getInstance().accion(EventoNegocio.GUI_MODIFICAR_EMPLEADO, GUIPrincipal_Empleado.this);
+                    Controlador.getInstance().accion(EventoNegocio.GUI_MODIFICAR_EMPLEADO, GUIPrincipal_Empleado.this);
             }
             else if (e.getSource() == boton_mostrar_empleado) {
-                  //  Controlador.getInstance().accion(EventoNegocio.GUI_MOSTRAR_EMPLEADO, GUIPrincipal_Empleado.this);
+                    Controlador.getInstance().accion(EventoNegocio.GUI_MOSTRAR_EMPLEADO, GUIPrincipal_Empleado.this);
 
             }else if (e.getSource() == boton_mostrar_lista_empleados) {
-                  //  Controlador.getInstance().accion(EventoNegocio.GUI_MOSTRAR_LISTA_EMPLEADOS, GUIPrincipal_Empleado.this);
+                    Controlador.getInstance().accion(EventoNegocio.GUI_MOSTRAR_LISTA_EMPLEADOS, GUIPrincipal_Empleado.this);
 
             }
         }

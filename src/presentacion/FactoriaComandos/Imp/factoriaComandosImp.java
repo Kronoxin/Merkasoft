@@ -15,7 +15,22 @@ import presentacion.Controlador.Comandos.producto.GUI.*;
 import presentacion.Controlador.Comandos.venta.GUI.*;
 import presentacion.FactoriaComandos.factoriaComandos;
 import presentacion.Controlador.Comandos.Command;
+import presentacion.Controlador.Comandos.departamento.GUI.comandoGUIaltaDepartamento;
+import presentacion.Controlador.Comandos.departamento.GUI.comandoGUIcalcularNominaDepartamento;
+import presentacion.Controlador.Comandos.departamento.GUI.comandoGUIeliminarDepartamento;
+import presentacion.Controlador.Comandos.departamento.GUI.comandoGUImodificarDepartamento;
+import presentacion.Controlador.Comandos.departamento.GUI.comandoGUImostrarDepartamento;
+import presentacion.Controlador.Comandos.departamento.GUI.comandoGUImostrarListaDepartamentos;
+import presentacion.Controlador.Comandos.departamento.comandoAltaDepartamento;
+import presentacion.Controlador.Comandos.departamento.comandoBajaDepartamento;
+import presentacion.Controlador.Comandos.departamento.comandoModificarDepartamento;
+import presentacion.Controlador.Comandos.departamento.comandoMostrarDepartamento;
+import presentacion.Controlador.Comandos.departamento.comandoMostrarListaDepartamentos;
 import presentacion.Controlador.Comandos.empleado.GUI.comandoGUIaltaEmpleado;
+import presentacion.Controlador.Comandos.empleado.GUI.comandoGUIeliminarEmpleado;
+import presentacion.Controlador.Comandos.empleado.GUI.comandoGUImodificarEmpleado;
+import presentacion.Controlador.Comandos.empleado.GUI.comandoGUImostrarEmpleado;
+import presentacion.Controlador.Comandos.empleado.GUI.comandoGUImostrarListaEmpleados;
 import presentacion.Controlador.Comandos.empleado.comandoAltaEmpleado;
 import presentacion.Controlador.Eventos.EventoNegocio;
 /**
@@ -187,11 +202,65 @@ public class factoriaComandosImp extends factoriaComandos
             
             
             //SEGUNDA PARTE
+            //eventos GUI Empleado
             case EventoNegocio.GUI_ALTA_EMPLEADO:
             {
                 comando = new comandoGUIaltaEmpleado();
                 break;
             }
+            case EventoNegocio.GUI_BAJA_EMPLEADO:
+            {
+                comando = new comandoGUIeliminarEmpleado();
+                break;
+            }
+            case EventoNegocio.GUI_MODIFICAR_EMPLEADO:
+            {
+                comando = new comandoGUImodificarEmpleado();
+                break;
+            }
+            case EventoNegocio.GUI_MOSTRAR_EMPLEADO:
+            {
+                comando = new comandoGUImostrarEmpleado();
+                break;
+            }
+            case EventoNegocio.GUI_MOSTRAR_LISTA_EMPLEADOS:
+            {
+                comando = new comandoGUImostrarListaEmpleados();
+                break;
+            }
+            
+            //eventos GUI Departamento
+            case EventoNegocio.GUI_ALTA_DEPARTAMENTO:
+            {
+                comando = new comandoGUIaltaDepartamento();
+                break;
+            }
+            case EventoNegocio.GUI_BAJA_DEPARTAMENTO:
+            {
+                comando = new comandoGUIeliminarDepartamento();
+                break;
+            }
+            case EventoNegocio.GUI_MOSTRAR_DEPARTAMENTO:
+            {
+                comando = new comandoGUImostrarDepartamento();
+                break;
+            }
+            case EventoNegocio.GUI_MOSTRAR_LISTA_DEPARTAMENTOS:
+            {
+                comando = new comandoGUImostrarListaDepartamentos();
+                break;
+            }
+            case EventoNegocio.GUI_MODIFICAR_DEPARTAMENTO:
+            {
+                comando = new comandoGUImodificarDepartamento();
+                break;
+            }
+            case EventoNegocio.GUI_CALCULAR_NOMINA_DEPARTAMENTO:
+            {
+                comando = new comandoGUIcalcularNominaDepartamento();
+                break;
+            }
+            
            
             default:
                 comando=null;

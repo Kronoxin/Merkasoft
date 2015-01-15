@@ -18,7 +18,17 @@ import presentacion.Vista.cliente.GUIModificarCliente;
 import presentacion.Vista.cliente.GUIMostrarCliente;
 import presentacion.Vista.cliente.GUIMostrarListaClientes;
 import presentacion.Vista.cliente.GUIPrincipal_Cliente;
+import presentacion.Vista.departamento.GUIAltaDepartamento;
+import presentacion.Vista.departamento.GUIBajaDepartamento;
+import presentacion.Vista.departamento.GUICalcularNominaDepartamento;
+import presentacion.Vista.departamento.GUIModificarDepartamento;
+import presentacion.Vista.departamento.GUIMostrarDepartamento;
+import presentacion.Vista.departamento.GUIMostrarListaDepartamentos;
 import presentacion.Vista.empleado.GUIAltaEmpleado;
+import presentacion.Vista.empleado.GUIBajaEmpleado;
+import presentacion.Vista.empleado.GUIModificarEmpleado;
+import presentacion.Vista.empleado.GUIMostrarEmpleado;
+import presentacion.Vista.empleado.GUIMostrarListaEmpleados;
 import presentacion.Vista.popups.PopupsCliente;
 import presentacion.Vista.popups.PopupsProducto;
 import presentacion.Vista.popups.PopupsVenta;
@@ -27,6 +37,11 @@ import presentacion.Vista.producto.GUIBajaProducto;
 import presentacion.Vista.producto.GUIModificarProducto;
 import presentacion.Vista.producto.GUIMostrarListaProductos;
 import presentacion.Vista.producto.GUIMostrarProducto;
+import presentacion.Vista.turno.GUIAltaTurno;
+import presentacion.Vista.turno.GUIBajaTurno;
+import presentacion.Vista.turno.GUIModificarTurno;
+import presentacion.Vista.turno.GUIMostrarListaTurnos;
+import presentacion.Vista.turno.GUIMostrarTurno;
 import presentacion.Vista.venta.GUIAltaVenta;
 import presentacion.Vista.venta.GUIDevolverProducto;
 import presentacion.Vista.venta.GUIMostrarListaVentas;
@@ -125,7 +140,7 @@ public class DispatcherImp extends Dispatcher
                 break;
             }
             
-            //Eventos GUI cliente
+            //Eventos cliente
             case EventoNegocio.ALTA_CLIENTE:
             {
                 //VentanaPrincipal.ventanaPrincipal.getPrincipal_cliente().cambioVentana("alta");
@@ -242,12 +257,92 @@ public class DispatcherImp extends Dispatcher
             }
             
             //SEGUNDA PARTE
-            
+            //comandos GUI de empleado
             case EventoNegocio.GUI_ALTA_EMPLEADO:
             {
                 new GUIAltaEmpleado();
                 break;
             }
+            case EventoNegocio.GUI_BAJA_EMPLEADO:
+            {
+                new GUIBajaEmpleado();
+                break;
+            }
+            case EventoNegocio.GUI_MOSTRAR_EMPLEADO:
+            {
+                new GUIMostrarEmpleado();
+                break;
+            }
+            case EventoNegocio.GUI_MOSTRAR_LISTA_EMPLEADOS:
+            {
+                new GUIMostrarListaEmpleados();
+                break;
+            }
+            case EventoNegocio.GUI_MODIFICAR_EMPLEADO:
+            {
+                new GUIModificarEmpleado();
+                break;
+            }
+            
+            //comandos GUI de departamento.
+            case EventoNegocio.GUI_ALTA_DEPARTAMENTO:
+            {
+                new GUIAltaDepartamento();
+                break;
+            }
+            case EventoNegocio.GUI_BAJA_DEPARTAMENTO:
+            {
+                new GUIBajaDepartamento();
+                break;
+            }
+            case EventoNegocio.GUI_MOSTRAR_DEPARTAMENTO:
+            {
+                new GUIMostrarDepartamento();
+                break;
+            }
+            case EventoNegocio.GUI_MOSTRAR_LISTA_DEPARTAMENTOS:
+            {
+                new GUIMostrarListaDepartamentos();
+                break;
+            }
+            case EventoNegocio.GUI_MODIFICAR_DEPARTAMENTO:
+            {
+                new GUIModificarDepartamento();
+                break;
+            }
+            case EventoNegocio.GUI_CALCULAR_NOMINA_DEPARTAMENTO:
+            {
+                new GUICalcularNominaDepartamento();
+                break;
+            } 
+            
+            //comandos GUI de Turno
+            case EventoNegocio.GUI_ALTA_TURNO:
+            {
+                new GUIAltaTurno();
+                break;
+            }
+            case EventoNegocio.GUI_BAJA_TURNO:
+            {
+                new GUIBajaTurno();
+                break;
+            }
+            case EventoNegocio.GUI_MOSTRAR_TURNO:
+            {
+                new GUIMostrarTurno();
+                break;
+            }
+            case EventoNegocio.GUI_MOSTRAR_LISTA_TURNOS:
+            {
+                new GUIMostrarListaTurnos();
+                break;
+            }
+            case EventoNegocio.GUI_MODIFICAR_TURNO:
+            {
+                new GUIModificarTurno();
+                break;
+            }
+        
                 
         }
     }

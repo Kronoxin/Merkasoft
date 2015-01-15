@@ -71,22 +71,22 @@ public class GUIPrincipal_Departamento extends JPanel{
         @Override
         public void actionPerformed(ActionEvent e) {
             if( e.getSource() ==  boton_alta_departamento ){
-                 //   Controlador.getInstance().accion(EventoNegocio.GUI_ALTA_DEPARTAMENTO,GUIPrincipal_Departamento.this);
+                    Controlador.getInstance().accion(EventoNegocio.GUI_ALTA_DEPARTAMENTO,GUIPrincipal_Departamento.this);
             }
             else if( e.getSource() == boton_baja_departamento){
-                  //  Controlador.getInstance().accion(EventoNegocio.GUI_BAJA_DEPARTAMENTO, GUIPrincipal_Departamento.this);
+                    Controlador.getInstance().accion(EventoNegocio.GUI_BAJA_DEPARTAMENTO, GUIPrincipal_Departamento.this);
             }
             else if( e.getSource() == boton_nomina_departamentos){
-                  //  Controlador.getInstance().accion(EventoNegocio.GUI_NOMINA_DEPARTAMENTOS, GUIPrincipal_Departamento.this);
+                    Controlador.getInstance().accion(EventoNegocio.GUI_CALCULAR_NOMINA_DEPARTAMENTO, GUIPrincipal_Departamento.this);
             }
             else if( e.getSource() == boton_modificar_departamento){
-                  //  Controlador.getInstance().accion(EventoNegocio.GUI_MODIFICAR_DEPARTAMENTO, GUIPrincipal_Departamento.this);
+                    Controlador.getInstance().accion(EventoNegocio.GUI_MODIFICAR_DEPARTAMENTO, GUIPrincipal_Departamento.this);
             }
             else if (e.getSource() == boton_mostrar_departamento) {
-                  //  Controlador.getInstance().accion(EventoNegocio.GUI_MOSTRAR_DEPARTAMENTO, GUIPrincipal_Departamento.this);
+                    Controlador.getInstance().accion(EventoNegocio.GUI_MOSTRAR_DEPARTAMENTO, GUIPrincipal_Departamento.this);
 
             }else if (e.getSource() == boton_mostrar_lista_departamentos) {
-                  //  Controlador.getInstance().accion(EventoNegocio.GUI_MOSTRAR_LISTA_DEPARTAMENTOS, GUIPrincipal_Departamento.this);
+                    Controlador.getInstance().accion(EventoNegocio.GUI_MOSTRAR_LISTA_DEPARTAMENTOS, GUIPrincipal_Departamento.this);
 
             }
         }
