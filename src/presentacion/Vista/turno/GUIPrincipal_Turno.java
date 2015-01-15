@@ -68,19 +68,19 @@ public class GUIPrincipal_Turno extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             if( e.getSource() ==  boton_alta_turno ){
-                 //   Controlador.getInstance().accion(EventoNegocio.GUI_ALTA_TURNO,GUIPrincipal_Turno.this);
+                    Controlador.getInstance().accion(EventoNegocio.GUI_ALTA_TURNO,GUIPrincipal_Turno.this);
             }
             else if( e.getSource() == boton_baja_turno){
-                //    Controlador.getInstance().accion(EventoNegocio.GUI_BAJA_TURNO, GUIPrincipal_Turno.this);
+                    Controlador.getInstance().accion(EventoNegocio.GUI_BAJA_TURNO, GUIPrincipal_Turno.this);
             }
             else if( e.getSource() == boton_modificar_turno){
-                 //   Controlador.getInstance().accion(EventoNegocio.GUI_MODIFICAR_TURNO, GUIPrincipal_Turno.this);
+                    Controlador.getInstance().accion(EventoNegocio.GUI_MODIFICAR_TURNO, GUIPrincipal_Turno.this);
             }
             else if (e.getSource() == boton_mostrar_turno) {
-                 //   Controlador.getInstance().accion(EventoNegocio.GUI_MOSTRAR_TURNO, GUIPrincipal_Turno.this);
+                    Controlador.getInstance().accion(EventoNegocio.GUI_MOSTRAR_TURNO, GUIPrincipal_Turno.this);
 
             }else if (e.getSource() == boton_mostrar_lista_turnos) {
-                 //   Controlador.getInstance().accion(EventoNegocio.GUI_MOSTRAR_LISTA_TURNOS, GUIPrincipal_Turno.this);
+                    Controlador.getInstance().accion(EventoNegocio.GUI_MOSTRAR_LISTA_TURNOS, GUIPrincipal_Turno.this);
 
             }
         }

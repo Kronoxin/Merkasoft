@@ -23,6 +23,7 @@ import presentacion.Controlador.Comandos.departamento.GUI.comandoGUImostrarDepar
 import presentacion.Controlador.Comandos.departamento.GUI.comandoGUImostrarListaDepartamentos;
 import presentacion.Controlador.Comandos.departamento.comandoAltaDepartamento;
 import presentacion.Controlador.Comandos.departamento.comandoBajaDepartamento;
+import presentacion.Controlador.Comandos.departamento.comandoCalcularNominaDepartamento;
 import presentacion.Controlador.Comandos.departamento.comandoModificarDepartamento;
 import presentacion.Controlador.Comandos.departamento.comandoMostrarDepartamento;
 import presentacion.Controlador.Comandos.departamento.comandoMostrarListaDepartamentos;
@@ -32,6 +33,16 @@ import presentacion.Controlador.Comandos.empleado.GUI.comandoGUImodificarEmplead
 import presentacion.Controlador.Comandos.empleado.GUI.comandoGUImostrarEmpleado;
 import presentacion.Controlador.Comandos.empleado.GUI.comandoGUImostrarListaEmpleados;
 import presentacion.Controlador.Comandos.empleado.comandoAltaEmpleado;
+import presentacion.Controlador.Comandos.empleado.comandoBajaEmpleado;
+import presentacion.Controlador.Comandos.empleado.comandoModificarEmpleado;
+import presentacion.Controlador.Comandos.empleado.comandoMostrarEmpleado;
+import presentacion.Controlador.Comandos.empleado.comandoMostrarListaEmpleados;
+import presentacion.Controlador.Comandos.turno.GUI.comandoGUIaltaTurno;
+import presentacion.Controlador.Comandos.turno.GUI.comandoGUIeliminarTurno;
+import presentacion.Controlador.Comandos.turno.GUI.comandoGUImodificarTurno;
+import presentacion.Controlador.Comandos.turno.GUI.comandoGUImostrarListaTurnos;
+import presentacion.Controlador.Comandos.turno.GUI.comandoGUImostrarTurno;
+import presentacion.Controlador.Comandos.turno.*;
 import presentacion.Controlador.Eventos.EventoNegocio;
 /**
  *
@@ -202,6 +213,33 @@ public class factoriaComandosImp extends factoriaComandos
             
             
             //SEGUNDA PARTE
+            //eventos Empleado
+             case EventoNegocio.ALTA_EMPLEADO:
+            {
+                comando = new comandoAltaEmpleado();
+                break;
+            }
+            case EventoNegocio.BAJA_EMPLEADO:
+            {
+                comando = new comandoBajaEmpleado();
+                break;
+            }
+            case EventoNegocio.MODIFICAR_EMPLEADO:
+            {
+                comando = new comandoModificarEmpleado();
+                break;
+            }
+            case EventoNegocio.MOSTRAR_EMPLEADO:
+            {
+                comando = new comandoMostrarEmpleado();
+                break;
+            }
+            case EventoNegocio.MOSTRAR_LISTA_EMPLEADO:
+            {
+                comando = new comandoMostrarListaEmpleados();
+                break;
+            }
+            
             //eventos GUI Empleado
             case EventoNegocio.GUI_ALTA_EMPLEADO:
             {
@@ -226,6 +264,37 @@ public class factoriaComandosImp extends factoriaComandos
             case EventoNegocio.GUI_MOSTRAR_LISTA_EMPLEADOS:
             {
                 comando = new comandoGUImostrarListaEmpleados();
+                break;
+            }
+            //eventos Departamento
+             case EventoNegocio.ALTA_DEPARTAMENTO:
+            {
+                comando = new comandoAltaDepartamento();
+                break;
+            }
+            case EventoNegocio.BAJA_DEPARTAMENTO:
+            {
+                comando = new comandoBajaDepartamento();
+                break;
+            }
+            case EventoNegocio.MOSTRAR_DEPARTAMENTO:
+            {
+                comando = new comandoMostrarDepartamento();
+                break;
+            }
+            case EventoNegocio.MOSTRAR_LISTA_DEPARTAMENTO:
+            {
+                comando = new comandoMostrarListaDepartamentos();
+                break;
+            }
+            case EventoNegocio.MODIFICAR_DEPARTAMENTO:
+            {
+                comando = new comandoModificarDepartamento();
+                break;
+            }
+            case EventoNegocio.CALCULAR_NOMINA_DEPARTAMENTO:
+            {
+                comando = new comandoCalcularNominaDepartamento();
                 break;
             }
             
@@ -260,6 +329,62 @@ public class factoriaComandosImp extends factoriaComandos
                 comando = new comandoGUIcalcularNominaDepartamento();
                 break;
             }
+            
+            //eventos Turno
+            
+            case EventoNegocio.ALTA_TURNO:
+            {
+                comando = new comandoAltaTurno();
+                break;
+            }
+            case EventoNegocio.BAJA_TURNO:
+            {
+                comando = new comandoBajaTurno();
+                break;
+            }
+            case EventoNegocio.MODIFICAR_TURNO:
+            {
+                comando = new comandoModificarTurno();
+                break;
+            }
+            case EventoNegocio.MOSTRAR_TURNO:
+            {
+                comando = new comandoMostrarTurno();
+                break;
+            }
+            case EventoNegocio.MOSTRAR_LISTA_TURNO:
+            {
+                comando = new comandoMostrarListaTurnos();
+                break;
+            }
+            
+            //eventos GUI turno
+            case EventoNegocio.GUI_ALTA_TURNO:
+            {
+                comando = new comandoGUIaltaTurno();
+                break;
+            }
+            case EventoNegocio.GUI_BAJA_TURNO:
+            {
+                comando = new comandoGUIeliminarTurno();
+                break;
+            }
+            case EventoNegocio.GUI_MODIFICAR_TURNO:
+            {
+                comando = new comandoGUImodificarTurno();
+                break;
+            }
+            case EventoNegocio.GUI_MOSTRAR_TURNO:
+            {
+                comando = new comandoGUImostrarTurno();
+                break;
+            }
+            case EventoNegocio.GUI_MOSTRAR_LISTA_TURNOS:
+            {
+                comando = new comandoGUImostrarListaTurnos();
+                break;
+            }
+            
             
            
             default:
