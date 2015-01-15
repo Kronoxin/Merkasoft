@@ -10,7 +10,7 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import negocio.empleados.Empleados;
+import negocio.empleados.Empleado;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -36,20 +36,20 @@ public class DepartamentoSAImp implements Serializable {
 
     public void create(Departamento departamento) {
         if (departamento.getEmpleadosCollection() == null) {
-            departamento.setEmpleadosCollection(new ArrayList<Empleados>());
+            departamento.setEmpleadosCollection(new ArrayList<Empleado>());
         }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Collection<Empleados> attachedEmpleadosCollection = new ArrayList<Empleados>();
-            for (Empleados empleadosCollectionEmpleadosToAttach : departamento.getEmpleadosCollection()) {
+            Collection<Empleado> attachedEmpleadosCollection = new ArrayList<Empleado>();
+            for (Empleado empleadosCollectionEmpleadosToAttach : departamento.getEmpleadosCollection()) {
                 empleadosCollectionEmpleadosToAttach = em.getReference(empleadosCollectionEmpleadosToAttach.getClass(), empleadosCollectionEmpleadosToAttach.getIdEmpleado());
                 attachedEmpleadosCollection.add(empleadosCollectionEmpleadosToAttach);
             }
             departamento.setEmpleadosCollection(attachedEmpleadosCollection);
             em.persist(departamento);
-            for (Empleados empleadosCollectionEmpleados : departamento.getEmpleadosCollection()) {
+            for (Empleado empleadosCollectionEmpleados : departamento.getEmpleadosCollection()) {
                 Departamento oldDepartamentoOfEmpleadosCollectionEmpleados = empleadosCollectionEmpleados.getDepartamento();
                 empleadosCollectionEmpleados.setDepartamento(departamento);
                 empleadosCollectionEmpleados = em.merge(empleadosCollectionEmpleados);
@@ -72,23 +72,23 @@ public class DepartamentoSAImp implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             Departamento persistentDepartamento = em.find(Departamento.class, departamento.getIdDepartamento());
-            Collection<Empleados> empleadosCollectionOld = persistentDepartamento.getEmpleadosCollection();
-            Collection<Empleados> empleadosCollectionNew = departamento.getEmpleadosCollection();
-            Collection<Empleados> attachedEmpleadosCollectionNew = new ArrayList<Empleados>();
-            for (Empleados empleadosCollectionNewEmpleadosToAttach : empleadosCollectionNew) {
+            Collection<Empleado> empleadosCollectionOld = persistentDepartamento.getEmpleadosCollection();
+            Collection<Empleado> empleadosCollectionNew = departamento.getEmpleadosCollection();
+            Collection<Empleado> attachedEmpleadosCollectionNew = new ArrayList<Empleado>();
+            for (Empleado empleadosCollectionNewEmpleadosToAttach : empleadosCollectionNew) {
                 empleadosCollectionNewEmpleadosToAttach = em.getReference(empleadosCollectionNewEmpleadosToAttach.getClass(), empleadosCollectionNewEmpleadosToAttach.getIdEmpleado());
                 attachedEmpleadosCollectionNew.add(empleadosCollectionNewEmpleadosToAttach);
             }
             empleadosCollectionNew = attachedEmpleadosCollectionNew;
             departamento.setEmpleadosCollection(empleadosCollectionNew);
             departamento = em.merge(departamento);
-            for (Empleados empleadosCollectionOldEmpleados : empleadosCollectionOld) {
+            for (Empleado empleadosCollectionOldEmpleados : empleadosCollectionOld) {
                 if (!empleadosCollectionNew.contains(empleadosCollectionOldEmpleados)) {
                     empleadosCollectionOldEmpleados.setDepartamento(null);
                     empleadosCollectionOldEmpleados = em.merge(empleadosCollectionOldEmpleados);
                 }
             }
-            for (Empleados empleadosCollectionNewEmpleados : empleadosCollectionNew) {
+            for (Empleado empleadosCollectionNewEmpleados : empleadosCollectionNew) {
                 if (!empleadosCollectionOld.contains(empleadosCollectionNewEmpleados)) {
                     Departamento oldDepartamentoOfEmpleadosCollectionNewEmpleados = empleadosCollectionNewEmpleados.getDepartamento();
                     empleadosCollectionNewEmpleados.setDepartamento(departamento);
@@ -128,8 +128,8 @@ public class DepartamentoSAImp implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The departamento with id " + id + " no longer exists.", enfe);
             }
-            Collection<Empleados> empleadosCollection = departamento.getEmpleadosCollection();
-            for (Empleados empleadosCollectionEmpleados : empleadosCollection) {
+            Collection<Empleado> empleadosCollection = departamento.getEmpleadosCollection();
+            for (Empleado empleadosCollectionEmpleados : empleadosCollection) {
                 empleadosCollectionEmpleados.setDepartamento(null);
                 empleadosCollectionEmpleados = em.merge(empleadosCollectionEmpleados);
             }

@@ -41,7 +41,7 @@ import negocio.turnos.Turno;
     @NamedQuery(name = "Empleados.findByApellidos", query = "SELECT e FROM Empleados e WHERE e.apellidos = :apellidos"),
     @NamedQuery(name = "Empleados.findByDireccion", query = "SELECT e FROM Empleados e WHERE e.direccion = :direccion"),
     @NamedQuery(name = "Empleados.findBySueldo", query = "SELECT e FROM Empleados e WHERE e.sueldo = :sueldo")})
-public class Empleados implements Serializable {
+public class Empleado implements Serializable {
     @JoinTable(name = "horario_trabajo", joinColumns = {
         @JoinColumn(name = "id_empleado", referencedColumnName = "id_empleado")}, inverseJoinColumns = {
         @JoinColumn(name = "id_turno", referencedColumnName = "id_turno")})
@@ -68,10 +68,10 @@ public class Empleados implements Serializable {
     @ManyToOne
     private Departamento departamento;
 
-    public Empleados() {
+    public Empleado() {
     }
 
-    public Empleados(Integer idEmpleado) {
+    public Empleado(Integer idEmpleado) {
         this.idEmpleado = idEmpleado;
     }
 
@@ -141,10 +141,10 @@ public class Empleados implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Empleados)) {
+        if (!(object instanceof Empleado)) {
             return false;
         }
-        Empleados other = (Empleados) object;
+        Empleado other = (Empleado) object;
         if ((this.idEmpleado == null && other.idEmpleado != null) || (this.idEmpleado != null && !this.idEmpleado.equals(other.idEmpleado))) {
             return false;
         }

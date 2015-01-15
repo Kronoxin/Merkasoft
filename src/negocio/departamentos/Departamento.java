@@ -19,7 +19,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-import negocio.empleados.Empleados;
+import negocio.empleados.Empleado;
 
 /**
  *
@@ -45,7 +45,7 @@ public class Departamento implements Serializable {
     @Column(name = "Descripcion")
     private String descripcion;
     @OneToMany(mappedBy = "departamento")
-    private Collection<Empleados> empleadosCollection;
+    private Collection<Empleado> empleadosCollection;
 
     public Departamento() {
     }
@@ -79,11 +79,11 @@ public class Departamento implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Empleados> getEmpleadosCollection() {
+    public Collection<Empleado> getEmpleadosCollection() {
         return empleadosCollection;
     }
 
-    public void setEmpleadosCollection(Collection<Empleados> empleadosCollection) {
+    public void setEmpleadosCollection(Collection<Empleado> empleadosCollection) {
         this.empleadosCollection = empleadosCollection;
     }
 

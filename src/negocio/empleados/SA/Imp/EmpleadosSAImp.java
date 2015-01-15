@@ -17,7 +17,7 @@ import java.util.Collection;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import negocio.empleados.Empleados;
+import negocio.empleados.Empleado;
 import negocio.turnos.SA.exceptions.NonexistentEntityException;
 import negocio.turnos.Turno;
 
@@ -36,7 +36,7 @@ public class EmpleadosSAImp implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Empleados empleados) {
+    public void create(Empleado empleados) {
         if (empleados.getTurnoCollection() == null) {
             empleados.setTurnoCollection(new ArrayList<Turno>());
         }
@@ -72,12 +72,12 @@ public class EmpleadosSAImp implements Serializable {
         }
     }
 
-    public void edit(Empleados empleados) throws NonexistentEntityException, Exception {
+    public void edit(Empleado empleados) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Empleados persistentEmpleados = em.find(Empleados.class, empleados.getIdEmpleado());
+            Empleado persistentEmpleados = em.find(Empleado.class, empleados.getIdEmpleado());
             Departamento departamentoOld = persistentEmpleados.getDepartamento();
             Departamento departamentoNew = empleados.getDepartamento();
             Collection<Turno> turnoCollectionOld = persistentEmpleados.getTurnoCollection();
@@ -136,9 +136,9 @@ public class EmpleadosSAImp implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Empleados empleados;
+            Empleado empleados;
             try {
-                empleados = em.getReference(Empleados.class, id);
+                empleados = em.getReference(Empleado.class, id);
                 empleados.getIdEmpleado();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The empleados with id " + id + " no longer exists.", enfe);
@@ -162,19 +162,19 @@ public class EmpleadosSAImp implements Serializable {
         }
     }
 
-    public List<Empleados> findEmpleadosEntities() {
+    public List<Empleado> findEmpleadosEntities() {
         return findEmpleadosEntities(true, -1, -1);
     }
 
-    public List<Empleados> findEmpleadosEntities(int maxResults, int firstResult) {
+    public List<Empleado> findEmpleadosEntities(int maxResults, int firstResult) {
         return findEmpleadosEntities(false, maxResults, firstResult);
     }
 
-    private List<Empleados> findEmpleadosEntities(boolean all, int maxResults, int firstResult) {
+    private List<Empleado> findEmpleadosEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Empleados.class));
+            cq.select(cq.from(Empleado.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -186,10 +186,10 @@ public class EmpleadosSAImp implements Serializable {
         }
     }
 
-    public Empleados findEmpleados(Integer id) {
+    public Empleado findEmpleados(Integer id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Empleados.class, id);
+            return em.find(Empleado.class, id);
         } finally {
             em.close();
         }
@@ -199,7 +199,7 @@ public class EmpleadosSAImp implements Serializable {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Empleados> rt = cq.from(Empleados.class);
+            Root<Empleado> rt = cq.from(Empleado.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

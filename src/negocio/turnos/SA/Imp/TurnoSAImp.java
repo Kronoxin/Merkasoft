@@ -11,7 +11,7 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import negocio.empleados.Empleados;
+import negocio.empleados.Empleado;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -36,20 +36,20 @@ public class TurnoSAImp implements Serializable {
 
     public void create(Turno turno) {
         if (turno.getEmpleadosCollection() == null) {
-            turno.setEmpleadosCollection(new ArrayList<Empleados>());
+            turno.setEmpleadosCollection(new ArrayList<Empleado>());
         }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Collection<Empleados> attachedEmpleadosCollection = new ArrayList<Empleados>();
-            for (Empleados empleadosCollectionEmpleadosToAttach : turno.getEmpleadosCollection()) {
+            Collection<Empleado> attachedEmpleadosCollection = new ArrayList<Empleado>();
+            for (Empleado empleadosCollectionEmpleadosToAttach : turno.getEmpleadosCollection()) {
                 empleadosCollectionEmpleadosToAttach = em.getReference(empleadosCollectionEmpleadosToAttach.getClass(), empleadosCollectionEmpleadosToAttach.getIdEmpleado());
                 attachedEmpleadosCollection.add(empleadosCollectionEmpleadosToAttach);
             }
             turno.setEmpleadosCollection(attachedEmpleadosCollection);
             em.persist(turno);
-            for (Empleados empleadosCollectionEmpleados : turno.getEmpleadosCollection()) {
+            for (Empleado empleadosCollectionEmpleados : turno.getEmpleadosCollection()) {
                 empleadosCollectionEmpleados.getTurnoCollection().add(turno);
                 empleadosCollectionEmpleados = em.merge(empleadosCollectionEmpleados);
             }
@@ -67,23 +67,23 @@ public class TurnoSAImp implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             Turno persistentTurno = em.find(Turno.class, turno.getIdTurno());
-            Collection<Empleados> empleadosCollectionOld = persistentTurno.getEmpleadosCollection();
-            Collection<Empleados> empleadosCollectionNew = turno.getEmpleadosCollection();
-            Collection<Empleados> attachedEmpleadosCollectionNew = new ArrayList<Empleados>();
-            for (Empleados empleadosCollectionNewEmpleadosToAttach : empleadosCollectionNew) {
+            Collection<Empleado> empleadosCollectionOld = persistentTurno.getEmpleadosCollection();
+            Collection<Empleado> empleadosCollectionNew = turno.getEmpleadosCollection();
+            Collection<Empleado> attachedEmpleadosCollectionNew = new ArrayList<Empleado>();
+            for (Empleado empleadosCollectionNewEmpleadosToAttach : empleadosCollectionNew) {
                 empleadosCollectionNewEmpleadosToAttach = em.getReference(empleadosCollectionNewEmpleadosToAttach.getClass(), empleadosCollectionNewEmpleadosToAttach.getIdEmpleado());
                 attachedEmpleadosCollectionNew.add(empleadosCollectionNewEmpleadosToAttach);
             }
             empleadosCollectionNew = attachedEmpleadosCollectionNew;
             turno.setEmpleadosCollection(empleadosCollectionNew);
             turno = em.merge(turno);
-            for (Empleados empleadosCollectionOldEmpleados : empleadosCollectionOld) {
+            for (Empleado empleadosCollectionOldEmpleados : empleadosCollectionOld) {
                 if (!empleadosCollectionNew.contains(empleadosCollectionOldEmpleados)) {
                     empleadosCollectionOldEmpleados.getTurnoCollection().remove(turno);
                     empleadosCollectionOldEmpleados = em.merge(empleadosCollectionOldEmpleados);
                 }
             }
-            for (Empleados empleadosCollectionNewEmpleados : empleadosCollectionNew) {
+            for (Empleado empleadosCollectionNewEmpleados : empleadosCollectionNew) {
                 if (!empleadosCollectionOld.contains(empleadosCollectionNewEmpleados)) {
                     empleadosCollectionNewEmpleados.getTurnoCollection().add(turno);
                     empleadosCollectionNewEmpleados = em.merge(empleadosCollectionNewEmpleados);
@@ -118,8 +118,8 @@ public class TurnoSAImp implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The turno with id " + id + " no longer exists.", enfe);
             }
-            Collection<Empleados> empleadosCollection = turno.getEmpleadosCollection();
-            for (Empleados empleadosCollectionEmpleados : empleadosCollection) {
+            Collection<Empleado> empleadosCollection = turno.getEmpleadosCollection();
+            for (Empleado empleadosCollectionEmpleados : empleadosCollection) {
                 empleadosCollectionEmpleados.getTurnoCollection().remove(turno);
                 empleadosCollectionEmpleados = em.merge(empleadosCollectionEmpleados);
             }

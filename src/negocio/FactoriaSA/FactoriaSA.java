@@ -28,6 +28,12 @@ public abstract class FactoriaSA {
 
 	public abstract SAVenta generaSAVenta();
         
+        public abstract SAVenta generaSAEmpleado();
+        
+        public abstract SAVenta generaSADepartamento();
+        
+        public abstract SAVenta generaSATurno();
+        
         
         
      public static FactoriaSA obtenerInstancia() {

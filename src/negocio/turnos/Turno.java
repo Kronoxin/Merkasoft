@@ -22,7 +22,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-import negocio.empleados.Empleados;
+import negocio.empleados.Empleado;
 
 /**
  *
@@ -39,7 +39,7 @@ import negocio.empleados.Empleados;
     @NamedQuery(name = "Turno.findByHoraSalida", query = "SELECT t FROM Turno t WHERE t.horaSalida = :horaSalida")})
 public class Turno implements Serializable {
     @ManyToMany(mappedBy = "turnoCollection")
-    private Collection<Empleados> empleadosCollection;
+    private Collection<Empleado> empleadosCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -128,11 +128,11 @@ public class Turno implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Empleados> getEmpleadosCollection() {
+    public Collection<Empleado> getEmpleadosCollection() {
         return empleadosCollection;
     }
 
-    public void setEmpleadosCollection(Collection<Empleados> empleadosCollection) {
+    public void setEmpleadosCollection(Collection<Empleado> empleadosCollection) {
         this.empleadosCollection = empleadosCollection;
     }
     
