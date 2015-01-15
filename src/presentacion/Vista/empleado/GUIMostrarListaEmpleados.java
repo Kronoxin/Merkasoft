@@ -42,7 +42,7 @@ public class GUIMostrarListaEmpleados extends JFrame{
     
     public GUIMostrarListaEmpleados(){
         this.setTitle("Mostrar Lista Empleados");
-	setBounds(100, 100, 500, 300);
+	setBounds(100, 100, 750, 400);
         this.setLocationRelativeTo(null);
         this.setLayout(new BorderLayout());
                 
@@ -57,7 +57,7 @@ public class GUIMostrarListaEmpleados extends JFrame{
             tabla.getColumnModel().getColumn(6).setPreferredWidth(5);
 
             //dimensiones del Jtable
-            tabla.setPreferredScrollableViewportSize(new Dimension(450, 70));
+            tabla.setPreferredScrollableViewportSize(new Dimension(700, 150));
             //Creamos un JscrollPane y le agregamos la JTable
             JScrollPane scrollPane = new JScrollPane(tabla);
             panelTabla.add(scrollPane,BorderLayout.CENTER);

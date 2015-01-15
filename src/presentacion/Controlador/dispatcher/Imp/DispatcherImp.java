@@ -30,7 +30,10 @@ import presentacion.Vista.empleado.GUIModificarEmpleado;
 import presentacion.Vista.empleado.GUIMostrarEmpleado;
 import presentacion.Vista.empleado.GUIMostrarListaEmpleados;
 import presentacion.Vista.popups.PopupsCliente;
+import presentacion.Vista.popups.PopupsDepartamento;
+import presentacion.Vista.popups.PopupsEmpleado;
 import presentacion.Vista.popups.PopupsProducto;
+import presentacion.Vista.popups.PopupsTurno;
 import presentacion.Vista.popups.PopupsVenta;
 import presentacion.Vista.producto.GUIAltaProducto;
 import presentacion.Vista.producto.GUIBajaProducto;
@@ -256,6 +259,7 @@ public class DispatcherImp extends Dispatcher
                 break;
             }
             
+            
             //SEGUNDA PARTE
             //comandos GUI de empleado
             case EventoNegocio.GUI_ALTA_EMPLEADO:
@@ -342,6 +346,109 @@ public class DispatcherImp extends Dispatcher
                 new GUIModificarTurno();
                 break;
             }
+            
+            //exitos empleado
+            case EventoNegocio.EXITO_ALTA_EMPLEADO:
+            {
+                PopupsEmpleado.AltaEmpleadoExito();
+                break;
+            }
+            case EventoNegocio.EXITO_BAJA_EMPLEADO:
+            {
+                PopupsEmpleado.BajaEmpleadoExito();
+                break;
+            }
+            case EventoNegocio.EXITO_MODIFICAR_EMPLEADO:
+            {
+                PopupsEmpleado.ModificarEmpleadoExito();
+                break;
+            }
+            
+            //exitos Departamento
+            case EventoNegocio.EXITO_ALTA_DEPARTAMENTO:
+            {
+                PopupsDepartamento.AltaDepartamentoExito();
+                break;
+            }
+            case EventoNegocio.EXITO_BAJA_DEPARTAMENTO:
+            {
+                PopupsDepartamento.BajaDepartamentoExito();
+                break;
+            }
+            case EventoNegocio.EXITO_MODIFICAR_DEPARTAMENTO:
+            {
+                PopupsDepartamento.ModificarDepartamentoExito();
+                break;
+            }
+            
+            //exitos turno
+            case EventoNegocio.EXITO_ALTA_TURNO:
+            {
+                PopupsTurno.AltaTurnoExito();
+                break;
+            }
+            case EventoNegocio.EXITO_BAJA_TURNO:
+            {
+                PopupsTurno.BajaTurnoExito();
+                break;
+            }
+            case EventoNegocio.EXITO_MODIFICAR_TURNO:
+            {
+                PopupsTurno.ModificarTurnoExito();
+                break;
+            }
+            
+            //fracaso Empleado
+            case EventoNegocio.FRACASO_ALTA_EMPLEADO:
+            {
+                PopupsEmpleado.AltaEmpleadoFracaso();
+                break;
+            }
+            case EventoNegocio.FRACASO_BAJA_EMPLEADO:
+            {
+                PopupsEmpleado.BajaEmpleadoFracaso();
+                break;
+            }
+            case EventoNegocio.FRACASO_MODIFICAR_EMPLEADO:
+            {
+                PopupsEmpleado.ModificarEmpleadoFracaso();
+                break;
+            }
+            
+            //fracaso Departamento
+            case EventoNegocio.FRACASO_ALTA_DEPARTAMENTO:
+            {
+                PopupsDepartamento.AltaDepartamentoFracaso();
+                break;
+            }
+            case EventoNegocio.FRACASO_BAJA_DEPARTAMENTO:
+            {
+                PopupsDepartamento.BajaDepartamentoFracaso();
+                break;
+            }
+            case EventoNegocio.FRACASO_MODIFICAR_DEPARTAMENTO:
+            {
+                PopupsDepartamento.ModificarDepartamentoFracaso();
+                break;
+            }
+            
+            //fracaso Turno
+            case EventoNegocio.FRACASO_ALTA_TURNO:
+            {
+                PopupsTurno.AltaTurnoFracaso();
+                break;
+            }
+            case EventoNegocio.FRACASO_BAJA_TURNO:
+            {
+                PopupsTurno.BajaTurnoFracaso();
+                break;
+            }
+            case EventoNegocio.FRACASO_MODIFICAR_TURNO:
+            {
+                PopupsTurno.ModificarTurnoFracaso();
+                break;
+            }
+
         
                 
         }
