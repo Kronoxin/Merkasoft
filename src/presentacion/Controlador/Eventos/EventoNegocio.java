@@ -50,37 +50,118 @@ public class EventoNegocio
     public static final int GUI_MOSTRAR_LISTA_VENTAS = 308;
     
     //400 control de exito
+    
+    //Modulo CLIENTE
     public static final int EXITO_ALTA_CLIENTE=401;
     public static final int EXITO_BAJA_CLIENTE=402;
     public static final int EXITO_MODIFICAR_CLIENTE=403;
+    public static final int EXITO_MOSTRAR_CLIENTE=411;
+    public static final int EXITO_MOSTRAR_LISTA_CLIENTE=412;
+    //Modulo PRODUCTOS
     public static final int EXITO_ALTA_PRODUCTO=404;
     public static final int EXITO_BAJA_PRODUCTO=405;
     public static final int EXITO_MODIFICAR_PRODUCTO=406;
-    public static final int EXITO_ALTA_VENTA=407;
-    public static final int EXITO_DEVOLUCION_PRODUCTO=408;
     public static final int EXITO_MOSTRAR_PRODUCTO=409;
     public static final int EXITO_MOSTRAR_LISTA_PRODUCTO=410;
+    
+    
+    //Modulo VENTAS
+    public static final int EXITO_ALTA_VENTA=407;
     public static final int EXITO_MOSTRAR_VENTA=411;
     public static final int EXITO_MOSTRAR_LISTA_VENTA=412;
-    public static final int EXITO_MOSTRAR_CLIENTE=411;
-    public static final int EXITO_MOSTRAR_LISTA_CLIENTE=412;
+    public static final int EXITO_DEVOLUCION_PRODUCTO=408;
+    
+    //Modulo EMPLEADOS
+    public static final int EXITO_ALTA_EMPLEADO = 471; 
+    public static final int EXITO_BAJA_EMPLEADO = 472; 
+    public static final int EXITO_MODIFICAR_EMPLEADO = 473; 
+    public static final int EXITO_MOSTRAR_EMPLEADO = 474; 
+    public static final int EXITO_MOSTRAR_LISTA_EMPLEADO = 475;
+    
+    //Modulo DEPARTAMENTOS
+    public static final int EXITO_ALTA_DEPARTAMENTO = 481;
+    public static final int EXITO_BAJA_DEPARTAMENTO = 482;
+    public static final int EXITO_MODIFICAR_DEPARTAMENTO = 483;
+    public static final int EXITO_MOSTRAR_DEPARTAMENTO = 484;
+    public static final int EXITO_MOSTRAR_LISTA_DEPARTAMENTO = 485;
+    public static final int EXITO_CALCULAR_NOMINA_DEPARTAMENTO = 486;
+    
+    //Modulo TURNOS
+    public static final int EXITO_ALTA_TURNO = 491;
+    public static final int EXITO_BAJA_TURNO = 492;
+    public static final int EXITO_MODIFICAR_TURNO = 493;
+    public static final int EXITO_MOSTRAR_TURNO = 494;
+    public static final int EXITO_MOSTRAR_LISTA_TURNO = 495;
+    
+
+    
     
     //500 Control de fracaso
+    //Modulo CLIENTE
     public static final int FRACASO_ALTA_CLIENTE=501;
     public static final int FRACASO_BAJA_CLIENTE=502;
     public static final int FRACASO_MODIFICAR_CLIENTE=503;
+    public static final int FRACASO_MOSTRAR_CLIENTE=513;
+    public static final int FRACASO_MOSTRAR_LISTA_CLIENTE=514;
+    //Modulo PRODUCTOS
     public static final int FRACASO_ALTA_PRODUCTO=504;
     public static final int FRACASO_BAJA_PRODUCTO=505;
     public static final int FRACASO_MODIFICAR_PRODUCTO=506;
-    public static final int FRACASO_ALTA_VENTA=507;
     public static final int FRACASO_DEVOLUCION_PRODUCTO=508;
     public static final int FRACASO_MOSTRAR_PRODUCTO=509;
     public static final int FRACASO_MOSTRAR_LISTA_PRODUCTO=510;
+    //Modulo VENTAS
+    public static final int FRACASO_ALTA_VENTA=507;
     public static final int FRACASO_MOSTRAR_VENTA=511;
     public static final int FRACASO_MOSTRAR_LISTA_VENTA=512;
-    public static final int FRACASO_MOSTRAR_CLIENTE=513;
-    public static final int FRACASO_MOSTRAR_LISTA_CLIENTE=514;
+    
+    //Modulo EMPLEADOS
+    public static final int FRACASO_ALTA_EMPLEADO = 771; 
+    public static final int FRACASO_BAJA_EMPLEADO = 772; 
+    public static final int FRACASO_MODIFICAR_EMPLEADO = 773; 
+    public static final int FRACASO_MOSTRAR_EMPLEADO = 774; 
+    public static final int FRACASO_MOSTRAR_LISTA_EMPLEADO = 775; 
+    
+    //Modulo DEPARTAMENTOS
+    public static final int FRACASO_ALTA_DEPARTAMENTO = 781;
+    public static final int FRACASO_BAJA_DEPARTAMENTO = 782;
+    public static final int FRACASO_MODIFICAR_DEPARTAMENTO = 783;
+    public static final int FRACASO_MOSTRAR_DEPARTAMENTO = 784;
+    public static final int FRACASO_MOSTRAR_LISTA_DEPARTAMENTO = 785;
+    public static final int FRACASO_CALCULAR_NOMINA_DEPARTAMENTO = 786;
+    
+    //Modulo TURNOS
+    public static final int FRACASO_ALTA_TURNO = 791;
+    public static final int FRACASO_BAJA_TURNO = 792;
+    public static final int FRACASO_MODIFICAR_TURNO = 793;
+    public static final int FRACASO_MOSTRAR_TURNO = 794;
+    public static final int FRACASO_MOSTRAR_LISTA_TURNO = 795;
     
     //600 control de ventanas
-    public static final int CANCELAR=601;
+    
+    
+    //700 Control de Empleados
+    public static final int ALTA_EMPLEADO = 701; 
+    public static final int BAJA_EMPLEADO = 702; 
+    public static final int MODIFICAR_EMPLEADO = 703; 
+    public static final int MOSTRAR_EMPLEADO = 704; 
+    public static final int MOSTRAR_LISTA_EMPLEADO = 705;                 
+    
+    //800 Control de Departamentos
+    public static final int ALTA_DEPARTAMENTO = 801;
+    public static final int BAJA_DEPARTAMENTO = 802;
+    public static final int MODIFICAR_DEPARTAMENTO = 803;
+    public static final int MOSTRAR_DEPARTAMENTO = 804;
+    public static final int MOSTRAR_LISTA_DEPARTAMENTO = 805;
+    public static final int CALCULAR_NOMINA_DEPARTAMENTO = 806;
+
+
+            
+    //900 Control de Turnos
+    public static final int ALTA_TURNO = 901;
+    public static final int BAJA_TURNO = 902;
+    public static final int MODIFICAR_TURNO = 903;
+    public static final int MOSTRAR_TURNO = 904;
+    public static final int MOSTRAR_LISTA_TURNO = 905;
+            
 }
