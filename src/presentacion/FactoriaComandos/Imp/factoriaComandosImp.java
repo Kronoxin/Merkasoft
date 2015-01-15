@@ -15,6 +15,8 @@ import presentacion.Controlador.Comandos.producto.GUI.*;
 import presentacion.Controlador.Comandos.venta.GUI.*;
 import presentacion.FactoriaComandos.factoriaComandos;
 import presentacion.Controlador.Comandos.Command;
+import presentacion.Controlador.Comandos.empleado.GUI.comandoGUIaltaEmpleado;
+import presentacion.Controlador.Comandos.empleado.comandoAltaEmpleado;
 import presentacion.Controlador.Eventos.EventoNegocio;
 /**
  *
@@ -182,6 +184,14 @@ public class factoriaComandosImp extends factoriaComandos
                 break;
             }
             //Eventos de vista
+            
+            
+            //SEGUNDA PARTE
+            case EventoNegocio.GUI_ALTA_EMPLEADO:
+            {
+                comando = new comandoGUIaltaEmpleado();
+                break;
+            }
            
             default:
                 comando=null;

@@ -6,6 +6,7 @@
 package presentacion.Controlador.Comandos.empleado;
 
 import negocio.FactoriaSA.FactoriaSA;
+import negocio.empleados.Empleado;
 import negocio.producto.TProducto;
 import presentacion.Controlador.Comandos.Command;
 import presentacion.Controlador.Comandos.RespuestaComando;
@@ -20,19 +21,19 @@ public class comandoModificarEmpleado implements Command{
     @Override
     public RespuestaComando execute(Object datos) {
        //int idEmpleado = Integer.parseInt((String) datos);
-	boolean correcto = FactoriaSA.obtenerInstancia().generaSAEmpleado().modificarEmpleado((TEmpleado)datos);
+	boolean correcto = FactoriaSA.obtenerInstancia().generaSAEmpleado().modificarEmpleado((Empleado)datos);
 	RespuestaComando respuesta;
 		
 	if (correcto)
         {
-            respuesta = new RespuestaComando(EventoNegocio.EXITO_MODIFICAR_EMPLEADO, (TEmpleado)datos);
+            respuesta = new RespuestaComando(EventoNegocio.EXITO_MODIFICAR_EMPLEADO, (Empleado)datos);
 	}
 	else
         {
-            respuesta = new RespuestaComando(EventoNegocio.FRACASO_MODIFICAR_EMPLEADO, (TEmpleado)datos);
+            respuesta = new RespuestaComando(EventoNegocio.FRACASO_MODIFICAR_EMPLEADO, (Empleado)datos);
 	}
 	return respuesta;
     }
-    }
+    
     
 }

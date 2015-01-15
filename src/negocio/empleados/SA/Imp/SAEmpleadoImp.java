@@ -17,7 +17,9 @@ import java.util.Collection;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import negocio.empleados.Empleado;
+import negocio.empleados.SA.SAEmpleado;
 import negocio.turnos.SA.exceptions.NonexistentEntityException;
 import negocio.turnos.Turno;
 
@@ -25,70 +27,78 @@ import negocio.turnos.Turno;
  *
  * @author Ruben
  */
-public class SAEmpleadoImp implements Serializable {
+public class SAEmpleadoImp implements SAEmpleado {
 
-    public SAEmpleadoImp(EntityManagerFactory emf) {
-        this.emf = emf;
-    }
-    private EntityManagerFactory emf = null;
+    
 
-    public SAEmpleadoImp() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public SAEmpleadoImp() 
+    {
     }
 
-    public EntityManager getEntityManager() {
-        return emf.createEntityManager();
-    }
-
-    public void create(Empleado empleados) {
-        if (empleados.getTurnoCollection() == null) {
-            empleados.setTurnoCollection(new ArrayList<Turno>());
+   
+    @Override
+    public int altaEmpleado(Empleado empleado) 
+    {
+        if (empleado.getTurnoCollection() == null) {
+            empleado.setTurnoCollection(new ArrayList<Turno>());
         }
         EntityManager em = null;
-        try {
-            em = getEntityManager();
+        try 
+        {
+            EntityManagerFactory ef = Persistence.createEntityManagerFactory("merkasoft");
+            em = ef.createEntityManager();
+            
             em.getTransaction().begin();
-            Departamento departamento = empleados.getDepartamento();
+            Departamento departamento = empleado.getDepartamento();
             if (departamento != null) {
                 departamento = em.getReference(departamento.getClass(), departamento.getIdDepartamento());
-                empleados.setDepartamento(departamento);
+                empleado.setDepartamento(departamento);
             }
             Collection<Turno> attachedTurnoCollection = new ArrayList<Turno>();
-            for (Turno turnoCollectionTurnoToAttach : empleados.getTurnoCollection()) {
+            for (Turno turnoCollectionTurnoToAttach : empleado.getTurnoCollection()) {
                 turnoCollectionTurnoToAttach = em.getReference(turnoCollectionTurnoToAttach.getClass(), turnoCollectionTurnoToAttach.getIdTurno());
                 attachedTurnoCollection.add(turnoCollectionTurnoToAttach);
             }
-            empleados.setTurnoCollection(attachedTurnoCollection);
-            em.persist(empleados);
+            empleado.setTurnoCollection(attachedTurnoCollection);
+            em.persist(empleado);
             if (departamento != null) {
-                departamento.getEmpleadosCollection().add(empleados);
+                departamento.getEmpleadosCollection().add(empleado);
                 departamento = em.merge(departamento);
             }
-            for (Turno turnoCollectionTurno : empleados.getTurnoCollection()) {
-                turnoCollectionTurno.getEmpleadosCollection().add(empleados);
+            for (Turno turnoCollectionTurno : empleado.getTurnoCollection()) {
+                turnoCollectionTurno.getEmpleadosCollection().add(empleado);
                 turnoCollectionTurno = em.merge(turnoCollectionTurno);
             }
             em.getTransaction().commit();
-        } finally {
-            if (em != null) {
+        } 
+        finally 
+        {
+            if (em != null) 
+            {
                 em.close();
             }
         }
+        
+        return empleado.getIdEmpleado();
     }
 
-    public void edit(Empleado empleados) throws NonexistentEntityException, Exception {
+    @Override
+    public boolean modificarEmpleado(Empleado empleado)
+    {
         EntityManager em = null;
+        boolean correcto = true;
         try {
-            em = getEntityManager();
+            EntityManagerFactory ef = Persistence.createEntityManagerFactory("merkasoft");
+            em = ef.createEntityManager();
             em.getTransaction().begin();
-            Empleado persistentEmpleados = em.find(Empleado.class, empleados.getIdEmpleado());
+            Empleado persistentEmpleados = em.find(Empleado.class, empleado.getIdEmpleado());
             Departamento departamentoOld = persistentEmpleados.getDepartamento();
-            Departamento departamentoNew = empleados.getDepartamento();
+            Departamento departamentoNew = empleado.getDepartamento();
             Collection<Turno> turnoCollectionOld = persistentEmpleados.getTurnoCollection();
-            Collection<Turno> turnoCollectionNew = empleados.getTurnoCollection();
+            Collection<Turno> turnoCollectionNew = empleado.getTurnoCollection();
             if (departamentoNew != null) {
                 departamentoNew = em.getReference(departamentoNew.getClass(), departamentoNew.getIdDepartamento());
-                empleados.setDepartamento(departamentoNew);
+                empleado.setDepartamento(departamentoNew);
             }
             Collection<Turno> attachedTurnoCollectionNew = new ArrayList<Turno>();
             for (Turno turnoCollectionNewTurnoToAttach : turnoCollectionNew) {
@@ -96,86 +106,107 @@ public class SAEmpleadoImp implements Serializable {
                 attachedTurnoCollectionNew.add(turnoCollectionNewTurnoToAttach);
             }
             turnoCollectionNew = attachedTurnoCollectionNew;
-            empleados.setTurnoCollection(turnoCollectionNew);
-            empleados = em.merge(empleados);
+            empleado.setTurnoCollection(turnoCollectionNew);
+            empleado = em.merge(empleado);
             if (departamentoOld != null && !departamentoOld.equals(departamentoNew)) {
-                departamentoOld.getEmpleadosCollection().remove(empleados);
+                departamentoOld.getEmpleadosCollection().remove(empleado);
                 departamentoOld = em.merge(departamentoOld);
             }
             if (departamentoNew != null && !departamentoNew.equals(departamentoOld)) {
-                departamentoNew.getEmpleadosCollection().add(empleados);
+                departamentoNew.getEmpleadosCollection().add(empleado);
                 departamentoNew = em.merge(departamentoNew);
             }
             for (Turno turnoCollectionOldTurno : turnoCollectionOld) {
                 if (!turnoCollectionNew.contains(turnoCollectionOldTurno)) {
-                    turnoCollectionOldTurno.getEmpleadosCollection().remove(empleados);
+                    turnoCollectionOldTurno.getEmpleadosCollection().remove(empleado);
                     turnoCollectionOldTurno = em.merge(turnoCollectionOldTurno);
                 }
             }
             for (Turno turnoCollectionNewTurno : turnoCollectionNew) {
                 if (!turnoCollectionOld.contains(turnoCollectionNewTurno)) {
-                    turnoCollectionNewTurno.getEmpleadosCollection().add(empleados);
+                    turnoCollectionNewTurno.getEmpleadosCollection().add(empleado);
                     turnoCollectionNewTurno = em.merge(turnoCollectionNewTurno);
                 }
             }
             em.getTransaction().commit();
-        } catch (Exception ex) {
+        } 
+        catch (Exception ex) 
+        {
+            correcto = false;
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Integer id = empleados.getIdEmpleado();
-                if (findEmpleados(id) == null) {
-                    throw new NonexistentEntityException("The empleados with id " + id + " no longer exists.");
+                Integer id = empleado.getIdEmpleado();
+                if (mostrarEmpleado(id) == null) {
+                    System.out.println("The empleados with id " + id + " no longer exists.");
                 }
             }
-            throw ex;
+            
         } finally {
             if (em != null) {
                 em.close();
             }
         }
+        return correcto;
     }
-
-    public void destroy(Integer id) throws NonexistentEntityException {
+    
+    @Override
+    public Empleado mostrarEmpleado(int id) {
         EntityManager em = null;
+        EntityManagerFactory ef = Persistence.createEntityManagerFactory("merkasoft");
+        em = ef.createEntityManager();
         try {
-            em = getEntityManager();
+            return em.find(Empleado.class, id);
+        } finally {
+            em.close();
+        }
+    }
+    
+    @Override
+     public ArrayList<Empleado> mostrarListaEmpleados() 
+    {
+        return new ArrayList(findEmpleadosEntities(true, -1, -1));
+    }
+
+    @Override
+    public boolean bajaEmpleado(int id)
+    {
+        EntityManager em = null;
+        boolean correcto = true;
+        try {
+            EntityManagerFactory ef = Persistence.createEntityManagerFactory("merkasoft");
+            em = ef.createEntityManager();
             em.getTransaction().begin();
-            Empleado empleados;
-            try {
-                empleados = em.getReference(Empleado.class, id);
-                empleados.getIdEmpleado();
-            } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The empleados with id " + id + " no longer exists.", enfe);
-            }
-            Departamento departamento = empleados.getDepartamento();
-            if (departamento != null) {
-                departamento.getEmpleadosCollection().remove(empleados);
-                departamento = em.merge(departamento);
-            }
-            Collection<Turno> turnoCollection = empleados.getTurnoCollection();
-            for (Turno turnoCollectionTurno : turnoCollection) {
-                turnoCollectionTurno.getEmpleadosCollection().remove(empleados);
-                turnoCollectionTurno = em.merge(turnoCollectionTurno);
-            }
-            em.remove(empleados);
+            Empleado persistentEmpleados = em.find(Empleado.class, id);
+            
+            persistentEmpleados.setActivo(false);
+            em.merge(persistentEmpleados);
             em.getTransaction().commit();
+        } 
+        catch (Exception ex) 
+        {
+            correcto = false;
+            ex.printStackTrace();
+            
         } finally {
             if (em != null) {
                 em.close();
             }
         }
+        return correcto;
     }
+    
 
-    public List<Empleado> findEmpleadosEntities() {
-        return findEmpleadosEntities(true, -1, -1);
-    }
+    
+   
 
-    public List<Empleado> findEmpleadosEntities(int maxResults, int firstResult) {
+    private List<Empleado> findEmpleadosEntities(int maxResults, int firstResult) {
         return findEmpleadosEntities(false, maxResults, firstResult);
     }
 
     private List<Empleado> findEmpleadosEntities(boolean all, int maxResults, int firstResult) {
-        EntityManager em = getEntityManager();
+        EntityManager em = null;
+        EntityManagerFactory ef = Persistence.createEntityManagerFactory("merkasoft");
+        em = ef.createEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             cq.select(cq.from(Empleado.class));
@@ -190,17 +221,10 @@ public class SAEmpleadoImp implements Serializable {
         }
     }
 
-    public Empleado findEmpleados(Integer id) {
-        EntityManager em = getEntityManager();
-        try {
-            return em.find(Empleado.class, id);
-        } finally {
-            em.close();
-        }
-    }
-
     public int getEmpleadosCount() {
-        EntityManager em = getEntityManager();
+        EntityManager em = null;
+        EntityManagerFactory ef = Persistence.createEntityManagerFactory("merkasoft");
+        em = ef.createEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             Root<Empleado> rt = cq.from(Empleado.class);

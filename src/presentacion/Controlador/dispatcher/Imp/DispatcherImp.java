@@ -18,6 +18,7 @@ import presentacion.Vista.cliente.GUIModificarCliente;
 import presentacion.Vista.cliente.GUIMostrarCliente;
 import presentacion.Vista.cliente.GUIMostrarListaClientes;
 import presentacion.Vista.cliente.GUIPrincipal_Cliente;
+import presentacion.Vista.empleado.GUIAltaEmpleado;
 import presentacion.Vista.popups.PopupsCliente;
 import presentacion.Vista.popups.PopupsProducto;
 import presentacion.Vista.popups.PopupsVenta;
@@ -237,6 +238,14 @@ public class DispatcherImp extends Dispatcher
             case EventoNegocio.FRACASO_DEVOLUCION_PRODUCTO:
             {
 		PopupsVenta.DevolucionProductoFracaso();
+                break;
+            }
+            
+            //SEGUNDA PARTE
+            
+            case EventoNegocio.GUI_ALTA_EMPLEADO:
+            {
+                new GUIAltaEmpleado();
                 break;
             }
                 

@@ -6,6 +6,7 @@
 package presentacion.Controlador.Comandos.empleado;
 
 import negocio.FactoriaSA.FactoriaSA;
+import negocio.empleados.Empleado;
 import negocio.empleados.TEmpleado;
 import presentacion.Controlador.Comandos.Command;
 import presentacion.Controlador.Comandos.RespuestaComando;
@@ -21,7 +22,7 @@ public class comandoAltaEmpleado implements Command{
     public RespuestaComando execute(Object datos) {
        RespuestaComando respuesta;
        int idEmpleado;
-       idEmpleado = FactoriaSA.obtenerInstancia().generaSAEmpleado().altaEmpleado((TEmpleado) datos);
+       idEmpleado = FactoriaSA.obtenerInstancia().generaSAEmpleado().altaEmpleado((Empleado) datos);
        if(idEmpleado > 0)
            respuesta = new RespuestaComando(EventoNegocio.EXITO_ALTA_EMPLEADO, idEmpleado);
        else

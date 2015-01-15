@@ -24,7 +24,7 @@ public class comandoBajaEmpleado implements Command{
             int idEmpleado = Integer.parseInt((String) datos);
             boolean eliminado;
             
-            eliminado = FactoriaSA.obtenerInstancia().generaSAEmpleado().eliminarEmpleado(idEmpleado);
+            eliminado = FactoriaSA.obtenerInstancia().generaSAEmpleado().bajaEmpleado(idEmpleado);
             
             if(eliminado)
                 respuesta = new RespuestaComando(EventoNegocio.EXITO_BAJA_EMPLEADO, idEmpleado);
@@ -35,6 +35,6 @@ public class comandoBajaEmpleado implements Command{
         }
         return respuesta;
     }
-    }
+    
     
 }

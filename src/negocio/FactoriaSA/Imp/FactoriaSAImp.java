@@ -23,7 +23,6 @@ import org.eclipse.persistence.internal.jpa.EntityManagerImpl;
  */
 public class FactoriaSAImp extends FactoriaSA {
     
-    private EntityManager em = new EntityManager();
 
     
     
@@ -48,8 +47,8 @@ public class FactoriaSAImp extends FactoriaSA {
     }
 
     @Override
-    public SAVenta generaSAEmpleado() {
-        return new SAEmpleadoImp(em);
+    public SAEmpleado generaSAEmpleado() {
+        return new SAEmpleadoImp();
     }
 
     @Override

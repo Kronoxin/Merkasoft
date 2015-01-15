@@ -5,11 +5,21 @@
  */
 package negocio.empleados.SA;
 
+import java.util.ArrayList;
+import negocio.empleados.Empleado;
+
 /**
  *
  * @author Ruben
  */
 //meter los CRUD
-public interface SAEmpleado {
+public interface SAEmpleado 
+{
+    
+    public int altaEmpleado(Empleado empleado);
+    public  boolean bajaEmpleado(int id);
+    public boolean modificarEmpleado(Empleado empleado);
+    public Empleado mostrarEmpleado(int id);
+    public ArrayList<Empleado> mostrarListaEmpleados();
     
 }

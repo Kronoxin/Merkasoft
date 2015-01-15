@@ -7,6 +7,7 @@ package presentacion.Controlador.Comandos.empleado;
 
 import java.util.ArrayList;
 import negocio.FactoriaSA.FactoriaSA;
+import negocio.empleados.Empleado;
 import negocio.empleados.TEmpleado;
 import presentacion.Controlador.Comandos.Command;
 import presentacion.Controlador.Comandos.RespuestaComando;
@@ -24,7 +25,7 @@ public class comandoMostrarEmpleado implements Command{
         
         
         Integer idEmpleado = (Integer)datosAlmacenados.get(0);
-        TEmpleado empleado;
+        Empleado empleado;
 	empleado = FactoriaSA.obtenerInstancia().generaSAEmpleado().mostrarEmpleado(idEmpleado);
 	RespuestaComando respuesta;
         datosAlmacenados.add(empleado);

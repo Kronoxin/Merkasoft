@@ -145,7 +145,13 @@ public class EventoNegocio
     public static final int BAJA_EMPLEADO = 702; 
     public static final int MODIFICAR_EMPLEADO = 703; 
     public static final int MOSTRAR_EMPLEADO = 704; 
-    public static final int MOSTRAR_LISTA_EMPLEADO = 705;                 
+    public static final int MOSTRAR_LISTA_EMPLEADO = 705; 
+ 
+    public static final int GUI_ALTA_EMPLEADO = 706;
+    public static final int GUI_BAJA_EMPLEADO = 707;
+    public static final int GUI_MODIFICAR_EMPLEADO = 708;
+    public static final int GUI_MOSTRAR_EMPLEADO = 709;
+    public static final int GUI_MOSTRAR_LISTA_EMPLEADOS = 710;
     
     //800 Control de Departamentos
     public static final int ALTA_DEPARTAMENTO = 801;
@@ -154,6 +160,12 @@ public class EventoNegocio
     public static final int MOSTRAR_DEPARTAMENTO = 804;
     public static final int MOSTRAR_LISTA_DEPARTAMENTO = 805;
     public static final int CALCULAR_NOMINA_DEPARTAMENTO = 806;
+    
+    public static final int GUI_ALTA_DEPARTAMENTO = 807;
+    public static final int GUI_BAJA_DEPARTAMENTO = 808;
+    public static final int GUI_MODIFICAR_DEPARTAMENTO = 809;
+    public static final int GUI_MOSTRAR_DEPARTAMENTO = 810;
+    public static final int GUI_MOSTRAR_LISTA_DEPARTAMENTOS = 811;
 
 
             
@@ -163,5 +175,11 @@ public class EventoNegocio
     public static final int MODIFICAR_TURNO = 903;
     public static final int MOSTRAR_TURNO = 904;
     public static final int MOSTRAR_LISTA_TURNO = 905;
+    
+    public static final int GUI_ALTA_TURNO = 906;
+    public static final int GUI_BAJA_TURNO = 907;
+    public static final int GUI_MODIFICAR_TURNO = 908;
+    public static final int GUI_MOSTRAR_TURNO = 909;
+    public static final int GUI_MOSTRAR_LISTA_TURNOS = 910;
             
 }

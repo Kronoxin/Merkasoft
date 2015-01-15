@@ -7,6 +7,7 @@ package presentacion.Controlador.Comandos.empleado;
 
 import java.util.ArrayList;
 import negocio.FactoriaSA.FactoriaSA;
+import negocio.empleados.Empleado;
 import negocio.empleados.TEmpleado;
 import presentacion.Controlador.Comandos.Command;
 import presentacion.Controlador.Comandos.RespuestaComando;
@@ -21,8 +22,8 @@ public class comandoMostrarListaEmpleados implements Command{
     @Override
     public RespuestaComando execute(Object datos) {
         ArrayList<Object> datosLista = (ArrayList<Object>)datos;
-        ArrayList<TEmpleado> listaEmpleados;
-	listaEmpleados = FactoriaSA.obtenerInstancia().generaSAEmpleado().mostrarListaEmpleado();
+        ArrayList<Empleado> listaEmpleados;
+	listaEmpleados = FactoriaSA.obtenerInstancia().generaSAEmpleado().mostrarListaEmpleados();
 	RespuestaComando respuesta;
         datosLista.add(listaEmpleados);
 		

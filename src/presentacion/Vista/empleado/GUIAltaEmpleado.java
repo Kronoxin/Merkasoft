@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.Date;
+import java.text.DecimalFormat;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -20,9 +21,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import negocio.empleados.Empleado;
 import presentacion.Controlador.Controlador;
 import presentacion.Controlador.Eventos.EventoNegocio;
 import presentacion.VentanaPrincipal;
+import sun.nio.cs.ext.GB18030;
 
 /**
  *
@@ -30,7 +33,7 @@ import presentacion.VentanaPrincipal;
  */
 public class GUIAltaEmpleado extends JFrame{
     
-    //TEmpleado empleado = new TEmpleado();
+    Empleado empleado = new Empleado();
     
     JPanel panelSuperior = new JPanel();
     JPanel panelRadios = new JPanel(new FlowLayout());
@@ -110,7 +113,14 @@ public class GUIAltaEmpleado extends JFrame{
 
             @Override
             public void actionPerformed(ActionEvent e) {
+                empleado.setDni(textDNI.getText());
+                empleado.setNombre(textNombre.getText());
+                empleado.setApellidos(textApellidos.getText());
+             //   empleado.setDepartamento(textDepartamento.getText());
+              //  empleado.setSueldo(BigDecimal)textSueldo.getText());
+                empleado.setActivo(true);
                 
+                Controlador.getInstance().accion(EventoNegocio.ALTA_EMPLEADO, empleado);
             }
         });
             boton_cancelar.addActionListener(new ActionListener() {
@@ -134,6 +144,8 @@ public class GUIAltaEmpleado extends JFrame{
             
             
 	}
+    
+ 
 
     public JPanel getPanelSuperior() {
         return panelSuperior;

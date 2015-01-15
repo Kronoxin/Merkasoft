@@ -68,6 +68,9 @@ public class Empleado implements Serializable {
     @ManyToOne
     private Departamento departamento;
 
+    @Column(name = "Activo")
+    private Boolean activo;
+     
     public Empleado() {
     }
 
@@ -137,6 +140,15 @@ public class Empleado implements Serializable {
         hash += (idEmpleado != null ? idEmpleado.hashCode() : 0);
         return hash;
     }
+
+    public Boolean getActivo() {
+        return activo;
+    }
+
+    public void setActivo(Boolean activo) {
+        this.activo = activo;
+    }
+    
 
     @Override
     public boolean equals(Object object) {

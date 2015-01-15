@@ -68,7 +68,7 @@ public class GUIPrincipal_Empleado extends JPanel{
         @Override
         public void actionPerformed(ActionEvent e) {
             if( e.getSource() ==  boton_alta_empleado ){
-                   // Controlador.getInstance().accion(EventoNegocio.GUI_ALTA_EMPLEADO,GUIPrincipal_Empleado.this);
+                    Controlador.getInstance().accion(EventoNegocio.GUI_ALTA_EMPLEADO,GUIPrincipal_Empleado.this);
             }
             else if( e.getSource() == boton_baja_empleado){
                   //  Controlador.getInstance().accion(EventoNegocio.GUI_BAJA_EMPLEADO, GUIPrincipal_Empleado.this);
