@@ -3,15 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package negocio.departamentos.SA;
+package negocio.empleados.SA;
 
 /**
  *
  * @author Ruben
  */
-
 //meter los CRUD
-public interface DepartamentoSA 
-{
+public interface SAEmpleado {
     
 }

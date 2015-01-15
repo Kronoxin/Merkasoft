@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package negocio.empleados.SA;
+package negocio.turnos.SA;
 
 /**
  *
  * @author Ruben
  */
 //meter los CRUD
-public interface EmpleadoSA {
+public interface SAturno {
     
 }

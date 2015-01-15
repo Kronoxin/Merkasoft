@@ -25,12 +25,16 @@ import negocio.turnos.Turno;
  *
  * @author Ruben
  */
-public class EmpleadosSAImp implements Serializable {
+public class SAEmpleadoImp implements Serializable {
 
-    public EmpleadosSAImp(EntityManagerFactory emf) {
+    public SAEmpleadoImp(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
+
+    public SAEmpleadoImp() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();

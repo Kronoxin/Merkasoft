@@ -5,6 +5,7 @@
  */
 package negocio.FactoriaSA;
 
+import javax.persistence.EntityManager;
 import negocio.FactoriaSA.Imp.FactoriaSAImp;
 import negocio.cliente.SACliente.Imp.SAClienteImp;
 import negocio.cliente.SACliente.SACliente;
@@ -20,6 +21,7 @@ import negocio.venta.SAVenta.SAVenta;
 public abstract class FactoriaSA {
     
     private static FactoriaSA _instance = null;
+       
 
 
 	public abstract SACliente generaSACliente();
