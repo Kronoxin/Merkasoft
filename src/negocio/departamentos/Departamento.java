@@ -46,6 +46,8 @@ public class Departamento implements Serializable {
     private String descripcion;
     @OneToMany(mappedBy = "departamento")
     private Collection<Empleado> empleadosCollection;
+    @Column(name = "disponible")
+    private boolean disponible;
 
     public Departamento() {
     }
@@ -87,6 +89,15 @@ public class Departamento implements Serializable {
         this.empleadosCollection = empleadosCollection;
     }
 
+    public boolean isDisponible() {
+        return disponible;
+    }
+
+    public void setDisponible(boolean disponible) {
+        this.disponible = disponible;
+    }
+    
+    
     @Override
     public int hashCode() {
         int hash = 0;

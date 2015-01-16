@@ -5,13 +5,15 @@
  */
 package negocio.departamentos.SA;
 
-/**
- *
- * @author Ruben
- */
+import java.util.ArrayList;
+import negocio.departamentos.Departamento;
 
-//meter los CRUD
+
 public interface SADepartamento 
 {
-    
+    public int altaDepartamento(Departamento empleado);
+    public  boolean bajaDepartamento(int id);
+    public boolean modificarDepartamento(Departamento empleado);
+    public Departamento mostrarDepartamento(int id);
+    public ArrayList<Departamento> mostrarListaDepartamentos();
 }

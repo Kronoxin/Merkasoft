@@ -68,10 +68,11 @@ public class Empleado implements Serializable {
     @ManyToOne
     private Departamento departamento;
 
-    @Column(name = "Activo")
-    private Boolean activo;
+    @Column(name = "disponible")
+    private Boolean disponible;
      
-    public Empleado() {
+    public Empleado() 
+    {
     }
 
     public Empleado(Integer idEmpleado) {
@@ -141,12 +142,12 @@ public class Empleado implements Serializable {
         return hash;
     }
 
-    public Boolean getActivo() {
-        return activo;
+    public Boolean getDisponible() {
+        return disponible;
     }
 
-    public void setActivo(Boolean activo) {
-        this.activo = activo;
+    public void setDisponible(Boolean disponible) {
+        this.disponible = disponible;
     }
     
 

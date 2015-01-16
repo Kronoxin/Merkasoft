@@ -178,7 +178,7 @@ public class SAEmpleadoImp implements SAEmpleado {
             em.getTransaction().begin();
             Empleado persistentEmpleados = em.find(Empleado.class, id);
             
-            persistentEmpleados.setActivo(false);
+            persistentEmpleados.setDisponible(false);
             em.merge(persistentEmpleados);
             em.getTransaction().commit();
         } 
@@ -234,6 +234,27 @@ public class SAEmpleadoImp implements SAEmpleado {
         } finally {
             em.close();
         }
+    }
+    
+    public static void main(String args[])
+    {
+        SAEmpleadoImp sa = new SAEmpleadoImp();
+        Empleado empleado = new Empleado();
+        Departamento dep = new Departamento();
+        
+        dep.setDescripcion("PruebaDepartamento1");
+        dep.setNombre("Departamento1");
+        ArrayList<Empleado> listaEmpleados = new ArrayList<>();
+        
+        listaEmpleados.add(empleado);
+        dep.setEmpleadosCollection(listaEmpleados);
+        
+        empleado.setNombre("Prueba1");
+        empleado.setApellidos("Cosas");
+        empleado.setDireccion("Calle rabo 4");
+        empleado.setDepartamento(dep);
+        
+        sa.altaEmpleado(empleado);
     }
     
 }
