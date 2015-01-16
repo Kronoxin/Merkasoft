@@ -45,7 +45,7 @@ public class SAEmpleadoImp implements SAEmpleado {
         EntityManager em = null;
         try 
         {
-            EntityManagerFactory ef = Persistence.createEntityManagerFactory("merkasoft");
+            EntityManagerFactory ef = Persistence.createEntityManagerFactory("MerkaSoftPU");
             em = ef.createEntityManager();
             
             em.getTransaction().begin();
@@ -88,7 +88,7 @@ public class SAEmpleadoImp implements SAEmpleado {
         EntityManager em = null;
         boolean correcto = true;
         try {
-            EntityManagerFactory ef = Persistence.createEntityManagerFactory("merkasoft");
+            EntityManagerFactory ef = Persistence.createEntityManagerFactory("MerkaSoftPU");
             em = ef.createEntityManager();
             em.getTransaction().begin();
             Empleado persistentEmpleados = em.find(Empleado.class, empleado.getIdEmpleado());
@@ -152,7 +152,7 @@ public class SAEmpleadoImp implements SAEmpleado {
     @Override
     public Empleado mostrarEmpleado(int id) {
         EntityManager em = null;
-        EntityManagerFactory ef = Persistence.createEntityManagerFactory("merkasoft");
+        EntityManagerFactory ef = Persistence.createEntityManagerFactory("MerkaSoftPU");
         em = ef.createEntityManager();
         try {
             return em.find(Empleado.class, id);
@@ -173,7 +173,7 @@ public class SAEmpleadoImp implements SAEmpleado {
         EntityManager em = null;
         boolean correcto = true;
         try {
-            EntityManagerFactory ef = Persistence.createEntityManagerFactory("merkasoft");
+            EntityManagerFactory ef = Persistence.createEntityManagerFactory("MerkaSoftPU");
             em = ef.createEntityManager();
             em.getTransaction().begin();
             Empleado persistentEmpleados = em.find(Empleado.class, id);
@@ -205,7 +205,7 @@ public class SAEmpleadoImp implements SAEmpleado {
 
     private List<Empleado> findEmpleadosEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = null;
-        EntityManagerFactory ef = Persistence.createEntityManagerFactory("merkasoft");
+        EntityManagerFactory ef = Persistence.createEntityManagerFactory("MerkaSoftPU");
         em = ef.createEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
@@ -223,7 +223,7 @@ public class SAEmpleadoImp implements SAEmpleado {
 
     public int getEmpleadosCount() {
         EntityManager em = null;
-        EntityManagerFactory ef = Persistence.createEntityManagerFactory("merkasoft");
+        EntityManagerFactory ef = Persistence.createEntityManagerFactory("MerkaSoftPU");
         em = ef.createEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();

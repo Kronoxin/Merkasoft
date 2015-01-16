@@ -35,7 +35,7 @@ public class SADepartamentoImp implements SADepartamento {
         try 
         {
            
-            EntityManagerFactory ef = Persistence.createEntityManagerFactory("merkasoft");
+            EntityManagerFactory ef = Persistence.createEntityManagerFactory("MerkaSoftPU");
             em = ef.createEntityManager();
         
             em.getTransaction().begin();
@@ -71,7 +71,7 @@ public class SADepartamentoImp implements SADepartamento {
         EntityManager em = null;
         try {
            
-            EntityManagerFactory ef = Persistence.createEntityManagerFactory("merkasoft");
+            EntityManagerFactory ef = Persistence.createEntityManagerFactory("MerkaSoftPU");
             em = ef.createEntityManager();
         
             em.getTransaction().begin();
@@ -136,7 +136,7 @@ public class SADepartamentoImp implements SADepartamento {
         EntityManager em = null;
         boolean correcto = true;
         try {
-            EntityManagerFactory ef = Persistence.createEntityManagerFactory("merkasoft");
+            EntityManagerFactory ef = Persistence.createEntityManagerFactory("MerkaSoftPU");
             em = ef.createEntityManager();
             em.getTransaction().begin();
             Departamento persistentDepartamento = em.find(Departamento.class, id);
@@ -170,7 +170,7 @@ public class SADepartamentoImp implements SADepartamento {
 
     private List<Departamento> findDepartamentoEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = null;
-        EntityManagerFactory ef = Persistence.createEntityManagerFactory("merkasoft");
+        EntityManagerFactory ef = Persistence.createEntityManagerFactory("MerkaSoftPU");
         
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
@@ -190,7 +190,7 @@ public class SADepartamentoImp implements SADepartamento {
     public Departamento mostrarDepartamento(int id) 
     {
         EntityManager em = null;
-        EntityManagerFactory ef = Persistence.createEntityManagerFactory("merkasoft");
+        EntityManagerFactory ef = Persistence.createEntityManagerFactory("MerkaSoftPU");
         em = ef.createEntityManager();
         
         try 
@@ -206,7 +206,7 @@ public class SADepartamentoImp implements SADepartamento {
     public int getDepartamentoCount() 
     {
         EntityManager em = null;
-        EntityManagerFactory ef = Persistence.createEntityManagerFactory("merkasoft");
+        EntityManagerFactory ef = Persistence.createEntityManagerFactory("MerkaSoftPU");
         em = ef.createEntityManager();
         
         try 
