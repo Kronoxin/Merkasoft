@@ -12,10 +12,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.sql.Date;
-import java.text.DecimalFormat;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -24,8 +23,7 @@ import javax.swing.JTextField;
 import negocio.empleados.Empleado;
 import presentacion.Controlador.Controlador;
 import presentacion.Controlador.Eventos.EventoNegocio;
-import presentacion.VentanaPrincipal;
-import sun.nio.cs.ext.GB18030;
+
 
 /**
  *
@@ -54,6 +52,7 @@ public class GUIAltaEmpleado extends JFrame{
     JLabel labSueldo = new JLabel("Sueldo",JLabel.CENTER);
     
     
+    
     JRadioButton radioSupervisor = new JRadioButton("Supervisor",true);
     JRadioButton radioTrabajador = new JRadioButton("Trabajador");
     ButtonGroup radioDNI = new ButtonGroup();
@@ -61,7 +60,10 @@ public class GUIAltaEmpleado extends JFrame{
     JButton boton_ok = new JButton("Aceptar");
     JButton boton_cancelar = new JButton("Cancelar");
     
-    Date fecha = new Date(1,1,1);
+    JComboBox combos;
+		
+		
+    
     public GUIAltaEmpleado(){
         this.setTitle("Alta Empleado");
 	setBounds(100, 100, 400, 300);
@@ -69,7 +71,10 @@ public class GUIAltaEmpleado extends JFrame{
         
             this.setLayout(new BorderLayout());
             
-            panelSuperior.setLayout(new GridLayout(5,2));
+            String[] departments = { "Departamento1", "Departamento2", "Departamento3",};
+            combos = new JComboBox(departments);
+            
+            panelSuperior.setLayout(new GridLayout(6,2));
 
 
 
@@ -89,9 +94,16 @@ public class GUIAltaEmpleado extends JFrame{
             panelSuperior.add(labDireccion);
             panelSuperior.add(textDireccion);
             
+            panelSuperior.add(labDepartamento);
+            panelSuperior.add(combos);
+            
+
+            
              //añadimos el Jlabel y el Jtextfield para el sueldo
             panelSuperior.add(labSueldo);
             panelSuperior.add(textSueldo);
+            textSueldo.setText("1000");
+                    
 
             //añadimos los radiobuttons al panelRadios para indicar si es empleado es Supervisor o Trabajador
             panelRadios.add(radioTrabajador);
@@ -118,7 +130,7 @@ public class GUIAltaEmpleado extends JFrame{
                 empleado.setApellidos(textApellidos.getText());
              //   empleado.setDepartamento(textDepartamento.getText());
               //  empleado.setSueldo(BigDecimal)textSueldo.getText());
-                empleado.setActivo(true);
+                empleado.setDisponible(true);
                 
                 Controlador.getInstance().accion(EventoNegocio.ALTA_EMPLEADO, empleado);
             }
@@ -307,13 +319,22 @@ public class GUIAltaEmpleado extends JFrame{
         this.boton_cancelar = boton_cancelar;
     }
 
-    public Date getFecha() {
-        return fecha;
+    public Empleado getEmpleado() {
+        return empleado;
     }
 
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
+    public void setEmpleado(Empleado empleado) {
+        this.empleado = empleado;
     }
+
+    public JComboBox getCombos() {
+        return combos;
+    }
+
+    public void setCombos(JComboBox combos) {
+        this.combos = combos;
+    }
+
 
     
     

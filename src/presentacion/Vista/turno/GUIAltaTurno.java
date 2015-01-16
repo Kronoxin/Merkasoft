@@ -26,12 +26,10 @@ public class GUIAltaTurno extends JFrame{
     JPanel panelBotones = new JPanel(new GridLayout(1,2,5,5));
 
     JTextField text_nombre = new JTextField("");
-    JTextField text_tipo = new JTextField("");
     JTextField text_horaEntrada = new JTextField("");
     JTextField text_horaSalida = new JTextField("");
 
     JLabel label_nombre = new JLabel("Nombre",JLabel.CENTER);
-    JLabel label_tipo = new JLabel("Tipo",JLabel.CENTER);
     JLabel label_horaEntrada = new JLabel("Hora de Entrada",JLabel.CENTER);
     JLabel label_horaSalida = new JLabel("Hora de Salida",JLabel.CENTER);
 
@@ -46,15 +44,12 @@ public class GUIAltaTurno extends JFrame{
         
         this.setLayout(new BorderLayout());
 
-        panelSuperior.setLayout(new GridLayout(4,2));
+        panelSuperior.setLayout(new GridLayout(3,2));
 
         //añadimos el Jlabel y el Jtextfield para el Nombre
         panelSuperior.add(label_nombre);
         panelSuperior.add(text_nombre);
         
-        //añadimos el Jlabel y el Jtextfield para la descripción
-        panelSuperior.add(label_tipo);
-        panelSuperior.add(text_tipo);
         
         //añadimos el Jlabel y el Jtextfield para la hora de entrada
         panelSuperior.add(label_horaEntrada);
@@ -127,13 +122,6 @@ public class GUIAltaTurno extends JFrame{
         this.text_nombre = text_nombre;
     }
 
-    public JTextField getText_tipo() {
-        return text_tipo;
-    }
-
-    public void setText_tipo(JTextField text_tipo) {
-        this.text_tipo = text_tipo;
-    }
 
     public JTextField getText_horaEntrada() {
         return text_horaEntrada;
@@ -159,13 +147,6 @@ public class GUIAltaTurno extends JFrame{
         this.label_nombre = label_nombre;
     }
 
-    public JLabel getLabel_tipo() {
-        return label_tipo;
-    }
-
-    public void setLabel_tipo(JLabel label_tipo) {
-        this.label_tipo = label_tipo;
-    }
 
     public JLabel getLabel_horaEntrada() {
         return label_horaEntrada;
