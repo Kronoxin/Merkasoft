@@ -34,13 +34,13 @@ import negocio.turnos.Turno;
 @Table(name = "empleados")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Empleados.findAll", query = "SELECT e FROM Empleados e"),
-    @NamedQuery(name = "Empleados.findByIdEmpleado", query = "SELECT e FROM Empleados e WHERE e.idEmpleado = :idEmpleado"),
-    @NamedQuery(name = "Empleados.findByDni", query = "SELECT e FROM Empleados e WHERE e.dni = :dni"),
-    @NamedQuery(name = "Empleados.findByNombre", query = "SELECT e FROM Empleados e WHERE e.nombre = :nombre"),
-    @NamedQuery(name = "Empleados.findByApellidos", query = "SELECT e FROM Empleados e WHERE e.apellidos = :apellidos"),
-    @NamedQuery(name = "Empleados.findByDireccion", query = "SELECT e FROM Empleados e WHERE e.direccion = :direccion"),
-    @NamedQuery(name = "Empleados.findBySueldo", query = "SELECT e FROM Empleados e WHERE e.sueldo = :sueldo")})
+    @NamedQuery(name = "Empleado.findAll", query = "SELECT e FROM Empleado e"),
+    @NamedQuery(name = "Empleado.findByIdEmpleado", query = "SELECT e FROM Empleado e WHERE e.idEmpleado = :idEmpleado"),
+    @NamedQuery(name = "Empleado.findByDni", query = "SELECT e FROM Empleado e WHERE e.dni = :dni"),
+    @NamedQuery(name = "Empleado.findByNombre", query = "SELECT e FROM Empleado e WHERE e.nombre = :nombre"),
+    @NamedQuery(name = "Empleado.findByApellidos", query = "SELECT e FROM Empleado e WHERE e.apellidos = :apellidos"),
+    @NamedQuery(name = "Empleado.findByDireccion", query = "SELECT e FROM Empleado e WHERE e.direccion = :direccion"),
+    @NamedQuery(name = "Empleado.findBySueldo", query = "SELECT e FROM Empleado e WHERE e.sueldo = :sueldo")})
 public class Empleado implements Serializable {
     @JoinTable(name = "horario_trabajo", joinColumns = {
         @JoinColumn(name = "id_empleado", referencedColumnName = "id_empleado")}, inverseJoinColumns = {

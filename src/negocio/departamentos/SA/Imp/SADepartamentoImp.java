@@ -228,7 +228,7 @@ public class SADepartamentoImp implements SADepartamento {
         SADepartamentoImp sa = new SADepartamentoImp();
         
         Departamento dep = new Departamento();
-        dep.setNombre("Bababuiiii");
+        dep.setNombre("Bababuiiii2");
         dep.setDescripcion("MUYY BABABUUUII");
         dep.setDisponible(true);
         sa.altaDepartamento(dep);
