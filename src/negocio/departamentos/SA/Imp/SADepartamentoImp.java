@@ -6,41 +6,38 @@
 package negocio.departamentos.SA.Imp;
 
 import java.io.Serializable;
-import javax.persistence.Query;
-import javax.persistence.EntityNotFoundException;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-import negocio.empleados.Empleado;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityNotFoundException;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import negocio.departamentos.Departamento;
+import negocio.departamentos.SA.SADepartamento;
+import negocio.empleados.Empleado;
 import negocio.turnos.SA.exceptions.NonexistentEntityException;
 
-/**
- *
- * @author Ruben
- */
-public class SADepartamentoImp implements Serializable {
 
-    public SADepartamentoImp(EntityManagerFactory emf) {
-        this.emf = emf;
-    }
-    private EntityManagerFactory emf = null;
+public class SADepartamentoImp implements SADepartamento {
 
-    public EntityManager getEntityManager() {
-        return emf.createEntityManager();
-    }
-
-    public void create(Departamento departamento) {
+  
+    @Override
+    public int altaDepartamento(Departamento departamento) 
+    {
         if (departamento.getEmpleadosCollection() == null) {
             departamento.setEmpleadosCollection(new ArrayList<Empleado>());
         }
         EntityManager em = null;
-        try {
-            em = getEntityManager();
+        try 
+        {
+           
+            EntityManagerFactory ef = Persistence.createEntityManagerFactory("merkasoft");
+            em = ef.createEntityManager();
+        
             em.getTransaction().begin();
             Collection<Empleado> attachedEmpleadosCollection = new ArrayList<Empleado>();
             for (Empleado empleadosCollectionEmpleadosToAttach : departamento.getEmpleadosCollection()) {
@@ -64,12 +61,19 @@ public class SADepartamentoImp implements Serializable {
                 em.close();
             }
         }
+        return departamento.getIdDepartamento();
     }
 
-    public void edit(Departamento departamento) throws NonexistentEntityException, Exception {
+    @Override
+    public boolean modificarDepartamento(Departamento departamento)
+    {
+        boolean correcto = true;
         EntityManager em = null;
         try {
-            em = getEntityManager();
+           
+            EntityManagerFactory ef = Persistence.createEntityManagerFactory("merkasoft");
+            em = ef.createEntityManager();
+        
             em.getTransaction().begin();
             Departamento persistentDepartamento = em.find(Departamento.class, departamento.getIdDepartamento());
             Collection<Empleado> empleadosCollectionOld = persistentDepartamento.getEmpleadosCollection();
@@ -100,58 +104,74 @@ public class SADepartamentoImp implements Serializable {
                 }
             }
             em.getTransaction().commit();
-        } catch (Exception ex) {
+        } 
+        catch (Exception ex) 
+        {
+            correcto = false;
             String msg = ex.getLocalizedMessage();
-            if (msg == null || msg.length() == 0) {
+            if (msg == null || msg.length() == 0) 
+            {
                 Integer id = departamento.getIdDepartamento();
-                if (findDepartamento(id) == null) {
-                    throw new NonexistentEntityException("The departamento with id " + id + " no longer exists.");
+                if (mostrarDepartamento(id) == null) 
+                {
+                    System.out.println("The departamento with id " + id + " no longer exists.");
                 }
             }
-            throw ex;
-        } finally {
-            if (em != null) {
+           
+        } 
+        finally 
+        {
+            if (em != null) 
+            {
                 em.close();
             }
         }
+        return correcto;
     }
-
-    public void destroy(Integer id) throws NonexistentEntityException {
+    
+    
+    @Override
+    public boolean bajaDepartamento(int id)
+    {
         EntityManager em = null;
+        boolean correcto = true;
         try {
-            em = getEntityManager();
+            EntityManagerFactory ef = Persistence.createEntityManagerFactory("merkasoft");
+            em = ef.createEntityManager();
             em.getTransaction().begin();
-            Departamento departamento;
-            try {
-                departamento = em.getReference(Departamento.class, id);
-                departamento.getIdDepartamento();
-            } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The departamento with id " + id + " no longer exists.", enfe);
-            }
-            Collection<Empleado> empleadosCollection = departamento.getEmpleadosCollection();
-            for (Empleado empleadosCollectionEmpleados : empleadosCollection) {
-                empleadosCollectionEmpleados.setDepartamento(null);
-                empleadosCollectionEmpleados = em.merge(empleadosCollectionEmpleados);
-            }
-            em.remove(departamento);
+            Departamento persistentDepartamento = em.find(Departamento.class, id);
+            
+            persistentDepartamento.setDisponible(false);
+            em.merge(persistentDepartamento);
             em.getTransaction().commit();
+        } 
+        catch (Exception ex) 
+        {
+            correcto = false;
+            ex.printStackTrace();
+            
         } finally {
             if (em != null) {
                 em.close();
             }
         }
+        return correcto;
     }
 
-    public List<Departamento> findDepartamentoEntities() {
-        return findDepartamentoEntities(true, -1, -1);
+    @Override
+    public ArrayList<Departamento> mostrarListaDepartamentos() 
+    {
+        return new ArrayList<Departamento>(findDepartamentoEntities(true, -1, -1));
     }
 
-    public List<Departamento> findDepartamentoEntities(int maxResults, int firstResult) {
+    private List<Departamento> findDepartamentoEntities(int maxResults, int firstResult) {
         return findDepartamentoEntities(false, maxResults, firstResult);
     }
 
     private List<Departamento> findDepartamentoEntities(boolean all, int maxResults, int firstResult) {
-        EntityManager em = getEntityManager();
+        EntityManager em = null;
+        EntityManagerFactory ef = Persistence.createEntityManagerFactory("merkasoft");
+        
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             cq.select(cq.from(Departamento.class));
@@ -166,26 +186,53 @@ public class SADepartamentoImp implements Serializable {
         }
     }
 
-    public Departamento findDepartamento(Integer id) {
-        EntityManager em = getEntityManager();
-        try {
+    @Override
+    public Departamento mostrarDepartamento(int id) 
+    {
+        EntityManager em = null;
+        EntityManagerFactory ef = Persistence.createEntityManagerFactory("merkasoft");
+        em = ef.createEntityManager();
+        
+        try 
+        {
             return em.find(Departamento.class, id);
-        } finally {
+        } 
+        finally 
+        {
             em.close();
         }
     }
 
-    public int getDepartamentoCount() {
-        EntityManager em = getEntityManager();
-        try {
+    public int getDepartamentoCount() 
+    {
+        EntityManager em = null;
+        EntityManagerFactory ef = Persistence.createEntityManagerFactory("merkasoft");
+        em = ef.createEntityManager();
+        
+        try 
+        {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             Root<Departamento> rt = cq.from(Departamento.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
-        } finally {
+        } 
+        finally 
+        {
             em.close();
         }
+    }
+    
+    public static void main(String args[])
+    {
+        SADepartamentoImp sa = new SADepartamentoImp();
+        
+        Departamento dep = new Departamento();
+        dep.setNombre("Bababuiiii");
+        dep.setDescripcion("MUYY BABABUUUII");
+        dep.setDisponible(true);
+        sa.altaDepartamento(dep);
+        System.out.println("SASASASASA");
     }
     
 }
