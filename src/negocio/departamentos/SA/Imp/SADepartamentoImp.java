@@ -183,7 +183,7 @@ public class SADepartamentoImp implements SADepartamento {
     private List<Departamento> findDepartamentoEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = null;
         EntityManagerFactory ef = Persistence.createEntityManagerFactory("MerkaSoftPU");
-        
+        em = ef.createEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             cq.select(cq.from(Departamento.class));
