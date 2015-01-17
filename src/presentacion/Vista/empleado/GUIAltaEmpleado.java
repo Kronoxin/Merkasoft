@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.math.BigDecimal;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -71,6 +72,7 @@ public class GUIAltaEmpleado extends JFrame{
         
             this.setLayout(new BorderLayout());
             
+            
             String[] departments = { "Departamento1", "Departamento2", "Departamento3",};
             combos = new JComboBox(departments);
             
@@ -95,7 +97,9 @@ public class GUIAltaEmpleado extends JFrame{
             panelSuperior.add(textDireccion);
             
             panelSuperior.add(labDepartamento);
-            panelSuperior.add(combos);
+            panelSuperior.add(textDepartamento);
+            //para lineas futuras, se puede poner el comboBox
+            //panelSuperior.add(combos);
             
 
             
@@ -128,8 +132,9 @@ public class GUIAltaEmpleado extends JFrame{
                 empleado.setDni(textDNI.getText());
                 empleado.setNombre(textNombre.getText());
                 empleado.setApellidos(textApellidos.getText());
-             //   empleado.setDepartamento(textDepartamento.getText());
-              //  empleado.setSueldo(BigDecimal)textSueldo.getText());
+                empleado.setDireccion(textDireccion.getText());
+           //     empleado.setDepartamento(textDepartamento.getText());
+                empleado.setSueldo((BigDecimal.valueOf(Double.parseDouble(textSueldo.getText()))));
                 empleado.setDisponible(true);
                 
                 Controlador.getInstance().accion(EventoNegocio.ALTA_EMPLEADO, empleado);

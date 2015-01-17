@@ -7,6 +7,7 @@ package presentacion.Controlador.dispatcher.Imp;
 
 import java.util.ArrayList;
 import negocio.departamentos.Departamento;
+import negocio.empleados.Empleado;
 import negocio.producto.TProducto;
 import presentacion.Controlador.Comandos.RespuestaComando;
 import presentacion.Controlador.Eventos.EventoNegocio;
@@ -362,6 +363,23 @@ public class DispatcherImp extends Dispatcher
             case EventoNegocio.EXITO_MODIFICAR_EMPLEADO:
             {
                 PopupsEmpleado.ModificarEmpleadoExito();
+                break;
+            }
+            case EventoNegocio.EXITO_MOSTRAR_EMPLEADO:
+            {
+                ArrayList<Object> datos = (ArrayList<Object>)comando.getDatos();
+                
+                Empleado empleado = (Empleado)datos.get(2);
+                ((GUIMostrarEmpleado)datos.get(1)).cargarEmpleadoEnLista(empleado);
+                break;
+            }
+            case EventoNegocio.EXITO_MOSTRAR_LISTA_EMPLEADO:
+            {
+                 ArrayList<Object> datos = (ArrayList<Object>)comando.getDatos();
+                
+                ArrayList<Empleado> empleados = (ArrayList<Empleado>)datos.get(1);
+                ((GUIMostrarListaEmpleados)datos.get(0)).cargarEmpleadoEnLista(empleados);
+		
                 break;
             }
             

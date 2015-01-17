@@ -19,6 +19,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+import negocio.empleados.Empleado;
+import negocio.producto.TProducto;
 import presentacion.Controlador.Controlador;
 import presentacion.Controlador.Eventos.EventoNegocio;
 import presentacion.Vista.producto.GUIMostrarProducto;
@@ -84,6 +87,14 @@ public class GUIMostrarEmpleado extends JFrame{
 
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    ArrayList<Object> datos = new ArrayList<>();
+                    
+                    
+                    datos.add(Integer.parseInt(textID.getText()));
+                    datos.add(new GUIMostrarEmpleado());
+                    
+                    Controlador.getInstance().accion(EventoNegocio.MOSTRAR_EMPLEADO, datos);
+                    dispose();
 
                 }
             });
@@ -99,6 +110,17 @@ public class GUIMostrarEmpleado extends JFrame{
         });
         
  
+    }
+    
+    public void cargarEmpleadoEnLista(Empleado empleado)
+    {
+        DefaultTableModel dtm = new DefaultTableModel(0, 0);
+        dtm.setColumnIdentifiers(NombreColumnas);
+        
+        tabla.setModel(dtm);
+        dtm.addRow(new Object[]
+        {empleado.getIdEmpleado(),empleado.getDni(), empleado.getNombre(), empleado.getApellidos(), empleado.getDireccion(),empleado.getTipo(), empleado.getDepartamento(),empleado.getSueldo()});
+        dtm.fireTableDataChanged();
     }
     
     //getters y setters

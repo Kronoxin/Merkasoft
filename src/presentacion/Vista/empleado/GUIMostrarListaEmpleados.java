@@ -17,6 +17,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import negocio.empleados.Empleado;
+import negocio.producto.TProducto;
 import presentacion.Controlador.Controlador;
 import presentacion.Controlador.Eventos.EventoNegocio;
 
@@ -93,6 +96,18 @@ public class GUIMostrarListaEmpleados extends JFrame{
         });
         
  
+    }
+    
+     public void cargarEmpleadoEnLista(ArrayList<Empleado> listaEmpleado)
+    {
+        DefaultTableModel dtm = new DefaultTableModel(0, 0);
+        dtm.setColumnIdentifiers(NombreColumnas);
+        
+        tabla.setModel(dtm);
+        for (Empleado empleado : listaEmpleado)
+            dtm.addRow(new Object[] {empleado.getIdEmpleado(),empleado.getDni(), empleado.getNombre(), empleado.getApellidos(), empleado.getDireccion(),empleado.getTipo(), empleado.getDepartamento(),empleado.getSueldo()});
+        
+        dtm.fireTableDataChanged();
     }
     
     //getters y setters
