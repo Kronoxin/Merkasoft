@@ -9,11 +9,17 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Timestamp;
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import negocio.turnos.Turno;
+import presentacion.Controlador.Controlador;
+import presentacion.Controlador.Eventos.EventoNegocio;
 
 /**
  *
@@ -72,8 +78,23 @@ public class GUIAltaTurno extends JFrame{
 
             @Override
             public void actionPerformed(ActionEvent e) {
-           //     turno.setNombre(text_nombre.getText());
-           //     turno.setTipo(text_tipo.getText());
+               Turno turno = new Turno(); 
+               turno.setNombre(text_nombre.getText());
+               turno.setDisponible(true);
+               String[] tiempos = text_horaEntrada.getText().split(":");
+               int hora = Integer.parseInt(tiempos[0]);
+               int minuto = Integer.parseInt(tiempos[1]);
+               Date date = new Date();
+                Calendar cal = Calendar.getInstance();
+                cal.set(2000, 10, 10, hora, minuto);               
+               turno.setHoraEntrada(cal.getTime());
+               tiempos = text_horaSalida.getText().split(":");
+               hora = Integer.parseInt(tiempos[0]);
+               minuto = Integer.parseInt(tiempos[1]);
+               cal.set(2000, 10, 10, hora, minuto);
+               turno.setHoraSalida(cal.getTime());
+               
+                Controlador.getInstance().accion(EventoNegocio.ALTA_TURNO, turno);
          
 
                
