@@ -19,6 +19,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+import negocio.departamentos.Departamento;
+import negocio.producto.TProducto;
 import presentacion.Controlador.Controlador;
 import presentacion.Controlador.Eventos.EventoNegocio;
 
@@ -82,6 +85,15 @@ public class GUIMostrarDepartamento extends JFrame{
 
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    
+                     ArrayList<Object> datos = new ArrayList<>();
+                    
+                    
+                    datos.add(Integer.parseInt(textID.getText()));
+                    datos.add(new GUIMostrarDepartamento());
+                    
+                    Controlador.getInstance().accion(EventoNegocio.MOSTRAR_DEPARTAMENTO, datos);
+                    dispose();
                    
                 }
             });
@@ -99,6 +111,16 @@ public class GUIMostrarDepartamento extends JFrame{
  
     }
     
+        public void cargarDepartamentoEnLista(Departamento departamento)
+    {
+        DefaultTableModel dtm = new DefaultTableModel(0, 0);
+        dtm.setColumnIdentifiers(NombreColumnas);
+        
+        tabla.setModel(dtm);
+        dtm.addRow(new Object[]
+        {departamento.getIdDepartamento(),departamento.getNombre(), departamento.getDescripcion()});
+        dtm.fireTableDataChanged();
+    }
     //getters y setters
 
     public Object[][] getDatos_entrada() {

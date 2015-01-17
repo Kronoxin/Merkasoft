@@ -6,6 +6,7 @@
 package presentacion.Controlador.Comandos.departamento;
 
 import negocio.FactoriaSA.FactoriaSA;
+import negocio.departamentos.Departamento;
 import negocio.producto.TProducto;
 import presentacion.Controlador.Comandos.Command;
 import presentacion.Controlador.Comandos.RespuestaComando;
@@ -19,7 +20,7 @@ public class comandoAltaDepartamento implements Command{
 
     @Override
     public RespuestaComando execute(Object datos) {
-    /*   RespuestaComando respuesta;
+       RespuestaComando respuesta;
        int idDepartamento;
        idDepartamento = FactoriaSA.obtenerInstancia().generaSADepartamento().altaDepartamento((Departamento) datos);
        if(idDepartamento > 0)
@@ -27,10 +28,9 @@ public class comandoAltaDepartamento implements Command{
        else
            respuesta = new RespuestaComando(EventoNegocio.FRACASO_ALTA_DEPARTAMENTO, idDepartamento);
        
-       return respuesta;*/
+       return respuesta;
         
-      //para poder ejecutar la aplicacion mientras no está el SA completado 
-      throw new UnsupportedOperationException("Not supported yet.");
+      
     }
     
 }

@@ -17,6 +17,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import negocio.departamentos.Departamento;
+import negocio.producto.TProducto;
 import presentacion.Controlador.Controlador;
 import presentacion.Controlador.Eventos.EventoNegocio;
 
@@ -91,6 +94,19 @@ public class GUIMostrarListaDepartamentos extends JFrame{
         });
         
  
+    }
+    
+        //{"ID","Nombre","Descripción",};
+    public void cargarDepartamentoEnLista(ArrayList<Departamento> listaDepartamento)
+    {
+        DefaultTableModel dtm = new DefaultTableModel(0, 0);
+        dtm.setColumnIdentifiers(NombreColumnas);
+        
+        tabla.setModel(dtm);
+        for (Departamento departamento : listaDepartamento)
+            dtm.addRow(new Object[] {departamento.getIdDepartamento(),departamento.getNombre(), departamento.getDescripcion()});
+        
+        dtm.fireTableDataChanged();
     }
     
     //getters y setters

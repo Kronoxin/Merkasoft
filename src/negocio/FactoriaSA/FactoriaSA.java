@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import negocio.FactoriaSA.Imp.FactoriaSAImp;
 import negocio.cliente.SACliente.Imp.SAClienteImp;
 import negocio.cliente.SACliente.SACliente;
+import negocio.departamentos.SA.SADepartamento;
 import negocio.empleados.SA.SAEmpleado;
 import negocio.producto.SAProducto.Imp.SAProductoImp;
 import negocio.producto.SAProducto.SAProducto;
@@ -33,9 +34,9 @@ public abstract class FactoriaSA {
         
         public abstract SAEmpleado generaSAEmpleado();
         
-        public abstract SAVenta generaSADepartamento();
+        public abstract SADepartamento generaSADepartamento();
         
-        public abstract SAVenta generaSATurno();
+    //    public abstract SATurno generaSATurno();
         
         
         

@@ -6,6 +6,7 @@
 package presentacion.Controlador.dispatcher.Imp;
 
 import java.util.ArrayList;
+import negocio.departamentos.Departamento;
 import negocio.producto.TProducto;
 import presentacion.Controlador.Comandos.RespuestaComando;
 import presentacion.Controlador.Eventos.EventoNegocio;
@@ -378,6 +379,23 @@ public class DispatcherImp extends Dispatcher
             case EventoNegocio.EXITO_MODIFICAR_DEPARTAMENTO:
             {
                 PopupsDepartamento.ModificarDepartamentoExito();
+                break;
+            }
+            case EventoNegocio.EXITO_MOSTRAR_DEPARTAMENTO:
+            {
+                 ArrayList<Object> datos = (ArrayList<Object>)comando.getDatos();
+                
+                Departamento departamento = (Departamento)datos.get(2);
+                ((GUIMostrarDepartamento)datos.get(1)).cargarDepartamentoEnLista(departamento);
+                break;
+            }
+            case EventoNegocio.EXITO_MOSTRAR_LISTA_DEPARTAMENTO:
+            {
+                ArrayList<Object> datos = (ArrayList<Object>)comando.getDatos();
+                
+                ArrayList<Departamento> departamentos = (ArrayList<Departamento>)datos.get(1);
+                ((GUIMostrarListaDepartamentos)datos.get(0)).cargarDepartamentoEnLista(departamentos);
+		
                 break;
             }
             

@@ -59,9 +59,9 @@ public class GUIBajaDepartamento extends JFrame{
 
             @Override
             public void actionPerformed(ActionEvent e) {
-             //   textID.getText();
+                textID.getText();
                 
-             //   Controlador.getInstance().accion(EventoNegocio.BAJA_DEPARTAMENTO, textID.getText());
+                Controlador.getInstance().accion(EventoNegocio.BAJA_DEPARTAMENTO, textID.getText());
             }
         });
         

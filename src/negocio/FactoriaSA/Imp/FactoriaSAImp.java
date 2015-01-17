@@ -9,6 +9,8 @@ import javax.persistence.EntityManager;
 import negocio.FactoriaSA.FactoriaSA;
 import negocio.cliente.SACliente.Imp.SAClienteImp;
 import negocio.cliente.SACliente.SACliente;
+import negocio.departamentos.SA.Imp.SADepartamentoImp;
+import negocio.departamentos.SA.SADepartamento;
 import negocio.empleados.SA.SAEmpleado;
 import negocio.empleados.SA.Imp.SAEmpleadoImp;
 import negocio.producto.SAProducto.Imp.SAProductoImp;
@@ -52,14 +54,14 @@ public class FactoriaSAImp extends FactoriaSA {
     }
 
     @Override
-    public SAVenta generaSADepartamento() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public SADepartamento generaSADepartamento() {
+        return new SADepartamentoImp();
     }
 
-    @Override
-    public SAVenta generaSATurno() {
+    
+   /* public SATurno generaSATurno() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    }*/
 
     
     

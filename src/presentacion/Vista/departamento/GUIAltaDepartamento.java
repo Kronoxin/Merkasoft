@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import negocio.departamentos.Departamento;
 import presentacion.Controlador.Controlador;
 import presentacion.Controlador.Eventos.EventoNegocio;
 
@@ -22,7 +23,7 @@ import presentacion.Controlador.Eventos.EventoNegocio;
  * @author Ruben
  */
 public class GUIAltaDepartamento extends JFrame{
-    
+    Departamento departamento = new Departamento();
     
     JPanel panelSuperior = new JPanel();     
     JPanel panelBotones = new JPanel(new GridLayout(1,2,5,5));
@@ -67,12 +68,11 @@ public class GUIAltaDepartamento extends JFrame{
 
             @Override
             public void actionPerformed(ActionEvent e) {
-           //     departamento.setNombre(text_nombre.getText());
-           //     departamento.setDescripcion(text_descripcion.getText());
+                departamento.setNombre(text_nombre.getText());
+                departamento.setDescripcion(text_descripcion.getText());
+                departamento.setDisponible(true);
 
-               
-                
-            //    Controlador.getInstance().accion(EventoNegocio.ALTA_DEPARTAMENTO, departamento);
+               Controlador.getInstance().accion(EventoNegocio.ALTA_DEPARTAMENTO, departamento);
             }
         });
         
