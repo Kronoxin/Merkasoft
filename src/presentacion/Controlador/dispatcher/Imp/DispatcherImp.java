@@ -284,6 +284,11 @@ public class DispatcherImp extends Dispatcher
                 new GUIMostrarListaEmpleados();
                 break;
             }
+            case EventoNegocio.GUI_MOSTRAR_EMPLEADO_PARA_MODIFICAR:
+            {
+                new GUIModificarEmpleado();
+                break;
+            }
             case EventoNegocio.GUI_MODIFICAR_EMPLEADO:
             {
                 new GUIModificarEmpleado();
@@ -362,7 +367,11 @@ public class DispatcherImp extends Dispatcher
             }
             case EventoNegocio.EXITO_MODIFICAR_EMPLEADO:
             {
-                PopupsEmpleado.ModificarEmpleadoExito();
+                ArrayList<Object> datos = (ArrayList<Object>)comando.getDatos();
+                
+                Empleado empleado = (Empleado)datos.get(2);
+                ((GUIModificarEmpleado)datos.get(1)).cargarEmpleadoEnLista(empleado);
+                
                 break;
             }
             case EventoNegocio.EXITO_MOSTRAR_EMPLEADO:
@@ -372,6 +381,14 @@ public class DispatcherImp extends Dispatcher
                 Empleado empleado = (Empleado)datos.get(2);
                 ((GUIMostrarEmpleado)datos.get(1)).cargarEmpleadoEnLista(empleado);
                 break;
+            }
+            case EventoNegocio.EXITO_MOSTRAR_EMPLEADO_PARA_MODIFICAR:
+            {
+               ArrayList<Object> datos = (ArrayList<Object>)comando.getDatos();
+                
+                Empleado empleado = (Empleado)datos.get(2);
+                ((GUIModificarEmpleado)datos.get(1)).cargarEmpleadoEnLista(empleado);
+                break; 
             }
             case EventoNegocio.EXITO_MOSTRAR_LISTA_EMPLEADO:
             {
@@ -465,6 +482,11 @@ public class DispatcherImp extends Dispatcher
             case EventoNegocio.FRACASO_MODIFICAR_DEPARTAMENTO:
             {
                 PopupsDepartamento.ModificarDepartamentoFracaso();
+                break;
+            }
+            case EventoNegocio.FRACASO_MOSTRAR_EMPLEADO_PARA_MODIFICAR:
+            {
+                PopupsEmpleado.ModificarEmpleadoFracaso();
                 break;
             }
             

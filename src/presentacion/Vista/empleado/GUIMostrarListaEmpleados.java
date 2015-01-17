@@ -22,6 +22,7 @@ import negocio.empleados.Empleado;
 import negocio.producto.TProducto;
 import presentacion.Controlador.Controlador;
 import presentacion.Controlador.Eventos.EventoNegocio;
+import presentacion.Vista.producto.GUIMostrarListaProductos;
 
 /**
  *
@@ -30,10 +31,10 @@ import presentacion.Controlador.Eventos.EventoNegocio;
 public class GUIMostrarListaEmpleados extends JFrame{
     
    Object[][] datos_entrada = {
-        {"","", "", "", "", "",""}
+        {"","", "", "", "", "","",""}
        };
         
-        String[] NombreColumnas = {"DNI","Nombre", "Apellidos", "Direccion", "Tipo", "Departamento", "Sueldo"};
+        String[] NombreColumnas = {"ID","DNI","Nombre", "Apellidos", "Direccion", "Tipo", "Departamento", "Sueldo"};
 
         JPanel panelSuperior = new JPanel(new GridLayout(2,2,5,5));
         JPanel panelTabla = new JPanel();
@@ -80,6 +81,13 @@ public class GUIMostrarListaEmpleados extends JFrame{
 
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                     ArrayList<Object> datos = new ArrayList<>();
+                    
+                    
+                    datos.add(new GUIMostrarListaEmpleados());
+                    
+                    Controlador.getInstance().accion(EventoNegocio.MOSTRAR_LISTA_EMPLEADO, datos);
+                    dispose();
 
 
                 }
@@ -100,12 +108,19 @@ public class GUIMostrarListaEmpleados extends JFrame{
     
      public void cargarEmpleadoEnLista(ArrayList<Empleado> listaEmpleado)
     {
-        DefaultTableModel dtm = new DefaultTableModel(0, 0);
+        DefaultTableModel dtm = new DefaultTableModel(0, 0){
+
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+            
+        };
         dtm.setColumnIdentifiers(NombreColumnas);
         
         tabla.setModel(dtm);
         for (Empleado empleado : listaEmpleado)
-            dtm.addRow(new Object[] {empleado.getIdEmpleado(),empleado.getDni(), empleado.getNombre(), empleado.getApellidos(), empleado.getDireccion(),empleado.getTipo(), empleado.getDepartamento(),empleado.getSueldo()});
+            dtm.addRow(new Object[] {empleado.getIdEmpleado(),empleado.getDni(), empleado.getNombre(), empleado.getApellidos(), empleado.getDireccion(),empleado.getTipo(), empleado.getDepartamento().getNombre(),empleado.getSueldo()});
         
         dtm.fireTableDataChanged();
     }

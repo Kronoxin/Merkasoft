@@ -27,6 +27,7 @@ import presentacion.Controlador.Comandos.departamento.comandoCalcularNominaDepar
 import presentacion.Controlador.Comandos.departamento.comandoModificarDepartamento;
 import presentacion.Controlador.Comandos.departamento.comandoMostrarDepartamento;
 import presentacion.Controlador.Comandos.departamento.comandoMostrarListaDepartamentos;
+import presentacion.Controlador.Comandos.empleado.GUI.comandoGUIMostrarEmpleadoParaModificar;
 import presentacion.Controlador.Comandos.empleado.GUI.comandoGUIaltaEmpleado;
 import presentacion.Controlador.Comandos.empleado.GUI.comandoGUIeliminarEmpleado;
 import presentacion.Controlador.Comandos.empleado.GUI.comandoGUImodificarEmpleado;
@@ -36,6 +37,7 @@ import presentacion.Controlador.Comandos.empleado.comandoAltaEmpleado;
 import presentacion.Controlador.Comandos.empleado.comandoBajaEmpleado;
 import presentacion.Controlador.Comandos.empleado.comandoModificarEmpleado;
 import presentacion.Controlador.Comandos.empleado.comandoMostrarEmpleado;
+import presentacion.Controlador.Comandos.empleado.comandoMostrarEmpleadoParaModificar;
 import presentacion.Controlador.Comandos.empleado.comandoMostrarListaEmpleados;
 import presentacion.Controlador.Comandos.turno.GUI.comandoGUIaltaTurno;
 import presentacion.Controlador.Comandos.turno.GUI.comandoGUIeliminarTurno;
@@ -239,6 +241,11 @@ public class factoriaComandosImp extends factoriaComandos
                 comando = new comandoMostrarListaEmpleados();
                 break;
             }
+            case EventoNegocio.MOSTRAR_EMPLEADO_PARA_MODIFICAR:
+            {
+                comando = new comandoMostrarEmpleadoParaModificar();
+                break;
+            }
             
             //eventos GUI Empleado
             case EventoNegocio.GUI_ALTA_EMPLEADO:
@@ -265,6 +272,12 @@ public class factoriaComandosImp extends factoriaComandos
             {
                 comando = new comandoGUImostrarListaEmpleados();
                 break;
+            }
+            case EventoNegocio.GUI_MOSTRAR_EMPLEADO_PARA_MODIFICAR:
+            {
+                    comando = new comandoGUIMostrarEmpleadoParaModificar();
+                    break;
+                            
             }
             //eventos Departamento
              case EventoNegocio.ALTA_DEPARTAMENTO:

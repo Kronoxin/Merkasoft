@@ -55,12 +55,16 @@ public class GUIBajaEmpleado extends JFrame{
      //   this.setBorder(new TitledBorder(new TitledBorder(""), "Baja empleado", TitledBorder.CENTER, TitledBorder.TOP ));	
         //actionlistener
         boton_ok.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) 
-                {
+        @Override
+        public void actionPerformed(ActionEvent e) 
+        {
+              textID.getText();
 
-                }
-            });
+            Controlador.getInstance().accion(EventoNegocio.BAJA_EMPLEADO, textID.getText());
+
+
+            }
+        });
         boton_cancelar.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) 

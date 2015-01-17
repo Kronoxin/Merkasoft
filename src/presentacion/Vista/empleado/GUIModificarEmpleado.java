@@ -6,14 +6,22 @@
 package presentacion.Vista.empleado;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+import negocio.empleados.Empleado;
 import presentacion.Controlador.Controlador;
 import presentacion.Controlador.Eventos.EventoNegocio;
 
@@ -23,53 +31,137 @@ import presentacion.Controlador.Eventos.EventoNegocio;
  */
 public class GUIModificarEmpleado extends JFrame{
     
-     JTextField textID = new JTextField("");
-    JLabel labID = new JLabel("ID del Empleado",JLabel.CENTER);
-    JButton boton_ok = new JButton("Aceptar");
-    JButton boton_cancelar = new JButton("Cancelar");
+    Object[][] datos_entrada = {
+        {"","", "", "", "", "","",""}
+       };
+        
+        String[] NombreColumnas = {"ID","DNI","Nombre", "Apellidos", "Direccion", "Tipo", "Departamento", "Sueldo"};
 
-    JPanel panelSuperior = new JPanel(new GridLayout(1,2));
+        JTextField textID = new JTextField("");
 
-    JPanel panelBotones = new JPanel(new GridLayout(1,2,10,10));
+        JPanel panelSuperior = new JPanel(new GridLayout(2,2,5,5));
+        JPanel panelTabla = new JPanel();
+
+        JLabel labID = new JLabel("ID del Empleado",JLabel.CENTER);
+        JButton butID = new JButton("Buscar por ID");
+        JButton boton_salir = new JButton("Salir");
+        JButton boton_guardar = new JButton("Guardar");
+        
+        JTable tabla;
     
     public GUIModificarEmpleado(){
-        this.setName("Modificar Empleado");
-	setBounds(100, 100, 400, 300);
+        this.setTitle("Modificar Empleado");
+	setBounds(100, 100, 750, 400);
         this.setLocationRelativeTo(null);
-        
         this.setLayout(new BorderLayout());
+                
+		
+            panelSuperior.add(labID);
+            panelSuperior.add(textID);
+            panelSuperior.add(butID);
 
-        //añadimos el JLabel y el JTextField al panel Superior
-        panelSuperior.add(labID);
-        panelSuperior.add(textID);
+            //se crea la Tabla
+            tabla = new JTable(datos_entrada, NombreColumnas);
+            //cojo la primera columna de la tabla (el DNI) y fijo el tamaño de esa columna
+            tabla.getColumnModel().getColumn(0).setPreferredWidth(8);
+            //y el campo Sueldo tb
+            tabla.getColumnModel().getColumn(6).setPreferredWidth(5);
 
-        //añadimos el boton de aceptar y cancelar al panel de botones
-        panelBotones.add(boton_ok);
-        panelBotones.add(boton_cancelar);
+            //dimensiones del Jtable
+            tabla.setPreferredScrollableViewportSize(new Dimension(700, 150));
+            //Creamos un JscrollPane y le agregamos la JTable
+            JScrollPane scrollPane = new JScrollPane(tabla);
+            panelTabla.add(scrollPane,BorderLayout.CENTER);
 
-        this.add(panelSuperior,BorderLayout.NORTH);
-        this.add(panelBotones,BorderLayout.SOUTH);
-	
-    //Actionlisteners
-        boton_ok.addActionListener(new ActionListener() {
+            boton_salir.setPreferredSize(new Dimension(90,40));
+            boton_guardar.setPreferredSize(new Dimension(90, 40));
+            JPanel panelBotones = new JPanel();
+            JPanel panelBoton = new JPanel(new FlowLayout(FlowLayout.RIGHT,15,15));
+            JPanel panelBotonGuardar = new JPanel(new FlowLayout(FlowLayout.LEFT,15,15));
+            
+            boton_guardar.setForeground(Color.BLUE);
+            boton_salir.setForeground(Color.red);
+            
+           
+            panelBoton.add(boton_salir);
+            panelBotonGuardar.add(boton_guardar);
+            
+            
+            panelBotones.add(panelBotonGuardar);
+            panelBotones.add(panelBoton);
+
+            this.add(panelSuperior,BorderLayout.NORTH);
+   //         this.setBorder(new TitledBorder(new TitledBorder(""), "Mostrar Empleado por ID", TitledBorder.CENTER, TitledBorder.TOP ));	
+
+            this.add(panelTabla, BorderLayout.CENTER);
+            this.add(panelBotones,BorderLayout.SOUTH);
+            this.setVisible(true);
+            
+            boton_guardar.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+            
+             butID.addActionListener(new ActionListener() {
+
                 @Override
-                public void actionPerformed(ActionEvent e) 
-                {
+                public void actionPerformed(ActionEvent e) {
+                    ArrayList<Object> datos = new ArrayList<>();
+                    
+                    
+                    datos.add(Integer.parseInt(textID.getText()));
+                    datos.add(new GUIModificarEmpleado());
+                    
+                    Controlador.getInstance().accion(EventoNegocio.MOSTRAR_EMPLEADO_PARA_MODIFICAR, datos);
+                    dispose();
 
-                }
-            });
-        boton_cancelar.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) 
-                {
-                dispose();
                 }
             });
         
-        this.setVisible(true);
+        
+        boton_salir.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+               
+            }
+        });
+        
+ 
+    }
+    
+    public void cargarEmpleadoEnLista(Empleado empleado)
+    {
+        DefaultTableModel dtm = new DefaultTableModel(0, 0);
+        dtm.setColumnIdentifiers(NombreColumnas);
+        
+        tabla.setModel(dtm);
+        dtm.addRow(new Object[]
+        {empleado.getIdEmpleado(),empleado.getDni(), empleado.getNombre(), empleado.getApellidos(), empleado.getDireccion(),empleado.getTipo(), empleado.getDepartamento().getNombre(),empleado.getSueldo()});
+        dtm.fireTableDataChanged();
     }
     
     //getters y setters
+
+    public Object[][] getDatos_entrada() {
+        return datos_entrada;
+    }
+
+    public void setDatos_entrada(Object[][] datos_entrada) {
+        this.datos_entrada = datos_entrada;
+    }
+
+    public String[] getNombreColumnas() {
+        return NombreColumnas;
+    }
+
+    public void setNombreColumnas(String[] NombreColumnas) {
+        this.NombreColumnas = NombreColumnas;
+    }
 
     public JTextField getTextID() {
         return textID;
@@ -77,30 +169,6 @@ public class GUIModificarEmpleado extends JFrame{
 
     public void setTextID(JTextField textID) {
         this.textID = textID;
-    }
-
-    public JLabel getLabID() {
-        return labID;
-    }
-
-    public void setLabID(JLabel labID) {
-        this.labID = labID;
-    }
-
-    public JButton getBoton_ok() {
-        return boton_ok;
-    }
-
-    public void setBoton_ok(JButton boton_ok) {
-        this.boton_ok = boton_ok;
-    }
-
-    public JButton getBoton_cancelar() {
-        return boton_cancelar;
-    }
-
-    public void setBoton_cancelar(JButton boton_cancelar) {
-        this.boton_cancelar = boton_cancelar;
     }
 
     public JPanel getPanelSuperior() {
@@ -111,13 +179,54 @@ public class GUIModificarEmpleado extends JFrame{
         this.panelSuperior = panelSuperior;
     }
 
-    public JPanel getPanelBotones() {
-        return panelBotones;
+    public JPanel getPanelTabla() {
+        return panelTabla;
     }
 
-    public void setPanelBotones(JPanel panelBotones) {
-        this.panelBotones = panelBotones;
+    public void setPanelTabla(JPanel panelTabla) {
+        this.panelTabla = panelTabla;
     }
+
+    public JLabel getLabID() {
+        return labID;
+    }
+
+    public void setLabID(JLabel labID) {
+        this.labID = labID;
+    }
+
+    public JButton getButID() {
+        return butID;
+    }
+
+    public void setButID(JButton butID) {
+        this.butID = butID;
+    }
+
+    public JButton getBoton_salir() {
+        return boton_salir;
+    }
+
+    public void setBoton_salir(JButton boton_salir) {
+        this.boton_salir = boton_salir;
+    }
+
+    public JButton getBoton_guardar() {
+        return boton_guardar;
+    }
+
+    public void setBoton_guardar(JButton boton_guardar) {
+        this.boton_guardar = boton_guardar;
+    }
+
+    public JTable getTabla() {
+        return tabla;
+    }
+
+    public void setTabla(JTable tabla) {
+        this.tabla = tabla;
+    }
+
     
     
     

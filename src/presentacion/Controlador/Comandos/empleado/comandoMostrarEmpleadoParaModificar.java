@@ -8,7 +8,6 @@ package presentacion.Controlador.Comandos.empleado;
 import java.util.ArrayList;
 import negocio.FactoriaSA.FactoriaSA;
 import negocio.empleados.Empleado;
-import negocio.producto.TProducto;
 import presentacion.Controlador.Comandos.Command;
 import presentacion.Controlador.Comandos.RespuestaComando;
 import presentacion.Controlador.Eventos.EventoNegocio;
@@ -17,30 +16,28 @@ import presentacion.Controlador.Eventos.EventoNegocio;
  *
  * @author Ruben
  */
-public class comandoModificarEmpleado implements Command{
+public class comandoMostrarEmpleadoParaModificar  implements Command{
 
     @Override
     public RespuestaComando execute(Object datos) {
-       ArrayList<Object> datosAlmacenados = (ArrayList<Object>)datos;
+        ArrayList<Object> datosAlmacenados = (ArrayList<Object>)datos;
         
         
         Integer idEmpleado = (Integer)datosAlmacenados.get(0);
         Empleado empleado;
-        Empleado empleadoAux;
 	empleado = FactoriaSA.obtenerInstancia().generaSAEmpleado().mostrarEmpleado(idEmpleado);
 	RespuestaComando respuesta;
         datosAlmacenados.add(empleado);
 		
 	if (empleado != null) //Si existe
         {
-            respuesta = new RespuestaComando(EventoNegocio.EXITO_MODIFICAR_EMPLEADO, datosAlmacenados);
+            respuesta = new RespuestaComando(EventoNegocio.EXITO_MOSTRAR_EMPLEADO_PARA_MODIFICAR, datosAlmacenados);
 	}
 	else
         {
-            respuesta = new RespuestaComando(EventoNegocio.FRACASO_MODIFICAR_PRODUCTO, datosAlmacenados);
+            respuesta = new RespuestaComando(EventoNegocio.FRACASO_MOSTRAR_EMPLEADO_PARA_MODIFICAR, datosAlmacenados);
 	}
 	return respuesta;
     }
-    
     
 }

@@ -32,10 +32,10 @@ import presentacion.Vista.producto.GUIMostrarProducto;
  */
 public class GUIMostrarEmpleado extends JFrame{
      Object[][] datos_entrada = {
-        {"","", "", "", "", "",""}
+        {"","", "", "", "", "","",""}
        };
         
-        String[] NombreColumnas = {"DNI","Nombre", "Apellidos", "Direccion", "Tipo", "Departamento", "Sueldo"};
+        String[] NombreColumnas = {"ID","DNI","Nombre", "Apellidos", "Direccion", "Tipo", "Departamento", "Sueldo"};
 
         JTextField textID = new JTextField("");
 
@@ -114,14 +114,24 @@ public class GUIMostrarEmpleado extends JFrame{
     
     public void cargarEmpleadoEnLista(Empleado empleado)
     {
-        DefaultTableModel dtm = new DefaultTableModel(0, 0);
+        DefaultTableModel dtm = new DefaultTableModel(0, 0){
+
+            @Override
+            public boolean isCellEditable(int row, int column) {
+               return false;
+            }
+            
+      
+            
+        };
         dtm.setColumnIdentifiers(NombreColumnas);
         
         tabla.setModel(dtm);
         dtm.addRow(new Object[]
-        {empleado.getIdEmpleado(),empleado.getDni(), empleado.getNombre(), empleado.getApellidos(), empleado.getDireccion(),empleado.getTipo(), empleado.getDepartamento(),empleado.getSueldo()});
+        {empleado.getIdEmpleado(),empleado.getDni(), empleado.getNombre(), empleado.getApellidos(), empleado.getDireccion(),empleado.getTipo(), empleado.getDepartamento().getNombre(),empleado.getSueldo()});
         dtm.fireTableDataChanged();
     }
+    
     
     //getters y setters
 

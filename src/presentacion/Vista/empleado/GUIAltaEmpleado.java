@@ -133,7 +133,7 @@ public class GUIAltaEmpleado extends JFrame{
                 empleado.setNombre(textNombre.getText());
                 empleado.setApellidos(textApellidos.getText());
                 empleado.setDireccion(textDireccion.getText());
-           //     empleado.setDepartamento(textDepartamento.getText());
+        //        empleado.setDepartamento(textDepartamento.getText());
                 empleado.setSueldo((BigDecimal.valueOf(Double.parseDouble(textSueldo.getText()))));
                 empleado.setDisponible(true);
                 

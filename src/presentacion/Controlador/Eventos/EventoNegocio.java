@@ -77,6 +77,7 @@ public class EventoNegocio
     public static final int EXITO_MODIFICAR_EMPLEADO = 473; 
     public static final int EXITO_MOSTRAR_EMPLEADO = 474; 
     public static final int EXITO_MOSTRAR_LISTA_EMPLEADO = 475;
+    public static final int EXITO_MOSTRAR_EMPLEADO_PARA_MODIFICAR = 476;
     
     //Modulo DEPARTAMENTOS
     public static final int EXITO_ALTA_DEPARTAMENTO = 481;
@@ -120,7 +121,8 @@ public class EventoNegocio
     public static final int FRACASO_BAJA_EMPLEADO = 772; 
     public static final int FRACASO_MODIFICAR_EMPLEADO = 773; 
     public static final int FRACASO_MOSTRAR_EMPLEADO = 774; 
-    public static final int FRACASO_MOSTRAR_LISTA_EMPLEADO = 775; 
+    public static final int FRACASO_MOSTRAR_LISTA_EMPLEADO = 775;
+    public static final int FRACASO_MOSTRAR_EMPLEADO_PARA_MODIFICAR = 776;
     
     //Modulo DEPARTAMENTOS
     public static final int FRACASO_ALTA_DEPARTAMENTO = 781;
@@ -146,6 +148,7 @@ public class EventoNegocio
     public static final int MODIFICAR_EMPLEADO = 703; 
     public static final int MOSTRAR_EMPLEADO = 704; 
     public static final int MOSTRAR_LISTA_EMPLEADO = 705; 
+    public static final int MOSTRAR_EMPLEADO_PARA_MODIFICAR = 711;
  
     public static final int GUI_ALTA_EMPLEADO = 706;
     public static final int GUI_BAJA_EMPLEADO = 707;
@@ -167,6 +170,7 @@ public class EventoNegocio
     public static final int GUI_MOSTRAR_DEPARTAMENTO = 810;
     public static final int GUI_MOSTRAR_LISTA_DEPARTAMENTOS = 811;
     public static final int GUI_CALCULAR_NOMINA_DEPARTAMENTO = 812;
+    public static final int GUI_MOSTRAR_EMPLEADO_PARA_MODIFICAR = 813;
 
 
             
