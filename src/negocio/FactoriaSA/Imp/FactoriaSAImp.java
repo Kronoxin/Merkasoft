@@ -15,6 +15,8 @@ import negocio.empleados.SA.SAEmpleado;
 import negocio.empleados.SA.Imp.SAEmpleadoImp;
 import negocio.producto.SAProducto.Imp.SAProductoImp;
 import negocio.producto.SAProducto.SAProducto;
+import negocio.turnos.SA.Imp.SATurnoImp;
+import negocio.turnos.SA.SATurno;
 import negocio.venta.SAVenta.Imp.SAVentaImp;
 import negocio.venta.SAVenta.SAVenta;
 import org.eclipse.persistence.internal.jpa.EntityManagerImpl;
@@ -58,10 +60,10 @@ public class FactoriaSAImp extends FactoriaSA {
         return new SADepartamentoImp();
     }
 
-    
-   /* public SATurno generaSATurno() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }*/
+    @Override
+    public SATurno generaSATurno() {
+        return new SATurnoImp();
+    }
 
     
     

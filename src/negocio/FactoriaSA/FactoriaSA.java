@@ -15,6 +15,7 @@ import negocio.producto.SAProducto.Imp.SAProductoImp;
 import negocio.producto.SAProducto.SAProducto;
 import negocio.venta.SAVenta.Imp.SAVentaImp;
 import negocio.venta.SAVenta.SAVenta;
+import negocio.turnos.SA.SATurno;
 
 /**
  *
@@ -36,7 +37,7 @@ public abstract class FactoriaSA {
         
         public abstract SADepartamento generaSADepartamento();
         
-    //    public abstract SATurno generaSATurno();
+        public abstract SATurno generaSATurno();
         
         
         
