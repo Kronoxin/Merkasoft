@@ -79,30 +79,42 @@ public class SADepartamentoImp implements SADepartamento {
             Collection<Empleado> empleadosCollectionOld = persistentDepartamento.getEmpleadosCollection();
             Collection<Empleado> empleadosCollectionNew = departamento.getEmpleadosCollection();
             Collection<Empleado> attachedEmpleadosCollectionNew = new ArrayList<Empleado>();
-            for (Empleado empleadosCollectionNewEmpleadosToAttach : empleadosCollectionNew) {
-                empleadosCollectionNewEmpleadosToAttach = em.getReference(empleadosCollectionNewEmpleadosToAttach.getClass(), empleadosCollectionNewEmpleadosToAttach.getIdEmpleado());
-                attachedEmpleadosCollectionNew.add(empleadosCollectionNewEmpleadosToAttach);
+            
+            if (empleadosCollectionNew != null)
+            {
+                for (Empleado empleadosCollectionNewEmpleadosToAttach : empleadosCollectionNew) 
+                {
+                    empleadosCollectionNewEmpleadosToAttach = em.getReference(empleadosCollectionNewEmpleadosToAttach.getClass(), empleadosCollectionNewEmpleadosToAttach.getIdEmpleado());
+                    attachedEmpleadosCollectionNew.add(empleadosCollectionNewEmpleadosToAttach);
+                }
             }
             empleadosCollectionNew = attachedEmpleadosCollectionNew;
             departamento.setEmpleadosCollection(empleadosCollectionNew);
             departamento = em.merge(departamento);
-            for (Empleado empleadosCollectionOldEmpleados : empleadosCollectionOld) {
-                if (!empleadosCollectionNew.contains(empleadosCollectionOldEmpleados)) {
-                    empleadosCollectionOldEmpleados.setDepartamento(null);
-                    empleadosCollectionOldEmpleados = em.merge(empleadosCollectionOldEmpleados);
-                }
-            }
-            for (Empleado empleadosCollectionNewEmpleados : empleadosCollectionNew) {
-                if (!empleadosCollectionOld.contains(empleadosCollectionNewEmpleados)) {
-                    Departamento oldDepartamentoOfEmpleadosCollectionNewEmpleados = empleadosCollectionNewEmpleados.getDepartamento();
-                    empleadosCollectionNewEmpleados.setDepartamento(departamento);
-                    empleadosCollectionNewEmpleados = em.merge(empleadosCollectionNewEmpleados);
-                    if (oldDepartamentoOfEmpleadosCollectionNewEmpleados != null && !oldDepartamentoOfEmpleadosCollectionNewEmpleados.equals(departamento)) {
-                        oldDepartamentoOfEmpleadosCollectionNewEmpleados.getEmpleadosCollection().remove(empleadosCollectionNewEmpleados);
-                        oldDepartamentoOfEmpleadosCollectionNewEmpleados = em.merge(oldDepartamentoOfEmpleadosCollectionNewEmpleados);
+            if (empleadosCollectionOld != null)
+            {
+                for (Empleado empleadosCollectionOldEmpleados : empleadosCollectionOld) {
+                    if (!empleadosCollectionNew.contains(empleadosCollectionOldEmpleados)) {
+                        empleadosCollectionOldEmpleados.setDepartamento(null);
+                        empleadosCollectionOldEmpleados = em.merge(empleadosCollectionOldEmpleados);
                     }
                 }
             }
+            if (empleadosCollectionNew != null)
+            {
+                for (Empleado empleadosCollectionNewEmpleados : empleadosCollectionNew) {
+                    if (!empleadosCollectionOld.contains(empleadosCollectionNewEmpleados)) {
+                        Departamento oldDepartamentoOfEmpleadosCollectionNewEmpleados = empleadosCollectionNewEmpleados.getDepartamento();
+                        empleadosCollectionNewEmpleados.setDepartamento(departamento);
+                        empleadosCollectionNewEmpleados = em.merge(empleadosCollectionNewEmpleados);
+                        if (oldDepartamentoOfEmpleadosCollectionNewEmpleados != null && !oldDepartamentoOfEmpleadosCollectionNewEmpleados.equals(departamento)) {
+                            oldDepartamentoOfEmpleadosCollectionNewEmpleados.getEmpleadosCollection().remove(empleadosCollectionNewEmpleados);
+                            oldDepartamentoOfEmpleadosCollectionNewEmpleados = em.merge(oldDepartamentoOfEmpleadosCollectionNewEmpleados);
+                        }
+                    }
+                }
+            }
+            
             em.getTransaction().commit();
         } 
         catch (Exception ex) 
@@ -227,12 +239,22 @@ public class SADepartamentoImp implements SADepartamento {
     {
         SADepartamentoImp sa = new SADepartamentoImp();
         
+        /*
         Departamento dep = new Departamento();
         dep.setNombre("Bababuiiii2");
         dep.setDescripcion("MUYY BABABUUUII");
         dep.setDisponible(true);
         sa.altaDepartamento(dep);
-        System.out.println("SASASASASA");
+                */
+        
+        
+        Departamento dep = new Departamento();
+        dep.setIdDepartamento(1);
+        dep.setNombre("BABABUIIIII3");
+        sa.modificarDepartamento(dep);
+        System.out.println("BABABUUUUUIII");
+                
+        
     }
     
 }
