@@ -61,7 +61,7 @@ public class DAOProductoImp implements DAOProducto
     {
         Statement query = null;
         Connection connection = null;        
-        String contenido_query = "UPDATE Productos SET Disponible = FALSE WHERE id_producto = " + ID + ";";                
+        String contenido_query = "UPDATE Productos SET Disponible = false WHERE id_producto = " + ID + ";";                
                 
         try
         {
@@ -82,7 +82,7 @@ public class DAOProductoImp implements DAOProducto
         {
             throw new SQLException("No se ha podido dar de baja el producto. \nError: " + e.getMessage());
         }
-         return false;
+        return true;
     }
 
     @Override
@@ -203,13 +203,14 @@ public class DAOProductoImp implements DAOProducto
 
         try
         {            
+            System.err.println(contenido_query);
             query.executeUpdate(contenido_query);
         }
         catch (SQLException ex)
         {            
             throw new Exception("Error al actualizar en la tabla de productos \nError: " + ex.getMessage());            
         }                                    
-        return false;
+        return true;
     }
     
 }

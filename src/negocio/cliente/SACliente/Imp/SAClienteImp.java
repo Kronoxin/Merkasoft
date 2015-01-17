@@ -28,37 +28,48 @@ public class SAClienteImp implements SACliente{
     @Override
     public int altaCliente(TCliente cliente) 
     {
-
          int idCliente =-1;
         
         TransactionManager.obtenerInstanacia().nuevaTransaccion();
-        
-        
         try{
             
             TransactionManager.obtenerInstanacia().getTransaccion().start();
        
-            
-            TCliente tCliente = FactoriaDAO.obtenerInstancia().getDAOCliente().mostrarCliente(cliente.getId());
-            
+            idCliente = FactoriaDAO.obtenerInstancia().getDAOCliente().altaCliente(cliente); 
+            //TCliente tCliente = FactoriaDAO.obtenerInstancia().getDAOCliente().mostrarCliente(cliente.getId());
+            System.err.println(idCliente);
             //Si el cliente no existe lo insertamos
-            
-            if(tCliente == null)
-            {
-             
-              idCliente = FactoriaDAO.obtenerInstancia().getDAOCliente().altaCliente(cliente);  
-              
               if(idCliente > 0)
               {
+                  // Se hace el commit.
+                  try
+                  {
                        TransactionManager.obtenerInstanacia().getTransaccion().commit();
+                  }
+                  // Si falla el commit.
+                  catch(Exception e)
+                  {
+                     idCliente = -1;
+                     TransactionManager.obtenerInstanacia().getTransaccion().rollback(); 
+                  }
               }                 
+
+            // Eliminamos la transaccion.
+            TransactionManager.obtenerInstanacia().eliminaTransaccion();
+        }
+        catch(Exception e){
             
-            
-            }
-            else{
-            
-            idCliente = tCliente.getId();
-            
+            idCliente = -1;
+             try 
+             {
+                 TransactionManager.obtenerInstanacia().getTransaccion().rollback();
+             } catch (Exception ex) 
+             {
+                 ex.printStackTrace();
+             }
+            TransactionManager.obtenerInstanacia().eliminaTransaccion();
+        }
+            /*
             // Si el cliente  existe  y no esta activo lo activamos
             
                 if(!tCliente.isActivo()){
@@ -73,36 +84,9 @@ public class SAClienteImp implements SACliente{
                                 
                    
                    }
-                   //Eliminamos la transaccion
-                   
-                   TransactionManager.obtenerInstanacia().eliminaTransaccion();
-                }
-            
-            
-            
-            
-            }
-            
-        
-        }
-        catch(Exception e){
-            
-            idCliente = -1;
-             try 
-             {
-                 TransactionManager.obtenerInstanacia().getTransaccion().rollback();
-             } catch (Exception ex) 
-             {
-                 ex.printStackTrace();
-             }
-            TransactionManager.obtenerInstanacia().eliminaTransaccion();
-            
-        
-        }
-        
-        return idCliente;
-    
-        
+                    */
+                
+        return idCliente;      
     }
 // eliminar por id
     public boolean eliminarCliente(int  id)

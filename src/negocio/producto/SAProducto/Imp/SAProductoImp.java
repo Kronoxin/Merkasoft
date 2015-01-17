@@ -143,9 +143,10 @@ public class SAProductoImp implements SAProducto
             //Iniciamos la transsacion y bloqueamos la tabla a modificar
             TransactionManager.obtenerInstanacia().getTransaccion().start();
             //buscamos el producto en la BBDD
-            TProducto tProducto = FactoriaDAO.obtenerInstancia().getDAOProducto().mostrarProducto(producto.getId());
+            //TProducto tProducto = FactoriaDAO.obtenerInstancia().getDAOProducto().mostrarProducto(producto.getId());
+            
             //Si el producto existe y no es igual al pasado lo modificamos
-            if(tProducto!=null && !tProducto.equals(producto))
+            if(producto!=null)
             {
                 if(FactoriaDAO.obtenerInstancia().getDAOProducto().modificarProducto(producto))
                 {

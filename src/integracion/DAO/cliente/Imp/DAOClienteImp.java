@@ -56,8 +56,17 @@ public class DAOClienteImp implements DAOCliente
             }
             System.out.println(contenido_query);
             query.executeUpdate(contenido_query);
-            query.execute("SELECT id_cliente FROM Clientes WHERE DNI = " + cliente.getDNI() + ";");
-            ResultSet rs = query.getResultSet();
+        }
+        catch (SQLException e)
+        {
+            throw new SQLException("No se ha podido dar de alta el cliente. Posiblemente ya exista\nError: " + e.getMessage() + "\n" + e.getSQLState() + "\n" + e.getErrorCode());
+        }
+         
+         //Si no ha saltado excepción en este punto es porque se ha dado el alta correctamente 
+         //Buscamos el id del nuevo usuario
+         query.executeQuery("SELECT id_cliente FROM Clientes WHERE DNI = " + "\"" + cliente.getDNI() + "\"" + ";");
+            
+         ResultSet rs = query.getResultSet();
             rs.next();
             int id = rs.getInt(1);
             if (cliente.getClass().equals(TClienteNormal.class))
@@ -72,14 +81,7 @@ public class DAOClienteImp implements DAOCliente
             }
             System.out.println(contenido_query_especializada);
             query.execute(contenido_query_especializada);
-        }
-        catch (SQLException e)
-        {
-            throw new SQLException("No se ha podido dar de alta el cliente. Posiblemente ya exista\nError: " + e.getMessage() + "\n" + e.getSQLState() + "\n" + e.getErrorCode());
-        }
-         
-         //Si no ha saltado excepción en este punto es porque se ha dado el alta correctamente         
-         return ret;
+         return id;
     }
 
     @Override
@@ -109,7 +111,7 @@ public class DAOClienteImp implements DAOCliente
         {
             throw new SQLException("No se ha podido dar de baja el cliente. \nError: " + e.getMessage());
         }
-         return false;
+         return true;
     }
 
     @Override

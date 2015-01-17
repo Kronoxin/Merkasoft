@@ -9,11 +9,13 @@ package presentacion.Vista.cliente;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import presentacion.Controlador.Controlador;
 import presentacion.Controlador.Eventos.EventoNegocio;
+import presentacion.Vista.producto.GUIMostrarProducto;
 
 
 /**
@@ -70,13 +72,20 @@ public class GUIMostrarCliente extends JFrame{
         this.add(panelTabla, BorderLayout.CENTER);
         this.add(panelBoton,BorderLayout.SOUTH);
         
+        this.setVisible(true);	
+                
         //action listener
         butID.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) 
                 {
-                Controlador con = Controlador.getInstance();
-                con.accion(EventoNegocio.MOSTRAR_CLIENTE, textID.getText());
+                    ArrayList<Object> datos = new ArrayList<>();
+                    
+                    datos.add(Integer.parseInt(textID.getText()));
+                    datos.add(new GUIMostrarCliente());
+                    
+                    Controlador.getInstance().accion(EventoNegocio.MOSTRAR_CLIENTE, datos);
+                    dispose();
                 }
             });
         boton_salir.addActionListener(new ActionListener() 
@@ -87,7 +96,6 @@ public class GUIMostrarCliente extends JFrame{
                 dispose();
                 }
         });
-        this.setVisible(true);	
 	}
 
     //getters y setter
