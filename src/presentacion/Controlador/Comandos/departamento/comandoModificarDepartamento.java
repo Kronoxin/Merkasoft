@@ -6,6 +6,7 @@
 package presentacion.Controlador.Comandos.departamento;
 
 import negocio.FactoriaSA.FactoriaSA;
+import negocio.departamentos.Departamento;
 import presentacion.Controlador.Comandos.Command;
 import presentacion.Controlador.Comandos.RespuestaComando;
 import presentacion.Controlador.Eventos.EventoNegocio;
@@ -18,7 +19,7 @@ public class comandoModificarDepartamento implements Command{
 
     @Override
     public RespuestaComando execute(Object datos) {
-      /*  boolean correcto = FactoriaSA.obtenerInstancia().generaSADepartamento().modificarDepartamento((Departamento)datos);
+        boolean correcto = FactoriaSA.obtenerInstancia().generaSADepartamento().modificarDepartamento((Departamento)datos);
 	RespuestaComando respuesta;
 		
 	if (correcto)
@@ -29,10 +30,8 @@ public class comandoModificarDepartamento implements Command{
         {
             respuesta = new RespuestaComando(EventoNegocio.FRACASO_MODIFICAR_DEPARTAMENTO, (Departamento)datos);
 	}
-	return respuesta;*/
+	return respuesta;
         
-        //para poder ejecutar la aplicacion mientras no está el SA completado 
-      throw new UnsupportedOperationException("Not supported yet.");
     }
     
 }

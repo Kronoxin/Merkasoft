@@ -18,7 +18,7 @@ public class comandoBajaDepartamento implements Command{
 
     @Override
     public RespuestaComando execute(Object datos) {
-     /*   int idDepartamento = Integer.parseInt((String) datos);
+        int idDepartamento = Integer.parseInt((String) datos);
        RespuestaComando respuesta;
        boolean eliminado;
        
@@ -29,10 +29,8 @@ public class comandoBajaDepartamento implements Command{
        else
            respuesta = new RespuestaComando(EventoNegocio.FRACASO_BAJA_DEPARTAMENTO, idDepartamento);
        
-       return respuesta;*/
+       return respuesta;
         
-        //para poder ejecutar la aplicacion mientras no está el SA completado 
-      throw new UnsupportedOperationException("Not supported yet.");
     }
     
 }
