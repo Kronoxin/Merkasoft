@@ -22,6 +22,7 @@ import negocio.departamentos.Departamento;
 import negocio.producto.TProducto;
 import presentacion.Controlador.Controlador;
 import presentacion.Controlador.Eventos.EventoNegocio;
+import presentacion.Vista.producto.GUIMostrarListaProductos;
 
 /**
  *
@@ -79,6 +80,14 @@ public class GUIMostrarListaDepartamentos extends JFrame{
 
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    
+                     ArrayList<Object> datos = new ArrayList<>();
+                    
+                    
+                    datos.add(new GUIMostrarListaDepartamentos());
+                    
+                    Controlador.getInstance().accion(EventoNegocio.MOSTRAR_LISTA_DEPARTAMENTO, datos);
+                    dispose();
 
                 }
             });

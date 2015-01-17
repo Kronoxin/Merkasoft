@@ -7,6 +7,7 @@ package presentacion.Controlador.Comandos.departamento;
 
 import java.util.ArrayList;
 import negocio.FactoriaSA.FactoriaSA;
+import negocio.departamentos.Departamento;
 import presentacion.Controlador.Comandos.Command;
 import presentacion.Controlador.Comandos.RespuestaComando;
 import presentacion.Controlador.Eventos.EventoNegocio;
@@ -19,7 +20,7 @@ public class comandoMostrarDepartamento implements Command{
 
     @Override
     public RespuestaComando execute(Object datos) {
-     /*    ArrayList<Object> datosAlmacenados = (ArrayList<Object>)datos;
+         ArrayList<Object> datosAlmacenados = (ArrayList<Object>)datos;
         
         
         Integer idDepartamento = (Integer)datosAlmacenados.get(0);
@@ -36,10 +37,9 @@ public class comandoMostrarDepartamento implements Command{
         {
             respuesta = new RespuestaComando(EventoNegocio.FRACASO_MOSTRAR_DEPARTAMENTO, datosAlmacenados);
 	}
-	return respuesta;*/
+	return respuesta;
         
-        //para poder ejecutar la aplicacion mientras no está el SA completado 
-      throw new UnsupportedOperationException("Not supported yet.");
+  
     }
     
 }
