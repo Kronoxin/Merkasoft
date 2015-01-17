@@ -12,6 +12,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -30,12 +31,12 @@ import presentacion.Controlador.Eventos.EventoNegocio;
  * @author Ruben
  */
 public class GUIModificarEmpleado extends JFrame{
-    
+  
     Object[][] datos_entrada = {
-        {"","", "", "", "", "","",""}
+        {"","", "", "", "", "","","",""}
        };
         
-        String[] NombreColumnas = {"ID","DNI","Nombre", "Apellidos", "Direccion", "Tipo", "Departamento", "Sueldo"};
+        String[] NombreColumnas = {"ID","DNI","Nombre", "Apellidos", "Direccion", "Tipo", "Departamento", "Sueldo","Disponible"};
 
         JTextField textID = new JTextField("");
 
@@ -101,7 +102,20 @@ public class GUIModificarEmpleado extends JFrame{
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                Empleado empleado = new Empleado();
+                empleado.setIdEmpleado((int)tabla.getValueAt(0, 0));
+                empleado.setDni((String)(tabla.getValueAt(0, 1)));
+                empleado.setNombre((String)(tabla.getValueAt(0, 2)));
+                empleado.setApellidos((String)(tabla.getValueAt(0, 3)));
+                empleado.setDireccion((String)tabla.getValueAt(0, 4));
+                empleado.setTipo((String)tabla.getValueAt(0, 5));
+           //     empleado.setDepartamento((String)tabla.getValueAt(0, 6));
+                empleado.setSueldo((BigDecimal)tabla.getValueAt(0, 7));
+                empleado.setDisponible((Boolean)tabla.getValueAt(0, 8));
+                
+                Controlador.getInstance().accion(EventoNegocio.MODIFICAR_EMPLEADO, empleado);
+                
+                
             }
         });
             
@@ -141,7 +155,7 @@ public class GUIModificarEmpleado extends JFrame{
         
         tabla.setModel(dtm);
         dtm.addRow(new Object[]
-        {empleado.getIdEmpleado(),empleado.getDni(), empleado.getNombre(), empleado.getApellidos(), empleado.getDireccion(),empleado.getTipo(), empleado.getDepartamento().getNombre(),empleado.getSueldo()});
+        {empleado.getIdEmpleado(),empleado.getDni(), empleado.getNombre(), empleado.getApellidos(), empleado.getDireccion(),empleado.getTipo(), empleado.getDepartamento().getNombre(),empleado.getSueldo(),empleado.getDisponible()});
         dtm.fireTableDataChanged();
     }
     

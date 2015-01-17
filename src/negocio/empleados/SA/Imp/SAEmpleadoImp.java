@@ -102,9 +102,12 @@ public class SAEmpleadoImp implements SAEmpleado {
                 empleado.setDepartamento(departamentoNew);
             }
             Collection<Turno> attachedTurnoCollectionNew = new ArrayList<Turno>();
-            for (Turno turnoCollectionNewTurnoToAttach : turnoCollectionNew) {
-                turnoCollectionNewTurnoToAttach = em.getReference(turnoCollectionNewTurnoToAttach.getClass(), turnoCollectionNewTurnoToAttach.getIdTurno());
-                attachedTurnoCollectionNew.add(turnoCollectionNewTurnoToAttach);
+            if(turnoCollectionNew != null)
+            {
+                for (Turno turnoCollectionNewTurnoToAttach : turnoCollectionNew) {
+                    turnoCollectionNewTurnoToAttach = em.getReference(turnoCollectionNewTurnoToAttach.getClass(), turnoCollectionNewTurnoToAttach.getIdTurno());
+                    attachedTurnoCollectionNew.add(turnoCollectionNewTurnoToAttach);
+                }
             }
             turnoCollectionNew = attachedTurnoCollectionNew;
             empleado.setTurnoCollection(turnoCollectionNew);
@@ -117,16 +120,22 @@ public class SAEmpleadoImp implements SAEmpleado {
                 departamentoNew.getEmpleadosCollection().add(empleado);
                 departamentoNew = em.merge(departamentoNew);
             }
-            for (Turno turnoCollectionOldTurno : turnoCollectionOld) {
-                if (!turnoCollectionNew.contains(turnoCollectionOldTurno)) {
-                    turnoCollectionOldTurno.getEmpleadosCollection().remove(empleado);
-                    turnoCollectionOldTurno = em.merge(turnoCollectionOldTurno);
+            if (turnoCollectionOld != null)
+            {
+                for (Turno turnoCollectionOldTurno : turnoCollectionOld) {
+                    if (!turnoCollectionNew.contains(turnoCollectionOldTurno)) {
+                        turnoCollectionOldTurno.getEmpleadosCollection().remove(empleado);
+                        turnoCollectionOldTurno = em.merge(turnoCollectionOldTurno);
+                    }
                 }
             }
-            for (Turno turnoCollectionNewTurno : turnoCollectionNew) {
-                if (!turnoCollectionOld.contains(turnoCollectionNewTurno)) {
-                    turnoCollectionNewTurno.getEmpleadosCollection().add(empleado);
-                    turnoCollectionNewTurno = em.merge(turnoCollectionNewTurno);
+            if ( turnoCollectionNew != null)
+            {
+                for (Turno turnoCollectionNewTurno : turnoCollectionNew) {
+                    if (!turnoCollectionOld.contains(turnoCollectionNewTurno)) {
+                        turnoCollectionNewTurno.getEmpleadosCollection().add(empleado);
+                        turnoCollectionNewTurno = em.merge(turnoCollectionNewTurno);
+                    }
                 }
             }
             em.getTransaction().commit();

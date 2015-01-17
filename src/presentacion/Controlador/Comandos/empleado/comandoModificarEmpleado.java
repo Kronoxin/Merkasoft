@@ -21,23 +21,21 @@ public class comandoModificarEmpleado implements Command{
 
     @Override
     public RespuestaComando execute(Object datos) {
-       ArrayList<Object> datosAlmacenados = (ArrayList<Object>)datos;
+       Empleado datosAlmacenados = (Empleado)datos;
         
         
-        Integer idEmpleado = (Integer)datosAlmacenados.get(0);
-        Empleado empleado;
-        Empleado empleadoAux;
-	empleado = FactoriaSA.obtenerInstancia().generaSAEmpleado().mostrarEmpleado(idEmpleado);
+        boolean correcto;
+	correcto = FactoriaSA.obtenerInstancia().generaSAEmpleado().modificarEmpleado(datosAlmacenados);
 	RespuestaComando respuesta;
-        datosAlmacenados.add(empleado);
+        
 		
-	if (empleado != null) //Si existe
+	if (correcto) //Si existe
         {
-            respuesta = new RespuestaComando(EventoNegocio.EXITO_MODIFICAR_EMPLEADO, datosAlmacenados);
+            respuesta = new RespuestaComando(EventoNegocio.EXITO_MODIFICAR_EMPLEADO, null);
 	}
 	else
         {
-            respuesta = new RespuestaComando(EventoNegocio.FRACASO_MODIFICAR_PRODUCTO, datosAlmacenados);
+            respuesta = new RespuestaComando(EventoNegocio.FRACASO_MODIFICAR_EMPLEADO, null);
 	}
 	return respuesta;
     }

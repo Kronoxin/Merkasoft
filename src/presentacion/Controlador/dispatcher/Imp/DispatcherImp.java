@@ -367,10 +367,7 @@ public class DispatcherImp extends Dispatcher
             }
             case EventoNegocio.EXITO_MODIFICAR_EMPLEADO:
             {
-                ArrayList<Object> datos = (ArrayList<Object>)comando.getDatos();
-                
-                Empleado empleado = (Empleado)datos.get(2);
-                ((GUIModificarEmpleado)datos.get(1)).cargarEmpleadoEnLista(empleado);
+                PopupsEmpleado.ModificarEmpleadoExito();
                 
                 break;
             }
