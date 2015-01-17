@@ -56,6 +56,16 @@ public class Turno implements Serializable {
     @Column(name = "Hora_Salida")
     @Temporal(TemporalType.TIMESTAMP)
     private Date horaSalida;
+    @Column(name = "Disponible")
+    private boolean Disponible;
+
+    public boolean isDisponible() {
+        return Disponible;
+    }
+
+    public void setDisponible(boolean Disponible) {
+        this.Disponible = Disponible;
+    }
 
     public Turno() {
     }

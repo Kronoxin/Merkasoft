@@ -17,13 +17,15 @@ import java.util.Collection;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import negocio.turnos.SA.SAturno;
 import negocio.turnos.Turno;
 
 /**
  *
  * @author Ruben
  */
-public class SATurnoImp implements Serializable {
+public class SATurnoImp implements Serializable, SAturno {
 
     public SATurnoImp(EntityManagerFactory emf) {
         this.emf = emf;
@@ -34,7 +36,101 @@ public class SATurnoImp implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Turno turno) {
+   
+
+    @Override
+    public int altaTurno(Turno turno) {       
+        EntityManager em = null;
+        try 
+        {
+           
+            EntityManagerFactory ef = Persistence.createEntityManagerFactory("MerkaSoftPU");
+            em = ef.createEntityManager();
+        
+            em.getTransaction().begin();
+                        
+            
+            em.persist(turno);            
+            em.getTransaction().commit();
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+        return turno.getIdTurno(); 
+    }
+
+    @Override
+    public boolean bajaTurno(int id) {
+        EntityManager em = null;
+        boolean correcto = true;
+        try {
+            EntityManagerFactory ef = Persistence.createEntityManagerFactory("MerkaSoftPU");
+            em = ef.createEntityManager();
+            em.getTransaction().begin();
+            Turno persistentTurno = em.find(Turno.class, id);
+            
+            persistentTurno.setDisponible(false); 
+            em.merge(persistentTurno);
+            em.getTransaction().commit();
+        } 
+        catch (Exception ex) 
+        {
+            correcto = false;
+            ex.printStackTrace();
+            
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+        return correcto;
+    }
+
+    @Override
+    public boolean modificarTurno(Turno turno) {
+        EntityManager em = null;
+        boolean ret = true;
+        try 
+        {
+           
+            EntityManagerFactory ef = Persistence.createEntityManagerFactory("MerkaSoftPU");
+            em = ef.createEntityManager();      
+            em.getTransaction().begin();            
+            em.merge(turno);            
+            em.getTransaction().commit();
+        } finally {
+            ret = false;
+            if (em != null) {
+                em.close();
+            }
+        }
+        return ret; 
+    }
+
+    @Override
+    public Turno mostrarTurno(int id) 
+    {
+        EntityManager em = null;
+        EntityManagerFactory ef = Persistence.createEntityManagerFactory("MerkaSoftPU");
+        em = ef.createEntityManager();
+        
+        try 
+        {
+            return em.find(Turno.class, id);
+        } 
+        finally 
+        {
+            em.close();
+        }
+    }
+
+    @Override
+    public ArrayList<Turno> mostrarListaTurnos() {
+        return new ArrayList<Turno>(findTurnoEntities(true, -1, -1));
+    }
+    
+     public void create(Turno turno) {
         if (turno.getEmpleadosCollection() == null) {
             turno.setEmpleadosCollection(new ArrayList<Empleado>());
         }

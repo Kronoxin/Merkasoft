@@ -5,11 +5,19 @@
  */
 package negocio.turnos.SA;
 
+import java.util.ArrayList;
+import negocio.turnos.Turno;
+
 /**
  *
  * @author Ruben
  */
 //meter los CRUD
-public interface SAturno {
-    
+public interface SAturno 
+{
+    public int altaTurno(Turno turno);
+    public  boolean bajaTurno(int id);
+    public boolean modificarTurno(Turno turno);
+    public Turno mostrarTurno(int id);
+    public ArrayList<Turno> mostrarListaTurnos();
 }
