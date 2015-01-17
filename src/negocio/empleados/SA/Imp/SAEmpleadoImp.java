@@ -18,6 +18,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import negocio.departamentos.SA.Imp.SADepartamentoImp;
 import negocio.empleados.Empleado;
 import negocio.empleados.SA.SAEmpleado;
 import negocio.turnos.SA.exceptions.NonexistentEntityException;
@@ -241,20 +242,18 @@ public class SAEmpleadoImp implements SAEmpleado {
         SAEmpleadoImp sa = new SAEmpleadoImp();
         Empleado empleado = new Empleado();
         Departamento dep = new Departamento();
-        
-        dep.setDescripcion("PruebaDepartamento1");
-        dep.setNombre("Departamento1");
-        ArrayList<Empleado> listaEmpleados = new ArrayList<>();
-        
-        listaEmpleados.add(empleado);
-        dep.setEmpleadosCollection(listaEmpleados);
-        
+        /*
         empleado.setNombre("Prueba1");
+        empleado.setDni("12345678A");
         empleado.setApellidos("Cosas");
         empleado.setDireccion("Calle rabo 4");
-        empleado.setDepartamento(dep);
+        empleado.setDisponible(true);
+        empleado.setDepartamento(new SADepartamentoImp().mostrarDepartamento(1));
         
         sa.altaEmpleado(empleado);
+                */
+        sa.bajaEmpleado(2);
+        System.out.println("BABABUUIIII");
     }
     
 }
