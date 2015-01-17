@@ -12,7 +12,7 @@ import negocio.turnos.Turno;
  *
  * @author Ruben
  */
-public interface SATurno2 {
+public interface SATurno {
     public int altaTurno(Turno turno);
     public boolean bajaTurno(int id);
     public boolean modificarTurno(Turno turno);
