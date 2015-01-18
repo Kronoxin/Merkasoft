@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -21,6 +22,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import negocio.FactoriaSA.FactoriaSA;
+import negocio.departamentos.Departamento;
 import negocio.empleados.Empleado;
 import presentacion.Controlador.Controlador;
 import presentacion.Controlador.Eventos.EventoNegocio;
@@ -56,7 +59,7 @@ public class GUIAltaEmpleado extends JFrame{
     
     JRadioButton radioSupervisor = new JRadioButton("Supervisor",true);
     JRadioButton radioTrabajador = new JRadioButton("Trabajador");
-    ButtonGroup radioDNI = new ButtonGroup();
+    ButtonGroup grupoRadios = new ButtonGroup();
     
     JButton boton_ok = new JButton("Aceptar");
     JButton boton_cancelar = new JButton("Cancelar");
@@ -72,8 +75,12 @@ public class GUIAltaEmpleado extends JFrame{
         
             this.setLayout(new BorderLayout());
             
-            
-            String[] departments = { "Departamento1", "Departamento2", "Departamento3",};
+            ArrayList<Departamento> depts = FactoriaSA.obtenerInstancia().generaSADepartamento().mostrarListaDepartamentos();
+            String[] departments = new String[depts.size()];
+            for (int i = 0; i < depts.size(); i++)
+            {
+                departments[i] = depts.get(i).getNombre();
+            }
             combos = new JComboBox(departments);
             
             panelSuperior.setLayout(new GridLayout(6,2));
@@ -97,9 +104,9 @@ public class GUIAltaEmpleado extends JFrame{
             panelSuperior.add(textDireccion);
             
             panelSuperior.add(labDepartamento);
-            panelSuperior.add(textDepartamento);
+            //panelSuperior.add(textDepartamento);
             //para lineas futuras, se puede poner el comboBox
-            //panelSuperior.add(combos);
+            panelSuperior.add(combos);
             
 
             
@@ -114,8 +121,8 @@ public class GUIAltaEmpleado extends JFrame{
             panelRadios.add(radioSupervisor);
 
             //los radiobuttons se encuentran dentro de un ButtonGroup
-            radioDNI.add(radioTrabajador);
-            radioDNI.add(radioSupervisor);
+            grupoRadios.add(radioTrabajador);
+            grupoRadios.add(radioSupervisor);
             
 
 
@@ -129,12 +136,18 @@ public class GUIAltaEmpleado extends JFrame{
 
             @Override
             public void actionPerformed(ActionEvent e) {
+                
+                ArrayList<Departamento> depts2 = FactoriaSA.obtenerInstancia().generaSADepartamento().mostrarListaDepartamentos();
                 empleado.setDni(textDNI.getText());
                 empleado.setNombre(textNombre.getText());
                 empleado.setApellidos(textApellidos.getText());
                 empleado.setDireccion(textDireccion.getText());
-        //        empleado.setDepartamento(textDepartamento.getText());
+                Departamento dummy = depts2.get(combos.getSelectedIndex());
+                empleado.setDepartamento(dummy);
                 empleado.setSueldo((BigDecimal.valueOf(Double.parseDouble(textSueldo.getText()))));
+                empleado.setTipo(radioTrabajador.getText());
+                if (radioSupervisor.isSelected())
+                    empleado.setTipo(radioSupervisor.getText());
                 empleado.setDisponible(true);
                 
                 Controlador.getInstance().accion(EventoNegocio.ALTA_EMPLEADO, empleado);
@@ -300,13 +313,14 @@ public class GUIAltaEmpleado extends JFrame{
         this.radioTrabajador = radioTrabajador;
     }
 
-    public ButtonGroup getRadioDNI() {
-        return radioDNI;
+    public ButtonGroup getGrupoRadios() {
+        return grupoRadios;
     }
 
-    public void setRadioDNI(ButtonGroup radioDNI) {
-        this.radioDNI = radioDNI;
+    public void setGrupoRadios(ButtonGroup grupoRadios) {
+        this.grupoRadios = grupoRadios;
     }
+
 
     public JButton getBoton_ok() {
         return boton_ok;
