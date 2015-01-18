@@ -20,12 +20,14 @@ import presentacion.Controlador.Comandos.departamento.GUI.comandoGUIcalcularNomi
 import presentacion.Controlador.Comandos.departamento.GUI.comandoGUIeliminarDepartamento;
 import presentacion.Controlador.Comandos.departamento.GUI.comandoGUImodificarDepartamento;
 import presentacion.Controlador.Comandos.departamento.GUI.comandoGUImostrarDepartamento;
+import presentacion.Controlador.Comandos.departamento.GUI.comandoGUImostrarDepartamentoParaModificar;
 import presentacion.Controlador.Comandos.departamento.GUI.comandoGUImostrarListaDepartamentos;
 import presentacion.Controlador.Comandos.departamento.comandoAltaDepartamento;
 import presentacion.Controlador.Comandos.departamento.comandoBajaDepartamento;
 import presentacion.Controlador.Comandos.departamento.comandoCalcularNominaDepartamento;
 import presentacion.Controlador.Comandos.departamento.comandoModificarDepartamento;
 import presentacion.Controlador.Comandos.departamento.comandoMostrarDepartamento;
+import presentacion.Controlador.Comandos.departamento.comandoMostrarDepartamentoParaModificar;
 import presentacion.Controlador.Comandos.departamento.comandoMostrarListaDepartamentos;
 import presentacion.Controlador.Comandos.empleado.GUI.comandoGUIMostrarEmpleadoParaModificar;
 import presentacion.Controlador.Comandos.empleado.GUI.comandoGUIaltaEmpleado;
@@ -310,6 +312,11 @@ public class factoriaComandosImp extends factoriaComandos
                 comando = new comandoCalcularNominaDepartamento();
                 break;
             }
+            case EventoNegocio.MOSTRAR_DEPARTAMENTO_PARA_MODIFICAR:
+            {
+                comando = new comandoMostrarDepartamentoParaModificar();
+                break;
+            }
             
             //eventos GUI Departamento
             case EventoNegocio.GUI_ALTA_DEPARTAMENTO:
@@ -340,6 +347,11 @@ public class factoriaComandosImp extends factoriaComandos
             case EventoNegocio.GUI_CALCULAR_NOMINA_DEPARTAMENTO:
             {
                 comando = new comandoGUIcalcularNominaDepartamento();
+                break;
+            }
+            case EventoNegocio.GUI_MOSTRAR_DEPARTAMENTO_PARA_MODIFICAR:
+            {
+                comando = new comandoGUImostrarDepartamentoParaModificar();
                 break;
             }
             

@@ -96,6 +96,9 @@ public class Departamento implements Serializable {
     public void setDisponible(boolean disponible) {
         this.disponible = disponible;
     }
+    public Boolean getDisponible() {
+        return disponible;
+    }
     
     
     @Override

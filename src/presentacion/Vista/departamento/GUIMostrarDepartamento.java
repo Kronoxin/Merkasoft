@@ -32,10 +32,10 @@ import presentacion.Controlador.Eventos.EventoNegocio;
 public class GUIMostrarDepartamento extends JFrame{
     
      Object[][] datos_entrada = {
-        {"","",""}
+        {"","","",""}
        };
         
-        String[] NombreColumnas = {"ID","Nombre", "Descripcion"};
+        String[] NombreColumnas = {"ID","Nombre", "Descripcion","Disponible"};
 
         JTextField textID = new JTextField("");
 
@@ -125,7 +125,7 @@ public class GUIMostrarDepartamento extends JFrame{
         
         tabla.setModel(dtm);
         dtm.addRow(new Object[]
-        {departamento.getIdDepartamento(),departamento.getNombre(), departamento.getDescripcion()});
+        {departamento.getIdDepartamento(),departamento.getNombre(), departamento.getDescripcion(),departamento.getDisponible()});
         dtm.fireTableDataChanged();
     }
     //getters y setters

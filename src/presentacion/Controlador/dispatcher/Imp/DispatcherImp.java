@@ -325,7 +325,12 @@ public class DispatcherImp extends Dispatcher
             {
                 new GUICalcularNominaDepartamento();
                 break;
-            } 
+            }
+            case EventoNegocio.GUI_MOSTRAR_DEPARTAMENTO_PARA_MODIFICAR:
+            {
+                new GUIModificarDepartamento();
+                break;
+            }
             
             //comandos GUI de Turno
             case EventoNegocio.GUI_ALTA_TURNO:
@@ -421,6 +426,14 @@ public class DispatcherImp extends Dispatcher
                 ((GUIMostrarDepartamento)datos.get(1)).cargarDepartamentoEnLista(departamento);
                 break;
             }
+            case EventoNegocio.EXITO_MOSTRAR_DEPARTAMENTO_PARA_MODIFICAR:
+            {
+                  ArrayList<Object> datos = (ArrayList<Object>)comando.getDatos();
+                
+                Departamento departamento = (Departamento)datos.get(2);
+                ((GUIModificarDepartamento)datos.get(1)).cargarDepartamentoEnLista(departamento);
+                break;
+            }
             case EventoNegocio.EXITO_MOSTRAR_LISTA_DEPARTAMENTO:
             {
                 ArrayList<Object> datos = (ArrayList<Object>)comando.getDatos();
@@ -464,6 +477,11 @@ public class DispatcherImp extends Dispatcher
                 PopupsEmpleado.ModificarEmpleadoFracaso();
                 break;
             }
+            case EventoNegocio.FRACASO_MOSTRAR_EMPLEADO_PARA_MODIFICAR:
+            {
+                PopupsEmpleado.ModificarEmpleadoFracaso();
+                break;
+            }
             
             //fracaso Departamento
             case EventoNegocio.FRACASO_ALTA_DEPARTAMENTO:
@@ -481,9 +499,10 @@ public class DispatcherImp extends Dispatcher
                 PopupsDepartamento.ModificarDepartamentoFracaso();
                 break;
             }
-            case EventoNegocio.FRACASO_MOSTRAR_EMPLEADO_PARA_MODIFICAR:
+            
+            case EventoNegocio.FRACASO_MOSTRAR_DEPARTAMENTO_PARA_MODIFICAR:
             {
-                PopupsEmpleado.ModificarEmpleadoFracaso();
+                PopupsDepartamento.ModificarDepartamentoFracaso();
                 break;
             }
             

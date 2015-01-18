@@ -12,6 +12,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -33,10 +34,10 @@ public class GUIModificarDepartamento extends JFrame{
     
    
      Object[][] datos_entrada = {
-        {"","",""}
+        {"","","",""}
        };
         
-        String[] NombreColumnas = {"ID","Nombre", "Descripcion"};
+        String[] NombreColumnas = {"ID","Nombre", "Descripcion","Disponible"};
 
         JTextField textID = new JTextField("");
 
@@ -100,7 +101,14 @@ public class GUIModificarDepartamento extends JFrame{
 
              @Override
              public void actionPerformed(ActionEvent e) {
-                 throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                 Departamento departamento = new Departamento();
+                departamento.setIdDepartamento((int)tabla.getValueAt(0, 0));
+                departamento.setNombre((String)(tabla.getValueAt(0, 1)));
+                departamento.setDescripcion((String)(tabla.getValueAt(0, 2)));
+                departamento.setDisponible((Boolean)tabla.getValueAt(0, 3));
+                
+                Controlador.getInstance().accion(EventoNegocio.MODIFICAR_DEPARTAMENTO, departamento);
+
              }
          });
             
@@ -108,14 +116,13 @@ public class GUIModificarDepartamento extends JFrame{
 
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    
                      ArrayList<Object> datos = new ArrayList<>();
                     
                     
                     datos.add(Integer.parseInt(textID.getText()));
                     datos.add(new GUIModificarDepartamento());
                     
-                    Controlador.getInstance().accion(EventoNegocio.MODIFICAR_DEPARTAMENTO, datos);
+                    Controlador.getInstance().accion(EventoNegocio.MOSTRAR_DEPARTAMENTO_PARA_MODIFICAR, datos);
                     dispose();
                    
                 }
@@ -134,16 +141,18 @@ public class GUIModificarDepartamento extends JFrame{
  
     }
     
-         public void cargarDepartamentoEnLista(Departamento departamento)
+    public void cargarDepartamentoEnLista(Departamento departamento)
     {
         DefaultTableModel dtm = new DefaultTableModel(0, 0);
         dtm.setColumnIdentifiers(NombreColumnas);
         
         tabla.setModel(dtm);
         dtm.addRow(new Object[]
-        {departamento.getIdDepartamento(),departamento.getNombre(), departamento.getDescripcion()});
+        {departamento.getIdDepartamento(),departamento.getNombre(), departamento.getDescripcion(),departamento.getDisponible()});
         dtm.fireTableDataChanged();
     }
+         
+   
     
     //getters y setters
 

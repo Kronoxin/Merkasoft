@@ -31,10 +31,10 @@ import presentacion.Vista.producto.GUIMostrarListaProductos;
 public class GUIMostrarListaDepartamentos extends JFrame{
     
      Object[][] datos_entrada = {
-        {"","", ""}
+        {"","", "",""}
         };
         
-        String[] NombreColumnas = {"ID","Nombre", "Descripción"};
+        String[] NombreColumnas = {"ID","Nombre", "Descripción","Disponible"};
 
         JPanel panelSuperior = new JPanel(new GridLayout(2,2,5,5));
         JPanel panelTabla = new JPanel();
@@ -120,7 +120,7 @@ public class GUIMostrarListaDepartamentos extends JFrame{
         
         tabla.setModel(dtm);
         for (Departamento departamento : listaDepartamento)
-            dtm.addRow(new Object[] {departamento.getIdDepartamento(),departamento.getNombre(), departamento.getDescripcion()});
+            dtm.addRow(new Object[] {departamento.getIdDepartamento(),departamento.getNombre(), departamento.getDescripcion(),departamento.getDisponible()});
         
         dtm.fireTableDataChanged();
     }
