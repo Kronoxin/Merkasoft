@@ -5,21 +5,14 @@
  */
 package negocio.turnos.SA.Imp;
 
-import negocio.turnos.SA.exceptions.NonexistentEntityException;
-import java.io.Serializable;
-import javax.persistence.Query;
-import javax.persistence.EntityNotFoundException;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-import negocio.empleados.Empleado;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaQuery;
 import negocio.turnos.SA.SATurno;
 import negocio.turnos.Turno;
 
@@ -27,9 +20,7 @@ import negocio.turnos.Turno;
  *
  * @author Ruben
  */
-public class SATurnoImp implements SATurno {
-
-    
+public class SATurnoImp implements SATurno{
     public SATurnoImp() {
        }
 
@@ -172,6 +163,5 @@ public class SATurnoImp implements SATurno {
         ArrayList<Turno> t = prueba.mostrarListaTurnos();
         int b =1;
     }
-
     
 }
