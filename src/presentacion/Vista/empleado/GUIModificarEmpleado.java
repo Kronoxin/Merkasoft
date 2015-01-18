@@ -150,7 +150,18 @@ public class GUIModificarEmpleado extends JFrame{
     
     public void cargarEmpleadoEnLista(Empleado empleado)
     {
-        DefaultTableModel dtm = new DefaultTableModel(0, 0);
+        DefaultTableModel dtm = new DefaultTableModel(0, 0){
+
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                if(column==8){
+                    return false;
+                }
+                return true;
+                    
+            }
+            
+        };
         dtm.setColumnIdentifiers(NombreColumnas);
         
         tabla.setModel(dtm);

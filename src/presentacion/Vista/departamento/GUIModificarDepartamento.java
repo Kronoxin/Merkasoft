@@ -143,7 +143,18 @@ public class GUIModificarDepartamento extends JFrame{
     
     public void cargarDepartamentoEnLista(Departamento departamento)
     {
-        DefaultTableModel dtm = new DefaultTableModel(0, 0);
+        DefaultTableModel dtm = new DefaultTableModel(0, 0){
+
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                if(column == 3){
+                    return false;
+                }
+                return true;
+                
+            }
+            
+        };
         dtm.setColumnIdentifiers(NombreColumnas);
         
         tabla.setModel(dtm);
