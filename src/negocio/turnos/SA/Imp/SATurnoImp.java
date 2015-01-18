@@ -13,7 +13,9 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import negocio.empleados.Empleado;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -151,7 +153,25 @@ public class SATurnoImp implements SATurno {
             em.close();
         }
     }
+   
 
+    public static void main (String[] args)
+    {
+        SATurnoImp prueba = new SATurnoImp();
+        Calendar cal = Calendar.getInstance();
+        cal.set(2000, 8, 8, 8, 8);
+        Calendar cal2 = Calendar.getInstance();
+        cal2.set(2000, 8, 8, 8, 15);        
+        Turno turno = new Turno(8,cal.getTime(), cal2.getTime());
+        turno.setDisponible(true);
+        //prueba.altaTurno(turno);
+        Turno dummy = prueba.mostrarTurno(1);
+        dummy.setNombre("manana");
+        prueba.modificarTurno(dummy);
+        prueba.bajaTurno(3);
+        ArrayList<Turno> t = prueba.mostrarListaTurnos();
+        int b =1;
+    }
 
     
 }
