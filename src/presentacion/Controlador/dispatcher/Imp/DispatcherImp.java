@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import negocio.departamentos.Departamento;
 import negocio.empleados.Empleado;
 import negocio.producto.TProducto;
+import negocio.turnos.Turno;
 import presentacion.Controlador.Comandos.RespuestaComando;
 import presentacion.Controlador.Eventos.EventoNegocio;
 import presentacion.Controlador.dispatcher.Dispatcher;
@@ -458,6 +459,23 @@ public class DispatcherImp extends Dispatcher
             case EventoNegocio.EXITO_MODIFICAR_TURNO:
             {
                 PopupsTurno.ModificarTurnoExito();
+                break;
+            }
+            case EventoNegocio.EXITO_MOSTRAR_TURNO:
+            {
+                ArrayList<Object> datos = (ArrayList<Object>)comando.getDatos();
+                
+                Turno turno = (Turno)datos.get(2);
+                ((GUIMostrarTurno)datos.get(1)).cargarTurnoEnLista(turno);
+                break;
+            }
+            case EventoNegocio.EXITO_MOSTRAR_LISTA_TURNO:
+            {
+                ArrayList<Object> datos = (ArrayList<Object>)comando.getDatos();
+                
+                ArrayList<Turno> turnos = (ArrayList<Turno>)datos.get(1);
+                ((GUIMostrarListaTurnos)datos.get(0)).cargarTurnoEnLista(turnos);
+		
                 break;
             }
             

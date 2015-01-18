@@ -7,6 +7,7 @@ package presentacion.Controlador.Comandos.turno;
 
 import java.util.ArrayList;
 import negocio.FactoriaSA.FactoriaSA;
+import negocio.turnos.Turno;
 import presentacion.Controlador.Comandos.Command;
 import presentacion.Controlador.Comandos.RespuestaComando;
 import presentacion.Controlador.Eventos.EventoNegocio;
@@ -19,7 +20,7 @@ public class comandoMostrarTurno implements Command{
 
     @Override
     public RespuestaComando execute(Object datos) {
-     /*     ArrayList<Object> datosAlmacenados = (ArrayList<Object>)datos;
+         ArrayList<Object> datosAlmacenados = (ArrayList<Object>)datos;
         
         
         Integer idTurno = (Integer)datosAlmacenados.get(0);
@@ -36,10 +37,9 @@ public class comandoMostrarTurno implements Command{
         {
             respuesta = new RespuestaComando(EventoNegocio.FRACASO_MOSTRAR_TURNO, datosAlmacenados);
 	}
-	return respuesta;*/
+	return respuesta;
         
-        //puesto aqui hasta que no esté completo el SA, para poder ejecutar la aplicacion
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      
     }
     
 }

@@ -11,6 +11,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -18,6 +19,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+import negocio.turnos.Turno;
+import presentacion.Controlador.Controlador;
+import presentacion.Controlador.Eventos.EventoNegocio;
 
 /**
  *
@@ -29,7 +34,7 @@ public class GUIMostrarTurno extends JFrame{
         {"","","","",""}
        };
         
-    String[] NombreColumnas = {"ID","Nombre", "Tipo", "Hora Entrada", "Hora Salida"};
+    String[] NombreColumnas = {"ID","Nombre", "Hora Entrada", "Hora Salida","Disponible"};
 
     JTextField textID = new JTextField("");
 
@@ -79,6 +84,14 @@ public class GUIMostrarTurno extends JFrame{
 
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    ArrayList<Object> datos = new ArrayList<>();
+                    
+                    
+                    datos.add(Integer.parseInt(textID.getText()));
+                    datos.add(new GUIMostrarTurno());
+                    
+                    Controlador.getInstance().accion(EventoNegocio.MOSTRAR_TURNO, datos);
+                    dispose();
                    
                 }
             });
@@ -94,6 +107,26 @@ public class GUIMostrarTurno extends JFrame{
         });
         
  
+    }
+    
+    public void cargarTurnoEnLista(Turno turno)
+    {
+        DefaultTableModel dtm = new DefaultTableModel(0, 0){
+
+            @Override
+            public boolean isCellEditable(int row, int column) {
+               return false;
+            }
+            
+      
+            
+        };
+        dtm.setColumnIdentifiers(NombreColumnas);
+        
+        tabla.setModel(dtm);
+        dtm.addRow(new Object[]
+        {turno.getIdTurno(),turno.getNombre(), turno.getHoraEntrada(), turno.getHoraSalida(), turno.isDisponible()});
+        dtm.fireTableDataChanged();
     }
     
 

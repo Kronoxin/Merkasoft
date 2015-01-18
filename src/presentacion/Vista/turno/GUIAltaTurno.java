@@ -60,10 +60,16 @@ public class GUIAltaTurno extends JFrame{
         //añadimos el Jlabel y el Jtextfield para la hora de entrada
         panelSuperior.add(label_horaEntrada);
         panelSuperior.add(text_horaEntrada);
+        text_horaEntrada.setText("00:00");
+        text_horaEntrada.setToolTipText("hh:mm");
+        label_horaEntrada.setToolTipText("hh:mm");
         
         //añadimos el Jlabel y el Jtextfield para la hora de salida
         panelSuperior.add(label_horaSalida);
         panelSuperior.add(text_horaSalida);
+        text_horaSalida.setText("00:00");
+        text_horaSalida.setToolTipText("hh:mm");
+        label_horaSalida.setToolTipText("hh:mm");
        
         
         //añadimos el boton Aceptar y Cancelar al panelBotones
@@ -97,9 +103,6 @@ public class GUIAltaTurno extends JFrame{
                 Controlador.getInstance().accion(EventoNegocio.ALTA_TURNO, turno);
          
 
-               
-                
-            //    Controlador.getInstance().accion(EventoNegocio.ALTA_DEPARTAMENTO, turno);
             }
         });
         

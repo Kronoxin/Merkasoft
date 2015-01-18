@@ -14,6 +14,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import presentacion.Controlador.Controlador;
+import presentacion.Controlador.Eventos.EventoNegocio;
 
 /**
  *
@@ -58,9 +60,9 @@ public class GUIBajaTurno extends JFrame{
 
             @Override
             public void actionPerformed(ActionEvent e) {
-             //   textID.getText();
+                textID.getText();
                 
-             //   Controlador.getInstance().accion(EventoNegocio.BAJA_TURNO, textID.getText());
+                Controlador.getInstance().accion(EventoNegocio.BAJA_TURNO, textID.getText());
             }
         });
         
