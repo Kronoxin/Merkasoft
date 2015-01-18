@@ -19,20 +19,20 @@ public class comandoModificarProducto implements Command
 {
     public RespuestaComando execute(Object datos) 
     {
-        int idProducto = Integer.parseInt((String) datos);
+        //int idProducto = Integer.parseInt((String) datos);
         //Devuelvo el producto, e intento modificarlo
-	TProducto prod = FactoriaSA.obtenerInstancia().generaSAProducto().mostrarProducto(idProducto);
+	//TProducto prod = FactoriaSA.obtenerInstancia().generaSAProducto().mostrarProducto(idProducto);
         
-        boolean correcto = FactoriaSA.obtenerInstancia().generaSAProducto().modificarProducto(prod);
+        boolean correcto = FactoriaSA.obtenerInstancia().generaSAProducto().modificarProducto((TProducto)datos);
 	RespuestaComando respuesta;
 		
 	if (correcto)
         {
-            respuesta = new RespuestaComando(EventoNegocio.EXITO_MODIFICAR_PRODUCTO, prod);
+            respuesta = new RespuestaComando(EventoNegocio.EXITO_MODIFICAR_PRODUCTO, (TProducto)datos);
 	}
 	else
         {
-            respuesta = new RespuestaComando(EventoNegocio.FRACASO_MODIFICAR_PRODUCTO, prod);
+            respuesta = new RespuestaComando(EventoNegocio.FRACASO_MODIFICAR_PRODUCTO, (TProducto)datos);
 	}
 	return respuesta;
     }

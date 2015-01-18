@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import negocio.departamentos.Departamento;
 import negocio.empleados.Empleado;
 import negocio.producto.TProducto;
-import negocio.turnos.Turno;
 import presentacion.Controlador.Comandos.RespuestaComando;
 import presentacion.Controlador.Eventos.EventoNegocio;
 import presentacion.Controlador.dispatcher.Dispatcher;
@@ -203,10 +202,20 @@ public class DispatcherImp extends Dispatcher
             case EventoNegocio.EXITO_MOSTRAR_PRODUCTO:
             {
                 ArrayList<Object> datos = (ArrayList<Object>)comando.getDatos();
-                
-                TProducto producto = (TProducto)datos.get(2);
-                ((GUIMostrarProducto)datos.get(1)).cargarProductoEnLista(producto);
-		
+                String mod = null;
+                TProducto producto = null;
+                //Si viene para modificar [2]==mod  ; [3]==producto
+                if(datos.size() == 4)
+                {
+                    mod = (String)datos.get(2);
+                    producto = (TProducto)datos.get(3);
+                    ((GUIModificarProducto)datos.get(1)).cargarProductoEnLista(producto);
+                }
+                else
+                {
+                    producto = (TProducto)datos.get(2);
+                    ((GUIMostrarProducto)datos.get(1)).cargarProductoEnLista(producto);
+                }
                 break;
             }
             
@@ -326,12 +335,7 @@ public class DispatcherImp extends Dispatcher
             {
                 new GUICalcularNominaDepartamento();
                 break;
-            }
-            case EventoNegocio.GUI_MOSTRAR_DEPARTAMENTO_PARA_MODIFICAR:
-            {
-                new GUIModificarDepartamento();
-                break;
-            }
+            } 
             
             //comandos GUI de Turno
             case EventoNegocio.GUI_ALTA_TURNO:
@@ -427,14 +431,6 @@ public class DispatcherImp extends Dispatcher
                 ((GUIMostrarDepartamento)datos.get(1)).cargarDepartamentoEnLista(departamento);
                 break;
             }
-            case EventoNegocio.EXITO_MOSTRAR_DEPARTAMENTO_PARA_MODIFICAR:
-            {
-                  ArrayList<Object> datos = (ArrayList<Object>)comando.getDatos();
-                
-                Departamento departamento = (Departamento)datos.get(2);
-                ((GUIModificarDepartamento)datos.get(1)).cargarDepartamentoEnLista(departamento);
-                break;
-            }
             case EventoNegocio.EXITO_MOSTRAR_LISTA_DEPARTAMENTO:
             {
                 ArrayList<Object> datos = (ArrayList<Object>)comando.getDatos();
@@ -461,23 +457,6 @@ public class DispatcherImp extends Dispatcher
                 PopupsTurno.ModificarTurnoExito();
                 break;
             }
-            case EventoNegocio.EXITO_MOSTRAR_TURNO:
-            {
-                ArrayList<Object> datos = (ArrayList<Object>)comando.getDatos();
-                
-                Turno turno = (Turno)datos.get(2);
-                ((GUIMostrarTurno)datos.get(1)).cargarTurnoEnLista(turno);
-                break;
-            }
-            case EventoNegocio.EXITO_MOSTRAR_LISTA_TURNO:
-            {
-                ArrayList<Object> datos = (ArrayList<Object>)comando.getDatos();
-                
-                ArrayList<Turno> turnos = (ArrayList<Turno>)datos.get(1);
-                ((GUIMostrarListaTurnos)datos.get(0)).cargarTurnoEnLista(turnos);
-		
-                break;
-            }
             
             //fracaso Empleado
             case EventoNegocio.FRACASO_ALTA_EMPLEADO:
@@ -491,11 +470,6 @@ public class DispatcherImp extends Dispatcher
                 break;
             }
             case EventoNegocio.FRACASO_MODIFICAR_EMPLEADO:
-            {
-                PopupsEmpleado.ModificarEmpleadoFracaso();
-                break;
-            }
-            case EventoNegocio.FRACASO_MOSTRAR_EMPLEADO_PARA_MODIFICAR:
             {
                 PopupsEmpleado.ModificarEmpleadoFracaso();
                 break;
@@ -517,10 +491,9 @@ public class DispatcherImp extends Dispatcher
                 PopupsDepartamento.ModificarDepartamentoFracaso();
                 break;
             }
-            
-            case EventoNegocio.FRACASO_MOSTRAR_DEPARTAMENTO_PARA_MODIFICAR:
+            case EventoNegocio.FRACASO_MOSTRAR_EMPLEADO_PARA_MODIFICAR:
             {
-                PopupsDepartamento.ModificarDepartamentoFracaso();
+                PopupsEmpleado.ModificarEmpleadoFracaso();
                 break;
             }
             

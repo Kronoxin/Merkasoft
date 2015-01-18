@@ -193,6 +193,7 @@ public class DAOClienteImp implements DAOCliente
                 String nombre = rs.getString("Nombre");
                 String apellidos = rs.getString("Apellidos");
                 String nacimiento = rs.getString("Fecha_nacimiento");
+                Boolean activo = rs.getBoolean("Disponible");
                 
                 if (rs.getString("tipo").equalsIgnoreCase("normal"))
                 {
@@ -226,7 +227,7 @@ public class DAOClienteImp implements DAOCliente
                 ret.setNombre(nombre);
                 ret.setApellidos(apellidos);
                 ret.setFechaNacimiento(nacimiento);
-                
+                ret.setActivo(activo);
             }
         }
         catch (SQLException e)

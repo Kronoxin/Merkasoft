@@ -189,7 +189,8 @@ public class DAOProductoImp implements DAOProducto
         Connection connection = null;        
         String contenido_query = "UPDATE Productos SET Nombre='" + producto.getNombre()+ "', Precio='" + producto.getPrecio();
                contenido_query += "', Descripcion='" + producto.getDescripcion() + "', Cod_barras='" + producto.getCodigoDeBarras() + "', Stock=" + producto.getStock() + " WHERE id_producto = " + producto.getId() + ";";
-        
+
+        long idProd = -1;
         try
         {
             connection = (Connection) TransactionManager.obtenerInstanacia().getTransaccion().getResource();

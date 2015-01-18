@@ -49,7 +49,7 @@ public class GUIMostrarProducto extends JFrame{
         this.setLocationRelativeTo(null);
         this.setLayout(new BorderLayout());
                 
-		
+            
             panelSuperior.add(labID);
             panelSuperior.add(textID);
             panelSuperior.add(butID);
@@ -87,7 +87,6 @@ public class GUIMostrarProducto extends JFrame{
                     
                     datos.add(Integer.parseInt(textID.getText()));
                     datos.add(new GUIMostrarProducto());
-                    
                     Controlador.getInstance().accion(EventoNegocio.MOSTRAR_PRODUCTO, datos);
                     dispose();
                 }
