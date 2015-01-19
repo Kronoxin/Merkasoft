@@ -14,7 +14,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -22,6 +25,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import negocio.FactoriaSA.FactoriaSA;
+import negocio.departamentos.Departamento;
 import negocio.empleados.Empleado;
 import presentacion.Controlador.Controlador;
 import presentacion.Controlador.Eventos.EventoNegocio;
@@ -52,7 +57,7 @@ public class GUIModificarEmpleado extends JFrame{
     
     public GUIModificarEmpleado(){
         this.setTitle("Modificar Empleado");
-	setBounds(100, 100, 750, 400);
+	setBounds(100, 100, 820, 400);
         this.setLocationRelativeTo(null);
         this.setLayout(new BorderLayout());
                 
@@ -69,7 +74,7 @@ public class GUIModificarEmpleado extends JFrame{
             tabla.getColumnModel().getColumn(6).setPreferredWidth(5);
 
             //dimensiones del Jtable
-            tabla.setPreferredScrollableViewportSize(new Dimension(700, 150));
+            tabla.setPreferredScrollableViewportSize(new Dimension(800, 200));
             //Creamos un JscrollPane y le agregamos la JTable
             JScrollPane scrollPane = new JScrollPane(tabla);
             panelTabla.add(scrollPane,BorderLayout.CENTER);
@@ -109,7 +114,7 @@ public class GUIModificarEmpleado extends JFrame{
                 empleado.setApellidos((String)(tabla.getValueAt(0, 3)));
                 empleado.setDireccion((String)tabla.getValueAt(0, 4));
                 empleado.setTipo((String)tabla.getValueAt(0, 5));
-           //     empleado.setDepartamento((String)tabla.getValueAt(0, 6));
+                empleado.setDepartamento((Departamento)tabla.getValueAt(0, 6));
                 empleado.setSueldo((BigDecimal)tabla.getValueAt(0, 7));
                 empleado.setDisponible((Boolean)tabla.getValueAt(0, 8));
                 
@@ -164,7 +169,18 @@ public class GUIModificarEmpleado extends JFrame{
         };
         dtm.setColumnIdentifiers(NombreColumnas);
         
+        ArrayList<Departamento> depts = FactoriaSA.obtenerInstancia().generaSADepartamento().mostrarListaDepartamentos();
+            String[] departments = new String[depts.size()];
+            for (int i = 0; i < depts.size(); i++)
+            {
+                departments[i] = depts.get(i).getNombre();
+            }
+        
         tabla.setModel(dtm);
+        JComboBox comboBox = new JComboBox(departments);
+        JCheckBox check = new JCheckBox();
+        tabla.getColumnModel().getColumn(6).setCellEditor(new DefaultCellEditor(comboBox));
+        tabla.getColumnModel().getColumn(8).setCellEditor(new DefaultCellEditor(check));
         dtm.addRow(new Object[]
         {empleado.getIdEmpleado(),empleado.getDni(), empleado.getNombre(), empleado.getApellidos(), empleado.getDireccion(),empleado.getTipo(), empleado.getDepartamento().getNombre(),empleado.getSueldo(),empleado.getDisponible()});
         dtm.fireTableDataChanged();
