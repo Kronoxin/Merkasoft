@@ -52,6 +52,7 @@ public class GUIModificarEmpleado extends JFrame{
         JButton butID = new JButton("Buscar por ID");
         JButton boton_salir = new JButton("Salir");
         JButton boton_guardar = new JButton("Guardar");
+        JComboBox comboBox;
         
         JTable tabla;
     
@@ -107,6 +108,8 @@ public class GUIModificarEmpleado extends JFrame{
 
             @Override
             public void actionPerformed(ActionEvent e) {
+                ArrayList<Departamento> depts2 = FactoriaSA.obtenerInstancia().generaSADepartamento().mostrarListaDepartamentos();
+                
                 Empleado empleado = new Empleado();
                 empleado.setIdEmpleado((int)tabla.getValueAt(0, 0));
                 empleado.setDni((String)(tabla.getValueAt(0, 1)));
@@ -114,7 +117,9 @@ public class GUIModificarEmpleado extends JFrame{
                 empleado.setApellidos((String)(tabla.getValueAt(0, 3)));
                 empleado.setDireccion((String)tabla.getValueAt(0, 4));
                 empleado.setTipo((String)tabla.getValueAt(0, 5));
-                empleado.setDepartamento((Departamento)tabla.getValueAt(0, 6));
+                
+                Departamento dep_selec = depts2.get(comboBox.getSelectedIndex());
+                empleado.setDepartamento(dep_selec);
                 empleado.setSueldo((BigDecimal)tabla.getValueAt(0, 7));
                 empleado.setDisponible((Boolean)tabla.getValueAt(0, 8));
                 
@@ -177,7 +182,7 @@ public class GUIModificarEmpleado extends JFrame{
             }
         
         tabla.setModel(dtm);
-        JComboBox comboBox = new JComboBox(departments);
+        comboBox = new JComboBox(departments);
         JCheckBox check = new JCheckBox();
         tabla.getColumnModel().getColumn(6).setCellEditor(new DefaultCellEditor(comboBox));
         tabla.getColumnModel().getColumn(8).setCellEditor(new DefaultCellEditor(check));
