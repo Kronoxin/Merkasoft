@@ -47,6 +47,7 @@ import presentacion.Controlador.Comandos.turno.GUI.comandoGUImodificarTurno;
 import presentacion.Controlador.Comandos.turno.GUI.comandoGUImostrarListaTurnos;
 import presentacion.Controlador.Comandos.turno.GUI.comandoGUImostrarTurno;
 import presentacion.Controlador.Comandos.turno.*;
+import presentacion.Controlador.Comandos.turno.GUI.comandoGUImostrarTurnoParaModificar;
 import presentacion.Controlador.Eventos.EventoNegocio;
 /**
  *
@@ -382,6 +383,11 @@ public class factoriaComandosImp extends factoriaComandos
                 comando = new comandoMostrarListaTurnos();
                 break;
             }
+            case EventoNegocio.MOSTRAR_TURNO_PARA_MODIFICAR:
+            {
+                comando = new comandoMostrarTurnoParaModificar();
+                break;
+            }
             
             //eventos GUI turno
             case EventoNegocio.GUI_ALTA_TURNO:
@@ -407,6 +413,11 @@ public class factoriaComandosImp extends factoriaComandos
             case EventoNegocio.GUI_MOSTRAR_LISTA_TURNOS:
             {
                 comando = new comandoGUImostrarListaTurnos();
+                break;
+            }
+            case EventoNegocio.GUI_MOSTRAR_TURNO_PARA_MODIFICAR:
+            {
+                comando = new comandoGUImostrarTurnoParaModificar();
                 break;
             }
             

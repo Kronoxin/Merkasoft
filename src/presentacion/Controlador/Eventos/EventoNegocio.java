@@ -94,6 +94,7 @@ public class EventoNegocio
     public static final int EXITO_MODIFICAR_TURNO = 493;
     public static final int EXITO_MOSTRAR_TURNO = 494;
     public static final int EXITO_MOSTRAR_LISTA_TURNO = 495;
+    public static final int EXITO_MOSTRAR_TURNO_PARA_MODIFICAR = 496;
     
 
     
@@ -140,6 +141,7 @@ public class EventoNegocio
     public static final int FRACASO_MODIFICAR_TURNO = 793;
     public static final int FRACASO_MOSTRAR_TURNO = 794;
     public static final int FRACASO_MOSTRAR_LISTA_TURNO = 795;
+    public static final int FRACASO_MOSTRAR_TURNO_PARA_MODIFICAR = 796;
     
     //600 control de ventanas
     
@@ -184,11 +186,13 @@ public class EventoNegocio
     public static final int MODIFICAR_TURNO = 903;
     public static final int MOSTRAR_TURNO = 904;
     public static final int MOSTRAR_LISTA_TURNO = 905;
+    public static final int MOSTRAR_TURNO_PARA_MODIFICAR = 911;
     
     public static final int GUI_ALTA_TURNO = 906;
     public static final int GUI_BAJA_TURNO = 907;
     public static final int GUI_MODIFICAR_TURNO = 908;
     public static final int GUI_MOSTRAR_TURNO = 909;
     public static final int GUI_MOSTRAR_LISTA_TURNOS = 910;
+    public static final int GUI_MOSTRAR_TURNO_PARA_MODIFICAR = 912;
             
 }
