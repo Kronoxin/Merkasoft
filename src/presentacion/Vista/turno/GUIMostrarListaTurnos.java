@@ -116,8 +116,11 @@ public class GUIMostrarListaTurnos extends JFrame{
         
         tabla.setModel(dtm);
         for (Turno turno : listaTurno)
-            dtm.addRow(new Object[] {turno.getIdTurno(),turno.getNombre(), turno.getHoraEntrada(), turno.getHoraSalida(),turno.isDisponible()});
-        
+        {            
+            String entrada = String.format("%02d:%02d", turno.getHoraEntrada(), turno.getMinutoEntrada());
+            String salida = String.format("%02d:%02d", turno.getHoraSalida(), turno.getMinutoSalida());
+            dtm.addRow(new Object[] {turno.getIdTurno(),turno.getNombre(), entrada, salida,turno.isDisponible()});
+        }
         dtm.fireTableDataChanged();
     }
     

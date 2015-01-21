@@ -9,6 +9,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
@@ -88,18 +89,15 @@ public class GUIAltaTurno extends JFrame{
                turno.setNombre(text_nombre.getText());
                turno.setDisponible(true);
                String[] tiempos = text_horaEntrada.getText().split(":");
-               int hora = Integer.parseInt(tiempos[0]);
-               int minuto = Integer.parseInt(tiempos[1]);
-               Date date = new Date();
-                Calendar cal = Calendar.getInstance();
-                cal.set(2000, 10, 10, hora, minuto);               
-               turno.setHoraEntrada(cal.getTime());
+               int hora_entrada = Integer.parseInt(tiempos[0]);
+               int minuto_entrada = Integer.parseInt(tiempos[1]);               
+               turno.setHoraEntrada(hora_entrada);
+               turno.setMinutoEntrada(minuto_entrada);
                tiempos = text_horaSalida.getText().split(":");
-               hora = Integer.parseInt(tiempos[0]);
-               minuto = Integer.parseInt(tiempos[1]);
-               cal.set(2000, 10, 10, hora, minuto);
-               turno.setHoraSalida(cal.getTime());
-               
+               int hora_salida = Integer.parseInt(tiempos[0]);
+               int minuto_salida = Integer.parseInt(tiempos[1]);
+               turno.setHoraSalida(hora_salida);
+               turno.setMinutoSalida(minuto_salida);                              
                 Controlador.getInstance().accion(EventoNegocio.ALTA_TURNO, turno);
          
 

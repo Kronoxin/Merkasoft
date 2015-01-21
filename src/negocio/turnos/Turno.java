@@ -6,8 +6,9 @@
 package negocio.turnos;
 
 import java.io.Serializable;
+import java.sql.Time;
 import java.util.Collection;
-import java.util.Date;
+import java.sql.Time;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -49,14 +50,14 @@ public class Turno implements Serializable {
     private Integer idTurno;
     @Column(name = "Nombre")
     private String nombre;
-    @Basic(optional = false)
-    @Column(name = "Hora_Entrada")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date horaEntrada;
-    @Basic(optional = false)
+    @Column(name = "Hora_Entrada")   
+    private int horaEntrada;
     @Column(name = "Hora_Salida")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date horaSalida;
+    private int horaSalida;
+    @Column(name = "Minuto_Entrada")   
+    private int minutoEntrada;
+    @Column(name = "Minuto_Salida")
+    private int minutoSalida;
     @Column(name = "Disponible")
     private boolean Disponible;
     @Version
@@ -78,11 +79,37 @@ public class Turno implements Serializable {
         this.idTurno = idTurno;
     }
 
-    public Turno(Integer idTurno, Date horaEntrada, Date horaSalida) {
-        this.idTurno = idTurno;
+    public int getHoraEntrada() {
+        return horaEntrada;
+    }
+
+    public void setHoraEntrada(int horaEntrada) {
         this.horaEntrada = horaEntrada;
+    }
+
+    public int getHoraSalida() {
+        return horaSalida;
+    }
+
+    public void setHoraSalida(int horaSalida) {
         this.horaSalida = horaSalida;
     }
+
+    public int getMinutoEntrada() {
+        return minutoEntrada;
+    }
+
+    public void setMinutoEntrada(int minutoEntrada) {
+        this.minutoEntrada = minutoEntrada;
+    }
+
+    public int getMinutoSalida() {
+        return minutoSalida;
+    }
+
+    public void setMinutoSalida(int minutoSalida) {
+        this.minutoSalida = minutoSalida;
+    }   
 
     public Integer getIdTurno() {
         return idTurno;
@@ -98,22 +125,6 @@ public class Turno implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public Date getHoraEntrada() {
-        return horaEntrada;
-    }
-
-    public void setHoraEntrada(Date horaEntrada) {
-        this.horaEntrada = horaEntrada;
-    }
-
-    public Date getHoraSalida() {
-        return horaSalida;
-    }
-
-    public void setHoraSalida(Date horaSalida) {
-        this.horaSalida = horaSalida;
     }
 
     @Override

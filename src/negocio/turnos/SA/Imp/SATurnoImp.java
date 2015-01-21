@@ -153,8 +153,8 @@ public class SATurnoImp implements SATurno{
         cal.set(2000, 8, 8, 8, 8);
         Calendar cal2 = Calendar.getInstance();
         cal2.set(2000, 8, 8, 8, 15);        
-        Turno turno = new Turno(8,cal.getTime(), cal2.getTime());
-        turno.setDisponible(true);
+        //Turno turno = new Turno(8,cal.getTime(), cal2.getTime());
+        //turno.setDisponible(true);
         //prueba.altaTurno(turno);
         Turno dummy = prueba.mostrarTurno(1);
         dummy.setNombre("manana");

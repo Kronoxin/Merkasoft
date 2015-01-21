@@ -124,8 +124,10 @@ public class GUIMostrarTurno extends JFrame{
         dtm.setColumnIdentifiers(NombreColumnas);
         
         tabla.setModel(dtm);
+        String entrada = String.format("%02d:%02d", turno.getHoraEntrada(), turno.getMinutoEntrada());
+        String salida = String.format("%02d:%02d", turno.getHoraSalida(), turno.getMinutoSalida());
         dtm.addRow(new Object[]
-        {turno.getIdTurno(),turno.getNombre(), turno.getHoraEntrada(), turno.getHoraSalida(), turno.isDisponible()});
+        {turno.getIdTurno(),turno.getNombre(), entrada, salida, turno.isDisponible()});
         dtm.fireTableDataChanged();
     }
     
