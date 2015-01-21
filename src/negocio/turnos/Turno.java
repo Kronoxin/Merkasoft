@@ -20,6 +20,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Version;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import negocio.empleados.Empleado;
@@ -58,6 +59,9 @@ public class Turno implements Serializable {
     private Date horaSalida;
     @Column(name = "Disponible")
     private boolean Disponible;
+    @Version
+    @Column(name = "Version")
+    private int version;
 
     public boolean isDisponible() {
         return Disponible;

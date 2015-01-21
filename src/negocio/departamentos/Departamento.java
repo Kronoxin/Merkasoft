@@ -17,6 +17,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Version;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import negocio.empleados.Empleado;
@@ -48,6 +49,9 @@ public class Departamento implements Serializable {
     private Collection<Empleado> empleadosCollection;
     @Column(name = "disponible")
     private boolean disponible;
+    @Version
+    @Column(name = "Version")
+    private int version;
 
     public Departamento() {
     }

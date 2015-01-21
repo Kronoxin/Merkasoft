@@ -22,6 +22,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Version;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import negocio.turnos.Turno;
@@ -69,6 +70,9 @@ public class Empleado implements Serializable {
     @JoinColumn(name = "Departamento", referencedColumnName = "id_departamento")
     @ManyToOne
     private Departamento departamento;
+    @Version
+    @Column(name = "Version")
+    private int version;
 
     @Column(name = "disponible")
     private Boolean disponible;
