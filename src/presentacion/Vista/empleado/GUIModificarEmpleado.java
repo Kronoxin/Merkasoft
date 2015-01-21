@@ -53,6 +53,7 @@ public class GUIModificarEmpleado extends JFrame{
         JButton boton_salir = new JButton("Salir");
         JButton boton_guardar = new JButton("Guardar");
         JComboBox comboBox;
+        JCheckBox check;
         
         JTable tabla;
     
@@ -70,9 +71,8 @@ public class GUIModificarEmpleado extends JFrame{
             //se crea la Tabla
             tabla = new JTable(datos_entrada, NombreColumnas);
             //cojo la primera columna de la tabla (el DNI) y fijo el tamaño de esa columna
-            tabla.getColumnModel().getColumn(0).setPreferredWidth(8);
-            //y el campo Sueldo tb
-            tabla.getColumnModel().getColumn(6).setPreferredWidth(5);
+            tabla.getColumnModel().getColumn(0).setPreferredWidth(3);
+
 
             //dimensiones del Jtable
             tabla.setPreferredScrollableViewportSize(new Dimension(800, 200));
@@ -157,6 +157,11 @@ public class GUIModificarEmpleado extends JFrame{
         
  
     }
+    public Class getColumnClass(int columna)
+   {
+      if (columna == 8) return Boolean.class;
+      return Object.class;
+   }
     
     public void cargarEmpleadoEnLista(Empleado empleado)
     {
@@ -172,6 +177,7 @@ public class GUIModificarEmpleado extends JFrame{
             }
             
         };
+       
         dtm.setColumnIdentifiers(NombreColumnas);
         
         ArrayList<Departamento> depts = FactoriaSA.obtenerInstancia().generaSADepartamento().mostrarListaDepartamentos();
@@ -183,11 +189,16 @@ public class GUIModificarEmpleado extends JFrame{
         
         tabla.setModel(dtm);
         comboBox = new JComboBox(departments);
-        JCheckBox check = new JCheckBox();
+        check = new JCheckBox();
+        
         tabla.getColumnModel().getColumn(6).setCellEditor(new DefaultCellEditor(comboBox));
         tabla.getColumnModel().getColumn(8).setCellEditor(new DefaultCellEditor(check));
+        
+        //que la columna ID tenga un tamaño de 3
+        tabla.getColumnModel().getColumn(0).setPreferredWidth(3);
+ 
         dtm.addRow(new Object[]
-        {empleado.getIdEmpleado(),empleado.getDni(), empleado.getNombre(), empleado.getApellidos(), empleado.getDireccion(),empleado.getTipo(), empleado.getDepartamento().getNombre(),empleado.getSueldo(),empleado.getDisponible()});
+        {empleado.getIdEmpleado(),empleado.getDni(), empleado.getNombre(), empleado.getApellidos(), empleado.getDireccion(),empleado.getTipo(), empleado.getDepartamento().getNombre(),empleado.getSueldo(),empleado.getDisponible() });
         dtm.fireTableDataChanged();
     }
     

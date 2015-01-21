@@ -69,12 +69,19 @@ public class SADepartamentoImp implements SADepartamento {
     {
         boolean correcto = true;
         EntityManager em = null;
+        EntityManagerFactory ef =null;
         try {
            
-            EntityManagerFactory ef = Persistence.createEntityManagerFactory("MerkaSoftPU");
+            ef= Persistence.createEntityManagerFactory("MerkaSoftPU");
             em = ef.createEntityManager();
         
+            //MODIFICACIÓN HECHA POR NAVARRO
             em.getTransaction().begin();
+            Departamento d= em.find(Departamento.class, departamento.getIdDepartamento());
+                   if (d!=null) em.merge(departamento);
+           
+            
+           /*
             Departamento persistentDepartamento = em.find(Departamento.class, departamento.getIdDepartamento());
             Collection<Empleado> empleadosCollectionOld = persistentDepartamento.getEmpleadosCollection();
             Collection<Empleado> empleadosCollectionNew = departamento.getEmpleadosCollection();
@@ -114,7 +121,7 @@ public class SADepartamentoImp implements SADepartamento {
                     }
                 }
             }
-            
+            */
             em.getTransaction().commit();
         } 
         catch (Exception ex) 
@@ -137,6 +144,8 @@ public class SADepartamentoImp implements SADepartamento {
             {
                 em.close();
             }
+            //Añadido por navarro. Antes no cerrabamos el EMF
+            if (ef!=null) ef.close();
         }
         return correcto;
     }
@@ -207,11 +216,15 @@ public class SADepartamentoImp implements SADepartamento {
         
         try 
         {
-            return em.find(Departamento.class, id);
+            
+            Departamento d= em.find(Departamento.class, id);
+            em.detach(d);
+            return d;
         } 
         finally 
         {
             em.close();
+            ef.close();
         }
     }
 

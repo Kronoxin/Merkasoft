@@ -440,7 +440,10 @@ public class DispatcherImp extends Dispatcher
                  ArrayList<Object> datos = (ArrayList<Object>)comando.getDatos();
                 
                 Departamento departamento = (Departamento)datos.get(2);
-                ((GUIMostrarDepartamento)datos.get(1)).cargarDepartamentoEnLista(departamento);
+                //MODIFICACION HECHA POR NAVARRO
+                GUIMostrarDepartamento gd= new GUIMostrarDepartamento();
+                gd.cargarDepartamentoEnLista(departamento);
+               // ((GUIMostrarDepartamento)datos.get(1)).cargarDepartamentoEnLista(departamento);
                 break;
             }
             case EventoNegocio.EXITO_MOSTRAR_DEPARTAMENTO_PARA_MODIFICAR:
@@ -448,7 +451,10 @@ public class DispatcherImp extends Dispatcher
                   ArrayList<Object> datos = (ArrayList<Object>)comando.getDatos();
                 
                 Departamento departamento = (Departamento)datos.get(2);
-                ((GUIModificarDepartamento)datos.get(1)).cargarDepartamentoEnLista(departamento);
+                GUIModificarDepartamento gd= new GUIModificarDepartamento();
+                                gd.cargarDepartamentoEnLista(departamento);
+
+               // ((GUIModificarDepartamento)datos.get(1)).cargarDepartamentoEnLista(departamento);
                 break;
             }
             case EventoNegocio.EXITO_MOSTRAR_LISTA_DEPARTAMENTO:

@@ -31,6 +31,7 @@ public class comandoMostrarDepartamentoParaModificar implements Command{
 		
 	if (departamento != null) //Si existe
         {
+           // System.out.println("hola mod"+departamento.getNombre());
             respuesta = new RespuestaComando(EventoNegocio.EXITO_MOSTRAR_DEPARTAMENTO_PARA_MODIFICAR, datosAlmacenados);
 	}
 	else

@@ -142,7 +142,7 @@ public class GUIModificarDepartamento extends JFrame{
     }
     
     public void cargarDepartamentoEnLista(Departamento departamento)
-    {
+    {   
         DefaultTableModel dtm = new DefaultTableModel(0, 0){
 
             @Override

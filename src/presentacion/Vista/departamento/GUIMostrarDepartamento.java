@@ -112,7 +112,7 @@ public class GUIMostrarDepartamento extends JFrame{
     }
     
         public void cargarDepartamentoEnLista(Departamento departamento)
-    {
+    { System.out.println(departamento.getNombre());
         DefaultTableModel dtm = new DefaultTableModel(0, 0){
 
             @Override

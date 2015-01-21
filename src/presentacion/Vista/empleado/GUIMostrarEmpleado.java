@@ -32,10 +32,10 @@ import presentacion.Vista.producto.GUIMostrarProducto;
  */
 public class GUIMostrarEmpleado extends JFrame{
      Object[][] datos_entrada = {
-        {"","", "", "", "", "","",""}
+        {"","", "", "", "", "","","",""}
        };
         
-        String[] NombreColumnas = {"ID","DNI","Nombre", "Apellidos", "Direccion", "Tipo", "Departamento", "Sueldo"};
+        String[] NombreColumnas = {"ID","DNI","Nombre", "Apellidos", "Direccion", "Tipo", "Departamento", "Sueldo","Disponible"};
 
         JTextField textID = new JTextField("");
 
@@ -128,7 +128,7 @@ public class GUIMostrarEmpleado extends JFrame{
         
         tabla.setModel(dtm);
         dtm.addRow(new Object[]
-        {empleado.getIdEmpleado(),empleado.getDni(), empleado.getNombre(), empleado.getApellidos(), empleado.getDireccion(),empleado.getTipo(), empleado.getDepartamento().getNombre(),empleado.getSueldo()});
+        {empleado.getIdEmpleado(),empleado.getDni(), empleado.getNombre(), empleado.getApellidos(), empleado.getDireccion(),empleado.getTipo(), empleado.getDepartamento().getNombre(),empleado.getSueldo(),empleado.getDisponible()});
         dtm.fireTableDataChanged();
     }
     

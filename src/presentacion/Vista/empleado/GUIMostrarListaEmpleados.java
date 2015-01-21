@@ -31,10 +31,10 @@ import presentacion.Vista.producto.GUIMostrarListaProductos;
 public class GUIMostrarListaEmpleados extends JFrame{
     
    Object[][] datos_entrada = {
-        {"","", "", "", "", "","",""}
+        {"","", "", "", "", "","","",""}
        };
         
-        String[] NombreColumnas = {"ID","DNI","Nombre", "Apellidos", "Direccion", "Tipo", "Departamento", "Sueldo"};
+        String[] NombreColumnas = {"ID","DNI","Nombre", "Apellidos", "Direccion", "Tipo", "Departamento", "Sueldo","Disponible"};
 
         JPanel panelSuperior = new JPanel(new GridLayout(2,2,5,5));
         JPanel panelTabla = new JPanel();
@@ -120,7 +120,7 @@ public class GUIMostrarListaEmpleados extends JFrame{
         
         tabla.setModel(dtm);
         for (Empleado empleado : listaEmpleado)
-            dtm.addRow(new Object[] {empleado.getIdEmpleado(),empleado.getDni(), empleado.getNombre(), empleado.getApellidos(), empleado.getDireccion(),empleado.getTipo(), empleado.getDepartamento().getNombre(),empleado.getSueldo()});
+            dtm.addRow(new Object[] {empleado.getIdEmpleado(),empleado.getDni(), empleado.getNombre(), empleado.getApellidos(), empleado.getDireccion(),empleado.getTipo(), empleado.getDepartamento().getNombre(),empleado.getSueldo(),empleado.getDisponible()});
         
         dtm.fireTableDataChanged();
     }
