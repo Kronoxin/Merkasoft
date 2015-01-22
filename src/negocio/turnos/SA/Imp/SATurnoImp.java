@@ -10,6 +10,7 @@ import java.util.Calendar;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.LockModeType;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
@@ -77,23 +78,52 @@ public class SATurnoImp implements SATurno{
 
     @Override
     public boolean modificarTurno(Turno turno) {
+         boolean correcto = true;
         EntityManager em = null;
-        boolean ret = true;
-        try 
-        {
+        EntityManagerFactory ef =null;
+        try {
            
-            EntityManagerFactory ef = Persistence.createEntityManagerFactory("MerkaSoftPU");
-            em = ef.createEntityManager();      
-            em.getTransaction().begin();            
-            em.merge(turno);            
-            em.getTransaction().commit();
-        } finally {
-            ret = false;
-            if (em != null) {
+            ef= Persistence.createEntityManagerFactory("MerkaSoftPU");
+            em = ef.createEntityManager();
+        
+            //MODIFICACIÓN HECHA POR NAVARRO
+            em.getTransaction().begin();
+            Turno t= em.find(Turno.class, turno.getIdTurno(),LockModeType.OPTIMISTIC);
+            
+            if (t!=null)
+            {
+                em.lock(t, LockModeType.OPTIMISTIC_FORCE_INCREMENT);
+                
+                em.merge(turno);
+                em.getTransaction().commit();
+                
+            }
+          
+        } 
+        catch (Exception ex) 
+        {
+            correcto = false;
+            String msg = ex.getLocalizedMessage();
+            if (msg == null || msg.length() == 0) 
+            {
+                Integer id = turno.getIdTurno();
+                if (mostrarTurno(id) == null) 
+                {
+                    System.out.println("The departamento with id " + id + " no longer exists.");
+                }
+            }
+           
+        } 
+        finally 
+        {
+            if (em != null) 
+            {
                 em.close();
             }
+            //Añadido por navarro. Antes no cerrabamos el EMF
+            if (ef!=null) ef.close();
         }
-        return ret; 
+        return correcto;
     }
 
     @Override
