@@ -21,5 +21,6 @@ public interface SAEmpleado
     public boolean modificarEmpleado(Empleado empleado);
     public Empleado mostrarEmpleado(int id);
     public ArrayList<Empleado> mostrarListaEmpleados();
+    public double nominaPorDepartamento();
     
 }

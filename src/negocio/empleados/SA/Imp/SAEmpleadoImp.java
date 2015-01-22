@@ -264,5 +264,11 @@ public class SAEmpleadoImp implements SAEmpleado {
         sa.bajaEmpleado(2);
         System.out.println("BABABUUIIII");
     }
+
+    @Override
+    public double nominaPorDepartamento() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+    }
     
 }
