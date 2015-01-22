@@ -160,5 +160,15 @@ public class Turno implements Serializable {
     public void setEmpleadosCollection(Collection<Empleado> empleadosCollection) {
         this.empleadosCollection = empleadosCollection;
     }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
+    }
+    
+    
     
 }

@@ -192,5 +192,15 @@ public class Empleado implements Serializable {
     public void setTurnoCollection(Collection<Turno> turnoCollection) {
         this.turnoCollection = turnoCollection;
     }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
+    }
+    
+    
     
 }

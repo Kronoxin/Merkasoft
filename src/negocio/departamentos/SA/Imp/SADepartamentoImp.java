@@ -12,6 +12,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.LockModeType;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
@@ -77,52 +78,17 @@ public class SADepartamentoImp implements SADepartamento {
         
             //MODIFICACIÓN HECHA POR NAVARRO
             em.getTransaction().begin();
-            Departamento d= em.find(Departamento.class, departamento.getIdDepartamento());
-                   if (d!=null) em.merge(departamento);
-           
+            Departamento d= em.find(Departamento.class, departamento.getIdDepartamento(),LockModeType.OPTIMISTIC);
             
-           /*
-            Departamento persistentDepartamento = em.find(Departamento.class, departamento.getIdDepartamento());
-            Collection<Empleado> empleadosCollectionOld = persistentDepartamento.getEmpleadosCollection();
-            Collection<Empleado> empleadosCollectionNew = departamento.getEmpleadosCollection();
-            Collection<Empleado> attachedEmpleadosCollectionNew = new ArrayList<Empleado>();
-            
-            if (empleadosCollectionNew != null)
+            if (d!=null)
             {
-                for (Empleado empleadosCollectionNewEmpleadosToAttach : empleadosCollectionNew) 
-                {
-                    empleadosCollectionNewEmpleadosToAttach = em.getReference(empleadosCollectionNewEmpleadosToAttach.getClass(), empleadosCollectionNewEmpleadosToAttach.getIdEmpleado());
-                    attachedEmpleadosCollectionNew.add(empleadosCollectionNewEmpleadosToAttach);
-                }
+                em.lock(d, LockModeType.OPTIMISTIC_FORCE_INCREMENT);
+                
+                em.merge(departamento);
+                em.getTransaction().commit();
+                
             }
-            empleadosCollectionNew = attachedEmpleadosCollectionNew;
-            departamento.setEmpleadosCollection(empleadosCollectionNew);
-            departamento = em.merge(departamento);
-            if (empleadosCollectionOld != null)
-            {
-                for (Empleado empleadosCollectionOldEmpleados : empleadosCollectionOld) {
-                    if (!empleadosCollectionNew.contains(empleadosCollectionOldEmpleados)) {
-                        empleadosCollectionOldEmpleados.setDepartamento(null);
-                        empleadosCollectionOldEmpleados = em.merge(empleadosCollectionOldEmpleados);
-                    }
-                }
-            }
-            if (empleadosCollectionNew != null)
-            {
-                for (Empleado empleadosCollectionNewEmpleados : empleadosCollectionNew) {
-                    if (!empleadosCollectionOld.contains(empleadosCollectionNewEmpleados)) {
-                        Departamento oldDepartamentoOfEmpleadosCollectionNewEmpleados = empleadosCollectionNewEmpleados.getDepartamento();
-                        empleadosCollectionNewEmpleados.setDepartamento(departamento);
-                        empleadosCollectionNewEmpleados = em.merge(empleadosCollectionNewEmpleados);
-                        if (oldDepartamentoOfEmpleadosCollectionNewEmpleados != null && !oldDepartamentoOfEmpleadosCollectionNewEmpleados.equals(departamento)) {
-                            oldDepartamentoOfEmpleadosCollectionNewEmpleados.getEmpleadosCollection().remove(empleadosCollectionNewEmpleados);
-                            oldDepartamentoOfEmpleadosCollectionNewEmpleados = em.merge(oldDepartamentoOfEmpleadosCollectionNewEmpleados);
-                        }
-                    }
-                }
-            }
-            */
-            em.getTransaction().commit();
+          
         } 
         catch (Exception ex) 
         {

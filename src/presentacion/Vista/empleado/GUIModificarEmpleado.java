@@ -38,10 +38,10 @@ import presentacion.Controlador.Eventos.EventoNegocio;
 public class GUIModificarEmpleado extends JFrame{
   
     Object[][] datos_entrada = {
-        {"","", "", "", "", "","","",""}
+        {"","", "", "", "", "","","","",""}
        };
         
-        String[] NombreColumnas = {"ID","DNI","Nombre", "Apellidos", "Direccion", "Tipo", "Departamento", "Sueldo","Disponible"};
+        String[] NombreColumnas = {"ID","DNI","Nombre", "Apellidos", "Direccion", "Tipo", "Departamento", "Sueldo","Disponible","Version"};
 
         JTextField textID = new JTextField("");
 
@@ -122,6 +122,7 @@ public class GUIModificarEmpleado extends JFrame{
                 empleado.setDepartamento(dep_selec);
                 empleado.setSueldo((BigDecimal)tabla.getValueAt(0, 7));
                 empleado.setDisponible((Boolean)tabla.getValueAt(0, 8));
+                empleado.setVersion((int)tabla.getValueAt(0,9));
                 
                 Controlador.getInstance().accion(EventoNegocio.MODIFICAR_EMPLEADO, empleado);
                 
@@ -198,7 +199,7 @@ public class GUIModificarEmpleado extends JFrame{
         tabla.getColumnModel().getColumn(0).setPreferredWidth(3);
  
         dtm.addRow(new Object[]
-        {empleado.getIdEmpleado(),empleado.getDni(), empleado.getNombre(), empleado.getApellidos(), empleado.getDireccion(),empleado.getTipo(), empleado.getDepartamento().getNombre(),empleado.getSueldo(),empleado.getDisponible() });
+        {empleado.getIdEmpleado(),empleado.getDni(), empleado.getNombre(), empleado.getApellidos(), empleado.getDireccion(),empleado.getTipo(), empleado.getDepartamento().getNombre(),empleado.getSueldo(),empleado.getDisponible(), empleado.getVersion() });
         dtm.fireTableDataChanged();
     }
     

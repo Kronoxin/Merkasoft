@@ -34,10 +34,10 @@ import presentacion.Controlador.Eventos.EventoNegocio;
 public class GUIModificarTurno extends JFrame{
     
     Object[][] datos_entrada = {
-        {"","","","",""}
+        {"","","","","",""}
        };
         
-    String[] NombreColumnas = {"ID","Nombre", "Hora Entrada", "Hora Salida","Disponible"};
+    String[] NombreColumnas = {"ID","Nombre", "Hora Entrada", "Hora Salida","Disponible","Version"};
 
     JTextField textID = new JTextField("");
 
@@ -107,6 +107,7 @@ public class GUIModificarTurno extends JFrame{
                 turno.setHoraSalida(hora_salida);
                 turno.setMinutoSalida(minuto_salida); 
                 turno.setDisponible((Boolean)tabla.getValueAt(0, 4));
+                turno.setVersion((int)tabla.getValueAt(0,5));
                 
                 Controlador.getInstance().accion(EventoNegocio.MODIFICAR_TURNO, turno);
             }
@@ -171,7 +172,7 @@ public class GUIModificarTurno extends JFrame{
         String entrada = String.format("%02d:%02d", turno.getHoraEntrada(), turno.getMinutoEntrada());
         String salida = String.format("%02d:%02d", turno.getHoraSalida(), turno.getMinutoSalida());
         dtm.addRow(new Object[]
-        {turno.getIdTurno(), turno.getNombre(), entrada, salida, turno.isDisponible()});
+        {turno.getIdTurno(), turno.getNombre(), entrada, salida, turno.isDisponible(),turno.getVersion()});
         dtm.fireTableDataChanged();
     }
     

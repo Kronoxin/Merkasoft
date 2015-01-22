@@ -34,10 +34,10 @@ public class GUIModificarDepartamento extends JFrame{
     
    
      Object[][] datos_entrada = {
-        {"","","",""}
+        {"","","","",""}
        };
         
-        String[] NombreColumnas = {"ID","Nombre", "Descripcion","Disponible"};
+        String[] NombreColumnas = {"ID","Nombre", "Descripcion","Disponible","Version"};
 
         JTextField textID = new JTextField("");
 
@@ -106,6 +106,7 @@ public class GUIModificarDepartamento extends JFrame{
                 departamento.setNombre((String)(tabla.getValueAt(0, 1)));
                 departamento.setDescripcion((String)(tabla.getValueAt(0, 2)));
                 departamento.setDisponible((Boolean)tabla.getValueAt(0, 3));
+                departamento.setVersion((int)tabla.getValueAt(0, 4));
                 
                 Controlador.getInstance().accion(EventoNegocio.MODIFICAR_DEPARTAMENTO, departamento);
 
@@ -159,7 +160,7 @@ public class GUIModificarDepartamento extends JFrame{
         
         tabla.setModel(dtm);
         dtm.addRow(new Object[]
-        {departamento.getIdDepartamento(),departamento.getNombre(), departamento.getDescripcion(),departamento.getDisponible()});
+        {departamento.getIdDepartamento(),departamento.getNombre(), departamento.getDescripcion(),departamento.getDisponible(),departamento.getVersion()});
         dtm.fireTableDataChanged();
     }
          

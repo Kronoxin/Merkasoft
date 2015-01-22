@@ -84,6 +84,15 @@ public class Departamento implements Serializable {
         this.descripcion = descripcion;
     }
 
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
+    }
+
+    
     @XmlTransient
     public Collection<Empleado> getEmpleadosCollection() {
         return empleadosCollection;
