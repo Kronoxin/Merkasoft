@@ -90,7 +90,6 @@ public class GUIMostrarDepartamento extends JFrame{
                     
                     
                     datos.add(Integer.parseInt(textID.getText()));
-                    datos.add(new GUIMostrarDepartamento());
                     
                     Controlador.getInstance().accion(EventoNegocio.MOSTRAR_DEPARTAMENTO, datos);
                     dispose();

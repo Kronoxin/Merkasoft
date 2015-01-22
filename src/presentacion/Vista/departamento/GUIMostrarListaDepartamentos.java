@@ -82,9 +82,7 @@ public class GUIMostrarListaDepartamentos extends JFrame{
                 public void actionPerformed(ActionEvent e) {
                     
                      ArrayList<Object> datos = new ArrayList<>();
-                    
-                    
-                    datos.add(new GUIMostrarListaDepartamentos());
+
                     
                     Controlador.getInstance().accion(EventoNegocio.MOSTRAR_LISTA_DEPARTAMENTO, datos);
                     dispose();

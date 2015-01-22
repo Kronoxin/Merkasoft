@@ -439,30 +439,33 @@ public class DispatcherImp extends Dispatcher
             {
                  ArrayList<Object> datos = (ArrayList<Object>)comando.getDatos();
                 
-                Departamento departamento = (Departamento)datos.get(2);
+                Departamento departamento = (Departamento)datos.get(1);
                 //MODIFICACION HECHA POR NAVARRO
                 GUIMostrarDepartamento gd= new GUIMostrarDepartamento();
                 gd.cargarDepartamentoEnLista(departamento);
-               // ((GUIMostrarDepartamento)datos.get(1)).cargarDepartamentoEnLista(departamento);
+               
                 break;
             }
             case EventoNegocio.EXITO_MOSTRAR_DEPARTAMENTO_PARA_MODIFICAR:
             {
                   ArrayList<Object> datos = (ArrayList<Object>)comando.getDatos();
                 
-                Departamento departamento = (Departamento)datos.get(2);
+                Departamento departamento = (Departamento)datos.get(1);
                 GUIModificarDepartamento gd= new GUIModificarDepartamento();
-                                gd.cargarDepartamentoEnLista(departamento);
+                gd.cargarDepartamentoEnLista(departamento);
 
-               // ((GUIModificarDepartamento)datos.get(1)).cargarDepartamentoEnLista(departamento);
+               
                 break;
             }
             case EventoNegocio.EXITO_MOSTRAR_LISTA_DEPARTAMENTO:
             {
                 ArrayList<Object> datos = (ArrayList<Object>)comando.getDatos();
                 
-                ArrayList<Departamento> departamentos = (ArrayList<Departamento>)datos.get(1);
-                ((GUIMostrarListaDepartamentos)datos.get(0)).cargarDepartamentoEnLista(departamentos);
+                ArrayList<Departamento> departamentos = (ArrayList<Departamento>)datos.get(0);
+                
+                GUIMostrarListaDepartamentos mld= new GUIMostrarListaDepartamentos();
+                mld.cargarDepartamentoEnLista(departamentos);
+               
 		
                 break;
             }

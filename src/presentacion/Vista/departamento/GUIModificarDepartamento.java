@@ -121,10 +121,10 @@ public class GUIModificarDepartamento extends JFrame{
                     
                     
                     datos.add(Integer.parseInt(textID.getText()));
-                    datos.add(new GUIModificarDepartamento());
-                    
+
                     Controlador.getInstance().accion(EventoNegocio.MOSTRAR_DEPARTAMENTO_PARA_MODIFICAR, datos);
                     dispose();
+                    
                    
                 }
             });
