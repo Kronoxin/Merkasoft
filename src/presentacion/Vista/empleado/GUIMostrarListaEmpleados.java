@@ -82,10 +82,7 @@ public class GUIMostrarListaEmpleados extends JFrame{
                 @Override
                 public void actionPerformed(ActionEvent e) {
                      ArrayList<Object> datos = new ArrayList<>();
-                    
-                    
-                    datos.add(new GUIMostrarListaEmpleados());
-                    
+
                     Controlador.getInstance().accion(EventoNegocio.MOSTRAR_LISTA_EMPLEADO, datos);
                     dispose();
 

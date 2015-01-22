@@ -138,7 +138,6 @@ public class GUIModificarEmpleado extends JFrame{
                     
                     
                     datos.add(Integer.parseInt(textID.getText()));
-                    datos.add(new GUIModificarEmpleado());
                     
                     Controlador.getInstance().accion(EventoNegocio.MOSTRAR_EMPLEADO_PARA_MODIFICAR, datos);
                     dispose();

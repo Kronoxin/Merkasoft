@@ -397,24 +397,29 @@ public class DispatcherImp extends Dispatcher
             {
                 ArrayList<Object> datos = (ArrayList<Object>)comando.getDatos();
                 
-                Empleado empleado = (Empleado)datos.get(2);
-                ((GUIMostrarEmpleado)datos.get(1)).cargarEmpleadoEnLista(empleado);
+                Empleado empleado = (Empleado)datos.get(1);
+                GUIMostrarEmpleado gme = new GUIMostrarEmpleado();
+                gme.cargarEmpleadoEnLista(empleado);
+               
                 break;
             }
             case EventoNegocio.EXITO_MOSTRAR_EMPLEADO_PARA_MODIFICAR:
             {
                ArrayList<Object> datos = (ArrayList<Object>)comando.getDatos();
                 
-                Empleado empleado = (Empleado)datos.get(2);
-                ((GUIModificarEmpleado)datos.get(1)).cargarEmpleadoEnLista(empleado);
+                Empleado empleado = (Empleado)datos.get(1);
+                GUIModificarEmpleado gme = new GUIModificarEmpleado();
+                gme.cargarEmpleadoEnLista(empleado);
+              
                 break; 
             }
             case EventoNegocio.EXITO_MOSTRAR_LISTA_EMPLEADO:
             {
                  ArrayList<Object> datos = (ArrayList<Object>)comando.getDatos();
                 
-                ArrayList<Empleado> empleados = (ArrayList<Empleado>)datos.get(1);
-                ((GUIMostrarListaEmpleados)datos.get(0)).cargarEmpleadoEnLista(empleados);
+                ArrayList<Empleado> empleados = (ArrayList<Empleado>)datos.get(0);
+                GUIMostrarListaEmpleados gmle = new GUIMostrarListaEmpleados();
+                gmle.cargarEmpleadoEnLista(empleados);
 		
                 break;
             }
@@ -490,25 +495,29 @@ public class DispatcherImp extends Dispatcher
             {
                 ArrayList<Object> datos = (ArrayList<Object>)comando.getDatos();
                 
-                Turno turno = (Turno)datos.get(2);
-                ((GUIMostrarTurno)datos.get(1)).cargarTurnoEnLista(turno);
+                Turno turno = (Turno)datos.get(1);
+                GUIMostrarTurno gmt = new GUIMostrarTurno();
+                gmt.cargarTurnoEnLista(turno);
+                
                 break;
             }
             case EventoNegocio.EXITO_MOSTRAR_LISTA_TURNO:
             {
                 ArrayList<Object> datos = (ArrayList<Object>)comando.getDatos();
                 
-                ArrayList<Turno> turnos = (ArrayList<Turno>)datos.get(1);
-                ((GUIMostrarListaTurnos)datos.get(0)).cargarTurnoEnLista(turnos);
+                ArrayList<Turno> turnos = (ArrayList<Turno>)datos.get(0);
+                GUIMostrarListaTurnos gmlt = new GUIMostrarListaTurnos();
+                gmlt.cargarTurnoEnLista(turnos);
 		
                 break;
             }
-			case EventoNegocio.EXITO_MOSTRAR_TURNO_PARA_MODIFICAR:
+            case EventoNegocio.EXITO_MOSTRAR_TURNO_PARA_MODIFICAR:
             {
                ArrayList<Object> datos = (ArrayList<Object>)comando.getDatos();
                 
-                Turno turno = (Turno)datos.get(2);
-                ((GUIModificarTurno)datos.get(1)).cargarTurnoEnLista(turno);
+                Turno turno = (Turno)datos.get(1);
+                GUIModificarTurno gmt = new GUIModificarTurno();
+                gmt.cargarTurnoEnLista(turno);
                 break;
             }
             

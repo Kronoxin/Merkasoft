@@ -88,8 +88,7 @@ public class GUIMostrarTurno extends JFrame{
                     
                     
                     datos.add(Integer.parseInt(textID.getText()));
-                    datos.add(new GUIMostrarTurno());
-                    
+
                     Controlador.getInstance().accion(EventoNegocio.MOSTRAR_TURNO, datos);
                     dispose();
                    

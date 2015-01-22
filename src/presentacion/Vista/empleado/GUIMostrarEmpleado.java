@@ -91,8 +91,7 @@ public class GUIMostrarEmpleado extends JFrame{
                     
                     
                     datos.add(Integer.parseInt(textID.getText()));
-                    datos.add(new GUIMostrarEmpleado());
-                    
+
                     Controlador.getInstance().accion(EventoNegocio.MOSTRAR_EMPLEADO, datos);
                     dispose();
 

@@ -121,7 +121,6 @@ public class GUIModificarTurno extends JFrame{
                     
                     
                     datos.add(Integer.parseInt(textID.getText()));
-                    datos.add(new GUIModificarTurno());
                     
                     Controlador.getInstance().accion(EventoNegocio.MOSTRAR_TURNO_PARA_MODIFICAR, datos);
                     dispose();

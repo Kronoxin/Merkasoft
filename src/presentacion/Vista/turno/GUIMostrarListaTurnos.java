@@ -80,9 +80,6 @@ public class GUIMostrarListaTurnos extends JFrame{
                 public void actionPerformed(ActionEvent e) {
                      ArrayList<Object> datos = new ArrayList<>();
                     
-                    
-                    datos.add(new GUIMostrarListaTurnos());
-                    
                     Controlador.getInstance().accion(EventoNegocio.MOSTRAR_LISTA_TURNO, datos);
                     dispose();
 
