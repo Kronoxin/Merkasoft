@@ -32,6 +32,9 @@ import presentacion.Vista.empleado.GUIBajaEmpleado;
 import presentacion.Vista.empleado.GUIModificarEmpleado;
 import presentacion.Vista.empleado.GUIMostrarEmpleado;
 import presentacion.Vista.empleado.GUIMostrarListaEmpleados;
+import presentacion.Vista.horario.GUIAsignarTurnoEmpleado;
+import presentacion.Vista.horario.GUIMostrarRelacionTurnoEmpleado;
+import presentacion.Vista.horario.GUIMostrarTurnosEmpleado;
 import presentacion.Vista.popups.PopupsCliente;
 import presentacion.Vista.popups.PopupsDepartamento;
 import presentacion.Vista.popups.PopupsEmpleado;
@@ -587,6 +590,24 @@ public class DispatcherImp extends Dispatcher
                 PopupsTurno.ModificarTurnoFracaso();
                 break;
             }
+            //horarios
+            case EventoNegocio.GUI_ASIGNAR_TURNO_EMPLEADO:
+            {
+                new GUIAsignarTurnoEmpleado();
+                break;
+            }
+            case EventoNegocio.GUI_MOSTRAR_TURNOS_EMPLEADO:
+            {
+                new GUIMostrarTurnosEmpleado();
+                break;
+            }
+            case EventoNegocio.GUI_MOSTRAR_RELACION_TURNO_EMPLEADO:
+            {
+                new GUIMostrarRelacionTurnoEmpleado();
+                break;
+            }
+                        
+                        
 
         
                 

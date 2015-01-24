@@ -169,7 +169,7 @@ public class GUIModificarEmpleado extends JFrame{
 
             @Override
             public boolean isCellEditable(int row, int column) {
-                if(column==8){
+                if(column==8 || column==0 || column==9){
                     return false;
                 }
                 return true;

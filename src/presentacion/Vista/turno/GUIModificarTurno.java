@@ -157,7 +157,7 @@ public class GUIModificarTurno extends JFrame{
 
             @Override
             public boolean isCellEditable(int row, int column) {
-                if(column==4){
+                if(column==4|| column == 0 || column ==5){
                     return false;
                 }
                 return true;

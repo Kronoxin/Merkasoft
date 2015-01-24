@@ -58,7 +58,7 @@ public class GUIPrincipal_Horario extends JPanel{
 
         @Override
         public void actionPerformed(ActionEvent e) {
-         /*   if( e.getSource() ==  boton_asignar_turno_empleado){
+            if( e.getSource() ==  boton_asignar_turno_empleado){
                     Controlador.getInstance().accion(EventoNegocio.GUI_ASIGNAR_TURNO_EMPLEADO, GUIPrincipal_Horario.this);
             }
             else if( e.getSource() == boton_mostrar_turnos_empleado){
@@ -66,7 +66,7 @@ public class GUIPrincipal_Horario extends JPanel{
             }
             else if( e.getSource() == boton_mostrar_relacion_turno_empleado){
                     Controlador.getInstance().accion(EventoNegocio.GUI_MOSTRAR_RELACION_TURNO_EMPLEADO, GUIPrincipal_Horario.this);
-            }*/
+            }
         }
     }
     

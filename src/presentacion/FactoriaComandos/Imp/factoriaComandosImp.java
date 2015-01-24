@@ -41,6 +41,12 @@ import presentacion.Controlador.Comandos.empleado.comandoModificarEmpleado;
 import presentacion.Controlador.Comandos.empleado.comandoMostrarEmpleado;
 import presentacion.Controlador.Comandos.empleado.comandoMostrarEmpleadoParaModificar;
 import presentacion.Controlador.Comandos.empleado.comandoMostrarListaEmpleados;
+import presentacion.Controlador.Comandos.horario.GUI.comandoGUIasignarTurnoEmpleado;
+import presentacion.Controlador.Comandos.horario.GUI.comandoGUImostrarRelacionTurnoEmpleado;
+import presentacion.Controlador.Comandos.horario.GUI.comandoGUImostrarTurnosEmpleado;
+import presentacion.Controlador.Comandos.horario.comandoAsignarTurnoEmpleado;
+import presentacion.Controlador.Comandos.horario.comandoMostrarRelacionTurnoEmpleado;
+import presentacion.Controlador.Comandos.horario.comandoMostrarTurnosEmpleado;
 import presentacion.Controlador.Comandos.turno.GUI.comandoGUIaltaTurno;
 import presentacion.Controlador.Comandos.turno.GUI.comandoGUIeliminarTurno;
 import presentacion.Controlador.Comandos.turno.GUI.comandoGUImodificarTurno;
@@ -418,6 +424,39 @@ public class factoriaComandosImp extends factoriaComandos
             case EventoNegocio.GUI_MOSTRAR_TURNO_PARA_MODIFICAR:
             {
                 comando = new comandoGUImostrarTurnoParaModificar();
+                break;
+            }
+            
+            //horarios
+            case EventoNegocio.GUI_ASIGNAR_TURNO_EMPLEADO:
+            {
+                comando = new comandoGUIasignarTurnoEmpleado();
+                break;
+            }
+            case EventoNegocio.GUI_MOSTRAR_TURNOS_EMPLEADO:
+            {
+                comando = new comandoGUImostrarTurnosEmpleado();
+                break;
+            }
+            case EventoNegocio.GUI_MOSTRAR_RELACION_TURNO_EMPLEADO:
+            {
+                comando = new comandoGUImostrarRelacionTurnoEmpleado();
+                break;
+            }
+            
+            case EventoNegocio.ASIGNAR_TURNO_EMPLEADO:
+            {
+                comando = new comandoAsignarTurnoEmpleado();
+                break;
+            }
+            case EventoNegocio.MOSTRAR_TURNOS_EMPLEADO:
+            {
+                comando = new comandoMostrarTurnosEmpleado();
+                break;
+            }
+            case EventoNegocio.MOSTRAR_RELACION_TURNO_EMPLEADO:
+            {
+                comando = new comandoMostrarRelacionTurnoEmpleado();
                 break;
             }
             

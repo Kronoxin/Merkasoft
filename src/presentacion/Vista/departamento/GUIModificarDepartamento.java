@@ -148,7 +148,7 @@ public class GUIModificarDepartamento extends JFrame{
 
             @Override
             public boolean isCellEditable(int row, int column) {
-                if(column == 3){
+                if(column == 3 || column ==0 || column == 4){
                     return false;
                 }
                 return true;
