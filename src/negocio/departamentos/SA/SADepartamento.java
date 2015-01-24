@@ -16,4 +16,5 @@ public interface SADepartamento
     public boolean modificarDepartamento(Departamento empleado);
     public Departamento mostrarDepartamento(int id);
     public ArrayList<Departamento> mostrarListaDepartamentos();
+    public double nominaPorDepartamento(int id);
 }

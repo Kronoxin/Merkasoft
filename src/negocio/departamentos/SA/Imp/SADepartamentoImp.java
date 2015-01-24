@@ -20,6 +20,8 @@ import javax.persistence.criteria.Root;
 import negocio.departamentos.Departamento;
 import negocio.departamentos.SA.SADepartamento;
 import negocio.empleados.Empleado;
+import negocio.empleados.Supervisor;
+import negocio.empleados.Trabajador;
 import negocio.turnos.SA.exceptions.NonexistentEntityException;
 
 
@@ -193,6 +195,70 @@ public class SADepartamentoImp implements SADepartamento {
             ef.close();
         }
     }
+    
+    @Override
+    public double nominaPorDepartamento(int id) {
+        List<Trabajador> trabajadores = findTrabajadoresEntities(true, -1, -1);
+        List<Supervisor> supervisores = findSupervisorEntities(true, -1, -1);
+        double ret = 0.0;                      
+        for (Trabajador t : trabajadores )
+        {
+            if (t.getDisponible() && t.getIdEmpleado() == id)
+            {                
+                ret += t.getSueldo() * t.getHoras_trabajadas();
+            }
+        }
+        for (Supervisor s : supervisores)
+        {
+            if (s.getDisponible()&& s.getIdEmpleado() == id)
+            {
+                ret += s.getSueldo() * s.getFactor_productividad();
+            }
+        }
+        return ret;                                                  
+    }
+    
+    private List<Trabajador> findTrabajadoresEntities(boolean all, int maxResults, int firstResult) {
+        EntityManager em = null;
+        EntityManagerFactory ef = Persistence.createEntityManagerFactory("MerkaSoftPU");
+        em = ef.createEntityManager();
+        try {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            cq.select(cq.from(Trabajador.class));
+            Query q = em.createQuery(cq);
+            if (!all) {
+                q.setMaxResults(maxResults);
+                q.setFirstResult(firstResult);
+            }
+            return q.getResultList();
+        } finally {
+            if (em != null)             
+                em.close();           
+            if (ef != null)
+                ef.close();
+        }
+    }
+    
+    private List<Supervisor> findSupervisorEntities(boolean all, int maxResults, int firstResult) {
+        EntityManager em = null;
+        EntityManagerFactory ef = Persistence.createEntityManagerFactory("MerkaSoftPU");
+        em = ef.createEntityManager();
+        try {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            cq.select(cq.from(Supervisor.class));
+            Query q = em.createQuery(cq);
+            if (!all) {
+                q.setMaxResults(maxResults);
+                q.setFirstResult(firstResult);
+            }
+            return q.getResultList();
+        } finally {
+            if (em != null)             
+                em.close();           
+            if (ef != null)
+                ef.close();
+        }
+    }
 
     public int getDepartamentoCount() 
     {
@@ -218,20 +284,21 @@ public class SADepartamentoImp implements SADepartamento {
     {
         SADepartamentoImp sa = new SADepartamentoImp();
         
+        System.out.println(sa.nominaPorDepartamento(1));        
         /*
         Departamento dep = new Departamento();
         dep.setNombre("Bababuiiii2");
         dep.setDescripcion("MUYY BABABUUUII");
         dep.setDisponible(true);
         sa.altaDepartamento(dep);
-                */
+                
         
         
         Departamento dep = new Departamento();
         dep.setIdDepartamento(1);
         dep.setNombre("BABABUIIIII3");
         sa.modificarDepartamento(dep);
-        System.out.println("BABABUUUUUIII");
+        System.out.println("BABABUUUUUIII");*/
                 
         
     }

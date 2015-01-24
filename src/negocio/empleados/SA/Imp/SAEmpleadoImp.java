@@ -280,68 +280,6 @@ public class SAEmpleadoImp implements SAEmpleado {
         return;
     }
 
-    @Override
-    public double nominaPorDepartamento() {
-        List<Trabajador> trabajadores = findTrabajadoresEntities(true, -1, -1);
-        List<Supervisor> supervisores = findSupervisorEntities(true, -1, -1);
-        double ret = 0.0;                      
-        for (Trabajador t : trabajadores )
-        {
-            if (t.getDisponible())
-            {                
-                ret += t.getSueldo() * t.getHoras_trabajadas();
-            }
-        }
-        for (Supervisor s : supervisores)
-        {
-            if (s.getDisponible())
-            {
-                ret += s.getSueldo() * s.getFactor_productividad();
-            }
-        }
-        return ret;                                                  
-    }
     
-    private List<Trabajador> findTrabajadoresEntities(boolean all, int maxResults, int firstResult) {
-        EntityManager em = null;
-        EntityManagerFactory ef = Persistence.createEntityManagerFactory("MerkaSoftPU");
-        em = ef.createEntityManager();
-        try {
-            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Trabajador.class));
-            Query q = em.createQuery(cq);
-            if (!all) {
-                q.setMaxResults(maxResults);
-                q.setFirstResult(firstResult);
-            }
-            return q.getResultList();
-        } finally {
-            if (em != null)             
-                em.close();           
-            if (ef != null)
-                ef.close();
-        }
-    }
-    
-    private List<Supervisor> findSupervisorEntities(boolean all, int maxResults, int firstResult) {
-        EntityManager em = null;
-        EntityManagerFactory ef = Persistence.createEntityManagerFactory("MerkaSoftPU");
-        em = ef.createEntityManager();
-        try {
-            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Supervisor.class));
-            Query q = em.createQuery(cq);
-            if (!all) {
-                q.setMaxResults(maxResults);
-                q.setFirstResult(firstResult);
-            }
-            return q.getResultList();
-        } finally {
-            if (em != null)             
-                em.close();           
-            if (ef != null)
-                ef.close();
-        }
-    }
     
 }
