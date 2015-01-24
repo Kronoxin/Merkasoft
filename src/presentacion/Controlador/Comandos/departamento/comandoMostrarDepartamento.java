@@ -12,10 +12,7 @@ import presentacion.Controlador.Comandos.Command;
 import presentacion.Controlador.Comandos.RespuestaComando;
 import presentacion.Controlador.Eventos.EventoNegocio;
 
-/**
- *
- * @author Ruben
- */
+
 public class comandoMostrarDepartamento implements Command{
 
     @Override
@@ -31,7 +28,6 @@ public class comandoMostrarDepartamento implements Command{
 		
 	if (departamento != null) //Si existe
         {
-           // System.out.println("hola"+departamento.getNombre());
             respuesta = new RespuestaComando(EventoNegocio.EXITO_MOSTRAR_DEPARTAMENTO, datosAlmacenados);
 	}
 	else
