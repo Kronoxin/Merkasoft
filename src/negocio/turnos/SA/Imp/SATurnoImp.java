@@ -37,24 +37,60 @@ public class SATurnoImp implements SATurno{
     }
 
     @Override
-    public int altaTurno(Turno turno) {       
-        EntityManager em = null;  
-        if (!esTurnoCorrecto(turno))
-            return -1;
+    public int altaTurno(Turno turno) 
+    {       
+        turno.setIdTurno(-1);
+        
+        EntityManager em = null;
+        EntityManagerFactory ef = null;
         try 
         {
-           
-            EntityManagerFactory ef = Persistence.createEntityManagerFactory("MerkaSoftPU");
-            em = ef.createEntityManager();        
-            em.getTransaction().begin();                                    
-            em.persist(turno);            
-            em.getTransaction().commit();
-        } finally {
-            if (em != null) {
-                em.close();
+            ef = Persistence.createEntityManagerFactory("MerkaSoftPU");
+            em = ef.createEntityManager();
+            
+            em.getTransaction().begin();
+            
+            Turno turnoAux = null;
+            
+            List results = em.createNamedQuery("Turno.findByNombre")
+            .setParameter("nombre", turno.getNombre())
+            .getResultList();
+            
+            if (results.size() > 0)
+                turnoAux = (Turno)results.get(0);
+            
+            if (turnoAux != null)
+            {
+                if (!turnoAux.isDisponible())
+                {
+                    turnoAux.setDisponible(true);
+                    em.merge(turnoAux);
+                    turno.setIdTurno(turnoAux.getIdTurno());
+                    em.getTransaction().commit();
+                }
+                else
+                {
+                    System.out.println("Ya existe el turno");
+                    em.getTransaction().rollback();
+                }
+            }            
+            else
+            {
+                em.persist(turno);
+                em.getTransaction().commit();
             }
+            
+        } 
+            
+        finally 
+        {
+            if (em != null)             
+                em.close();           
+            if (ef != null)
+                ef.close();
         }
-        return turno.getIdTurno(); 
+        
+        return turno.getIdTurno();
     }
 
     @Override
@@ -85,24 +121,24 @@ public class SATurnoImp implements SATurno{
     }
 
     @Override
-    public boolean modificarTurno(Turno turno) {
-         boolean correcto = true;
+    public boolean modificarTurno(Turno turno) 
+    {
+        boolean correcto = true;
         EntityManager em = null;
         EntityManagerFactory ef =null;
-        if (!esTurnoCorrecto(turno))
-            return false;
-        try {
+        
+        try 
+        {
            
             ef= Persistence.createEntityManagerFactory("MerkaSoftPU");
             em = ef.createEntityManager();
         
-            //MODIFICACIÓN HECHA POR NAVARRO
             em.getTransaction().begin();
-            Turno t= em.find(Turno.class, turno.getIdTurno(),LockModeType.OPTIMISTIC);
+            Turno d= em.find(Turno.class, turno.getIdTurno(),LockModeType.OPTIMISTIC);
             
-            if (t!=null)
+            if (d!=null)
             {
-                em.lock(t, LockModeType.OPTIMISTIC_FORCE_INCREMENT);
+                em.lock(d, LockModeType.OPTIMISTIC_FORCE_INCREMENT);
                 
                 em.merge(turno);
                 em.getTransaction().commit();
@@ -119,7 +155,7 @@ public class SATurnoImp implements SATurno{
                 Integer id = turno.getIdTurno();
                 if (mostrarTurno(id) == null) 
                 {
-                    System.out.println("The departamento with id " + id + " no longer exists.");
+                    System.out.println("El turno con id " + id + " no existe.");
                 }
             }
            
