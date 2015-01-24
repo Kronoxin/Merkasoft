@@ -5,13 +5,10 @@
  */
 package negocio.departamentos.SA.Imp;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityNotFoundException;
 import javax.persistence.LockModeType;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
@@ -19,10 +16,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import negocio.departamentos.Departamento;
 import negocio.departamentos.SA.SADepartamento;
-import negocio.empleados.Empleado;
 import negocio.empleados.Supervisor;
 import negocio.empleados.Trabajador;
-import negocio.turnos.SA.exceptions.NonexistentEntityException;
 
 
 public class SADepartamentoImp implements SADepartamento {
@@ -140,16 +135,29 @@ public class SADepartamentoImp implements SADepartamento {
     public boolean bajaDepartamento(int id)
     {
         EntityManager em = null;
-        boolean correcto = true;
+        boolean correcto = false;
         try {
             EntityManagerFactory ef = Persistence.createEntityManagerFactory("MerkaSoftPU");
             em = ef.createEntityManager();
             em.getTransaction().begin();
             Departamento persistentDepartamento = em.find(Departamento.class, id);
             
-            persistentDepartamento.setDisponible(false);
-            em.merge(persistentDepartamento);
-            em.getTransaction().commit();
+            List results = em.createNamedQuery("Empleado.findByDepartamento")
+            .setParameter("dep", persistentDepartamento)
+            .getResultList();
+            
+            if (results.size() == 0 && persistentDepartamento.isDisponible())
+            {
+                persistentDepartamento.setDisponible(false);
+                em.merge(persistentDepartamento);
+                em.getTransaction().commit();
+                correcto = true;
+            }
+            else
+            {
+                System.out.println("No se puede dar de baja un departamento con empleados asociados");
+                em.getTransaction().rollback();
+            }
         } 
         catch (Exception ex) 
         {
