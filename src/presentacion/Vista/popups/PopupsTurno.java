@@ -50,4 +50,16 @@ public class PopupsTurno {
       
     }
     
+    public static void MostrarTurnoFracaso(){
+
+      JOptionPane.showMessageDialog(null, "No se ha podido mostrar el turno","Error",JOptionPane.ERROR_MESSAGE);
+      
+    }
+    
+    public static void MostrarListaTurnosFracaso(){
+
+      JOptionPane.showMessageDialog(null, "No se hay turnos que mostrar","Error",JOptionPane.ERROR_MESSAGE);
+      
+    }
+    
 }
