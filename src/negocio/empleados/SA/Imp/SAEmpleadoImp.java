@@ -5,27 +5,18 @@
  */
 package negocio.empleados.SA.Imp;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
 import javax.persistence.Query;
-import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import negocio.departamentos.Departamento;
-import negocio.turnos.Turno;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.LockModeType;
 import javax.persistence.Persistence;
-import negocio.departamentos.SA.Imp.SADepartamentoImp;
 import negocio.empleados.Empleado;
 import negocio.empleados.SA.SAEmpleado;
-import negocio.empleados.Supervisor;
-import negocio.empleados.Trabajador;
-import negocio.turnos.SA.exceptions.NonexistentEntityException;
-import negocio.turnos.Turno;
 
 /**
  *
@@ -100,77 +91,49 @@ public class SAEmpleadoImp implements SAEmpleado {
     @Override
     public boolean modificarEmpleado(Empleado empleado)
     {
+         boolean correcto = true;
         EntityManager em = null;
-        EntityManagerFactory ef = null;
-        boolean correcto = true;
+        EntityManagerFactory ef =null;
         try {
-            ef = Persistence.createEntityManagerFactory("MerkaSoftPU");
+           
+            ef= Persistence.createEntityManagerFactory("MerkaSoftPU");
             em = ef.createEntityManager();
+        
             em.getTransaction().begin();
-            Empleado persistentEmpleados = em.find(Empleado.class, empleado.getIdEmpleado());
-            Departamento departamentoOld = persistentEmpleados.getDepartamento();
-            Departamento departamentoNew = empleado.getDepartamento();
-            Collection<Turno> turnoCollectionOld = persistentEmpleados.getTurnoCollection();
-            Collection<Turno> turnoCollectionNew = empleado.getTurnoCollection();
-            if (departamentoNew != null) {
-                departamentoNew = em.getReference(departamentoNew.getClass(), departamentoNew.getIdDepartamento());
-                empleado.setDepartamento(departamentoNew);
-            }
-            Collection<Turno> attachedTurnoCollectionNew = new ArrayList<Turno>();
-            if(turnoCollectionNew != null)
+            Empleado d= em.find(Empleado.class, empleado.getIdEmpleado(),LockModeType.OPTIMISTIC);
+            
+            if (d!=null)
             {
-                for (Turno turnoCollectionNewTurnoToAttach : turnoCollectionNew) {
-                    turnoCollectionNewTurnoToAttach = em.getReference(turnoCollectionNewTurnoToAttach.getClass(), turnoCollectionNewTurnoToAttach.getIdTurno());
-                    attachedTurnoCollectionNew.add(turnoCollectionNewTurnoToAttach);
-                }
+                em.lock(d, LockModeType.OPTIMISTIC_FORCE_INCREMENT);
+                
+                em.merge(empleado);
+                em.getTransaction().commit();
+                
             }
-            turnoCollectionNew = attachedTurnoCollectionNew;
-            empleado.setTurnoCollection(turnoCollectionNew);
-            empleado = em.merge(empleado);
-            if (departamentoOld != null && !departamentoOld.equals(departamentoNew)) {
-                departamentoOld.getEmpleadosCollection().remove(empleado);
-                departamentoOld = em.merge(departamentoOld);
-            }
-            if (departamentoNew != null && !departamentoNew.equals(departamentoOld)) {
-                departamentoNew.getEmpleadosCollection().add(empleado);
-                departamentoNew = em.merge(departamentoNew);
-            }
-            if (turnoCollectionOld != null)
-            {
-                for (Turno turnoCollectionOldTurno : turnoCollectionOld) {
-                    if (!turnoCollectionNew.contains(turnoCollectionOldTurno)) {
-                        turnoCollectionOldTurno.getEmpleadosCollection().remove(empleado);
-                        turnoCollectionOldTurno = em.merge(turnoCollectionOldTurno);
-                    }
-                }
-            }
-            if ( turnoCollectionNew != null)
-            {
-                for (Turno turnoCollectionNewTurno : turnoCollectionNew) {
-                    if (!turnoCollectionOld.contains(turnoCollectionNewTurno)) {
-                        turnoCollectionNewTurno.getEmpleadosCollection().add(empleado);
-                        turnoCollectionNewTurno = em.merge(turnoCollectionNewTurno);
-                    }
-                }
-            }
-            em.getTransaction().commit();
+          
         } 
         catch (Exception ex) 
         {
             correcto = false;
             String msg = ex.getLocalizedMessage();
-            if (msg == null || msg.length() == 0) {
+            if (msg == null || msg.length() == 0) 
+            {
                 Integer id = empleado.getIdEmpleado();
-                if (mostrarEmpleado(id) == null) {
-                    System.out.println("The empleados with id " + id + " no longer exists.");
+                if (mostrarEmpleado(id) == null) 
+                {
+                    System.out.println("El empleado con id " + id + " no existe.");
                 }
             }
-            
-        } finally {
-            if (em != null)             
-                em.close();           
-            if (ef != null)
-                ef.close();
+           
+        } 
+        finally 
+        {
+            if (em != null) 
+            {
+                em.close();
+            }
+           
+            if (ef!=null) ef.close();
         }
         return correcto;
     }
@@ -230,7 +193,8 @@ public class SAEmpleadoImp implements SAEmpleado {
     
    
 
-    private List<Empleado> findEmpleadosEntities(int maxResults, int firstResult) {
+    private List<Empleado> findEmpleadosEntities(int maxResults, int firstResult) 
+    {
         return findEmpleadosEntities(false, maxResults, firstResult);
     }
 
@@ -238,7 +202,8 @@ public class SAEmpleadoImp implements SAEmpleado {
         EntityManager em = null;
         EntityManagerFactory ef = Persistence.createEntityManagerFactory("MerkaSoftPU");
         em = ef.createEntityManager();
-        try {
+        try 
+        {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             cq.select(cq.from(Empleado.class));
             Query q = em.createQuery(cq);
@@ -247,7 +212,10 @@ public class SAEmpleadoImp implements SAEmpleado {
                 q.setFirstResult(firstResult);
             }
             return q.getResultList();
-        } finally {
+        }
+        
+        finally 
+        {
             if (em != null)             
                 em.close();           
             if (ef != null)
@@ -269,27 +237,4 @@ public class SAEmpleadoImp implements SAEmpleado {
             em.close();
         }
     }
-    
-    public static void main(String args[])
-    {
-        SAEmpleadoImp sa = new SAEmpleadoImp();
-        Empleado empleado = new Empleado();
-        Departamento dep = new Departamento();
-        /*
-        empleado.setNombre("Prueba1");
-        empleado.setDni("12345678A");
-        empleado.setApellidos("Cosas");
-        empleado.setDireccion("Calle rabo 4");
-        empleado.setDisponible(true);
-        empleado.setDepartamento(new SADepartamentoImp().mostrarDepartamento(1));
-        
-        sa.altaEmpleado(empleado);
-                */
-        sa.bajaEmpleado(2);
-        System.out.println("BABABUUIIII");
-        return;
-    }
-
-    
-    
 }

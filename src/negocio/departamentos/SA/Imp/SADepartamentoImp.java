@@ -31,39 +31,57 @@ public class SADepartamentoImp implements SADepartamento {
     @Override
     public int altaDepartamento(Departamento departamento) 
     {
-        if (departamento.getEmpleadosCollection() == null) {
-            departamento.setEmpleadosCollection(new ArrayList<Empleado>());
-        }
+        departamento.setIdDepartamento(-1);
+        
         EntityManager em = null;
+        EntityManagerFactory ef = null;
         try 
         {
-           
-            EntityManagerFactory ef = Persistence.createEntityManagerFactory("MerkaSoftPU");
+            ef = Persistence.createEntityManagerFactory("MerkaSoftPU");
             em = ef.createEntityManager();
-        
+            
             em.getTransaction().begin();
-            Collection<Empleado> attachedEmpleadosCollection = new ArrayList<Empleado>();
-            for (Empleado empleadosCollectionEmpleadosToAttach : departamento.getEmpleadosCollection()) {
-                empleadosCollectionEmpleadosToAttach = em.getReference(empleadosCollectionEmpleadosToAttach.getClass(), empleadosCollectionEmpleadosToAttach.getIdEmpleado());
-                attachedEmpleadosCollection.add(empleadosCollectionEmpleadosToAttach);
-            }
-            departamento.setEmpleadosCollection(attachedEmpleadosCollection);
-            em.persist(departamento);
-            for (Empleado empleadosCollectionEmpleados : departamento.getEmpleadosCollection()) {
-                Departamento oldDepartamentoOfEmpleadosCollectionEmpleados = empleadosCollectionEmpleados.getDepartamento();
-                empleadosCollectionEmpleados.setDepartamento(departamento);
-                empleadosCollectionEmpleados = em.merge(empleadosCollectionEmpleados);
-                if (oldDepartamentoOfEmpleadosCollectionEmpleados != null) {
-                    oldDepartamentoOfEmpleadosCollectionEmpleados.getEmpleadosCollection().remove(empleadosCollectionEmpleados);
-                    oldDepartamentoOfEmpleadosCollectionEmpleados = em.merge(oldDepartamentoOfEmpleadosCollectionEmpleados);
+            
+            Departamento departamentoAux = null;
+            
+            List results = em.createNamedQuery("Departamento.findByNombre")
+            .setParameter("nombre", departamento.getNombre())
+            .getResultList();
+            
+            if (results.size() > 0)
+                departamentoAux = (Departamento)results.get(0);
+            
+            if (departamentoAux != null)
+            {
+                if (!departamentoAux.getDisponible())
+                {
+                    departamentoAux.setDisponible(true);
+                    em.merge(departamentoAux);
+                    departamento.setIdDepartamento(departamentoAux.getIdDepartamento());
+                    em.getTransaction().commit();
                 }
+                else
+                {
+                    System.out.println("Ya existe el departamento");
+                    em.getTransaction().rollback();
+                }
+            }            
+            else
+            {
+                em.persist(departamento);
+                em.getTransaction().commit();
             }
-            em.getTransaction().commit();
-        } finally {
-            if (em != null) {
-                em.close();
-            }
+            
+           
+        } 
+        finally 
+        {
+            if (em != null)             
+                em.close();           
+            if (ef != null)
+                ef.close();
         }
+        
         return departamento.getIdDepartamento();
     }
 
@@ -78,7 +96,6 @@ public class SADepartamentoImp implements SADepartamento {
             ef= Persistence.createEntityManagerFactory("MerkaSoftPU");
             em = ef.createEntityManager();
         
-            //MODIFICACIÓN HECHA POR NAVARRO
             em.getTransaction().begin();
             Departamento d= em.find(Departamento.class, departamento.getIdDepartamento(),LockModeType.OPTIMISTIC);
             
@@ -101,7 +118,7 @@ public class SADepartamentoImp implements SADepartamento {
                 Integer id = departamento.getIdDepartamento();
                 if (mostrarDepartamento(id) == null) 
                 {
-                    System.out.println("The departamento with id " + id + " no longer exists.");
+                    System.out.println("El departamento con id " + id + " no existe.");
                 }
             }
            
@@ -112,7 +129,7 @@ public class SADepartamentoImp implements SADepartamento {
             {
                 em.close();
             }
-            //Añadido por navarro. Antes no cerrabamos el EMF
+            
             if (ef!=null) ef.close();
         }
         return correcto;
