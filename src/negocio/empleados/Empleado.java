@@ -64,7 +64,7 @@ public class Empleado implements Serializable {
     private String direccion;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "Sueldo")
-    private BigDecimal sueldo;
+    private double sueldo;
     @Column(name = "Tipo")
     private String tipo;
     @JoinColumn(name = "Departamento", referencedColumnName = "id_departamento")
@@ -125,11 +125,11 @@ public class Empleado implements Serializable {
         this.direccion = direccion;
     }
 
-    public BigDecimal getSueldo() {
+    public double getSueldo() {
         return sueldo;
     }
 
-    public void setSueldo(BigDecimal sueldo) {
+    public void setSueldo(double sueldo) {
         this.sueldo = sueldo;
     }
 

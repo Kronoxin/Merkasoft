@@ -6,6 +6,7 @@
 package presentacion.Vista.empleado;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -25,6 +26,8 @@ import javax.swing.JTextField;
 import negocio.FactoriaSA.FactoriaSA;
 import negocio.departamentos.Departamento;
 import negocio.empleados.Empleado;
+import negocio.empleados.Supervisor;
+import negocio.empleados.Trabajador;
 import presentacion.Controlador.Controlador;
 import presentacion.Controlador.Eventos.EventoNegocio;
 
@@ -36,9 +39,11 @@ import presentacion.Controlador.Eventos.EventoNegocio;
 public class GUIAltaEmpleado extends JFrame{
     
     Empleado empleado = new Empleado();
+    Trabajador t = new Trabajador();
+    Supervisor s = new Supervisor();
     
     JPanel panelSuperior = new JPanel();
-    JPanel panelRadios = new JPanel(new FlowLayout());
+    JPanel panelRadios = new JPanel(new GridLayout(4,2,5,5));
     JPanel panelBotones = new JPanel(new GridLayout(1,2,5,5));
     
     JTextField textNombre = new JTextField("");
@@ -47,6 +52,10 @@ public class GUIAltaEmpleado extends JFrame{
     JTextField textDireccion = new JTextField("");
     JTextField textDepartamento = new JTextField("");
     JTextField textSueldo = new JTextField("");
+    JTextField textHoras = new JTextField("");
+    JTextField textProductividad = new JTextField("");
+    JTextField textOculto1 = new JTextField("");
+    JTextField textOculto2 = new JTextField("");
                 
     JLabel labApellidos = new JLabel("Apellidos",JLabel.CENTER);
     JLabel labNombre = new JLabel("Nombre",JLabel.CENTER);
@@ -54,6 +63,9 @@ public class GUIAltaEmpleado extends JFrame{
     JLabel labDireccion = new JLabel("Direccion",JLabel.CENTER);
     JLabel labDepartamento = new JLabel("Departamento",JLabel.CENTER);
     JLabel labSueldo = new JLabel("Sueldo",JLabel.CENTER);
+    JLabel labHoras = new JLabel("Horas trabajadas", JLabel.LEFT);
+    JLabel labProductividad = new JLabel("Factor de productividad", JLabel.LEFT);
+    
     
     
     
@@ -66,11 +78,10 @@ public class GUIAltaEmpleado extends JFrame{
     
     JComboBox combos;
 		
-		
     
     public GUIAltaEmpleado(){
         this.setTitle("Alta Empleado");
-	setBounds(100, 100, 400, 300);
+	setBounds(100, 100, 500, 400);
         this.setLocationRelativeTo(null);
         
             this.setLayout(new BorderLayout());
@@ -83,7 +94,7 @@ public class GUIAltaEmpleado extends JFrame{
             }
             combos = new JComboBox(departments);
             
-            panelSuperior.setLayout(new GridLayout(6,2));
+            panelSuperior.setLayout(new GridLayout(8,2));
 
 
 
@@ -114,8 +125,7 @@ public class GUIAltaEmpleado extends JFrame{
             panelSuperior.add(labSueldo);
             panelSuperior.add(textSueldo);
             textSueldo.setText("1000");
-                    
-
+  
             //añadimos los radiobuttons al panelRadios para indicar si es empleado es Supervisor o Trabajador
             panelRadios.add(radioTrabajador);
             panelRadios.add(radioSupervisor);
@@ -124,6 +134,19 @@ public class GUIAltaEmpleado extends JFrame{
             grupoRadios.add(radioTrabajador);
             grupoRadios.add(radioSupervisor);
             
+            //Añadimos el campo de especialidad
+            panelRadios.add(labProductividad);
+            panelRadios.add(textProductividad);
+            panelRadios.add(labHoras);
+            panelRadios.add(textHoras);
+            labHoras.setVisible(false);
+            textHoras.setVisible(false);
+            // Añadimos cajas de texto ocultas para cuadrar mejor el espacio
+            panelRadios.add(textOculto1);
+            panelRadios.add(textOculto2);
+            textOculto1.setVisible(false);
+            textOculto2.setVisible(false);
+            
 
 
 
@@ -131,26 +154,72 @@ public class GUIAltaEmpleado extends JFrame{
             panelBotones.add(boton_ok);
             panelBotones.add(boton_cancelar);
             
+            //Añadimos actionlintener de los botones
+            radioTrabajador.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                labProductividad.setVisible(false);
+                textProductividad.setVisible(false);
+                labHoras.setVisible(true);
+                textHoras.setVisible(true);                
+            }
+        });
+            
+            radioSupervisor.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                labHoras.setVisible(false);
+                textHoras.setVisible(false); 
+                labProductividad.setVisible(true);
+                textProductividad.setVisible(true);
+            }
+        });
+            
+            
+            
             //Añadimos el actionlistener
             boton_ok.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
                 
-                ArrayList<Departamento> depts2 = FactoriaSA.obtenerInstancia().generaSADepartamento().mostrarListaDepartamentos();
-                empleado.setDni(textDNI.getText());
-                empleado.setNombre(textNombre.getText());
-                empleado.setApellidos(textApellidos.getText());
-                empleado.setDireccion(textDireccion.getText());
-                Departamento dummy = depts2.get(combos.getSelectedIndex());
-                empleado.setDepartamento(dummy);
-                empleado.setSueldo((BigDecimal.valueOf(Double.parseDouble(textSueldo.getText()))));
-                empleado.setTipo(radioTrabajador.getText());
-                if (radioSupervisor.isSelected())
-                    empleado.setTipo(radioSupervisor.getText());
-                empleado.setDisponible(true);
                 
-                Controlador.getInstance().accion(EventoNegocio.ALTA_EMPLEADO, empleado);
+                
+                if (radioTrabajador.isSelected())
+                {
+                    
+                    ArrayList<Departamento> depts2 = FactoriaSA.obtenerInstancia().generaSADepartamento().mostrarListaDepartamentos();
+                    t.setDni(textDNI.getText());
+                    t.setNombre(textNombre.getText());
+                    t.setApellidos(textApellidos.getText());
+                    t.setDireccion(textDireccion.getText());
+                    Departamento dummy = depts2.get(combos.getSelectedIndex());
+                    t.setDepartamento(dummy);
+                    t.setSueldo(((double)(Double.parseDouble(textSueldo.getText()))));
+                    t.setTipo(radioTrabajador.getText());                    
+                    t.setDisponible(true);
+                    t.setHoras_trabajadas((double) Double.parseDouble(textHoras.getText()));
+                    Controlador.getInstance().accion(EventoNegocio.ALTA_EMPLEADO, t);
+                }
+                else
+                {
+                    ArrayList<Departamento> depts2 = FactoriaSA.obtenerInstancia().generaSADepartamento().mostrarListaDepartamentos();
+                    s.setDni(textDNI.getText());
+                    s.setNombre(textNombre.getText());
+                    s.setApellidos(textApellidos.getText());
+                    s.setDireccion(textDireccion.getText());
+                    Departamento dummy = depts2.get(combos.getSelectedIndex());
+                    s.setDepartamento(dummy);
+                    s.setSueldo(((double)(Double.parseDouble(textSueldo.getText()))));
+                    s.setTipo(radioSupervisor.getText());                    
+                    s.setDisponible(true);
+                    s.setFactor_productividad((double) Double.parseDouble(textProductividad.getText()));
+                    Controlador.getInstance().accion(EventoNegocio.ALTA_EMPLEADO, s);
+                }
+                
+                
             }
         });
             boton_cancelar.addActionListener(new ActionListener() {

@@ -6,6 +6,7 @@
 package negocio.empleados.SA.Imp;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
@@ -21,6 +22,8 @@ import javax.persistence.Persistence;
 import negocio.departamentos.SA.Imp.SADepartamentoImp;
 import negocio.empleados.Empleado;
 import negocio.empleados.SA.SAEmpleado;
+import negocio.empleados.Supervisor;
+import negocio.empleados.Trabajador;
 import negocio.turnos.SA.exceptions.NonexistentEntityException;
 import negocio.turnos.Turno;
 
@@ -42,11 +45,12 @@ public class SAEmpleadoImp implements SAEmpleado {
     {
         if (empleado.getTurnoCollection() == null) {
             empleado.setTurnoCollection(new ArrayList<Turno>());
-        }
+        }        
         EntityManager em = null;
+        EntityManagerFactory ef = null;
         try 
         {
-            EntityManagerFactory ef = Persistence.createEntityManagerFactory("MerkaSoftPU");
+             ef = Persistence.createEntityManagerFactory("MerkaSoftPU");
             em = ef.createEntityManager();
             
             em.getTransaction().begin();
@@ -61,7 +65,7 @@ public class SAEmpleadoImp implements SAEmpleado {
                 attachedTurnoCollection.add(turnoCollectionTurnoToAttach);
             }
             empleado.setTurnoCollection(attachedTurnoCollection);
-            em.persist(empleado);
+            em.merge(empleado);
             if (departamento != null) {
                 departamento.getEmpleadosCollection().add(empleado);
                 departamento = em.merge(departamento);
@@ -74,10 +78,10 @@ public class SAEmpleadoImp implements SAEmpleado {
         } 
         finally 
         {
-            if (em != null) 
-            {
-                em.close();
-            }
+            if (em != null)             
+                em.close();           
+            if (ef != null)
+                ef.close();
         }
         
         return empleado.getIdEmpleado();
@@ -87,9 +91,10 @@ public class SAEmpleadoImp implements SAEmpleado {
     public boolean modificarEmpleado(Empleado empleado)
     {
         EntityManager em = null;
+        EntityManagerFactory ef = null;
         boolean correcto = true;
         try {
-            EntityManagerFactory ef = Persistence.createEntityManagerFactory("MerkaSoftPU");
+            ef = Persistence.createEntityManagerFactory("MerkaSoftPU");
             em = ef.createEntityManager();
             em.getTransaction().begin();
             Empleado persistentEmpleados = em.find(Empleado.class, empleado.getIdEmpleado());
@@ -152,9 +157,10 @@ public class SAEmpleadoImp implements SAEmpleado {
             }
             
         } finally {
-            if (em != null) {
-                em.close();
-            }
+            if (em != null)             
+                em.close();           
+            if (ef != null)
+                ef.close();
         }
         return correcto;
     }
@@ -167,7 +173,10 @@ public class SAEmpleadoImp implements SAEmpleado {
         try {
             return em.find(Empleado.class, id);
         } finally {
-            em.close();
+            if (em != null)             
+                em.close();           
+            if (ef != null)
+                ef.close();
         }
     }
     
@@ -181,9 +190,10 @@ public class SAEmpleadoImp implements SAEmpleado {
     public boolean bajaEmpleado(int id)
     {
         EntityManager em = null;
-        boolean correcto = true;
+        EntityManagerFactory ef = null;
+        boolean correcto = true;        
         try {
-            EntityManagerFactory ef = Persistence.createEntityManagerFactory("MerkaSoftPU");
+             ef = Persistence.createEntityManagerFactory("MerkaSoftPU");
             em = ef.createEntityManager();
             em.getTransaction().begin();
             Empleado persistentEmpleados = em.find(Empleado.class, id);
@@ -198,9 +208,10 @@ public class SAEmpleadoImp implements SAEmpleado {
             ex.printStackTrace();
             
         } finally {
-            if (em != null) {
-                em.close();
-            }
+            if (em != null)             
+                em.close();           
+            if (ef != null)
+                ef.close();
         }
         return correcto;
     }
@@ -227,7 +238,10 @@ public class SAEmpleadoImp implements SAEmpleado {
             }
             return q.getResultList();
         } finally {
-            em.close();
+            if (em != null)             
+                em.close();           
+            if (ef != null)
+                ef.close();
         }
     }
 
@@ -263,12 +277,71 @@ public class SAEmpleadoImp implements SAEmpleado {
                 */
         sa.bajaEmpleado(2);
         System.out.println("BABABUUIIII");
+        return;
     }
 
     @Override
     public double nominaPorDepartamento() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        
+        List<Trabajador> trabajadores = findTrabajadoresEntities(true, -1, -1);
+        List<Supervisor> supervisores = findSupervisorEntities(true, -1, -1);
+        double ret = 0.0;                      
+        for (Trabajador t : trabajadores )
+        {
+            if (t.getDisponible())
+            {                
+                ret += t.getSueldo() * t.getHoras_trabajadas();
+            }
+        }
+        for (Supervisor s : supervisores)
+        {
+            if (s.getDisponible())
+            {
+                ret += s.getSueldo() * s.getFactor_productividad();
+            }
+        }
+        return ret;                                                  
+    }
+    
+    private List<Trabajador> findTrabajadoresEntities(boolean all, int maxResults, int firstResult) {
+        EntityManager em = null;
+        EntityManagerFactory ef = Persistence.createEntityManagerFactory("MerkaSoftPU");
+        em = ef.createEntityManager();
+        try {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            cq.select(cq.from(Trabajador.class));
+            Query q = em.createQuery(cq);
+            if (!all) {
+                q.setMaxResults(maxResults);
+                q.setFirstResult(firstResult);
+            }
+            return q.getResultList();
+        } finally {
+            if (em != null)             
+                em.close();           
+            if (ef != null)
+                ef.close();
+        }
+    }
+    
+    private List<Supervisor> findSupervisorEntities(boolean all, int maxResults, int firstResult) {
+        EntityManager em = null;
+        EntityManagerFactory ef = Persistence.createEntityManagerFactory("MerkaSoftPU");
+        em = ef.createEntityManager();
+        try {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            cq.select(cq.from(Supervisor.class));
+            Query q = em.createQuery(cq);
+            if (!all) {
+                q.setMaxResults(maxResults);
+                q.setFirstResult(firstResult);
+            }
+            return q.getResultList();
+        } finally {
+            if (em != null)             
+                em.close();           
+            if (ef != null)
+                ef.close();
+        }
     }
     
 }

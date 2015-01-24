@@ -41,16 +41,16 @@ public class Trabajador extends Empleado implements Serializable
     @Column(name = "id_empleado")
     private Integer idEmpleado;
     @Column(name = "Horas_trabajadas")
-    private String horas_trabajadas;
+    private double horas_trabajadas;
     @Version
     @Column(name = "Version")
     private int version;
 
-    public String getHoras_trabajadas() {
+    public double getHoras_trabajadas() {
         return horas_trabajadas;
     }
 
-    public void setHoras_trabajadas(String horas_trabajadas) {
+    public void setHoras_trabajadas(double horas_trabajadas) {
         this.horas_trabajadas = horas_trabajadas;
     }
     

@@ -120,7 +120,7 @@ public class GUIModificarEmpleado extends JFrame{
                 
                 Departamento dep_selec = depts2.get(comboBox.getSelectedIndex());
                 empleado.setDepartamento(dep_selec);
-                empleado.setSueldo((BigDecimal)tabla.getValueAt(0, 7));
+                empleado.setSueldo((double)tabla.getValueAt(0, 7));
                 empleado.setDisponible((Boolean)tabla.getValueAt(0, 8));
                 empleado.setVersion((int)tabla.getValueAt(0,9));
                 
