@@ -194,5 +194,15 @@ public class EventoNegocio
     public static final int GUI_MOSTRAR_TURNO = 909;
     public static final int GUI_MOSTRAR_LISTA_TURNOS = 910;
     public static final int GUI_MOSTRAR_TURNO_PARA_MODIFICAR = 912;
+    
+    //1000 Control de Horarios
+    
+    public static final int ASIGNAR_TURNO_EMPLEADO = 1001;
+    public static final int MOSTRAR_TURNOS_EMPLEADO = 1002;
+    public static final int MOSTRAR_RELACION_TURNO_EMPLEADO = 1003;
+    
+    public static final int GUI_ASIGNAR_TURNO_EMPLEADO = 1010;
+    public static final int GUI_MOSTRAR_TURNOS_EMPLEADO = 1011;
+    public static final int GUI_MOSTRAR_RELACION_TURNO_EMPLEADO = 1012;
             
 }
