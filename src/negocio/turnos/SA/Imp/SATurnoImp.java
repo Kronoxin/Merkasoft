@@ -17,10 +17,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import negocio.turnos.SA.SATurno;
 import negocio.turnos.Turno;
 
-/**
- *
- * @author Ruben
- */
+
 public class SATurnoImp implements SATurno{
     public SATurnoImp() {
        }

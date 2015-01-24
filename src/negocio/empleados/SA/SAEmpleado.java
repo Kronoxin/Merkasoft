@@ -9,11 +9,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import negocio.empleados.Empleado;
 
-/**
- *
- * @author Ruben
- */
-//meter los CRUD
+
 public interface SAEmpleado 
 {
     

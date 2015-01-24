@@ -8,10 +8,7 @@ package negocio.cliente.SACliente;
 import negocio.cliente.TCliente;
 import java.util.ArrayList;
 
-/**
- *
- * @author borja
- */
+
 public interface SACliente {
     
     public int altaCliente(TCliente cliente)throws Exception;

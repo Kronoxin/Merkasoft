@@ -9,10 +9,7 @@ package negocio.producto.SAProducto;
 import negocio.producto.TProducto;
 import java.util.ArrayList;
 
-/**
- *
- * @author borja
- */
+
 public interface SAProducto 
 {
     

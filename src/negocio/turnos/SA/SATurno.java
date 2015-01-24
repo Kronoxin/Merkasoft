@@ -8,10 +8,7 @@ package negocio.turnos.SA;
 import java.util.ArrayList;
 import negocio.turnos.Turno;
 
-/**
- *
- * @author Ruben
- */
+
 public interface SATurno {
     public int altaTurno(Turno turno);
     public boolean bajaTurno(int id);

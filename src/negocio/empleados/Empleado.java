@@ -30,10 +30,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import negocio.turnos.Turno;
 
-/**
- *
- * @author Ruben
- */
+
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
 @DiscriminatorColumn(name="Tipo")

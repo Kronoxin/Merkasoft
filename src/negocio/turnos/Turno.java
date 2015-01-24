@@ -26,10 +26,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import negocio.empleados.Empleado;
 
-/**
- *
- * @author Ruben
- */
+
 @Entity
 @Table(name = "turno")
 @XmlRootElement

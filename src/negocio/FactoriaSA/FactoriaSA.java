@@ -17,10 +17,7 @@ import negocio.venta.SAVenta.Imp.SAVentaImp;
 import negocio.venta.SAVenta.SAVenta;
 import negocio.turnos.SA.SATurno;
 
-/**
- *
- * @author borja
- */
+
 public abstract class FactoriaSA {
     
     private static FactoriaSA _instance = null;

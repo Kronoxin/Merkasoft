@@ -18,10 +18,7 @@ import javax.persistence.Persistence;
 import negocio.empleados.Empleado;
 import negocio.empleados.SA.SAEmpleado;
 
-/**
- *
- * @author Ruben
- */
+
 public class SAEmpleadoImp implements SAEmpleado {
 
     
