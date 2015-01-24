@@ -49,6 +49,7 @@ public class VentanaPrincipal extends JPanel {
     private final ImageIcon icono_empleados = new ImageIcon("icono-empleados.PNG");
     private final ImageIcon icono_departamentos = new ImageIcon("icono-departamento.PNG");
     private final ImageIcon icono_turnos = new ImageIcon("icono-turno.GIF");
+    private final ImageIcon icono_horarios = new ImageIcon("icono-horarios.PNG");
     
 
 	public VentanaPrincipal() {
@@ -71,7 +72,7 @@ public class VentanaPrincipal extends JPanel {
             //añadimos el Tab de Turnos al principal, con el icono y la clase principal de este panel
             tab_principal.addTab("Turnos", icono_turnos, principal_turno, "Turnos - Tab 6");
             
-            tab_principal.addTab("Horarios", icono_ventas, principal_horario, "Horarios - Tab 7");
+            tab_principal.addTab("Horarios", icono_horarios, principal_horario, "Horarios - Tab 7");
             
             
 
