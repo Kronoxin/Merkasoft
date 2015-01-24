@@ -49,5 +49,14 @@ public class PopupsDepartamento {
       JOptionPane.showMessageDialog(null, "No se ha podido modificar el departamento","Error",JOptionPane.ERROR_MESSAGE);
       
     }
+    public static void MostrarDepartamentoFracaso(){
+        
+      JOptionPane.showMessageDialog(null, "No se encuentra el departamento","Error",JOptionPane.ERROR_MESSAGE);
+    }
+    
+    public static void MostrarListaDepartamentosFracaso(){
+        
+      JOptionPane.showMessageDialog(null, "No se hay departamentos que mostrar","Error",JOptionPane.ERROR_MESSAGE);
+    }
     
 }

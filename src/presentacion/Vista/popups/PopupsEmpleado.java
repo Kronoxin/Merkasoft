@@ -50,4 +50,15 @@ public class PopupsEmpleado {
       
     }
     
+    public static void MostrarEmpleadoFracaso(){
+
+      JOptionPane.showMessageDialog(null, "No se ha podido mostrar el empleado","Error",JOptionPane.ERROR_MESSAGE);
+      
+    }
+    public static void MostrarListaEmpleadosFracaso(){
+
+      JOptionPane.showMessageDialog(null, "No se hay Empleados que mostrar","Error",JOptionPane.ERROR_MESSAGE);
+      
+    }
+    
 }
