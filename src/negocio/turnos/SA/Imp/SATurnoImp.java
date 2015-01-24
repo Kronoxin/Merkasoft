@@ -25,20 +25,28 @@ public class SATurnoImp implements SATurno{
     public SATurnoImp() {
        }
 
-   
+   //Comprobar que el turno es correcto
+    private boolean esTurnoCorrecto(Turno t)
+    {
+        boolean ret = true;
+        if (t.getHoraEntrada() > t.getHoraSalida() || (t.getHoraEntrada() == t.getHoraSalida() && t.getMinutoEntrada() >= t.getMinutoSalida()))
+        {
+            ret = false;
+        }        
+        return ret;
+    }
 
     @Override
     public int altaTurno(Turno turno) {       
-        EntityManager em = null;
+        EntityManager em = null;  
+        if (!esTurnoCorrecto(turno))
+            return -1;
         try 
         {
            
             EntityManagerFactory ef = Persistence.createEntityManagerFactory("MerkaSoftPU");
-            em = ef.createEntityManager();
-        
-            em.getTransaction().begin();
-                        
-            
+            em = ef.createEntityManager();        
+            em.getTransaction().begin();                                    
             em.persist(turno);            
             em.getTransaction().commit();
         } finally {
@@ -81,6 +89,8 @@ public class SATurnoImp implements SATurno{
          boolean correcto = true;
         EntityManager em = null;
         EntityManagerFactory ef =null;
+        if (!esTurnoCorrecto(turno))
+            return false;
         try {
            
             ef= Persistence.createEntityManagerFactory("MerkaSoftPU");

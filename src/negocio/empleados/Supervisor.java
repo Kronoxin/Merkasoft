@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,22 +30,15 @@ import negocio.turnos.Turno;
 
 
 @Entity
-@Table(name = "supervisor")
-@XmlRootElement
+@DiscriminatorValue("Supervisor")
 //No están puestas las namequerys. son necesarias?
     
 public class Supervisor extends Empleado implements Serializable
 {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id_empleado")
-    private Integer idEmpleado;
+    
     @Column(name = "Factor_productividad")
     private double factor_productividad;
-    @Version
-    @Column(name = "Version")
-    private int version;
+    
 
     public double getFactor_productividad() {
         return factor_productividad;
@@ -53,14 +47,4 @@ public class Supervisor extends Empleado implements Serializable
     public void setFactor_productividad(double factor_productividad) {
         this.factor_productividad = factor_productividad;
     }
-    
-    public int getVersion() {
-        return version;
-    }
-
-    public void setVersion(int version) {
-        this.version = version;
-    }
-    
-    
 }

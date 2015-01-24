@@ -43,38 +43,48 @@ public class SAEmpleadoImp implements SAEmpleado {
     @Override
     public int altaEmpleado(Empleado empleado) 
     {
-        if (empleado.getTurnoCollection() == null) {
-            empleado.setTurnoCollection(new ArrayList<Turno>());
-        }        
+        empleado.setIdEmpleado(-1);
+        
         EntityManager em = null;
         EntityManagerFactory ef = null;
         try 
         {
-             ef = Persistence.createEntityManagerFactory("MerkaSoftPU");
+            ef = Persistence.createEntityManagerFactory("MerkaSoftPU");
             em = ef.createEntityManager();
             
             em.getTransaction().begin();
-            Departamento departamento = empleado.getDepartamento();
-            if (departamento != null) {
-                departamento = em.getReference(departamento.getClass(), departamento.getIdDepartamento());
-                empleado.setDepartamento(departamento);
+            
+            Empleado empleadoAux = null;
+            
+            List results = em.createNamedQuery("Empleado.findByDni")
+            .setParameter("dni", empleado.getDni())
+            .getResultList();
+            
+            if (results.size() > 0)
+                empleadoAux = (Empleado)results.get(0);
+            
+            if (empleadoAux != null)
+            {
+                if (!empleadoAux.getDisponible())
+                {
+                    empleadoAux.setDisponible(true);
+                    em.merge(empleadoAux);
+                    empleado.setIdEmpleado(empleadoAux.getIdEmpleado());
+                    em.getTransaction().commit();
+                }
+                else
+                {
+                    System.out.println("Ya existe el empleado");
+                    em.getTransaction().rollback();
+                }
+            }            
+            else
+            {
+                em.persist(empleado);
+                em.getTransaction().commit();
             }
-            Collection<Turno> attachedTurnoCollection = new ArrayList<Turno>();
-            for (Turno turnoCollectionTurnoToAttach : empleado.getTurnoCollection()) {
-                turnoCollectionTurnoToAttach = em.getReference(turnoCollectionTurnoToAttach.getClass(), turnoCollectionTurnoToAttach.getIdTurno());
-                attachedTurnoCollection.add(turnoCollectionTurnoToAttach);
-            }
-            empleado.setTurnoCollection(attachedTurnoCollection);
-            em.merge(empleado);
-            if (departamento != null) {
-                departamento.getEmpleadosCollection().add(empleado);
-                departamento = em.merge(departamento);
-            }
-            for (Turno turnoCollectionTurno : empleado.getTurnoCollection()) {
-                turnoCollectionTurno.getEmpleadosCollection().add(empleado);
-                turnoCollectionTurno = em.merge(turnoCollectionTurno);
-            }
-            em.getTransaction().commit();
+            
+           
         } 
         finally 
         {

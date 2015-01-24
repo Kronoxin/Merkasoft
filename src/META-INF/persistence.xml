@@ -5,6 +5,8 @@
     <class>negocio.turnos.Turno</class>
     <class>negocio.departamentos.Departamento</class>
     <class>negocio.empleados.Empleado</class>
+    <class>negocio.empleados.Supervisor</class>
+    <class>negocio.empleados.Trabajador</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/merkasoft?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
