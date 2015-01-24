@@ -9,10 +9,7 @@ import integracion.query.Query;
 import integracion.query.cliente.QueryMediaClientes;
 import integracion.query.factoriaQuery.FactoriaQuery;
 
-/**
- *
- * @author Ruben
- */
+
 public class FactoriaQueryImp extends FactoriaQuery
 {
 

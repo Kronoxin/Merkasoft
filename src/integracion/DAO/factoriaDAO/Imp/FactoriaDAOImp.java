@@ -13,10 +13,7 @@ import integracion.DAO.producto.Imp.DAOProductoImp;
 import integracion.DAO.venta.DAOVenta;
 import integracion.DAO.venta.Imp.DAOVentaImp;
 
-/**
- *
- * @author Ruben
- */
+
 public class FactoriaDAOImp extends FactoriaDAO
 {
     

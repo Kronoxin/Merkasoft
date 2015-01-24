@@ -5,10 +5,7 @@
  */
 package integracion.query;
 
-/**
- *
- * @author Ruben
- */
+
 public interface Query 
 {
     public Object execute(Object datos);

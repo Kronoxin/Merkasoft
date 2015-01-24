@@ -14,10 +14,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import negocio.cliente.TCliente;
 
-/**
- *
- * @author Ruben
- */
+
 public class QueryMediaClientes implements Query
 {
 
