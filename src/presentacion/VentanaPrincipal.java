@@ -16,6 +16,7 @@ import javax.swing.*;
 import presentacion.Vista.cliente.GUIPrincipal_Cliente;
 import presentacion.Vista.departamento.GUIPrincipal_Departamento;
 import presentacion.Vista.empleado.GUIPrincipal_Empleado;
+import presentacion.Vista.horario.GUIPrincipal_Horario;
 import presentacion.Vista.producto.GUIPrincipal_Producto;
 import presentacion.Vista.turno.GUIPrincipal_Turno;
 import presentacion.Vista.venta.GUIPrincipal_Venta;
@@ -43,6 +44,7 @@ public class VentanaPrincipal extends JPanel {
     GUIPrincipal_Empleado principal_empleado = new GUIPrincipal_Empleado();
     GUIPrincipal_Departamento principal_departamento = new GUIPrincipal_Departamento();
     GUIPrincipal_Turno principal_turno = new GUIPrincipal_Turno();
+    GUIPrincipal_Horario principal_horario = new GUIPrincipal_Horario();
     
     private final ImageIcon icono_empleados = new ImageIcon("icono-empleados.PNG");
     private final ImageIcon icono_departamentos = new ImageIcon("icono-departamento.PNG");
@@ -68,6 +70,8 @@ public class VentanaPrincipal extends JPanel {
             
             //añadimos el Tab de Turnos al principal, con el icono y la clase principal de este panel
             tab_principal.addTab("Turnos", icono_turnos, principal_turno, "Turnos - Tab 6");
+            
+            tab_principal.addTab("Horarios", icono_ventas, principal_horario, "Horarios - Tab 7");
             
             
 
