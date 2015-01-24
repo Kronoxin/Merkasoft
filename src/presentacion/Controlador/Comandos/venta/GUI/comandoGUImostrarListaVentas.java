@@ -10,10 +10,7 @@ import presentacion.Controlador.Comandos.Command;
 import presentacion.Controlador.Comandos.RespuestaComando;
 import presentacion.Controlador.Eventos.EventoNegocio;
 
-/**
- *
- * @author usuario_local
- */
+
 public class comandoGUImostrarListaVentas implements Command
 {
     @Override

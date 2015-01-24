@@ -10,10 +10,7 @@ import presentacion.FactoriaComandos.factoriaComandos;
 import presentacion.Controlador.Comandos.Command;
 import presentacion.Controlador.Comandos.RespuestaComando;
 
-/**
- *
- * @author Pepu
- */
+
 public class ControladorImp extends Controlador
 {
     public void accion(int evento, Object datos) {

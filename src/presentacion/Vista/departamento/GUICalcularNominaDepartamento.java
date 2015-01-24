@@ -19,10 +19,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
-/**
- *
- * @author Ruben
- */
+
 public class GUICalcularNominaDepartamento extends JFrame{
     Object[][] datos_entrada = {
         {"","",""}

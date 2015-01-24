@@ -19,10 +19,7 @@ import negocio.producto.TProducto;
 import presentacion.Controlador.Controlador;
 import presentacion.Controlador.Eventos.EventoNegocio;
 
-/**
- *
- * @author Ruben
- */
+
 public class GUIModificarProducto extends JFrame{
         Object[][] datos_entrada = {
         {"","", "", "", "", ""}

@@ -15,10 +15,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.TitledBorder;
 
-/**
- *
- * @author Ruben
- */
+
 public class GUIClientesMedia extends JFrame{
         Object[][] datos_entrada = {
         {new Integer(1),"Paco", "Pino", new Date(1990, 12, 25)},

@@ -8,10 +8,7 @@ package presentacion.FactoriaComandos;
 import presentacion.Controlador.Comandos.Command;
 import presentacion.FactoriaComandos.Imp.*;
 
-/**
- *
- * @author Pepu
- */
+
 public abstract class factoriaComandos 
 {
     private static factoriaComandos _instance = null;

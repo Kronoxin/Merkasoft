@@ -32,10 +32,7 @@ import presentacion.Controlador.Controlador;
 import presentacion.Controlador.Eventos.EventoNegocio;
 
 
-/**
- *
- * @author Ruben
- */
+
 public class GUIAltaEmpleado extends JFrame{
     
     Empleado empleado = new Empleado();

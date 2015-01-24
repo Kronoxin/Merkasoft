@@ -15,10 +15,7 @@ import javax.swing.border.TitledBorder;
 import presentacion.Controlador.Controlador;
 import presentacion.Controlador.Eventos.EventoNegocio;
 
-/**
- *
- * @author Ruben
- */
+
 public class GUIPrincipal_Turno extends JPanel {
     
     JPanel panel_botones_turnos = new JPanel(new GridLayout(5,1,4,4));

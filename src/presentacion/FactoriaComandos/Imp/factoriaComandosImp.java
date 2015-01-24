@@ -55,10 +55,9 @@ import presentacion.Controlador.Comandos.turno.GUI.comandoGUImostrarTurno;
 import presentacion.Controlador.Comandos.turno.*;
 import presentacion.Controlador.Comandos.turno.GUI.comandoGUImostrarTurnoParaModificar;
 import presentacion.Controlador.Eventos.EventoNegocio;
-/**
- *
- * @author Pepu
- */
+
+
+
 public class factoriaComandosImp extends factoriaComandos 
 {
     @Override

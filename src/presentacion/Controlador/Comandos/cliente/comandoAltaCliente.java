@@ -11,10 +11,8 @@ import negocio.cliente.TCliente;
 import negocio.producto.TProducto;
 import presentacion.Controlador.Comandos.*;
 import presentacion.Controlador.Eventos.EventoNegocio;
-/**
- *
- * @author Pepu
- */
+
+
 public class comandoAltaCliente implements Command
 {
     public RespuestaComando execute(Object datos) 

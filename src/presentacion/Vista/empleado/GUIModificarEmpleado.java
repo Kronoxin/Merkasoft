@@ -31,10 +31,7 @@ import negocio.empleados.Empleado;
 import presentacion.Controlador.Controlador;
 import presentacion.Controlador.Eventos.EventoNegocio;
 
-/**
- *
- * @author Ruben
- */
+
 public class GUIModificarEmpleado extends JFrame{
   
     Object[][] datos_entrada = {

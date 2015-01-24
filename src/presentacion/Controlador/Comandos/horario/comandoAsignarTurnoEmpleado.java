@@ -8,10 +8,7 @@ package presentacion.Controlador.Comandos.horario;
 import presentacion.Controlador.Comandos.Command;
 import presentacion.Controlador.Comandos.RespuestaComando;
 
-/**
- *
- * @author Ruben
- */
+
 public class comandoAsignarTurnoEmpleado implements Command{
 
     @Override

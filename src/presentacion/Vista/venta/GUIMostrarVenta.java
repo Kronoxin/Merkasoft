@@ -12,10 +12,7 @@ import java.awt.GridLayout;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
-/**
- *
- * @author Ruben
- */
+
 public class GUIMostrarVenta extends JFrame{
         Object[][] datos_entrada = {
         {new Integer(1),"Paco", new Integer(1), "item1", new Integer(10)},

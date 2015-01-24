@@ -14,10 +14,7 @@ import presentacion.Controlador.Comandos.Command;
 import presentacion.Controlador.Comandos.RespuestaComando;
 import presentacion.Controlador.Eventos.EventoNegocio;
 
-/**
- *
- * @author usuario_local
- */
+
 public class comandoDevolucionProducto implements Command
 {
     public RespuestaComando execute(Object datos) 

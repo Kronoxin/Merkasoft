@@ -9,10 +9,7 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
-/**
- *
- * @author Ruben
- */
+
 public class GUIAltaVenta extends JFrame{
     
         JPanel panelSuperior = new JPanel();

@@ -18,10 +18,7 @@ import presentacion.Controlador.Eventos.EventoNegocio;
 import presentacion.Vista.producto.GUIMostrarProducto;
 
 
-/**
- *
- * @author Ruben
- */
+
 public class GUIMostrarCliente extends JFrame{
     Object[][] datos_entrada;
         String[] NombreColumnas = {"ID","Nombre", "Apellido", "Fecha Nacimiento"};

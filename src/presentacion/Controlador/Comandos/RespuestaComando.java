@@ -5,10 +5,7 @@
  */
 package presentacion.Controlador.Comandos;
 
-/**
- *
- * @author Pepu
- */
+
 public class RespuestaComando 
 {
     private int evento;

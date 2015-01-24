@@ -26,10 +26,7 @@ import presentacion.Controlador.Controlador;
 import presentacion.Controlador.Eventos.EventoNegocio;
 import presentacion.Vista.producto.GUIMostrarProducto;
 
-/**
- *
- * @author Ruben
- */
+
 public class GUIMostrarEmpleado extends JFrame{
      Object[][] datos_entrada = {
         {"","", "", "", "", "","","",""}

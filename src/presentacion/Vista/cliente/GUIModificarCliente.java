@@ -18,10 +18,7 @@ import javax.swing.border.TitledBorder;
 import presentacion.Controlador.Controlador;
 import presentacion.Controlador.Eventos.EventoNegocio;
 
-/**
- *
- * @author Ruben
- */
+
 public class GUIModificarCliente extends JFrame{
     
     JTextField textID = new JTextField("");

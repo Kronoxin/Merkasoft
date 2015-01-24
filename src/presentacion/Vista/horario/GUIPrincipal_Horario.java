@@ -16,10 +16,7 @@ import javax.swing.border.TitledBorder;
 import presentacion.Controlador.Controlador;
 import presentacion.Controlador.Eventos.EventoNegocio;
 
-/**
- *
- * @author Ruben
- */
+
 public class GUIPrincipal_Horario extends JPanel{
     
      JPanel panel_botones_horarios = new JPanel(new GridLayout(4,1,4,4));

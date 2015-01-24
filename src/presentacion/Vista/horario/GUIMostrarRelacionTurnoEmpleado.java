@@ -24,10 +24,7 @@ import negocio.departamentos.Departamento;
 import presentacion.Controlador.Controlador;
 import presentacion.Controlador.Eventos.EventoNegocio;
 
-/**
- *
- * @author Ruben
- */
+
 public class GUIMostrarRelacionTurnoEmpleado extends JFrame{
      Object[][] datos_entrada = {
         {"","","",""}

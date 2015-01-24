@@ -24,10 +24,7 @@ import presentacion.Controlador.Controlador;
 import presentacion.Controlador.Eventos.EventoNegocio;
 import presentacion.Vista.producto.GUIMostrarListaProductos;
 
-/**
- *
- * @author Ruben
- */
+
 public class GUIMostrarListaDepartamentos extends JFrame{
     
      Object[][] datos_entrada = {

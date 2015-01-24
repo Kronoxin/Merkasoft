@@ -26,10 +26,7 @@ import presentacion.Controlador.Controlador;
 import presentacion.Controlador.Eventos.EventoNegocio;
 import presentacion.Vista.cliente.GUIPrincipal_Cliente;
 
-/**
- *
- * @author Ruben
- */
+
 public class GUIAltaProducto extends JFrame{
     TProducto producto = new TProducto();
     

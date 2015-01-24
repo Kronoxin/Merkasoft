@@ -15,10 +15,7 @@ import javax.swing.border.TitledBorder;
 import presentacion.Controlador.Controlador;
 import presentacion.Controlador.Eventos.EventoNegocio;
 
-/**
- *
- * @author Ruben
- */
+
 public class GUIPrincipal_Departamento extends JPanel{
     
     JPanel panel_botones_departamentos = new JPanel(new GridLayout(6,1,4,4));

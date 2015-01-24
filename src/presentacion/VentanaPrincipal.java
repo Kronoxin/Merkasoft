@@ -22,10 +22,7 @@ import presentacion.Vista.turno.GUIPrincipal_Turno;
 import presentacion.Vista.venta.GUIPrincipal_Venta;
 
 
-/**
- *
- * @author Ruben
- */
+
 public class VentanaPrincipal extends JPanel {
     
     private final JTabbedPane tab_principal = new JTabbedPane();

@@ -7,10 +7,7 @@ package presentacion.Vista.popups;
 
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Ruben
- */
+
 public class PopupsVenta {
     
     public PopupsVenta(){

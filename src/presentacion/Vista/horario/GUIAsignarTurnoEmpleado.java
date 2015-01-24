@@ -18,10 +18,7 @@ import negocio.turnos.Turno;
 import presentacion.Controlador.Controlador;
 import presentacion.Controlador.Eventos.EventoNegocio;
 
-/**
- *
- * @author Ruben
- */
+
 public class GUIAsignarTurnoEmpleado extends JFrame{
     
     JPanel panelSuperior = new JPanel();     

@@ -10,10 +10,7 @@ import java.awt.GridLayout;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
-/**
- *
- * @author Ruben
- */
+
 public class GUIDevolverProducto extends JFrame{
     	JPanel panelSuperior = new JPanel();
         JPanel panelBotones = new JPanel(new GridLayout(1,3,5,5));

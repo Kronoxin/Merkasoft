@@ -17,10 +17,7 @@ import javax.swing.JTextField;
 import presentacion.Controlador.Controlador;
 import presentacion.Controlador.Eventos.EventoNegocio;
 
-/**
- *
- * @author Ruben
- */
+
 public class GUIBajaEmpleado extends JFrame{
     
      JTextField textID = new JTextField("");

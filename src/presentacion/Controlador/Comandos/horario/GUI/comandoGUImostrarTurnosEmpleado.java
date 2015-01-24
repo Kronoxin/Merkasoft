@@ -9,10 +9,7 @@ import presentacion.Controlador.Comandos.Command;
 import presentacion.Controlador.Comandos.RespuestaComando;
 import presentacion.Controlador.Eventos.EventoNegocio;
 
-/**
- *
- * @author Ruben
- */
+
 public class comandoGUImostrarTurnosEmpleado implements Command{
 
     @Override

@@ -10,10 +10,7 @@ import java.awt.Dimension;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
-/**
- *
- * @author Ruben
- */
+
 public class GUIMostrarListaVentas extends JFrame{
     
     Object[][] datos_entrada = {

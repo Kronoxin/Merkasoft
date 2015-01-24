@@ -24,10 +24,7 @@ import negocio.turnos.Turno;
 import presentacion.Controlador.Controlador;
 import presentacion.Controlador.Eventos.EventoNegocio;
 
-/**
- *
- * @author Ruben
- */
+
 public class GUIMostrarTurno extends JFrame{
     
     Object[][] datos_entrada = {

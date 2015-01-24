@@ -5,10 +5,7 @@
  */
 package presentacion.Controlador.Comandos;
 
-/**
- *
- * @author Pepu
- */
+
 public interface Command 
 {
     public RespuestaComando execute(Object datos);

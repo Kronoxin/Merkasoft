@@ -12,10 +12,7 @@ import javax.swing.*;
 import presentacion.Controlador.Controlador;
 import presentacion.Controlador.Eventos.EventoNegocio;
 
-/**
- *
- * @author Ruben
- */
+
 public class GUIBajaCliente extends JFrame{
    
     

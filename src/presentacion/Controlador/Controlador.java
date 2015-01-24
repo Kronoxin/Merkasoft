@@ -5,10 +5,7 @@
  */
 package presentacion.Controlador;
 
-/**
- *
- * @author Pepu
- */
+
 public abstract class Controlador 
 {
     private static Controlador _controlador;

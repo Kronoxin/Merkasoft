@@ -5,10 +5,7 @@
  */
 package presentacion.Controlador.Eventos;
 
-/**
- *
- * @author Pepu
- */
+
 public class EventoNegocio 
 {
     //100 Control de cliente y su GUI
