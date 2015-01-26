@@ -221,7 +221,7 @@ public class SATurnoImp implements SATurno{
             em.close();
         }
     }
-   
+   //Metodo ce control apra los campos de la entidad turno
 
     public static void main (String[] args)
     {

@@ -16,6 +16,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import negocio.departamentos.Departamento;
 import negocio.departamentos.SA.SADepartamento;
+import negocio.empleados.Empleado;
 import negocio.empleados.Supervisor;
 import negocio.empleados.Trabajador;
 
@@ -64,7 +65,7 @@ public class SADepartamentoImp implements SADepartamento {
             else
             {
                 em.persist(departamento);
-                em.getTransaction().commit();
+                em.getTransaction().commit(); 
             }
             
            
@@ -304,7 +305,6 @@ public class SADepartamentoImp implements SADepartamento {
             em.close();
         }
     }
-    
     public static void main(String args[])
     {
         SADepartamentoImp sa = new SADepartamentoImp();
