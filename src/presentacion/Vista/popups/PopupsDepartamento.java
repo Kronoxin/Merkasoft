@@ -59,4 +59,9 @@ public class PopupsDepartamento {
       JOptionPane.showMessageDialog(null, "No se hay departamentos que mostrar","Error",JOptionPane.ERROR_MESSAGE);
     }
     
+    public static void CalcularNominaDepartamentoFracaso(){
+        
+      JOptionPane.showMessageDialog(null, "No se hay departamentos que mostrar","Error",JOptionPane.ERROR_MESSAGE);
+    }
+    
 }

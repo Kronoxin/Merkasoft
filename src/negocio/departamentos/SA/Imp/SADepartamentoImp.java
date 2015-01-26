@@ -228,14 +228,14 @@ public class SADepartamentoImp implements SADepartamento {
         double ret = 0.0;                      
         for (Trabajador t : trabajadores )
         {
-            if (t.getDisponible() && t.getIdEmpleado() == id)
+            if (t.getDisponible() && t.getDepartamento().getIdDepartamento() == id)
             {                
                 ret += t.getSueldo() * t.getHoras_trabajadas();
             }
         }
         for (Supervisor s : supervisores)
         {
-            if (s.getDisponible()&& s.getIdEmpleado() == id)
+            if (s.getDisponible()&& s.getDepartamento().getIdDepartamento() == id)
             {
                 ret += s.getSueldo() * s.getFactor_productividad();
             }
