@@ -9,6 +9,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -68,8 +69,10 @@ public class GUIAsignarTurnoEmpleado extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                
-
-          //     Controlador.getInstance().accion(EventoNegocio.ASIGNAR_TURNO_EMPLEADO, turno);
+                ArrayList<Object> datos = new ArrayList<Object>();
+                datos.add(text_empleado.getText());
+                datos.add(text_turno.getText());
+               Controlador.getInstance().accion(EventoNegocio.ASIGNAR_TURNO_EMPLEADO, datos);
             }
         });
         

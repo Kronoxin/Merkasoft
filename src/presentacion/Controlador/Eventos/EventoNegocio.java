@@ -201,5 +201,14 @@ public class EventoNegocio
     public static final int GUI_ASIGNAR_TURNO_EMPLEADO = 1010;
     public static final int GUI_MOSTRAR_TURNOS_EMPLEADO = 1011;
     public static final int GUI_MOSTRAR_RELACION_TURNO_EMPLEADO = 1012;
+    
+    public static final int EXITO_ASIGNAR_TURNO_EMPLEADO = 1020;
+    public static final int EXITO_MOSTRAR_TURNOS_EMPLEADO = 1021;
+    public static final int EXITO_MOSTRAR_RELACION_TURNO_EMPLEADO = 1022;
+    
+    public static final int FRACASO_ASIGNAR_TURNO_EMPLEADO = 1030;
+    public static final int FRACASO_MOSTRAR_TURNOS_EMPLEADO = 1031;
+    public static final int FRACASO_MOSTRAR_RELACION_TURNO_EMPLEADO = 1032;
             
+    
 }

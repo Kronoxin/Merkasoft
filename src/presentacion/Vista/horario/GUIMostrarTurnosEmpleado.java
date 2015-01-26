@@ -108,7 +108,7 @@ public class GUIMostrarTurnosEmpleado extends JFrame{
         
     }
     
-    public void cargarTurnoEnLista(Turno turno )
+    public void cargarTurnosEmpleadoEnLista(ArrayList<Turno> turnos )
     { 
       
         DefaultTableModel dtm = new DefaultTableModel(0, 0){
@@ -122,9 +122,12 @@ public class GUIMostrarTurnosEmpleado extends JFrame{
         dtm.setColumnIdentifiers(NombreColumnas);
         
         tabla.setModel(dtm);
-        dtm.addRow(new Object[]
-        {turno.getIdTurno(),turno.getNombre()});
-        dtm.fireTableDataChanged();
+        for (Turno t: turnos)
+        {
+            dtm.addRow(new Object[]
+            {t.getIdTurno(),t.getNombre()});
+            dtm.fireTableDataChanged();
+        }
     }
     
     //getters y setters

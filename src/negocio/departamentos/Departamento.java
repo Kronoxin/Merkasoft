@@ -32,6 +32,11 @@ import negocio.empleados.Empleado;
     @NamedQuery(name = "Departamento.findByNombre", query = "SELECT d FROM Departamento d WHERE d.nombre = :nombre"),
     @NamedQuery(name = "Departamento.findByDescripcion", query = "SELECT d FROM Departamento d WHERE d.descripcion = :descripcion")})
 public class Departamento implements Serializable {
+    @Basic(optional = false)
+    @Column(name = "Disponible")
+    private boolean disponible;
+    @Column(name = "Version")
+    private Integer version;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,11 +49,7 @@ public class Departamento implements Serializable {
     private String descripcion;
     @OneToMany(mappedBy = "departamento")
     private Collection<Empleado> empleadosCollection;
-    @Column(name = "disponible")
-    private boolean disponible;
-    @Version
-    @Column(name = "Version")
-    private int version;
+
 
     public Departamento() {
     }
@@ -81,13 +82,6 @@ public class Departamento implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public int getVersion() {
-        return version;
-    }
-
-    public void setVersion(int version) {
-        this.version = version;
-    }
 
     
     @XmlTransient
@@ -134,6 +128,16 @@ public class Departamento implements Serializable {
     @Override
     public String toString() {
         return "negocio.empleados.Departamento[ idDepartamento=" + idDepartamento + " ]";
+    }
+
+
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
     }
     
 }

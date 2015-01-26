@@ -15,5 +15,8 @@ public interface SATurno {
     public boolean modificarTurno(Turno turno);
     public Turno mostrarTurno(int id);
     public ArrayList<Turno> mostrarListaTurnos();
+    public boolean asignarTurno(int idEmpleado, int idTurno);
+    public boolean mostrarTurnosEmpleado(int idEmpleado);
+    public ArrayList<Object> mostrarRelacionTurnoEmpleado();
     
 }

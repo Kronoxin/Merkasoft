@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
@@ -24,10 +25,12 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import negocio.turnos.HorarioTrabajo;
 import negocio.turnos.Turno;
 
 
@@ -49,6 +52,16 @@ import negocio.turnos.Turno;
 
 public class Empleado implements Serializable 
 {
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "Sueldo")
+    private double sueldo;
+    @Column(name = "Version")
+    private Integer version;
+    @Basic(optional = false)
+    @Column(name = "Disponible")
+    private boolean disponible;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "empleado")
+    private Collection<HorarioTrabajo> horarioTrabajoCollection;
     
     @JoinTable(name = "horario_trabajo", joinColumns = {
         @JoinColumn(name = "id_empleado", referencedColumnName = "id_empleado")}, inverseJoinColumns = {
@@ -69,20 +82,11 @@ public class Empleado implements Serializable
     private String apellidos;
     @Column(name = "Direccion")
     private String direccion;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "Sueldo")
-    private double sueldo;
     @Column(name = "Tipo")
     private String tipo;
     @JoinColumn(name = "Departamento", referencedColumnName = "id_departamento")
     @ManyToOne
     private Departamento departamento;
-    @Version
-    @Column(name = "Version")
-    private int version;
-
-    @Column(name = "disponible")
-    private Boolean disponible;
      
     public Empleado() 
     {
@@ -132,13 +136,6 @@ public class Empleado implements Serializable
         this.direccion = direccion;
     }
 
-    public double getSueldo() {
-        return sueldo;
-    }
-
-    public void setSueldo(double sueldo) {
-        this.sueldo = sueldo;
-    }
 
     public Departamento getDepartamento() {
         return departamento;
@@ -200,12 +197,33 @@ public class Empleado implements Serializable
         this.turnoCollection = turnoCollection;
     }
 
-    public int getVersion() {
+    public double getSueldo() {
+        return sueldo;
+    }
+
+    public void setSueldo(double sueldo) {
+        this.sueldo = sueldo;
+    }
+
+    public Integer getVersion() {
         return version;
     }
 
-    public void setVersion(int version) {
+    public void setVersion(Integer version) {
         this.version = version;
+    }
+
+    public void setDisponible(boolean disponible) {
+        this.disponible = disponible;
+    }
+
+    @XmlTransient
+    public Collection<HorarioTrabajo> getHorarioTrabajoCollection() {
+        return horarioTrabajoCollection;
+    }
+
+    public void setHorarioTrabajoCollection(Collection<HorarioTrabajo> horarioTrabajoCollection) {
+        this.horarioTrabajoCollection = horarioTrabajoCollection;
     }
     
     

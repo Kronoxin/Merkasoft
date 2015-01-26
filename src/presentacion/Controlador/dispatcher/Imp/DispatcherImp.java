@@ -38,6 +38,7 @@ import presentacion.Vista.horario.GUIMostrarTurnosEmpleado;
 import presentacion.Vista.popups.PopupsCliente;
 import presentacion.Vista.popups.PopupsDepartamento;
 import presentacion.Vista.popups.PopupsEmpleado;
+import presentacion.Vista.popups.PopupsHorarios;
 import presentacion.Vista.popups.PopupsProducto;
 import presentacion.Vista.popups.PopupsTurno;
 import presentacion.Vista.popups.PopupsVenta;
@@ -622,7 +623,42 @@ public class DispatcherImp extends Dispatcher
                 new GUIMostrarRelacionTurnoEmpleado();
                 break;
             }
-                        
+            
+            case EventoNegocio.EXITO_ASIGNAR_TURNO_EMPLEADO:
+            {                
+                PopupsHorarios.AsignarTurnoEmpleadoExito();
+                break;
+            }
+            
+            case EventoNegocio.FRACASO_ASIGNAR_TURNO_EMPLEADO:
+            {
+                PopupsHorarios.AsignarTurnoEmpleadoFracaso();
+                break;
+            }
+            
+            case EventoNegocio.EXITO_MOSTRAR_TURNOS_EMPLEADO:
+            {
+                ArrayList<Turno> datos = (ArrayList<Turno>)comando.getDatos();                
+                GUIMostrarTurnosEmpleado te = new GUIMostrarTurnosEmpleado();
+                te.cargarTurnosEmpleadoEnLista(datos);
+                break;
+            }
+            case EventoNegocio.FRACASO_MOSTRAR_TURNOS_EMPLEADO:
+            {
+                PopupsHorarios.MostrarTurnosEmpleadoFracaso();
+                break;
+            }
+            case EventoNegocio.EXITO_MOSTRAR_RELACION_TURNO_EMPLEADO:
+            {
+                
+            }
+            
+            case EventoNegocio.FRACASO_MOSTRAR_RELACION_TURNO_EMPLEADO:
+            {
+                PopupsHorarios.MostrarRelacionTurnoFracaso();
+            }
+                
+           
                         
 
         

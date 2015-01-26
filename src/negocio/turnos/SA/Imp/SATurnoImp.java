@@ -7,6 +7,7 @@ package negocio.turnos.SA.Imp;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -14,6 +15,9 @@ import javax.persistence.LockModeType;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
+import negocio.empleados.Empleado;
+import negocio.turnos.HorarioTrabajo;
+import negocio.turnos.HorarioTrabajoPK;
 import negocio.turnos.SA.SATurno;
 import negocio.turnos.Turno;
 
@@ -235,6 +239,39 @@ public class SATurnoImp implements SATurno{
         prueba.bajaTurno(3);
         ArrayList<Turno> t = prueba.mostrarListaTurnos();
         int b =1;
+    }
+
+    @Override
+    public boolean asignarTurno(int idEmpleado, int idTurno) {
+        EntityManager em = null;
+        EntityManagerFactory ef = Persistence.createEntityManagerFactory("MerkaSoftPU");
+        em = ef.createEntityManager();
+        boolean ret = false;
+        
+        try 
+        {
+            HorarioTrabajoPK pk = new HorarioTrabajoPK(idEmpleado,idTurno);// Turno t = em.find(Turno.class, idTurno);
+            HorarioTrabajo ht = new HorarioTrabajo(pk);
+    
+            em.persist(ht);
+        } 
+        finally 
+        {
+            em.close();
+            ef.close();
+        }
+        
+        return ret;
+    }
+
+    @Override
+    public boolean mostrarTurnosEmpleado(int idEmpleado) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<Object> mostrarRelacionTurnoEmpleado() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
