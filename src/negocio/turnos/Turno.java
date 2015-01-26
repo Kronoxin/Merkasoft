@@ -10,7 +10,6 @@ import java.sql.Time;
 import java.util.Collection;
 import java.sql.Time;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,7 +18,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -39,18 +37,6 @@ import negocio.empleados.Empleado;
     @NamedQuery(name = "Turno.findByHoraEntrada", query = "SELECT t FROM Turno t WHERE t.horaEntrada = :horaEntrada"),
     @NamedQuery(name = "Turno.findByHoraSalida", query = "SELECT t FROM Turno t WHERE t.horaSalida = :horaSalida")})
 public class Turno implements Serializable {
-    @Column(name = "Hora_entrada")
-    private Integer horaentrada;
-    @Column(name = "Hora_salida")
-    private Integer horasalida;
-    @Column(name = "Minuto_entrada")
-    private Integer minutoentrada;
-    @Column(name = "Minuto_salida")
-    private Integer minutosalida;
-    @Column(name = "Version")
-    private Integer version;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "turno")
-    private Collection<HorarioTrabajo> horarioTrabajoCollection;
     @ManyToMany(mappedBy = "turnoCollection")
     private Collection<Empleado> empleadosCollection;
     private static final long serialVersionUID = 1L;
@@ -71,6 +57,9 @@ public class Turno implements Serializable {
     private int minutoSalida;
     @Column(name = "Disponible")
     private boolean Disponible;
+    @Version
+    @Column(name = "Version")
+    private int version;
 
     public boolean isDisponible() {
         return Disponible;
@@ -169,53 +158,12 @@ public class Turno implements Serializable {
         this.empleadosCollection = empleadosCollection;
     }
 
-    public Integer getHoraentrada() {
-        return horaentrada;
-    }
-
-    public void setHoraentrada(Integer horaentrada) {
-        this.horaentrada = horaentrada;
-    }
-
-    public Integer getHorasalida() {
-        return horasalida;
-    }
-
-    public void setHorasalida(Integer horasalida) {
-        this.horasalida = horasalida;
-    }
-
-    public Integer getMinutoentrada() {
-        return minutoentrada;
-    }
-
-    public void setMinutoentrada(Integer minutoentrada) {
-        this.minutoentrada = minutoentrada;
-    }
-
-    public Integer getMinutosalida() {
-        return minutosalida;
-    }
-
-    public void setMinutosalida(Integer minutosalida) {
-        this.minutosalida = minutosalida;
-    }
-
-    public Integer getVersion() {
+    public int getVersion() {
         return version;
     }
 
-    public void setVersion(Integer version) {
+    public void setVersion(int version) {
         this.version = version;
-    }
-
-    @XmlTransient
-    public Collection<HorarioTrabajo> getHorarioTrabajoCollection() {
-        return horarioTrabajoCollection;
-    }
-
-    public void setHorarioTrabajoCollection(Collection<HorarioTrabajo> horarioTrabajoCollection) {
-        this.horarioTrabajoCollection = horarioTrabajoCollection;
     }
     
     

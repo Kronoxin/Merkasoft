@@ -16,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Version;
 import javax.xml.bind.annotation.XmlRootElement;
 import negocio.empleados.Empleado;
 
@@ -37,10 +38,11 @@ public class HorarioTrabajo implements Serializable {
     @EmbeddedId
     protected HorarioTrabajoPK horarioTrabajoPK;
     @Column(name = "Version")
+    @Version
     private Integer version;
     @Basic(optional = false)
     @Column(name = "disponible")
-    private boolean disponible;
+    private boolean disponible = true;
     @JoinColumn(name = "id_turno", referencedColumnName = "id_turno", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Turno turno;

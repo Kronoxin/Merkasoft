@@ -246,15 +246,24 @@ public class SATurnoImp implements SATurno{
         EntityManager em = null;
         EntityManagerFactory ef = Persistence.createEntityManagerFactory("MerkaSoftPU");
         em = ef.createEntityManager();
-        boolean ret = false;
+        boolean ret = true;
+        
         
         try 
         {
+            em.getTransaction().begin();
             HorarioTrabajoPK pk = new HorarioTrabajoPK(idEmpleado,idTurno);// Turno t = em.find(Turno.class, idTurno);
             HorarioTrabajo ht = new HorarioTrabajo(pk);
     
             em.persist(ht);
+            em.getTransaction().commit();
+            
         } 
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            ret = false;
+        }
         finally 
         {
             em.close();
