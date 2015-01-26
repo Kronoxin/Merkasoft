@@ -68,8 +68,14 @@ public class GUIAltaDepartamento extends JFrame{
                 departamento.setNombre(text_nombre.getText());
                 departamento.setDescripcion(text_descripcion.getText());
                 departamento.setDisponible(true);
-
-               Controlador.getInstance().accion(EventoNegocio.ALTA_DEPARTAMENTO, departamento);
+                if(controlErroresDepartamento(departamento))
+                {
+                    Controlador.getInstance().accion(EventoNegocio.ALTA_DEPARTAMENTO, departamento);
+                }
+                else
+                { 
+                    System.out.println("Datos incorrectos");
+                }
             }
         });
         
@@ -86,7 +92,20 @@ public class GUIAltaDepartamento extends JFrame{
         this.setVisible(true);
 
     }
-    
+    //Metodo que controla el contenido de los campos de la entidad
+    private boolean controlErroresDepartamento(Departamento departamento)
+    {
+        boolean correcto=false;
+        if(departamento.isDisponible())
+        {
+            if(!departamento.getDescripcion().isEmpty()&& !departamento.getNombre().isEmpty())
+            {
+                correcto=true;
+            }
+        }
+        return correcto;
+    }
+
     //getters y setters
 
     public JPanel getPanelSuperior() {

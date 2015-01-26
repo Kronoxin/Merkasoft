@@ -219,7 +219,6 @@ public class SAEmpleadoImp implements SAEmpleado {
                 ef.close();
         }
     }
-
     public int getEmpleadosCount() {
         EntityManager em = null;
         EntityManagerFactory ef = Persistence.createEntityManagerFactory("MerkaSoftPU");

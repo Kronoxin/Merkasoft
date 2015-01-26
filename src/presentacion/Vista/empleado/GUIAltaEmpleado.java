@@ -198,7 +198,10 @@ public class GUIAltaEmpleado extends JFrame{
                     t.setTipo(radioTrabajador.getText());                    
                     t.setDisponible(true);
                     t.setHoras_trabajadas((double) Double.parseDouble(textHoras.getText()));
-                    Controlador.getInstance().accion(EventoNegocio.ALTA_EMPLEADO, t);
+                    if(controlErroresEmpleado(t))
+                    {
+                        Controlador.getInstance().accion(EventoNegocio.ALTA_EMPLEADO, t);
+                    }
                 }
                 else
                 {
@@ -213,7 +216,10 @@ public class GUIAltaEmpleado extends JFrame{
                     s.setTipo(radioSupervisor.getText());                    
                     s.setDisponible(true);
                     s.setFactor_productividad((double) Double.parseDouble(textProductividad.getText()));
-                    Controlador.getInstance().accion(EventoNegocio.ALTA_EMPLEADO, s);
+                    if(controlErroresEmpleado(s))
+                    {
+                        Controlador.getInstance().accion(EventoNegocio.ALTA_EMPLEADO, s);
+                    }
                 }
                 
                 
@@ -240,7 +246,41 @@ public class GUIAltaEmpleado extends JFrame{
             
             
 	}
-    
+     //Metodo de control de errores en los campos de empelado
+    private boolean controlErroresEmpleado(Empleado empleado)
+    {
+        boolean correcto=false;
+        if(empleado.getTipo().equalsIgnoreCase("supervisor"))
+        {
+            empleado=(Supervisor)empleado;
+        }
+        if(empleado.getDisponible())
+        {
+            if(!empleado.getApellidos().isEmpty() && !empleado.getNombre().isEmpty())
+            {
+                if(!empleado.getDireccion().isEmpty() && empleado.getSueldo()>0 && !empleado.getTipo().isEmpty())
+                {
+                    if(empleado.getTipo().equalsIgnoreCase("supervisor"))
+                     {
+                         Supervisor s =(Supervisor)empleado;
+                         if(s.getFactor_productividad()>0)
+                         {
+                             correcto=true;
+                         }
+                         else
+                         {
+                             Trabajador t =(Trabajador)empleado;
+                             if(t.getHoras_trabajadas()>0)
+                             {
+                                 correcto=true;
+                             }
+                         }               
+                     }
+                }
+            }
+        }
+        return correcto;
+    }
  
 
     public JPanel getPanelSuperior() {
