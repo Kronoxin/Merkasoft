@@ -478,6 +478,22 @@ public class DispatcherImp extends Dispatcher
                 break;
             }
             
+            case EventoNegocio.EXITO_CALCULAR_NOMINA_DEPARTAMENTO:
+            {
+                ArrayList<Object> datos = (ArrayList<Object>)comando.getDatos();
+                Departamento departamento = (Departamento)datos.get(0);
+                double nomina = (double)datos.get(1);
+                GUICalcularNominaDepartamento cn = new GUICalcularNominaDepartamento();
+                cn.cargarDepartamentoEnListaConNomina(departamento, nomina);
+                break;
+            }
+            
+             case EventoNegocio.FRACASO_CALCULAR_NOMINA_DEPARTAMENTO:
+            {
+                PopupsDepartamento.CalcularNominaDepartamentoFracaso();
+                break;
+            }
+            
             //exitos turno
             case EventoNegocio.EXITO_ALTA_TURNO:
             {

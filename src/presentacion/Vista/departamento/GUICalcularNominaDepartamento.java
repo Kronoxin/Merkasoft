@@ -11,6 +11,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -18,6 +19,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+import negocio.departamentos.Departamento;
+import presentacion.Controlador.Controlador;
+import presentacion.Controlador.Eventos.EventoNegocio;
 
 
 public class GUICalcularNominaDepartamento extends JFrame{
@@ -75,6 +80,8 @@ public class GUICalcularNominaDepartamento extends JFrame{
 
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                   Controlador.getInstance().accion(EventoNegocio.CALCULAR_NOMINA_DEPARTAMENTO, textID.getText());
+                    dispose();
                    
                 }
             });
@@ -91,6 +98,26 @@ public class GUICalcularNominaDepartamento extends JFrame{
         
  
     }
+    public void cargarDepartamentoEnListaConNomina(Departamento departamento, double nomina)
+    {
+        DefaultTableModel dtm = new DefaultTableModel(0, 0){
+
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+            
+        };
+        dtm.setColumnIdentifiers(NombreColumnas);
+        
+        tabla.setModel(dtm);
+        dtm.addRow(new Object[]
+        {departamento.getIdDepartamento(),departamento.getNombre(), nomina});
+        dtm.fireTableDataChanged();
+    }
+    
+    //getters y setters
+    
 
     public Object[][] getDatos_entrada() {
         return datos_entrada;

@@ -59,7 +59,7 @@ public class GUIAltaEmpleado extends JFrame{
     JLabel labDNI = new JLabel("DNI",JLabel.CENTER);
     JLabel labDireccion = new JLabel("Direccion",JLabel.CENTER);
     JLabel labDepartamento = new JLabel("Departamento",JLabel.CENTER);
-    JLabel labSueldo = new JLabel("Sueldo",JLabel.CENTER);
+    JLabel labSueldo = new JLabel("Sueldo / horas",JLabel.CENTER);
     JLabel labHoras = new JLabel("Horas trabajadas", JLabel.LEFT);
     JLabel labProductividad = new JLabel("Factor de productividad", JLabel.LEFT);
     
