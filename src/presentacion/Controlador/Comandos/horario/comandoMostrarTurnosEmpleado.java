@@ -5,15 +5,27 @@
  */
 package presentacion.Controlador.Comandos.horario;
 
+import java.util.ArrayList;
+import negocio.FactoriaSA.FactoriaSA;
+import negocio.turnos.HorarioTrabajo;
 import presentacion.Controlador.Comandos.Command;
 import presentacion.Controlador.Comandos.RespuestaComando;
+import presentacion.Controlador.Eventos.EventoNegocio;
 
 
 public class comandoMostrarTurnosEmpleado implements Command{
 
     @Override
     public RespuestaComando execute(Object datos) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        RespuestaComando ret = null;
+        int entrada = (int) datos;
+        ArrayList<HorarioTrabajo> resultado = FactoriaSA.obtenerInstancia().generaSATurno().mostrarTurnosEmpleado(entrada);
+        if (resultado == null)
+            ret = new RespuestaComando(EventoNegocio.FRACASO_MOSTRAR_TURNOS_EMPLEADO, resultado);
+        else
+            ret = new RespuestaComando(EventoNegocio.EXITO_MOSTRAR_TURNOS_EMPLEADO, resultado);
+        
+        return ret;
     }
     
 }

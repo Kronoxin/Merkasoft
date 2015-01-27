@@ -14,6 +14,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.LockModeType;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import negocio.empleados.Empleado;
 import negocio.turnos.HorarioTrabajo;
@@ -274,8 +275,39 @@ public class SATurnoImp implements SATurno{
     }
 
     @Override
-    public boolean mostrarTurnosEmpleado(int idEmpleado) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ArrayList<HorarioTrabajo> mostrarTurnosEmpleado(int idEmpleado) {
+        EntityManager em = null;
+        EntityManagerFactory ef = Persistence.createEntityManagerFactory("MerkaSoftPU");
+        em = ef.createEntityManager();
+        ArrayList<HorarioTrabajo> ret = new ArrayList<HorarioTrabajo>();
+        TypedQuery<HorarioTrabajo> query = null;
+        List<HorarioTrabajo> resultado_query = null;
+        
+        
+        try 
+        {
+            em.getTransaction().begin();
+            query = em.createQuery(HorarioTrabajo.QUERY_BUSCAR_TURNOS_POR_IDEMPLEADO, HorarioTrabajo.class);
+            resultado_query = query.getResultList();
+            for (HorarioTrabajo it : resultado_query)
+            {
+                ret.add(it);
+                em.detach(it);
+            }
+            
+            
+        } 
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        finally 
+        {
+            em.close();
+            ef.close();
+        }
+        
+        return ret;
     }
 
     @Override

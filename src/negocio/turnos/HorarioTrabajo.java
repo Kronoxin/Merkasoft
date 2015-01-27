@@ -49,6 +49,9 @@ public class HorarioTrabajo implements Serializable {
     @JoinColumn(name = "id_empleado", referencedColumnName = "id_empleado", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Empleado empleado;
+    
+    public static final String QUERY_BUSCAR_TURNOS_POR_IDEMPLEADO = "HorarioTrabajo.findByIdEmpleado";
+    public static final String QUERY_BUSCAR_TODOS_TURNOS_CON_TODOS_EMPLEADOS = "HorarioTrabajo.findAll";
 
     public HorarioTrabajo() {
     }

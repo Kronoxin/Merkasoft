@@ -28,10 +28,10 @@ import presentacion.Controlador.Eventos.EventoNegocio;
 public class GUIMostrarTurnosEmpleado extends JFrame{
     
     Object[][] datos_entrada = {
-        {"","",}
+        {""}
        };
         
-        String[] NombreColumnas = {"ID Turno","Nombre Turno",};
+        String[] NombreColumnas = {"ID Turno"};
 
         JTextField textID = new JTextField("");
 
@@ -83,12 +83,8 @@ public class GUIMostrarTurnosEmpleado extends JFrame{
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     
-                     ArrayList<Object> datos = new ArrayList<>();
-                    
-                    
-                    datos.add(Integer.parseInt(textID.getText()));
-                    
-                //    Controlador.getInstance().accion(EventoNegocio.MOSTRAR_TURNOS_EMPLEADO, datos);
+                    int datos = Integer.parseInt(textID.getText());  
+                    Controlador.getInstance().accion(EventoNegocio.MOSTRAR_TURNOS_EMPLEADO, datos);
                     dispose();
                    
                 }

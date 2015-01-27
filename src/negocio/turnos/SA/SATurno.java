@@ -6,6 +6,7 @@
 package negocio.turnos.SA;
 
 import java.util.ArrayList;
+import negocio.turnos.HorarioTrabajo;
 import negocio.turnos.Turno;
 
 
@@ -16,7 +17,7 @@ public interface SATurno {
     public Turno mostrarTurno(int id);
     public ArrayList<Turno> mostrarListaTurnos();
     public boolean asignarTurno(int idEmpleado, int idTurno);
-    public boolean mostrarTurnosEmpleado(int idEmpleado);
+    public ArrayList<HorarioTrabajo> mostrarTurnosEmpleado(int idEmpleado);
     public ArrayList<Object> mostrarRelacionTurnoEmpleado();
     
 }
