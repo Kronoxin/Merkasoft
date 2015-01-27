@@ -57,18 +57,30 @@ public class ControlErrores
             if(!turno.getNombre().isEmpty())
             {
                 //Control del formato de las horas
-                if(turno.getHoraEntrada()>=0 &&turno.getHoraEntrada()<=23);
+                if(turno.getHoraEntrada() >=0)
                 {
-                    if(turno.getHoraSalida()>=0 &&turno.getHoraSalida()<=23);
-                    {
-                        //Control del formato de los minutos
-                        if(turno.getMinutoEntrada()>=0&&turno.getMinutoEntrada()<=60)
-                        {
-                            if(turno.getMinutoSalida()>=0&&turno.getMinutoSalida()<=60)
-                            {
-                                correcto=true;
-                            }
-                        }
+                    if(turno.getHoraEntrada() <=23)
+                    {   
+                       if(turno.getHoraSalida() >=0)
+                       {
+                           if(turno.getHoraSalida() <=23)
+                           {   
+                               //Control del formato de los minutos
+                                if(turno.getMinutoEntrada() >=0)
+                                {
+                                    if(turno.getMinutoEntrada() <=60)
+                                    {   
+                                       if(turno.getMinutoSalida() >=0)
+                                       {
+                                           if(turno.getMinutoSalida() <=60)
+                                           {   
+                                               correcto=true;
+                                           }
+                                       } 
+                                    }
+                                }
+                           }
+                       } 
                     }
                 }
             }
