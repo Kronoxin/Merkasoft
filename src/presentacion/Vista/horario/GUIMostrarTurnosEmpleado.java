@@ -20,6 +20,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import negocio.turnos.HorarioTrabajo;
 import negocio.turnos.Turno;
 import presentacion.Controlador.Controlador;
 import presentacion.Controlador.Eventos.EventoNegocio;
@@ -28,10 +29,10 @@ import presentacion.Controlador.Eventos.EventoNegocio;
 public class GUIMostrarTurnosEmpleado extends JFrame{
     
     Object[][] datos_entrada = {
-        {""}
+        {"","",}
        };
         
-        String[] NombreColumnas = {"ID Turno"};
+        String[] NombreColumnas = {"ID Turno","Nombre Turno",};
 
         JTextField textID = new JTextField("");
 
@@ -83,7 +84,11 @@ public class GUIMostrarTurnosEmpleado extends JFrame{
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     
-                    int datos = Integer.parseInt(textID.getText());  
+                     int datos = Integer.parseInt(textID.getText());
+                    
+                    
+                    
+                    
                     Controlador.getInstance().accion(EventoNegocio.MOSTRAR_TURNOS_EMPLEADO, datos);
                     dispose();
                    
@@ -104,7 +109,7 @@ public class GUIMostrarTurnosEmpleado extends JFrame{
         
     }
     
-    public void cargarTurnosEmpleadoEnLista(ArrayList<Turno> turnos )
+    public void cargarTurnosEmpleadoEnLista(ArrayList<HorarioTrabajo> horarios )
     { 
       
         DefaultTableModel dtm = new DefaultTableModel(0, 0){
@@ -118,10 +123,10 @@ public class GUIMostrarTurnosEmpleado extends JFrame{
         dtm.setColumnIdentifiers(NombreColumnas);
         
         tabla.setModel(dtm);
-        for (Turno t: turnos)
+        for (HorarioTrabajo t: horarios)
         {
             dtm.addRow(new Object[]
-            {t.getIdTurno(),t.getNombre()});
+            {t.getTurno().getIdTurno(),t.getTurno().getNombre()});
             dtm.fireTableDataChanged();
         }
     }

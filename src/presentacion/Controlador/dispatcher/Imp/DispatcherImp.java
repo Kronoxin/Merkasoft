@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import negocio.departamentos.Departamento;
 import negocio.empleados.Empleado;
 import negocio.producto.TProducto;
+import negocio.turnos.HorarioTrabajo;
 import negocio.turnos.Turno;
 import presentacion.Controlador.Comandos.RespuestaComando;
 import presentacion.Controlador.Eventos.EventoNegocio;
@@ -638,7 +639,7 @@ public class DispatcherImp extends Dispatcher
             
             case EventoNegocio.EXITO_MOSTRAR_TURNOS_EMPLEADO:
             {
-                ArrayList<Turno> datos = (ArrayList<Turno>)comando.getDatos();                
+                ArrayList<HorarioTrabajo> datos = (ArrayList<HorarioTrabajo>)comando.getDatos();                
                 GUIMostrarTurnosEmpleado te = new GUIMostrarTurnosEmpleado();
                 te.cargarTurnosEmpleadoEnLista(datos);
                 break;
@@ -647,11 +648,7 @@ public class DispatcherImp extends Dispatcher
             {
                 PopupsHorarios.MostrarTurnosEmpleadoFracaso();
                 break;
-            }
-            case EventoNegocio.EXITO_MOSTRAR_RELACION_TURNO_EMPLEADO:
-            {
-                
-            }
+            }            
             
             case EventoNegocio.FRACASO_MOSTRAR_RELACION_TURNO_EMPLEADO:
             {

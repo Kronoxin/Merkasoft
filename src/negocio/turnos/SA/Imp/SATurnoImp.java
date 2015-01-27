@@ -287,7 +287,8 @@ public class SATurnoImp implements SATurno{
         try 
         {
             em.getTransaction().begin();
-            query = em.createQuery(HorarioTrabajo.QUERY_BUSCAR_TURNOS_POR_IDEMPLEADO, HorarioTrabajo.class);
+            query = em.createQuery("SELECT h FROM HorarioTrabajo h WHERE h.horarioTrabajo.idEmpleado = " + idEmpleado, HorarioTrabajo.class);
+            //query.setParameter("id_empleado", idEmpleado);
             resultado_query = query.getResultList();
             for (HorarioTrabajo it : resultado_query)
             {
