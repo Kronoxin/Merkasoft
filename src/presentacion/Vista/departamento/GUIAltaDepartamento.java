@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 import negocio.departamentos.Departamento;
 import presentacion.Controlador.Controlador;
 import presentacion.Controlador.Eventos.EventoNegocio;
+import presentacion.Vista.ControlErrores;
 
 
 public class GUIAltaDepartamento extends JFrame{
@@ -36,6 +37,7 @@ public class GUIAltaDepartamento extends JFrame{
     JButton boton_cancelar = new JButton("Cancelar");
     
     public GUIAltaDepartamento(){
+        final ControlErrores control=new ControlErrores();
         this.setTitle("Alta Departamento");
 	setBounds(100, 100, 400, 300);
         this.setLocationRelativeTo(null);
@@ -68,13 +70,13 @@ public class GUIAltaDepartamento extends JFrame{
                 departamento.setNombre(text_nombre.getText());
                 departamento.setDescripcion(text_descripcion.getText());
                 departamento.setDisponible(true);
-                if(controlErroresDepartamento(departamento))
+                if(control.controlErroresDepartamento(departamento))
                 {
                     Controlador.getInstance().accion(EventoNegocio.ALTA_DEPARTAMENTO, departamento);
                 }
                 else
-                { 
-                    System.out.println("Datos incorrectos");
+                {
+                    System.out.println("Formato erroneo o falta de datos");
                 }
             }
         });
@@ -92,20 +94,7 @@ public class GUIAltaDepartamento extends JFrame{
         this.setVisible(true);
 
     }
-    //Metodo que controla el contenido de los campos de la entidad
-    private boolean controlErroresDepartamento(Departamento departamento)
-    {
-        boolean correcto=false;
-        if(departamento.isDisponible())
-        {
-            if(!departamento.getDescripcion().isEmpty()&& !departamento.getNombre().isEmpty())
-            {
-                correcto=true;
-            }
-        }
-        return correcto;
-    }
-
+   
     //getters y setters
 
     public JPanel getPanelSuperior() {

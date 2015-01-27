@@ -21,11 +21,12 @@ import javax.swing.JTextField;
 import negocio.turnos.Turno;
 import presentacion.Controlador.Controlador;
 import presentacion.Controlador.Eventos.EventoNegocio;
+import presentacion.Vista.ControlErrores;
 
 
 public class GUIAltaTurno extends JFrame{
     
-     
+    final ControlErrores control=new ControlErrores();
     JPanel panelSuperior = new JPanel();     
     JPanel panelBotones = new JPanel(new GridLayout(1,2,5,5));
 
@@ -94,8 +95,15 @@ public class GUIAltaTurno extends JFrame{
                int hora_salida = Integer.parseInt(tiempos[0]);
                int minuto_salida = Integer.parseInt(tiempos[1]);
                turno.setHoraSalida(hora_salida);
-               turno.setMinutoSalida(minuto_salida);                              
-                Controlador.getInstance().accion(EventoNegocio.ALTA_TURNO, turno);
+               turno.setMinutoSalida(minuto_salida);
+               if(control.controlErorresTurno(turno))
+               {
+                    Controlador.getInstance().accion(EventoNegocio.ALTA_TURNO, turno);
+               }
+               else
+               {
+                   System.out.println("Formato erroneo o falta de datos");
+               }
          
 
             }
@@ -114,7 +122,6 @@ public class GUIAltaTurno extends JFrame{
         this.setVisible(true);
 
     }
-    
     //setters y getters
 
     public JPanel getPanelSuperior() {

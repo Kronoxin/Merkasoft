@@ -6,14 +6,9 @@
 package presentacion.Vista.empleado;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -30,7 +25,7 @@ import negocio.empleados.Supervisor;
 import negocio.empleados.Trabajador;
 import presentacion.Controlador.Controlador;
 import presentacion.Controlador.Eventos.EventoNegocio;
-
+import presentacion.Vista.ControlErrores;
 
 
 public class GUIAltaEmpleado extends JFrame{
@@ -77,6 +72,7 @@ public class GUIAltaEmpleado extends JFrame{
 		
     
     public GUIAltaEmpleado(){
+        final ControlErrores control=new ControlErrores();
         this.setTitle("Alta Empleado");
 	setBounds(100, 100, 500, 400);
         this.setLocationRelativeTo(null);
@@ -198,9 +194,13 @@ public class GUIAltaEmpleado extends JFrame{
                     t.setTipo(radioTrabajador.getText());                    
                     t.setDisponible(true);
                     t.setHoras_trabajadas((double) Double.parseDouble(textHoras.getText()));
-                    if(controlErroresEmpleado(t))
+                    if(control.controlErroresEmpleado(t))
                     {
                         Controlador.getInstance().accion(EventoNegocio.ALTA_EMPLEADO, t);
+                    }
+                    else
+                    {
+                        System.out.println("Formato erroneo o falta de datos");
                     }
                 }
                 else
@@ -216,9 +216,13 @@ public class GUIAltaEmpleado extends JFrame{
                     s.setTipo(radioSupervisor.getText());                    
                     s.setDisponible(true);
                     s.setFactor_productividad((double) Double.parseDouble(textProductividad.getText()));
-                    if(controlErroresEmpleado(s))
+                    if(control.controlErroresEmpleado(s))
                     {
                         Controlador.getInstance().accion(EventoNegocio.ALTA_EMPLEADO, s);
+                    }
+                    else
+                    {
+                        System.out.println("Formato erroneo o falta de datos");
                     }
                 }
                 
@@ -246,41 +250,7 @@ public class GUIAltaEmpleado extends JFrame{
             
             
 	}
-     //Metodo de control de errores en los campos de empelado
-    private boolean controlErroresEmpleado(Empleado empleado)
-    {
-        boolean correcto=false;
-        if(empleado.getTipo().equalsIgnoreCase("supervisor"))
-        {
-            empleado=(Supervisor)empleado;
-        }
-        if(empleado.getDisponible())
-        {
-            if(!empleado.getApellidos().isEmpty() && !empleado.getNombre().isEmpty())
-            {
-                if(!empleado.getDireccion().isEmpty() && empleado.getSueldo()>0 && !empleado.getTipo().isEmpty())
-                {
-                    if(empleado.getTipo().equalsIgnoreCase("supervisor"))
-                     {
-                         Supervisor s =(Supervisor)empleado;
-                         if(s.getFactor_productividad()>0)
-                         {
-                             correcto=true;
-                         }
-                         else
-                         {
-                             Trabajador t =(Trabajador)empleado;
-                             if(t.getHoras_trabajadas()>0)
-                             {
-                                 correcto=true;
-                             }
-                         }               
-                     }
-                }
-            }
-        }
-        return correcto;
-    }
+    
  
 
     public JPanel getPanelSuperior() {
