@@ -30,6 +30,7 @@ import negocio.departamentos.Departamento;
 import negocio.empleados.Empleado;
 import presentacion.Controlador.Controlador;
 import presentacion.Controlador.Eventos.EventoNegocio;
+import presentacion.Vista.ControlErrores;
 
 
 public class GUIModificarEmpleado extends JFrame{
@@ -55,6 +56,7 @@ public class GUIModificarEmpleado extends JFrame{
         JTable tabla;
     
     public GUIModificarEmpleado(){
+        final ControlErrores control=new ControlErrores();
         this.setTitle("Modificar Empleado");
 	setBounds(100, 100, 820, 400);
         this.setLocationRelativeTo(null);
@@ -133,12 +135,17 @@ public class GUIModificarEmpleado extends JFrame{
                 public void actionPerformed(ActionEvent e) {
                     ArrayList<Object> datos = new ArrayList<>();
                     
-                    
-                    datos.add(Integer.parseInt(textID.getText()));
-                    
-                    Controlador.getInstance().accion(EventoNegocio.MOSTRAR_EMPLEADO_PARA_MODIFICAR, datos);
-                    dispose();
-
+                    if(control.controlErroresID(textID.getText()))
+                    {
+                        datos.add(Integer.parseInt(textID.getText()));
+                        Controlador.getInstance().accion(EventoNegocio.MOSTRAR_EMPLEADO_PARA_MODIFICAR, datos);
+                        dispose();
+                    }
+                    else
+                    {
+                        System.out.println("Formato erroneo o falta de datos");
+                        Controlador.getInstance().accion(EventoNegocio.MOSTRAR_INFORMACION_ERROR, null);
+                    }
                 }
             });
         

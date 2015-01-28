@@ -16,10 +16,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import presentacion.Controlador.Controlador;
 import presentacion.Controlador.Eventos.EventoNegocio;
+import presentacion.Vista.ControlErrores;
 
 
 public class GUIBajaEmpleado extends JFrame{
-    
+    final ControlErrores control=new ControlErrores();
      JTextField textID = new JTextField("");
     
     JPanel panelSuperior = new JPanel(new GridLayout(1,2));
@@ -56,11 +57,16 @@ public class GUIBajaEmpleado extends JFrame{
         public void actionPerformed(ActionEvent e) 
         {
               textID.getText();
-
-            Controlador.getInstance().accion(EventoNegocio.BAJA_EMPLEADO, textID.getText());
-
-
+            if(control.controlErroresID(textID.getText()))
+            {
+                Controlador.getInstance().accion(EventoNegocio.BAJA_EMPLEADO, textID.getText());
             }
+            else
+            {
+                System.out.println("Formato erroneo o falta de datos");
+                Controlador.getInstance().accion(EventoNegocio.MOSTRAR_INFORMACION_ERROR, null);
+            }
+        }
         });
         boton_cancelar.addActionListener(new ActionListener() {
                 @Override

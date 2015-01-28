@@ -26,10 +26,11 @@ import javax.swing.table.DefaultTableModel;
 import negocio.turnos.Turno;
 import presentacion.Controlador.Controlador;
 import presentacion.Controlador.Eventos.EventoNegocio;
+import presentacion.Vista.ControlErrores;
 
 
 public class GUIModificarTurno extends JFrame{
-    
+    final ControlErrores control=new ControlErrores();
     Object[][] datos_entrada = {
         {"","","","","",""}
        };
@@ -106,7 +107,15 @@ public class GUIModificarTurno extends JFrame{
                 turno.setDisponible((Boolean)tabla.getValueAt(0, 4));
                 turno.setVersion((int)tabla.getValueAt(0,5));
                 
-                Controlador.getInstance().accion(EventoNegocio.MODIFICAR_TURNO, turno);
+                if(control.controlErorresTurno(turno))
+                {
+                    Controlador.getInstance().accion(EventoNegocio.MODIFICAR_TURNO, turno);
+                }
+                else
+                {
+                    System.out.println("Formato erroneo o falta de datos");
+                    Controlador.getInstance().accion(EventoNegocio.MOSTRAR_INFORMACION_ERROR, null);
+                }
             }
         });
             
@@ -116,11 +125,17 @@ public class GUIModificarTurno extends JFrame{
             public void actionPerformed(ActionEvent e) {
                  ArrayList<Object> datos = new ArrayList<>();
                     
-                    
-                    datos.add(Integer.parseInt(textID.getText()));
-                    
-                    Controlador.getInstance().accion(EventoNegocio.MOSTRAR_TURNO_PARA_MODIFICAR, datos);
-                    dispose();
+                    if(control.controlErroresID(textID.getText()))
+                    {
+                        datos.add(Integer.parseInt(textID.getText()));  
+                        Controlador.getInstance().accion(EventoNegocio.MOSTRAR_TURNO_PARA_MODIFICAR, datos);
+                        dispose();
+                    }
+                    else
+                    {
+                        System.out.println("Formato erroneo o falta de datos");
+                        Controlador.getInstance().accion(EventoNegocio.MOSTRAR_INFORMACION_ERROR, null);
+                    }
             }
         });
             

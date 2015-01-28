@@ -23,9 +23,11 @@ import javax.swing.table.DefaultTableModel;
 import negocio.departamentos.Departamento;
 import presentacion.Controlador.Controlador;
 import presentacion.Controlador.Eventos.EventoNegocio;
+import presentacion.Vista.ControlErrores;
 
 
 public class GUICalcularNominaDepartamento extends JFrame{
+    final ControlErrores control=new ControlErrores();
     Object[][] datos_entrada = {
         {"","",""}
        };
@@ -80,8 +82,16 @@ public class GUICalcularNominaDepartamento extends JFrame{
 
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                   Controlador.getInstance().accion(EventoNegocio.CALCULAR_NOMINA_DEPARTAMENTO, textID.getText());
-                    dispose();
+                    if(control.controlErroresID(textID.getText()))
+                    {
+                        Controlador.getInstance().accion(EventoNegocio.CALCULAR_NOMINA_DEPARTAMENTO, textID.getText());
+                        dispose();
+                    }
+                    else
+                    {
+                        System.out.println("Formato erroneo o falta de datos");
+                        Controlador.getInstance().accion(EventoNegocio.MOSTRAR_INFORMACION_ERROR, null);
+                    }
                    
                 }
             });

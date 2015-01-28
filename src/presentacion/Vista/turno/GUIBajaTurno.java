@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import presentacion.Controlador.Controlador;
 import presentacion.Controlador.Eventos.EventoNegocio;
+import presentacion.Vista.ControlErrores;
 
 
 public class GUIBajaTurno extends JFrame{
@@ -33,6 +34,7 @@ public class GUIBajaTurno extends JFrame{
             
             
     public GUIBajaTurno(){
+        final ControlErrores control=new ControlErrores();
         this.setTitle("Baja Turno");
 	setBounds(100, 100, 400, 300);
         this.setLocationRelativeTo(null);
@@ -57,9 +59,15 @@ public class GUIBajaTurno extends JFrame{
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                textID.getText();
-                
-                Controlador.getInstance().accion(EventoNegocio.BAJA_TURNO, textID.getText());
+                if(control.controlErroresID(textID.getText()))
+                {
+                    Controlador.getInstance().accion(EventoNegocio.BAJA_TURNO, textID.getText());
+                }
+                else
+                {
+                    System.out.println("Formato erroneo o falta de datos");
+                    Controlador.getInstance().accion(EventoNegocio.MOSTRAR_INFORMACION_ERROR, null);
+                }
             }
         });
         

@@ -23,6 +23,7 @@ import javax.swing.table.DefaultTableModel;
 import negocio.turnos.Turno;
 import presentacion.Controlador.Controlador;
 import presentacion.Controlador.Eventos.EventoNegocio;
+import presentacion.Vista.ControlErrores;
 
 
 public class GUIMostrarTurno extends JFrame{
@@ -45,6 +46,7 @@ public class GUIMostrarTurno extends JFrame{
     JTable tabla;
     
     public GUIMostrarTurno(){
+        final ControlErrores control=new ControlErrores();
         this.setTitle("Mostrar Turno");
 	setBounds(100, 100, 500, 300);
         this.setLocationRelativeTo(null);
@@ -83,11 +85,17 @@ public class GUIMostrarTurno extends JFrame{
                 public void actionPerformed(ActionEvent e) {
                     ArrayList<Object> datos = new ArrayList<>();
                     
-                    
-                    datos.add(Integer.parseInt(textID.getText()));
-
-                    Controlador.getInstance().accion(EventoNegocio.MOSTRAR_TURNO, datos);
-                    dispose();
+                    if(control.controlErroresID(textID.getText()))
+                    {
+                        datos.add(Integer.parseInt(textID.getText()));
+                        Controlador.getInstance().accion(EventoNegocio.MOSTRAR_TURNO, datos);
+                        dispose();
+                    }
+                    else
+                    {
+                        System.out.println("Formato erroneo o falta de datos");
+                        Controlador.getInstance().accion(EventoNegocio.MOSTRAR_INFORMACION_ERROR, null);
+                    }
                    
                 }
             });

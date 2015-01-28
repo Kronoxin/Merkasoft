@@ -24,10 +24,11 @@ import negocio.departamentos.Departamento;
 import negocio.producto.TProducto;
 import presentacion.Controlador.Controlador;
 import presentacion.Controlador.Eventos.EventoNegocio;
+import presentacion.Vista.ControlErrores;
 
 
 public class GUIMostrarDepartamento extends JFrame{
-    
+    final ControlErrores control=new ControlErrores();
      Object[][] datos_entrada = {
         {"","","",""}
        };
@@ -85,11 +86,17 @@ public class GUIMostrarDepartamento extends JFrame{
                     
                      ArrayList<Object> datos = new ArrayList<>();
                     
-                    
-                    datos.add(Integer.parseInt(textID.getText()));
-                    
-                    Controlador.getInstance().accion(EventoNegocio.MOSTRAR_DEPARTAMENTO, datos);
-                    dispose();
+                    if(control.controlErroresID(textID.getText()))
+                    {
+                        datos.add(Integer.parseInt(textID.getText()));
+                        Controlador.getInstance().accion(EventoNegocio.MOSTRAR_DEPARTAMENTO, datos);
+                        dispose();
+                    }
+                    else
+                    {
+                        System.out.println("Formato erroneo o falta de datos");
+                        Controlador.getInstance().accion(EventoNegocio.MOSTRAR_INFORMACION_ERROR, null);
+                    }
                    
                 }
             });

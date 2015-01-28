@@ -24,6 +24,7 @@ import negocio.empleados.Empleado;
 import negocio.producto.TProducto;
 import presentacion.Controlador.Controlador;
 import presentacion.Controlador.Eventos.EventoNegocio;
+import presentacion.Vista.ControlErrores;
 import presentacion.Vista.producto.GUIMostrarProducto;
 
 
@@ -46,6 +47,7 @@ public class GUIMostrarEmpleado extends JFrame{
         JTable tabla;
     
     public GUIMostrarEmpleado(){
+        final ControlErrores control= new ControlErrores();
         this.setTitle("Mostrar Empleado");
 	setBounds(100, 100, 750, 400);
         this.setLocationRelativeTo(null);
@@ -86,11 +88,17 @@ public class GUIMostrarEmpleado extends JFrame{
                 public void actionPerformed(ActionEvent e) {
                     ArrayList<Object> datos = new ArrayList<>();
                     
-                    
+                    if(control.controlErroresID(textID.getText()))
+                    {
                     datos.add(Integer.parseInt(textID.getText()));
-
                     Controlador.getInstance().accion(EventoNegocio.MOSTRAR_EMPLEADO, datos);
                     dispose();
+                    }
+                    else
+                    {
+                        System.out.println("Formato erroneo o falta de datos");
+                        Controlador.getInstance().accion(EventoNegocio.MOSTRAR_INFORMACION_ERROR, null);
+                    }
 
                 }
             });

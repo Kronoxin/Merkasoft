@@ -25,11 +25,12 @@ import javax.swing.table.DefaultTableModel;
 import negocio.departamentos.Departamento;
 import presentacion.Controlador.Controlador;
 import presentacion.Controlador.Eventos.EventoNegocio;
+import presentacion.Vista.ControlErrores;
 
 
 public class GUIModificarDepartamento extends JFrame{
     
-   
+    final ControlErrores control=new ControlErrores();
      Object[][] datos_entrada = {
         {"","","","",""}
        };
@@ -105,7 +106,15 @@ public class GUIModificarDepartamento extends JFrame{
                 departamento.setDisponible((Boolean)tabla.getValueAt(0, 3));
                 departamento.setVersion((int)tabla.getValueAt(0, 4));
                 
-                Controlador.getInstance().accion(EventoNegocio.MODIFICAR_DEPARTAMENTO, departamento);
+                if(control.controlErroresDepartamento(departamento))
+                {
+                    Controlador.getInstance().accion(EventoNegocio.MODIFICAR_DEPARTAMENTO, departamento);
+                }
+                else
+                {
+                    System.out.println("Formato erroneo o falta de datos");
+                    Controlador.getInstance().accion(EventoNegocio.MOSTRAR_INFORMACION_ERROR, null);
+                }
 
              }
          });
@@ -116,11 +125,17 @@ public class GUIModificarDepartamento extends JFrame{
                 public void actionPerformed(ActionEvent e) {
                      ArrayList<Object> datos = new ArrayList<>();
                     
-                    
-                    datos.add(Integer.parseInt(textID.getText()));
-
-                    Controlador.getInstance().accion(EventoNegocio.MOSTRAR_DEPARTAMENTO_PARA_MODIFICAR, datos);
-                    dispose();
+                    if(control.controlErroresID(textID.getText()))
+                    {
+                        datos.add(Integer.parseInt(textID.getText()));
+                        Controlador.getInstance().accion(EventoNegocio.MOSTRAR_DEPARTAMENTO_PARA_MODIFICAR, datos);
+                        dispose();
+                    }
+                    else
+                    {
+                        System.out.println("Formato erroneo o falta de datos");
+                        Controlador.getInstance().accion(EventoNegocio.MOSTRAR_INFORMACION_ERROR, null);
+                    }
                     
                    
                 }
