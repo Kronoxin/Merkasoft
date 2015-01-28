@@ -185,14 +185,17 @@ public class GUIModificarEmpleado extends JFrame{
         dtm.setColumnIdentifiers(NombreColumnas);
         
         ArrayList<Departamento> depts = FactoriaSA.obtenerInstancia().generaSADepartamento().mostrarListaDepartamentos();
-            String[] departments = new String[depts.size()];
+            
+            ArrayList<String> departments = new ArrayList<>();
+            
             for (int i = 0; i < depts.size(); i++)
             {
-                departments[i] = depts.get(i).getNombre();
+                if (depts.get(i).isDisponible())
+                    departments.add(depts.get(i).getNombre());
             }
+            comboBox = new JComboBox(departments.toArray());
         
         tabla.setModel(dtm);
-        comboBox = new JComboBox(departments);
         check = new JCheckBox();
         
         tabla.getColumnModel().getColumn(6).setCellEditor(new DefaultCellEditor(comboBox));
