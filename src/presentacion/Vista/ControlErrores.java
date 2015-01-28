@@ -23,21 +23,22 @@ public class ControlErrores
                 if(!empleado.getDireccion().isEmpty() && empleado.getSueldo()>0 && !empleado.getTipo().isEmpty())
                 {
                     if(empleado.getTipo().equalsIgnoreCase("supervisor"))
-                     {
+                    {
                          Supervisor s =(Supervisor)empleado;
                          if(s.getFactor_productividad()>0)
                          {
                              correcto=true;
                          }
-                         else
-                         {
-                            Trabajador t =(Trabajador)empleado;
-                            if(t.getHoras_trabajadas()>0)
-                            {
-                                correcto=true;
-                            }
-                         }               
-                     }
+                                       
+                    }
+                    else //es trabajador
+                    {
+                        Trabajador t = (Trabajador)empleado;
+                        if(t.getHoras_trabajadas()>0)
+                        {
+                            correcto=true;
+                        }
+                    }
                 }
             }
         }
