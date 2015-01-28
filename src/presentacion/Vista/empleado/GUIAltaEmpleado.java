@@ -80,14 +80,6 @@ public class GUIAltaEmpleado extends JFrame{
             this.setLayout(new BorderLayout());
             
             ArrayList<Departamento> depts = FactoriaSA.obtenerInstancia().generaSADepartamento().mostrarListaDepartamentos();
-                    for(int i = 0; i < depts.size(); i++)
-                    {
-                        if (!depts.get(i).getDisponible())
-                            {
-                                depts.remove(i);
-                                i--;
-                            }
-                    }
             String[] departments = new String[depts.size()];
             for (int i = 0; i < depts.size(); i++)
             {
@@ -192,14 +184,6 @@ public class GUIAltaEmpleado extends JFrame{
                 {
                     
                     ArrayList<Departamento> depts2 = FactoriaSA.obtenerInstancia().generaSADepartamento().mostrarListaDepartamentos();
-                    for(int i = 0; i < depts2.size(); i++)
-                    {
-                        if (!depts2.get(i).getDisponible())
-                            {
-                                depts2.remove(i);
-                                i--;
-                            }
-                    }
                     t.setDni(textDNI.getText());
                     t.setNombre(textNombre.getText());
                     t.setApellidos(textApellidos.getText());
@@ -223,14 +207,6 @@ public class GUIAltaEmpleado extends JFrame{
                 else
                 {
                     ArrayList<Departamento> depts2 = FactoriaSA.obtenerInstancia().generaSADepartamento().mostrarListaDepartamentos();
-                    for(int i = 0; i < depts2.size(); i++)
-                    {
-                        if (!depts2.get(i).getDisponible())
-                            {
-                                depts2.remove(i);
-                                i--;
-                            }
-                    }
                     s.setDni(textDNI.getText());
                     s.setNombre(textNombre.getText());
                     s.setApellidos(textApellidos.getText());
