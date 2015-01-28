@@ -648,11 +648,20 @@ public class DispatcherImp extends Dispatcher
             {
                 PopupsHorarios.MostrarTurnosEmpleadoFracaso();
                 break;
-            }            
+            }   
+            
+            case EventoNegocio.EXITO_MOSTRAR_RELACION_TURNO_EMPLEADO:
+            {
+                ArrayList<HorarioTrabajo> datos = (ArrayList<HorarioTrabajo>)comando.getDatos();                
+                GUIMostrarRelacionTurnoEmpleado rte = new GUIMostrarRelacionTurnoEmpleado();
+                rte.cargarRelacionEnLista(datos);
+                break;
+            }
             
             case EventoNegocio.FRACASO_MOSTRAR_RELACION_TURNO_EMPLEADO:
             {
                 PopupsHorarios.MostrarRelacionTurnoFracaso();
+                break;
             }
                 
            

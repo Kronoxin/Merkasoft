@@ -287,15 +287,12 @@ public class SATurnoImp implements SATurno{
         
         try 
         {
-            em.getTransaction().begin();
+            //em.getTransaction().begin();
             
             resultado_query = em.createNamedQuery("HorarioTrabajo.findByIdEmpleado")
-            .setParameter("id_empleado", idEmpleado)
+            .setParameter("idEmpleado", idEmpleado)
             .getResultList();
             
-         /*   query = em.createQuery("SELECT h FROM HorarioTrabajo h WHERE h.horarioTrabajo.idEmpleado = " + idEmpleado, HorarioTrabajo.class);
-            //query.setParameter("id_empleado", idEmpleado);
-            resultado_query = query.getResultList();*/
             for (HorarioTrabajo it : resultado_query)
             {
                 ret.add(it);
@@ -318,8 +315,41 @@ public class SATurnoImp implements SATurno{
     }
 
     @Override
-    public ArrayList<Object> mostrarRelacionTurnoEmpleado() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ArrayList<HorarioTrabajo> mostrarRelacionTurnoEmpleado() {
+        EntityManager em = null;
+        EntityManagerFactory ef = Persistence.createEntityManagerFactory("MerkaSoftPU");
+        em = ef.createEntityManager();
+        ArrayList<HorarioTrabajo> ret = new ArrayList<HorarioTrabajo>();
+        TypedQuery<HorarioTrabajo> query = null;
+        List<HorarioTrabajo> resultado_query = null;
+        
+        
+        try 
+        {
+            //em.getTransaction().begin();
+            
+            resultado_query = em.createNamedQuery("HorarioTrabajo.findAll").getResultList();
+            
+            for (HorarioTrabajo it : resultado_query)
+            {
+                ret.add(it);
+                em.detach(it);
+            }
+            
+            
+        } 
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        finally 
+        {
+            em.close();
+            ef.close();
+        }
+        
+        return ret;
     }
-    
 }
+    
+

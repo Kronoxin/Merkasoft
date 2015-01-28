@@ -21,6 +21,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import negocio.departamentos.Departamento;
+import negocio.turnos.HorarioTrabajo;
 import presentacion.Controlador.Controlador;
 import presentacion.Controlador.Eventos.EventoNegocio;
 
@@ -78,10 +79,10 @@ public class GUIMostrarRelacionTurnoEmpleado extends JFrame{
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     
-                     ArrayList<Object> datos = new ArrayList<>();
+                     //ArrayList<Object> datos = new ArrayList<>();
 
                     
-                 //   Controlador.getInstance().accion(EventoNegocio.MOSTRAR_RELACION_TURNO_EMPLEADO, datos);
+                    Controlador.getInstance().accion(EventoNegocio.MOSTRAR_RELACION_TURNO_EMPLEADO, null);
                     dispose();
 
                 }
@@ -99,7 +100,7 @@ public class GUIMostrarRelacionTurnoEmpleado extends JFrame{
         
     }
     
-    public void cargarRelacionEnLista()
+    public void cargarRelacionEnLista(ArrayList<HorarioTrabajo> horarios)
     {
         DefaultTableModel dtm = new DefaultTableModel(0, 0){
 
@@ -112,10 +113,15 @@ public class GUIMostrarRelacionTurnoEmpleado extends JFrame{
         dtm.setColumnIdentifiers(NombreColumnas);
         
         tabla.setModel(dtm);
+        for (HorarioTrabajo ht : horarios)
+        {
+            dtm.addRow(new Object[] 
+            {ht.getTurno().getIdTurno(),ht.getTurno().getNombre(), ht.getEmpleado().getIdEmpleado(), ht.getEmpleado().getNombre()});
+            dtm.fireTableDataChanged();
+        }
         
-         //   dtm.addRow(new Object[] {departamento.getIdDepartamento(),departamento.getNombre(), departamento.getDescripcion(),departamento.getDisponible()});
         
-        dtm.fireTableDataChanged();
+        
     }
     
     //getters y setters

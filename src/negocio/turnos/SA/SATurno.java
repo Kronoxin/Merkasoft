@@ -18,6 +18,6 @@ public interface SATurno {
     public ArrayList<Turno> mostrarListaTurnos();
     public boolean asignarTurno(int idEmpleado, int idTurno);
     public ArrayList<HorarioTrabajo> mostrarTurnosEmpleado(int idEmpleado);
-    public ArrayList<Object> mostrarRelacionTurnoEmpleado();
+    public ArrayList<HorarioTrabajo> mostrarRelacionTurnoEmpleado();
     
 }
