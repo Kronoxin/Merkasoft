@@ -14,7 +14,8 @@ public class comandoGUImostrarError implements Command{
     @Override
     public RespuestaComando execute(Object datos) 
     {
-       return new RespuestaComando(EventoNegocio.MOSTRAR_INFORMACION_ERROR, datos);
+        String prueba=datos.toString();
+       return new RespuestaComando(EventoNegocio.MOSTRAR_INFORMACION_ERROR, prueba);
     }
     
 }

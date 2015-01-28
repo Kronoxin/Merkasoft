@@ -98,14 +98,4 @@ public class ControlErrores
         }
         return correcto;
     }
-    //Metodo que controla que el campo ID no este vacio
-    public boolean controlErroresID(String id)
-    {
-        boolean correcto=false;
-        if(!id.isEmpty() && Integer.parseInt(id)>0)
-        {
-            correcto=true;
-        }
-        return correcto;
-    }
 }

@@ -23,7 +23,6 @@ import javax.swing.table.DefaultTableModel;
 import negocio.departamentos.Departamento;
 import presentacion.Controlador.Controlador;
 import presentacion.Controlador.Eventos.EventoNegocio;
-import presentacion.Vista.ControlErrores;
 
 
 public class GUICalcularNominaDepartamento extends JFrame{
@@ -45,7 +44,6 @@ public class GUICalcularNominaDepartamento extends JFrame{
         JTable tabla;
     
     public GUICalcularNominaDepartamento(){
-        final ControlErrores control= new ControlErrores();
         this.setTitle("Calcular Nomina Departamento");
 	setBounds(100, 100, 500, 300);
         this.setLocationRelativeTo(null);
@@ -82,15 +80,8 @@ public class GUICalcularNominaDepartamento extends JFrame{
 
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    if(control.controlErroresID(textID.getText()))
-                    {
-                        Controlador.getInstance().accion(EventoNegocio.CALCULAR_NOMINA_DEPARTAMENTO, textID.getText());
-                        dispose();
-                    }
-                    else
-                    {
-                        Controlador.getInstance().accion(EventoNegocio.MOSTRAR_INFORMACION_ERROR, null);
-                    }
+                   Controlador.getInstance().accion(EventoNegocio.CALCULAR_NOMINA_DEPARTAMENTO, textID.getText());
+                    dispose();
                    
                 }
             });

@@ -77,7 +77,7 @@ public class GUIAltaDepartamento extends JFrame{
                 else
                 {
                     System.out.println("Formato erroneo o falta de datos");
-                    Controlador.getInstance().accion(EventoNegocio.MOSTRAR_INFORMACION_ERROR, null);
+                    Controlador.getInstance().accion(EventoNegocio.MOSTRAR_INFORMACION_ERROR, text_nombre.getText());
                 }
             }
         });

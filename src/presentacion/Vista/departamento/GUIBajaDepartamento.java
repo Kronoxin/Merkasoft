@@ -16,12 +16,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import presentacion.Controlador.Controlador;
 import presentacion.Controlador.Eventos.EventoNegocio;
-import presentacion.Vista.ControlErrores;
 
 
 public class GUIBajaDepartamento extends JFrame{
-     ControlErrores control=new ControlErrores();
-    JTextField textID = new JTextField("");
+     JTextField textID = new JTextField("");
 
         JPanel panelSuperior = new JPanel(new GridLayout(1,2));
         JPanel panelBotones = new JPanel(new GridLayout(1,2,10,10));
@@ -59,14 +57,8 @@ public class GUIBajaDepartamento extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 textID.getText();
-                if(control.controlErroresID(textID.getText()))
-                {
+                
                 Controlador.getInstance().accion(EventoNegocio.BAJA_DEPARTAMENTO, textID.getText());
-                }
-                else
-                {
-                    Controlador.getInstance().accion(EventoNegocio.MOSTRAR_INFORMACION_ERROR, null);
-                }
             }
         });
         
