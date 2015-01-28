@@ -80,12 +80,13 @@ public class GUIAltaEmpleado extends JFrame{
             this.setLayout(new BorderLayout());
             
             ArrayList<Departamento> depts = FactoriaSA.obtenerInstancia().generaSADepartamento().mostrarListaDepartamentos();
-            String[] departments = new String[depts.size()];
+            ArrayList<String> departments = new ArrayList<>();
             for (int i = 0; i < depts.size(); i++)
             {
-                departments[i] = depts.get(i).getNombre();
+                if (depts.get(i).isDisponible())
+                    departments.add(depts.get(i).getNombre());
             }
-            combos = new JComboBox(departments);
+            combos = new JComboBox(departments.toArray());
             
             panelSuperior.setLayout(new GridLayout(8,2));
 
