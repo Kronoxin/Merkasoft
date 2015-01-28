@@ -25,6 +25,7 @@ import javax.swing.table.DefaultTableModel;
 import negocio.departamentos.Departamento;
 import presentacion.Controlador.Controlador;
 import presentacion.Controlador.Eventos.EventoNegocio;
+import presentacion.Vista.ControlErrores;
 
 
 public class GUIModificarDepartamento extends JFrame{
@@ -49,6 +50,7 @@ public class GUIModificarDepartamento extends JFrame{
         JTable tabla;
     
     public GUIModificarDepartamento(){
+        final ControlErrores control=new ControlErrores();
          this.setTitle("Modificar Departamento");
 	setBounds(100, 100, 500, 300);
         this.setLocationRelativeTo(null);
@@ -104,9 +106,14 @@ public class GUIModificarDepartamento extends JFrame{
                 departamento.setDescripcion((String)(tabla.getValueAt(0, 2)));
                 departamento.setDisponible((Boolean)tabla.getValueAt(0, 3));
                 departamento.setVersion((int)tabla.getValueAt(0, 4));
-                
-                Controlador.getInstance().accion(EventoNegocio.MODIFICAR_DEPARTAMENTO, departamento);
-
+                if(control.controlErroresDepartamento(departamento))
+                {
+                    Controlador.getInstance().accion(EventoNegocio.MODIFICAR_DEPARTAMENTO, departamento);
+                }
+                else
+                {
+                    Controlador.getInstance().accion(EventoNegocio.MOSTRAR_INFORMACION_ERROR, null);
+                }
              }
          });
             
@@ -116,11 +123,17 @@ public class GUIModificarDepartamento extends JFrame{
                 public void actionPerformed(ActionEvent e) {
                      ArrayList<Object> datos = new ArrayList<>();
                     
-                    
+                    if(control.controlErroresID(textID.getText()))
+                    {
                     datos.add(Integer.parseInt(textID.getText()));
-
                     Controlador.getInstance().accion(EventoNegocio.MOSTRAR_DEPARTAMENTO_PARA_MODIFICAR, datos);
                     dispose();
+                    }
+                    else
+                    {
+                        Controlador.getInstance().accion(EventoNegocio.MOSTRAR_INFORMACION_ERROR, null);
+                    }
+                    
                     
                    
                 }
