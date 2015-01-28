@@ -176,6 +176,16 @@ public class GUIAltaEmpleado extends JFrame{
             //Añadimos el actionlistener
             boton_ok.addActionListener(new ActionListener() {
 
+            private Departamento encuentraDepPorNombre(ArrayList<Departamento> deps, String nombre)
+            {
+                Departamento d = null;
+                
+                for (Departamento dep : deps)
+                    if (dep.getNombre().equalsIgnoreCase(nombre))
+                        d = dep;
+                
+                return d;
+            }
             @Override
             public void actionPerformed(ActionEvent e) {
                 
@@ -189,7 +199,7 @@ public class GUIAltaEmpleado extends JFrame{
                     t.setNombre(textNombre.getText());
                     t.setApellidos(textApellidos.getText());
                     t.setDireccion(textDireccion.getText());
-                    Departamento dummy = depts2.get(combos.getSelectedIndex());
+                    Departamento dummy = encuentraDepPorNombre(depts2, (String)combos.getSelectedItem());
                     t.setDepartamento(dummy);
                     t.setSueldo(((double)(Double.parseDouble(textSueldo.getText()))));
                     t.setTipo(radioTrabajador.getText());                    
