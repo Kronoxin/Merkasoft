@@ -11,10 +11,7 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
-/**
- *
- * @author usuario_local
- */
+
 @Embeddable
 public class HorarioTrabajoPK implements Serializable {
     @Basic(optional = false)

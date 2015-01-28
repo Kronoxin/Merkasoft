@@ -20,10 +20,8 @@ import javax.persistence.Version;
 import javax.xml.bind.annotation.XmlRootElement;
 import negocio.empleados.Empleado;
 
-/**
- *
- * @author usuario_local
- */
+
+
 @Entity
 @Table(name = "horario_trabajo")
 @XmlRootElement

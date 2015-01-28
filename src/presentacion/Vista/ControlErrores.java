@@ -9,10 +9,7 @@ import negocio.empleados.Supervisor;
 import negocio.empleados.Trabajador;
 import negocio.turnos.Turno;
 
-/**
- *
- * @author Jose Luis
- */
+
 public class ControlErrores 
 {
      //Metodo de control de errores para la entidad empleado y sus especializaciones
