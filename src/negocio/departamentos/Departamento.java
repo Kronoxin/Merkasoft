@@ -35,6 +35,7 @@ public class Departamento implements Serializable {
     @Basic(optional = false)
     @Column(name = "Disponible")
     private boolean disponible;
+    @Version
     @Column(name = "Version")
     private Integer version;
     private static final long serialVersionUID = 1L;
