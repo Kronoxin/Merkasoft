@@ -104,6 +104,7 @@ public class SATurnoImp implements SATurno{
             em = ef.createEntityManager();
             em.getTransaction().begin();
             Turno persistentTurno = em.find(Turno.class, id);
+           // persistentTurno.getEmpleadosCollection();
             
             persistentTurno.setDisponible(false); 
             em.merge(persistentTurno);
@@ -287,9 +288,14 @@ public class SATurnoImp implements SATurno{
         try 
         {
             em.getTransaction().begin();
-            query = em.createQuery("SELECT h FROM HorarioTrabajo h WHERE h.horarioTrabajo.idEmpleado = " + idEmpleado, HorarioTrabajo.class);
+            
+            resultado_query = em.createNamedQuery("HorarioTrabajo.findByIdEmpleado")
+            .setParameter("id_empleado", idEmpleado)
+            .getResultList();
+            
+         /*   query = em.createQuery("SELECT h FROM HorarioTrabajo h WHERE h.horarioTrabajo.idEmpleado = " + idEmpleado, HorarioTrabajo.class);
             //query.setParameter("id_empleado", idEmpleado);
-            resultado_query = query.getResultList();
+            resultado_query = query.getResultList();*/
             for (HorarioTrabajo it : resultado_query)
             {
                 ret.add(it);
