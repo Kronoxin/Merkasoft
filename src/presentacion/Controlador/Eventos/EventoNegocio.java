@@ -19,10 +19,7 @@ public class EventoNegocio
     public static final int GUI_MOSTRAR_CLIENTE = 108;
     public static final int GUI_MOSTRAR_LISTA_CLIENTES = 109;
     public static final int GUI_MODIFICAR_CLIENTE = 110;
-    public static final int GUI_MEDIA_CLIENTES = 111;
-    //PUTO GIT
-    
-    
+    public static final int GUI_MEDIA_CLIENTES = 111;   
     
     //200 Control de productos y su GUI
     public static final int ALTA_PRODUCTO = 201;
@@ -210,5 +207,6 @@ public class EventoNegocio
     public static final int FRACASO_MOSTRAR_TURNOS_EMPLEADO = 1031;
     public static final int FRACASO_MOSTRAR_RELACION_TURNO_EMPLEADO = 1032;
             
-    
+    //1100 Control de infomacion y errores
+    public static final int MOSTRAR_INFORMACION_ERROR =1101;
 }

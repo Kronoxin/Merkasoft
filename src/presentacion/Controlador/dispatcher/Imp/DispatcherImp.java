@@ -39,6 +39,7 @@ import presentacion.Vista.horario.GUIMostrarTurnosEmpleado;
 import presentacion.Vista.popups.PopupsCliente;
 import presentacion.Vista.popups.PopupsDepartamento;
 import presentacion.Vista.popups.PopupsEmpleado;
+import presentacion.Vista.popups.PopupsErrores;
 import presentacion.Vista.popups.PopupsHorarios;
 import presentacion.Vista.popups.PopupsProducto;
 import presentacion.Vista.popups.PopupsTurno;
@@ -100,7 +101,7 @@ public class DispatcherImp extends Dispatcher
                 break;
             }
             
-            //GUIS DE PRODUCTO
+            //GUI DE PRODUCTO
             
             case EventoNegocio.GUI_ALTA_PRODUCTO:
             {
@@ -663,12 +664,13 @@ public class DispatcherImp extends Dispatcher
                 PopupsHorarios.MostrarRelacionTurnoFracaso();
                 break;
             }
-                
-           
-                        
-
-        
-                
+            
+            //Control de errores
+            case EventoNegocio.MOSTRAR_INFORMACION_ERROR:
+            {
+                PopupsErrores.FaltaDeDatos();
+                break;
+            }
         }
     }
     

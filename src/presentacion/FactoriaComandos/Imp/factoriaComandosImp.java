@@ -15,6 +15,7 @@ import presentacion.Controlador.Comandos.producto.GUI.*;
 import presentacion.Controlador.Comandos.venta.GUI.*;
 import presentacion.FactoriaComandos.factoriaComandos;
 import presentacion.Controlador.Comandos.Command;
+import presentacion.Controlador.Comandos.Errores.GUI.comandoGUImostrarError;
 import presentacion.Controlador.Comandos.departamento.GUI.comandoGUIaltaDepartamento;
 import presentacion.Controlador.Comandos.departamento.GUI.comandoGUIcalcularNominaDepartamento;
 import presentacion.Controlador.Comandos.departamento.GUI.comandoGUIeliminarDepartamento;
@@ -458,8 +459,12 @@ public class factoriaComandosImp extends factoriaComandos
                 comando = new comandoMostrarRelacionTurnoEmpleado();
                 break;
             }
-            
-            
+            // Evento GUI Errores
+            case EventoNegocio.MOSTRAR_INFORMACION_ERROR:
+            {
+                comando = new comandoGUImostrarError();
+                break;
+            }
            
             default:
                 comando=null;
