@@ -201,6 +201,7 @@ public class GUIAltaEmpleado extends JFrame{
                     else
                     {
                         System.out.println("Formato erroneo o falta de datos");
+                         Controlador.getInstance().accion(EventoNegocio.MOSTRAR_INFORMACION_ERROR, null);
                     }
                 }
                 else
@@ -223,6 +224,7 @@ public class GUIAltaEmpleado extends JFrame{
                     else
                     {
                         System.out.println("Formato erroneo o falta de datos");
+                        Controlador.getInstance().accion(EventoNegocio.MOSTRAR_INFORMACION_ERROR, null);
                     }
                 }
                 

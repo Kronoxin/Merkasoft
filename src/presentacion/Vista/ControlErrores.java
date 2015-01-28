@@ -23,21 +23,21 @@ public class ControlErrores
                 if(!empleado.getDireccion().isEmpty() && empleado.getSueldo()>0 && !empleado.getTipo().isEmpty())
                 {
                     if(empleado.getTipo().equalsIgnoreCase("supervisor"))
-                     {
+                    {
                          Supervisor s =(Supervisor)empleado;
                          if(s.getFactor_productividad()>0)
                          {
                              correcto=true;
-                         }
-                         else
-                         {
-                            Trabajador t =(Trabajador)empleado;
-                            if(t.getHoras_trabajadas()>0)
-                            {
-                                correcto=true;
-                            }
-                         }               
-                     }
+                         }          
+                    }
+                    else
+                    {
+                       Trabajador t =(Trabajador)empleado;
+                       if(t.getHoras_trabajadas()>0)
+                       {
+                           correcto=true;
+                       }
+                    }    
                 }
             }
         }
@@ -95,6 +95,16 @@ public class ControlErrores
             {
                 correcto=true;
             }
+        }
+        return correcto;
+    }
+    //Metodo que controla que el campo ID no este vacio
+    public boolean controlErroresID(String id)
+    {
+        boolean correcto=false;
+        if(!id.isEmpty() && Integer.parseInt(id)>0)
+        {
+            correcto=true;
         }
         return correcto;
     }
