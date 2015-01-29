@@ -117,7 +117,7 @@ public class GUIModificarEmpleado extends JFrame{
                 empleado.setDireccion((String)tabla.getValueAt(0, 4));
                 empleado.setTipo((String)tabla.getValueAt(0, 5));
                 
-                Departamento dep_selec = depts2.get(comboBox.getSelectedIndex());
+                Departamento dep_selec = encuentraDepPorNombre(depts2, (String)comboBox.getSelectedItem());
                 empleado.setDepartamento(dep_selec);
                 empleado.setSueldo((double)tabla.getValueAt(0, 7));
                 empleado.setDisponible((Boolean)tabla.getValueAt(0, 8));
@@ -161,6 +161,17 @@ public class GUIModificarEmpleado extends JFrame{
         
  
     }
+    
+    private Departamento encuentraDepPorNombre(ArrayList<Departamento> deps, String nombre)
+            {
+                Departamento d = null;
+                
+                for (Departamento dep : deps)
+                    if (dep.getNombre().equalsIgnoreCase(nombre))
+                        d = dep;
+                
+                return d;
+            }
     public Class getColumnClass(int columna)
    {
       if (columna == 8) return Boolean.class;
