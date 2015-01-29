@@ -222,7 +222,7 @@ public class GUIAltaEmpleado extends JFrame{
                     s.setNombre(textNombre.getText());
                     s.setApellidos(textApellidos.getText());
                     s.setDireccion(textDireccion.getText());
-                    Departamento dummy = depts2.get(combos.getSelectedIndex());
+                    Departamento dummy = encuentraDepPorNombre(depts2, (String)combos.getSelectedItem());
                     s.setDepartamento(dummy);
                     s.setSueldo(((double)(Double.parseDouble(textSueldo.getText()))));
                     s.setTipo(radioSupervisor.getText());                    
