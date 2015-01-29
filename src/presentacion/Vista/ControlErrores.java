@@ -3,6 +3,7 @@
  */
 package presentacion.Vista;
 
+import java.util.ArrayList;
 import negocio.departamentos.Departamento;
 import negocio.empleados.Empleado;
 import negocio.empleados.Supervisor;
@@ -98,6 +99,26 @@ public class ControlErrores
         }
         return correcto;
     }
+    
+    public boolean controlErroresHorarios(Object datos)
+    {
+        boolean correcto=false;
+        ArrayList<Object> entrada = (ArrayList<Object>)datos;
+        String empleado=(String)entrada.get(0);
+        String turno=(String)entrada.get(1);
+        if(!turno.isEmpty() && !empleado.isEmpty())
+        {
+            if(Integer.parseInt(empleado)>0)
+            {
+                if(Integer.parseInt(turno)>0)
+                {
+                    correcto=true;
+                }
+            }
+        }
+        return correcto;
+    }
+    
     //Metodo que controla que el campo ID no este vacio
     public boolean controlErroresID(String id)
     {

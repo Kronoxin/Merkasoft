@@ -24,6 +24,7 @@ import negocio.turnos.HorarioTrabajo;
 import negocio.turnos.Turno;
 import presentacion.Controlador.Controlador;
 import presentacion.Controlador.Eventos.EventoNegocio;
+import presentacion.Vista.ControlErrores;
 
 
 public class GUIMostrarTurnosEmpleado extends JFrame{
@@ -46,7 +47,7 @@ public class GUIMostrarTurnosEmpleado extends JFrame{
         JTable tabla;
     
     public GUIMostrarTurnosEmpleado(){
-        
+        final ControlErrores control=new ControlErrores();
         this.setTitle("Mostrar Turnos de un Empleado");
 	setBounds(100, 100, 500, 300);
         this.setLocationRelativeTo(null);
@@ -84,13 +85,19 @@ public class GUIMostrarTurnosEmpleado extends JFrame{
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     
-                     int datos = Integer.parseInt(textID.getText());
+                   
                     
-                    
-                    
-                    
-                    Controlador.getInstance().accion(EventoNegocio.MOSTRAR_TURNOS_EMPLEADO, datos);
-                    dispose();
+                    if(control.controlErroresID(textID.getText()))
+                    { 
+                        int datos = Integer.parseInt(textID.getText());
+                        Controlador.getInstance().accion(EventoNegocio.MOSTRAR_TURNOS_EMPLEADO, datos);
+                        dispose();
+                    }
+                    else
+                    {
+                        System.out.println("Formato erroneo o falta de datos");
+                        Controlador.getInstance().accion(EventoNegocio.MOSTRAR_INFORMACION_ERROR, null);
+                    }
                    
                 }
             });

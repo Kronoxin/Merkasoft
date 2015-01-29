@@ -79,9 +79,6 @@ public class GUIMostrarRelacionTurnoEmpleado extends JFrame{
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     
-                     //ArrayList<Object> datos = new ArrayList<>();
-
-                    
                     Controlador.getInstance().accion(EventoNegocio.MOSTRAR_RELACION_TURNO_EMPLEADO, null);
                     dispose();
 

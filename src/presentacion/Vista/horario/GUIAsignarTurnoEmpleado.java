@@ -18,6 +18,7 @@ import javax.swing.JTextField;
 import negocio.turnos.Turno;
 import presentacion.Controlador.Controlador;
 import presentacion.Controlador.Eventos.EventoNegocio;
+import presentacion.Vista.ControlErrores;
 
 
 public class GUIAsignarTurnoEmpleado extends JFrame{
@@ -38,7 +39,7 @@ public class GUIAsignarTurnoEmpleado extends JFrame{
     
     
     public GUIAsignarTurnoEmpleado(){
-        
+        final ControlErrores control=new ControlErrores();
         this.setTitle("Asignar Turno a un Empleado");
 	setBounds(100, 100, 400, 300);
         this.setLocationRelativeTo(null);
@@ -72,7 +73,15 @@ public class GUIAsignarTurnoEmpleado extends JFrame{
                 ArrayList<Object> datos = new ArrayList<Object>();
                 datos.add(text_empleado.getText());
                 datos.add(text_turno.getText());
-               Controlador.getInstance().accion(EventoNegocio.ASIGNAR_TURNO_EMPLEADO, datos);
+                if(control.controlErroresHorarios(datos))
+                {
+                    Controlador.getInstance().accion(EventoNegocio.ASIGNAR_TURNO_EMPLEADO, datos);
+                }
+                else
+                {
+                    System.out.println("Formato erroneo o falta de datos");
+                    Controlador.getInstance().accion(EventoNegocio.MOSTRAR_INFORMACION_ERROR, null);
+                }
             }
         });
         
